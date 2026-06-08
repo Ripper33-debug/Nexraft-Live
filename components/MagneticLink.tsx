@@ -7,10 +7,17 @@ type MagneticLinkProps = {
   href: string;
   children: ReactNode;
   className?: string;
+  strength?: "default" | "primary";
 };
 
-export function MagneticLink({ href, children, className = "" }: MagneticLinkProps) {
+export function MagneticLink({
+  href,
+  children,
+  className = "",
+  strength = "default",
+}: MagneticLinkProps) {
   const ref = useRef<HTMLAnchorElement>(null);
+  const pull = strength === "primary" ? 0.32 : 0.15;
 
   const onMove = (e: MouseEvent<HTMLAnchorElement>) => {
     const el = ref.current;
@@ -26,7 +33,7 @@ export function MagneticLink({ href, children, className = "" }: MagneticLinkPro
     const x = e.clientX - rect.left - rect.width / 2;
     const y = e.clientY - rect.top - rect.height / 2;
 
-    el.style.transform = `translate(${x * 0.15}px, ${y * 0.2}px)`;
+    el.style.transform = `translate(${x * pull}px, ${y * (pull + 0.05)}px)`;
   };
 
   const onLeave = () => {
@@ -39,7 +46,9 @@ export function MagneticLink({ href, children, className = "" }: MagneticLinkPro
     <Link
       ref={ref}
       href={href}
-      className={`magnetic-link inline-block transition-transform duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] ${className}`}
+      className={`magnetic-link inline-block transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] ${className} ${
+        strength === "primary" ? "magnetic-link-primary" : ""
+      }`}
       onMouseMove={onMove}
       onMouseLeave={onLeave}
       data-cursor-hover

@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+import Script from "next/script";
 import { Analytics } from "@vercel/analytics/next";
 import { Bricolage_Grotesque } from "next/font/google";
 import { GeistSans } from "geist/font/sans";
@@ -9,6 +10,7 @@ import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { ScrollProgress } from "@/components/ScrollProgress";
 import { SectionRail } from "@/components/SectionRail";
+import { BootSequence } from "@/components/BootSequence";
 import { StudioCursor } from "@/components/StudioCursor";
 import "./globals.css";
 
@@ -59,7 +61,11 @@ export default function RootLayout({
       lang="en"
       className={`${bricolage.variable} ${GeistSans.variable} ${GeistMono.variable}`}
     >
+      <Script id="nexraft-boot" strategy="beforeInteractive">
+        {`(function(){try{var p=location.pathname;var s=sessionStorage.getItem("nexraft-boot");var r=window.matchMedia("(prefers-reduced-motion: reduce)").matches;if(p!=="/"||s==="1"||r){document.documentElement.classList.add("boot-complete");}else{document.documentElement.classList.add("boot-pending");}}catch(e){document.documentElement.classList.add("boot-complete");}})();`}
+      </Script>
       <body className="relative min-h-screen overflow-x-clip antialiased">
+        <BootSequence />
         <Grain />
         <GridOverlay />
         <ScrollProgress />

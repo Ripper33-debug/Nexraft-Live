@@ -49,32 +49,24 @@ export function StudioCursor() {
   if (!visible) return null;
 
   return (
-    <>
+    <div
+      className="pointer-events-none fixed z-[100]"
+      style={{
+        left: pos.x,
+        top: pos.y,
+        transform: "translate(-50%, -50%)",
+      }}
+      aria-hidden="true"
+    >
       <div
-        className="pointer-events-none fixed z-[100] mix-blend-difference"
-        style={{
-          left: pos.x,
-          top: pos.y,
-          transform: "translate(-50%, -50%)",
-        }}
-        aria-hidden="true"
+        className={`studio-cursor-ring transition-all duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] ${
+          hovering ? "is-hover" : ""
+        }`}
       >
-        <div
-          className={`rounded-full border border-white transition-all duration-200 ${
-            hovering ? "h-10 w-10 opacity-90" : "h-2 w-2 opacity-100"
-          }`}
-        />
+        <span className="studio-cursor-cross studio-cursor-cross-h" />
+        <span className="studio-cursor-cross studio-cursor-cross-v" />
+        <span className="studio-cursor-dot" />
       </div>
-      <div
-        className="pointer-events-none fixed z-[99] font-mono text-[9px] uppercase tracking-widest text-muted/60"
-        style={{
-          left: pos.x + 14,
-          top: pos.y + 14,
-        }}
-        aria-hidden="true"
-      >
-        {hovering ? "open" : ""}
-      </div>
-    </>
+    </div>
   );
 }

@@ -211,27 +211,50 @@
     }
   }
 
+  /* Hero — visible by default for SSR / no-JS */
   .hero-line {
+    clip-path: inset(0 0 0 0);
+    opacity: 1;
+  }
+
+  html.boot-pending .hero-line {
     clip-path: inset(0 100% 0 0);
     opacity: 0;
-    animation: hero-reveal 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
   }
 
-  .hero-line-1 { animation-delay: 0.05s; }
-  .hero-line-2 { animation-delay: 0.12s; }
-  .hero-line-3 { animation-delay: 0.2s; }
-  .hero-line-4 { animation-delay: 0.28s; }
-  .hero-line-5 { animation-delay: 0.36s; }
-  .hero-line-6 { animation-delay: 0.44s; }
-  .hero-line-7 { animation-delay: 0.5s; }
+  html.boot-complete.boot-choreo .hero-line {
+    clip-path: inset(0 100% 0 0);
+    opacity: 0;
+    animation: hero-reveal 0.72s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  }
+
+  html.boot-complete.boot-choreo .hero-line-1 { animation-delay: 0.04s; }
+  html.boot-complete.boot-choreo .hero-line-2 { animation-delay: 0.1s; }
+  html.boot-complete.boot-choreo .hero-line-3 { animation-delay: 0.18s; }
+  html.boot-complete.boot-choreo .hero-line-4 { animation-delay: 0.26s; }
+  html.boot-complete.boot-choreo .hero-line-5 { animation-delay: 0.34s; }
+  html.boot-complete.boot-choreo .hero-line-6 { animation-delay: 0.42s; }
+  html.boot-complete.boot-choreo .hero-line-7 { animation-delay: 0.48s; }
 
   .hero-fig-enter {
-    opacity: 0;
-    transform: scale(0.97) translateY(8px);
-    animation: hero-fig-in 0.85s cubic-bezier(0.22, 1, 0.36, 1) 0.32s forwards;
+    opacity: 1;
+    transform: none;
   }
 
-  @keyframes hero-fig-in {
+  html.boot-pending .hero-fig-enter {
+    opacity: 0;
+    transform: scale(0.86) translateY(12px);
+  }
+
+  html.boot-complete.boot-choreo .hero-fig-enter.is-choreo-ready {
+    animation: hero-fig-draw 0.88s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  }
+
+  @keyframes hero-fig-draw {
+    from {
+      opacity: 0;
+      transform: scale(0.86) translateY(12px);
+    }
     to {
       opacity: 1;
       transform: scale(1) translateY(0);
@@ -239,12 +262,43 @@
   }
 
   .hero-pipeline-enter {
-    opacity: 0;
-    animation: hero-fig-in 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.48s forwards;
+    opacity: 1;
   }
 
-  .hero-load-bar {
-    animation-delay: var(--delay, 0.52s);
+  html.boot-pending .hero-pipeline-enter {
+    opacity: 0;
+  }
+
+  html.boot-complete.boot-choreo .hero-pipeline-enter.is-choreo-ready {
+    animation: hero-pipeline-in 0.65s cubic-bezier(0.22, 1, 0.36, 1) 0.22s forwards;
+  }
+
+  @keyframes hero-pipeline-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  .hero-est-ticker {
+    min-height: 1.25rem;
+  }
+
+  .hero-est-caret {
+    display: inline-block;
+    width: 1px;
+    height: 0.75em;
+    margin-left: 2px;
+    background-color: var(--color-accent);
+    vertical-align: -0.05em;
+    animation: est-caret 0.9s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+  }
+
+  @keyframes est-caret {
+    0%, 45% { opacity: 1; }
+    50%, 100% { opacity: 0; }
+  }
+
+  .magnetic-link-primary::after {
+    transform-origin: left;
   }
 
   .fig-flow-line {
@@ -271,13 +325,223 @@
     .hero-pipeline-enter {
       clip-path: none;
       opacity: 1;
-      animation: none;
+      animation: none !important;
       transform: none;
+    }
+
+    .hero-est-caret {
+      display: none;
     }
 
     .fig-flow-line {
       animation: none;
     }
+  }
+
+  /* Boot sequence overlay */
+  .boot-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 200;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--color-surface);
+    cursor: pointer;
+    animation: boot-enter 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .boot-overlay.is-wipe {
+    animation: boot-wipe 0.48s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  }
+
+  @keyframes boot-enter {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  @keyframes boot-wipe {
+    to {
+      clip-path: inset(0 0 100% 0);
+      opacity: 0;
+    }
+  }
+
+  .boot-scanline {
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(61, 220, 132, 0.45),
+      transparent
+    );
+    animation: boot-scan 1.1s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    pointer-events: none;
+  }
+
+  @keyframes boot-scan {
+    0% { top: 0; opacity: 0; }
+    8% { opacity: 1; }
+    92% { opacity: 1; }
+    100% { top: 100%; opacity: 0; }
+  }
+
+  .boot-progress-track {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background-color: rgba(61, 220, 132, 0.1);
+  }
+
+  .boot-progress-bar {
+    height: 100%;
+    width: 0;
+    background-color: var(--color-accent);
+    animation: boot-progress 0.78s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  }
+
+  @keyframes boot-progress {
+    to { width: 100%; }
+  }
+
+  .boot-panel {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    text-align: center;
+  }
+
+  .boot-label {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--color-muted);
+    animation: boot-text-in 0.4s cubic-bezier(0.22, 1, 0.36, 1) 0.08s both;
+  }
+
+  .boot-modules {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--color-foreground);
+    animation: boot-text-in 0.4s cubic-bezier(0.22, 1, 0.36, 1) 0.16s both;
+  }
+
+  @keyframes boot-text-in {
+    from {
+      opacity: 0;
+      transform: translateY(6px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .boot-fig {
+    width: 5.5rem;
+    height: 5.5rem;
+    margin-top: 0.5rem;
+  }
+
+  .boot-fig-stroke {
+    stroke-dasharray: 140;
+    stroke-dashoffset: 140;
+    animation: boot-fig-draw 0.55s cubic-bezier(0.22, 1, 0.36, 1) 0.22s forwards;
+  }
+
+  .boot-fig-stroke-2 { animation-delay: 0.3s; }
+  .boot-fig-stroke-3 { animation-delay: 0.36s; }
+  .boot-fig-stroke-4 { animation-delay: 0.42s; }
+  .boot-fig-stroke-5 { animation-delay: 0.48s; }
+
+  @keyframes boot-fig-draw {
+    to { stroke-dashoffset: 0; }
+  }
+
+  .boot-fig-core {
+    opacity: 0;
+    animation: boot-core-in 0.3s cubic-bezier(0.22, 1, 0.36, 1) 0.62s forwards;
+  }
+
+  @keyframes boot-core-in {
+    to { opacity: 1; }
+  }
+
+  .boot-fig-tag {
+    font-family: var(--font-mono);
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    color: rgba(199, 210, 203, 0.45);
+    animation: boot-text-in 0.35s cubic-bezier(0.22, 1, 0.36, 1) 0.55s both;
+  }
+
+  /* Studio cursor */
+  .studio-cursor-ring {
+    position: relative;
+    width: 10px;
+    height: 10px;
+    border: 1px solid rgba(61, 220, 132, 0.55);
+    border-radius: 50%;
+    transition-property: width, height, border-color;
+  }
+
+  .studio-cursor-ring.is-hover {
+    width: 28px;
+    height: 28px;
+    border-color: rgba(61, 220, 132, 0.85);
+  }
+
+  .studio-cursor-dot {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 3px;
+    height: 3px;
+    margin: -1.5px 0 0 -1.5px;
+    border-radius: 50%;
+    background-color: var(--color-accent);
+  }
+
+  .studio-cursor-cross {
+    position: absolute;
+    background-color: rgba(61, 220, 132, 0.35);
+    pointer-events: none;
+  }
+
+  .studio-cursor-cross-h {
+    left: 50%;
+    top: -5px;
+    width: 1px;
+    height: 5px;
+    margin-left: -0.5px;
+  }
+
+  .studio-cursor-cross-v {
+    left: -5px;
+    top: 50%;
+    width: 5px;
+    height: 1px;
+    margin-top: -0.5px;
+  }
+
+  .studio-cursor-ring.is-hover .studio-cursor-cross-h {
+    height: 8px;
+    top: -8px;
+  }
+
+  .studio-cursor-ring.is-hover .studio-cursor-cross-v {
+    width: 8px;
+    left: -8px;
   }
 
   .scroll-reveal-line {
@@ -323,7 +587,15 @@
 
   .pipeline-bar {
     width: 0;
-    animation: pipeline-fill 1.2s cubic-bezier(0.22, 1, 0.36, 1) 0.4s forwards;
+  }
+
+  html.boot-complete.boot-choreo .pipeline-bar.is-choreo-ready {
+    animation: pipeline-fill 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    animation-delay: var(--delay, 0.08s);
+  }
+
+  html.boot-complete:not(.boot-choreo) .pipeline-bar.is-choreo-ready {
+    width: var(--target);
   }
 
   @keyframes pipeline-fill {

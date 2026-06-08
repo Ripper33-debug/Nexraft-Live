@@ -3,7 +3,11 @@
 import { useEffect, useRef } from "react";
 import * as THREE from "three";
 
-export default function HeroFigMesh() {
+type HeroFigMeshProps = {
+  active?: boolean;
+};
+
+export default function HeroFigMesh({ active = true }: HeroFigMeshProps) {
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -39,7 +43,7 @@ export default function HeroFigMesh() {
       new THREE.LineBasicMaterial({
         color: 0x3ddc84,
         transparent: true,
-        opacity: 0.75,
+        opacity: 0.72,
       }),
     );
 
@@ -49,7 +53,7 @@ export default function HeroFigMesh() {
       new THREE.LineBasicMaterial({
         color: 0xffffff,
         transparent: true,
-        opacity: 0.1,
+        opacity: 0.12,
       }),
     );
     inner.scale.setScalar(0.92);
@@ -60,9 +64,13 @@ export default function HeroFigMesh() {
     scene.add(group);
 
     const mouse = { x: 0, y: 0 };
+    const rotation = { x: 0, y: 0, z: 0 };
+    const target = { x: 0, y: 0 };
+    let scaleCurrent = 0.86;
     let visible = true;
     let animId = 0;
     let lastFrame = 0;
+    const startTime = performance.now();
     const frameInterval = 1000 / 30;
 
     const onMove = (e: MouseEvent) => {
@@ -84,10 +92,28 @@ export default function HeroFigMesh() {
       if (!visible || now - lastFrame < frameInterval) return;
       lastFrame = now;
 
+      const elapsed = (now - startTime) / 1000;
+
       if (!reduced) {
-        group.rotation.y += 0.0035 + mouse.x * 0.001;
-        group.rotation.x += 0.0012 + mouse.y * 0.0008;
+        target.x = mouse.y * 0.22;
+        target.y = mouse.x * 0.28;
+
+        rotation.x += (target.x - rotation.x) * 0.07;
+        rotation.y += (target.y - rotation.y) * 0.07;
+        rotation.z += 0.0018;
+
+        group.rotation.x = rotation.x;
+        group.rotation.y = rotation.y + elapsed * 0.18;
+        group.rotation.z = rotation.z;
+
+        const pulse = 0.58 + Math.sin(elapsed * 2.4) * 0.17;
+        wire.material.opacity = pulse;
+        inner.material.opacity = 0.08 + Math.sin(elapsed * 2.4 + 0.6) * 0.05;
       }
+
+      const scaleTarget = active ? 1 : 0.86;
+      scaleCurrent += (scaleTarget - scaleCurrent) * 0.06;
+      group.scale.setScalar(scaleCurrent);
 
       renderer.render(scene, camera);
     };
@@ -112,17 +138,19 @@ export default function HeroFigMesh() {
       geometry.dispose();
       edges.dispose();
       edgesInner.dispose();
+      (wire.material as THREE.Material).dispose();
+      (inner.material as THREE.Material).dispose();
       renderer.dispose();
       if (renderer.domElement.parentNode === container) {
         container.removeChild(renderer.domElement);
       }
     };
-  }, []);
+  }, [active]);
 
   return (
     <div
       ref={containerRef}
-      className="fig-canvas h-[min(24vw,20rem)] w-full max-w-md border border-border"
+      className="fig-canvas h-[min(26vw,22rem)] w-full max-w-md border border-border"
       aria-hidden="true"
     />
   );
