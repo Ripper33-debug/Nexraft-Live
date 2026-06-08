@@ -19,15 +19,26 @@ const bricolage = Bricolage_Grotesque({
 });
 
 export const metadata: Metadata = {
-  title: "Nexraft — Web, Hosting & 3D Studio",
+  title: {
+    default: "Nexraft — Web, Hosting & 3D Studio",
+    template: "%s — Nexraft",
+  },
   description:
-    "Everything you need to launch — and keep it fast. Engineering studio for web development, hosting, and 3D.",
+    "Everything you need to launch — and keep it fast. Engineering studio for web development, hosting, and 3D. Monthly retainers.",
   metadataBase: new URL("https://nexraft.com"),
   openGraph: {
-    title: "Nexraft",
+    title: "Nexraft — Web, Hosting & 3D Studio",
     description: "Everything you need to launch — and keep it fast.",
     type: "website",
+    siteName: "Nexraft",
+    locale: "en_US",
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "Nexraft",
+    description: "Everything you need to launch — and keep it fast.",
+  },
+  robots: { index: true, follow: true },
 };
 
 export const viewport: Viewport = {

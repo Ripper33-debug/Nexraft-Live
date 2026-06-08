@@ -30,7 +30,7 @@ export function SectionRail() {
 
   return (
     <nav
-      className="pointer-events-none fixed left-6 top-1/2 z-30 hidden -translate-y-1/2 flex-col gap-4 xl:flex"
+      className="section-rail pointer-events-none fixed top-1/2 z-30 hidden -translate-y-1/2 flex-col gap-3"
       aria-label="Section index"
     >
       {SECTIONS.map((section) => {
@@ -39,13 +39,14 @@ export function SectionRail() {
           <a
             key={section.id}
             href={section.href}
-            className={`pointer-events-auto group flex items-center gap-3 transition-opacity ${
+            className={`pointer-events-auto group flex items-center gap-3 transition-opacity duration-300 ${
               isActive ? "opacity-100" : "opacity-35 hover:opacity-70"
             }`}
             aria-current={isActive ? "true" : undefined}
+            data-cursor-hover
           >
             <span
-              className={`h-px transition-all duration-300 ${
+              className={`h-px transition-all duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] ${
                 isActive
                   ? "w-8 bg-accent"
                   : "w-4 bg-muted group-hover:w-6 group-hover:bg-foreground"

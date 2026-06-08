@@ -31,8 +31,9 @@ const plans: Record<Category, Plan[]> = {
       cadence: "monthly retainer",
       summary: "Ongoing site care, content updates, and performance monitoring.",
       deliverables: [
+        "Custom-built CMS included",
         "Up to 8 pages maintained",
-        "CMS updates and publishing",
+        "Content updates and publishing",
         "Monthly performance report",
         "Bug fixes within 48h SLA",
       ],
@@ -44,7 +45,9 @@ const plans: Record<Category, Plan[]> = {
       cadence: "monthly retainer",
       summary: "Active development hours for features, integrations, and optimization.",
       deliverables: [
+        "Custom-built CMS included",
         "20 dev hours per month",
+        "CMS fields, workflows, and roles",
         "A/B tests and conversion work",
         "API and third-party integrations",
         "Bi-weekly sync and roadmap",
@@ -57,8 +60,10 @@ const plans: Record<Category, Plan[]> = {
       cadence: "monthly retainer",
       summary: "Dedicated build capacity for apps, platforms, and complex systems.",
       deliverables: [
+        "Custom-built CMS included",
         "40 dev hours per month",
         "Full-stack feature delivery",
+        "Multi-editor CMS and permissions",
         "Architecture and code review",
         "Priority queue and same-day triage",
       ],
@@ -163,11 +168,11 @@ export function Pricing() {
   return (
     <section
       id="pricing"
-      className="scroll-mt-20 border-b border-border bg-surface-deep py-24 md:py-32"
+      className="section-pad scroll-mt-20 border-b border-border bg-surface-deep"
       aria-labelledby="pricing-heading"
     >
       <div className="grid-editorial">
-        <div className="col-span-12 mb-12 md:col-span-3">
+        <div className="col-span-12 section-label-gap md:col-span-3">
           <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-muted">
             04 / Pricing
           </p>
@@ -177,7 +182,7 @@ export function Pricing() {
           <ScrollReveal
             as="h2"
             id="pricing-heading"
-            className="font-display text-[clamp(2rem,5vw,3.5rem)] font-semibold leading-[1.05] tracking-[-0.02em] text-foreground"
+            className="text-display-section font-display font-semibold text-foreground"
           >
             Monthly rates. No surprises.
           </ScrollReveal>
@@ -188,7 +193,7 @@ export function Pricing() {
           </p>
 
           <div
-            className="pricing-tabs mt-12 flex gap-0 border-b border-border"
+            className="pricing-tabs mt-8 flex gap-0 border-b border-border"
             role="tablist"
             aria-label="Pricing categories"
           >
@@ -219,7 +224,7 @@ export function Pricing() {
             aria-labelledby={`tab-${category}`}
             className="pricing-panel mt-0"
           >
-            <div className="border-b border-border py-10 md:py-12">
+            <div className="border-b border-border py-8">
               <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-muted">
                 Selected plan
               </p>
@@ -227,9 +232,9 @@ export function Pricing() {
                 <span className="font-display text-3xl font-semibold text-foreground md:text-4xl">
                   {selected.name}
                 </span>
-                <span className="font-display text-[clamp(2.5rem,6vw,4rem)] font-bold leading-none tracking-tight text-foreground">
+                <span className="font-display text-[clamp(2rem,5vw,3.5rem)] font-bold leading-none tracking-tight text-foreground">
                   <CountUp
-                    key={`${category}-${selected.index}`}
+                    key={`${category}-${selected.index}-${selected.price}`}
                     value={selected.price}
                     prefix="$"
                     suffix="/mo"
@@ -287,6 +292,7 @@ export function Pricing() {
                       <div className="col-span-10 col-start-3 md:col-span-4 md:col-start-auto md:text-right">
                         <p className="font-display text-lg font-medium text-foreground md:text-xl">
                           <CountUp
+                            key={`${category}-${plan.index}-${plan.price}`}
                             value={plan.price}
                             prefix="$"
                             suffix="/mo"
@@ -320,7 +326,7 @@ export function Pricing() {
             </div>
           </div>
 
-          <div className="mt-10 flex flex-col gap-4 border-t border-border pt-10 sm:flex-row sm:items-center sm:justify-between">
+          <div className="mt-8 flex flex-col gap-4 border-t border-border pt-8 sm:flex-row sm:items-center sm:justify-between">
             <p className="font-mono text-xs text-muted">
               Need a custom monthly arrangement? We scope to your runway.
             </p>

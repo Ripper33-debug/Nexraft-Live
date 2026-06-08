@@ -4,8 +4,8 @@ export function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="py-12 md:py-16" role="contentinfo">
-      <div className="grid-editorial items-end border-t border-border pt-12">
+    <footer className="py-10 md:py-12" role="contentinfo">
+      <div className="grid-editorial items-end border-t border-border pt-8">
         <div className="col-span-12 md:col-span-6">
           <p className="font-display text-xl font-semibold tracking-tight text-foreground">
             Nexraft

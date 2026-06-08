@@ -25,7 +25,7 @@ const records = [
 
 export function ProofStrip() {
   return (
-    <div className="mt-16 border-t border-border pt-12">
+    <div className="mt-10 border-t border-border pt-8">
       <ScrollReveal
         as="p"
         className="font-mono text-[10px] uppercase tracking-[0.25em] text-muted"
@@ -34,7 +34,7 @@ export function ProofStrip() {
       </ScrollReveal>
 
       <div
-        className="mt-8 border-t border-border"
+        className="mt-6 border-t border-border"
         role="list"
         aria-label="Selected project outcomes"
       >
@@ -42,7 +42,7 @@ export function ProofStrip() {
           <div
             key={record.index}
             role="listitem"
-            className="grid grid-cols-12 items-baseline gap-4 border-b border-border py-5 md:gap-6 md:py-6"
+            className="grid grid-cols-12 items-baseline gap-3 border-b border-border py-4 md:gap-5 md:py-5"
           >
             <div className="col-span-2 md:col-span-1">
               <span
@@ -53,7 +53,7 @@ export function ProofStrip() {
               </span>
             </div>
             <div className="col-span-10 md:col-span-5">
-              <p className="font-display text-base font-medium text-foreground md:text-lg">
+              <p className="font-display text-base font-medium leading-snug text-foreground md:text-lg">
                 {record.project}
               </p>
             </div>

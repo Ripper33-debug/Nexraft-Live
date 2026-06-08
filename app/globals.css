@@ -12,6 +12,19 @@
   --font-display: var(--font-bricolage);
   --font-body: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+
+  /* 8px spacing scale */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.25rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-10: 2.5rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --space-section: clamp(3.5rem, 5.5vw, 5rem);
 }
 
 @layer base {
@@ -36,6 +49,8 @@
     background-color: var(--color-surface);
     color: var(--color-foreground);
     font-family: var(--font-body), sans-serif;
+    font-size: 1rem;
+    line-height: 1.6;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
@@ -99,17 +114,52 @@
     padding-inline: clamp(1.25rem, 4vw, 3rem);
   }
 
-  .hairline-b {
-    border-bottom: 1px solid var(--color-border);
+  .section-pad {
+    padding-block: var(--space-section);
   }
 
-  .hairline-t {
-    border-top: 1px solid var(--color-border);
+  .section-label-gap {
+    margin-bottom: var(--space-8);
   }
 
-  .hairline-x {
-    border-top: 1px solid var(--color-border);
-    border-bottom: 1px solid var(--color-border);
+  /* Modular type scale */
+  .text-display-hero {
+    font-size: clamp(2.125rem, 6.5vw, 5.5rem);
+    line-height: 0.95;
+    letter-spacing: -0.035em;
+  }
+
+  .text-display-section {
+    font-size: clamp(1.75rem, 4vw, 3rem);
+    line-height: 1.05;
+    letter-spacing: -0.025em;
+  }
+
+  .text-body {
+    font-size: clamp(0.9375rem, 1.5vw, 1.0625rem);
+    line-height: 1.65;
+  }
+
+  .prose-measure {
+    max-width: 65ch;
+  }
+
+  /* Section rail — left margin only when gutter exists */
+  .section-rail {
+    display: none;
+  }
+
+  @media (min-width: 1200px) {
+    .section-rail {
+      display: flex;
+      left: max(0.75rem, calc((100vw - 90rem) / 2 - 3.25rem));
+    }
+  }
+
+  @media (max-width: 1599px) {
+    .section-rail {
+      display: none !important;
+    }
   }
 
   .link-underline {
@@ -148,16 +198,16 @@
   }
 
   .hero-line:nth-child(1) {
-    animation-delay: 0.1s;
+    animation-delay: 0.08s;
   }
   .hero-line:nth-child(2) {
-    animation-delay: 0.22s;
+    animation-delay: 0.18s;
   }
   .hero-line:nth-child(3) {
-    animation-delay: 0.34s;
+    animation-delay: 0.28s;
   }
   .hero-line:nth-child(4) {
-    animation-delay: 0.46s;
+    animation-delay: 0.38s;
   }
 
   @keyframes hero-reveal {
@@ -191,8 +241,51 @@
     }
   }
 
+  .fig-node {
+    animation: fig-pulse 4s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+  }
+
+  .fig-node-center {
+    animation-duration: 3s;
+  }
+
+  .fig-diagram .fig-node:nth-of-type(2) { animation-delay: 0.6s; }
+  .fig-diagram .fig-node:nth-of-type(3) { animation-delay: 1.2s; }
+  .fig-diagram .fig-node:nth-of-type(4) { animation-delay: 1.8s; }
+  .fig-diagram .fig-node:nth-of-type(5) { animation-delay: 2.4s; }
+
+  @keyframes fig-pulse {
+    0%, 100% { opacity: 0.55; }
+    50% { opacity: 1; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .fig-node {
+      animation: none;
+      opacity: 1;
+    }
+  }
+
+  .pipeline-bar {
+    width: 0;
+    animation: pipeline-fill 1.2s cubic-bezier(0.22, 1, 0.36, 1) 0.4s forwards;
+  }
+
+  @keyframes pipeline-fill {
+    to {
+      width: var(--target);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .pipeline-bar {
+      width: var(--target);
+      animation: none;
+    }
+  }
+
   .service-row {
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s cubic-bezier(0.22, 1, 0.36, 1);
   }
 
   .service-row:hover,
@@ -243,7 +336,7 @@
   .service-detail {
     overflow: hidden;
     opacity: 0;
-    transition: opacity 0.3s ease;
+    transition: opacity 0.3s cubic-bezier(0.22, 1, 0.36, 1);
   }
 
   .service-row:hover .service-detail,
@@ -272,7 +365,7 @@
   }
 
   .pricing-row {
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s cubic-bezier(0.22, 1, 0.36, 1);
   }
 
   .pricing-row:hover {
@@ -299,12 +392,6 @@
       animation: none;
     }
 
-    .pricing-deliverables {
-      grid-template-rows: 1fr;
-    }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
     .service-detail-wrap {
       grid-template-rows: 1fr;
       transition: none;
@@ -317,16 +404,6 @@
   }
 
   @media (hover: none), (max-width: 767px) {
-    .service-detail-wrap {
-      grid-template-rows: 1fr;
-    }
-
-    .service-detail {
-      opacity: 1;
-      overflow: visible;
-      margin-top: 0.75rem;
-    }
-
     .service-detail-wrap:not(.is-open) {
       grid-template-rows: 0fr;
     }

@@ -7,10 +7,11 @@ const services = [
   {
     index: "01",
     name: "Web",
-    summary: "Applications, sites, and APIs — typed, tested, deployed.",
+    summary:
+      "Applications, sites, and APIs — each ships with a custom-built CMS.",
     detail:
-      "Next.js, TypeScript, headless CMS, e-commerce, internal tools. Performance budgets enforced from day one.",
-    stack: "Next.js · TypeScript · Postgres",
+      "Next.js, TypeScript, and a CMS tailored to your content workflow — not WordPress, not a generic dashboard. E-commerce, internal tools, performance budgets enforced from day one.",
+    stack: "Next.js · Custom CMS · TypeScript",
   },
   {
     index: "02",
@@ -37,11 +38,11 @@ export function Services() {
   return (
     <section
       id="services"
-      className="scroll-mt-20 border-b border-border py-24 md:py-32"
+      className="section-pad scroll-mt-20 border-b border-border"
       aria-labelledby="services-heading"
     >
       <div className="grid-editorial">
-        <div className="col-span-12 mb-12 md:col-span-3">
+        <div className="col-span-12 section-label-gap md:col-span-3">
           <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-muted">
             03 / Services
           </p>
@@ -51,7 +52,7 @@ export function Services() {
           <ScrollReveal
             as="h2"
             id="services-heading"
-            className="font-display text-[clamp(2rem,5vw,3.5rem)] font-semibold leading-[1.05] tracking-[-0.02em] text-foreground"
+            className="text-display-section font-display font-semibold text-foreground"
           >
             What we build and run.
           </ScrollReveal>
@@ -62,7 +63,7 @@ export function Services() {
           </p>
         </div>
 
-        <div className="col-span-12 mt-16 md:col-start-1">
+        <div className="col-span-12 mt-10 md:col-start-1">
           <div role="list" className="border-t border-border">
             {services.map((service) => {
               const isOpen = expanded === service.index;

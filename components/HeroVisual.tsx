@@ -1,11 +1,17 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type CSSProperties } from "react";
+import { CountUpOnView } from "@/components/CountUpOnView";
+
+const pipeline = [
+  { label: "Build", pct: 100 },
+  { label: "Deploy", pct: 100 },
+  { label: "Monitor", pct: 97 },
+] as const;
 
 export function HeroVisual() {
   const ref = useRef<SVGSVGElement>(null);
   const [offset, setOffset] = useState({ x: 0, y: 0 });
-  const [coords, setCoords] = useState({ x: 0, y: 0 });
 
   useEffect(() => {
     const fine = window.matchMedia("(pointer: fine)").matches;
@@ -22,11 +28,7 @@ export function HeroVisual() {
       const nx = (e.clientX - rect.left) / rect.width - 0.5;
       const ny = (e.clientY - rect.top) / rect.height - 0.5;
 
-      setOffset({ x: nx * 18, y: ny * 14 });
-      setCoords({
-        x: Math.round(((e.clientX - rect.left) / rect.width) * 1000),
-        y: Math.round(((e.clientY - rect.top) / rect.height) * 1000),
-      });
+      setOffset({ x: nx * 14, y: ny * 10 });
     };
 
     window.addEventListener("mousemove", onMove, { passive: true });
@@ -35,14 +37,14 @@ export function HeroVisual() {
 
   return (
     <div className="relative hidden lg:block" aria-hidden="true">
-      <div className="absolute -right-4 top-0 font-mono text-[10px] tabular-nums text-muted/50">
-        x{coords.x} y{coords.y}
-      </div>
+      <p className="absolute right-0 top-0 font-mono text-[10px] uppercase tracking-[0.2em] text-muted/60">
+        Scale 1:1
+      </p>
 
       <svg
         ref={ref}
         viewBox="0 0 400 400"
-        className="h-[min(28vw,22rem)] w-full max-w-md text-border"
+        className="fig-diagram h-[min(24vw,20rem)] w-full max-w-md text-border"
         fill="none"
       >
         <g
@@ -64,11 +66,11 @@ export function HeroVisual() {
           <line x1="40" y1="120" x2="360" y2="280" stroke="currentColor" />
           <line x1="40" y1="280" x2="360" y2="120" stroke="currentColor" />
 
-          <circle cx="200" cy="200" r="6" fill="#3ddc84" />
-          <circle cx="120" cy="120" r="4" fill="#ffffff" fillOpacity="0.6" />
-          <circle cx="280" cy="120" r="4" fill="#ffffff" fillOpacity="0.6" />
-          <circle cx="120" cy="280" r="4" fill="#ffffff" fillOpacity="0.6" />
-          <circle cx="280" cy="280" r="4" fill="#ffffff" fillOpacity="0.6" />
+          <circle className="fig-node fig-node-center" cx="200" cy="200" r="6" fill="#3ddc84" />
+          <circle className="fig-node" cx="120" cy="120" r="4" fill="#ffffff" fillOpacity="0.6" />
+          <circle className="fig-node" cx="280" cy="120" r="4" fill="#ffffff" fillOpacity="0.6" />
+          <circle className="fig-node" cx="120" cy="280" r="4" fill="#ffffff" fillOpacity="0.6" />
+          <circle className="fig-node" cx="280" cy="280" r="4" fill="#ffffff" fillOpacity="0.6" />
 
           <path
             d="M120 120 L200 200 L280 120"
@@ -104,28 +106,24 @@ export function HeroVisual() {
         </g>
       </svg>
 
-      <div className="mt-6 border-t border-border pt-4">
+      <div className="mt-5 border-t border-border pt-4">
         <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-muted">
           Pipeline status
         </p>
         <div className="mt-3 space-y-2">
-          {[
-            { label: "Build", pct: 100 },
-            { label: "Deploy", pct: 100 },
-            { label: "Monitor", pct: 97 },
-          ].map((bar) => (
+          {pipeline.map((bar) => (
             <div key={bar.label} className="flex items-center gap-3">
               <span className="w-14 font-mono text-[10px] text-muted">
                 {bar.label}
               </span>
               <div className="h-px flex-1 bg-border">
                 <div
-                  className="h-px bg-accent transition-all duration-1000"
-                  style={{ width: `${bar.pct}%` }}
+                  className="pipeline-bar h-px bg-accent"
+                  style={{ "--target": `${bar.pct}%` } as CSSProperties}
                 />
               </div>
-              <span className="w-8 font-mono text-[10px] tabular-nums text-muted">
-                {bar.pct}
+              <span className="w-10 text-right font-mono text-[10px] tabular-nums text-muted">
+                <CountUpOnView value={bar.pct} suffix="%" duration={1200} />
               </span>
             </div>
           ))}
