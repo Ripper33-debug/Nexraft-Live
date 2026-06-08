@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { Logo } from "@/components/Logo";
 
 export function Footer() {
   const year = new Date().getFullYear();
@@ -7,9 +8,7 @@ export function Footer() {
     <footer className="py-10 md:py-12" role="contentinfo">
       <div className="grid-editorial items-end border-t border-border pt-8">
         <div className="col-span-12 md:col-span-6">
-          <p className="font-display text-xl font-semibold tracking-tight text-foreground">
-            Nexraft
-          </p>
+          <Logo height={32} href={null} />
           <p className="mt-2 font-mono text-[10px] uppercase tracking-[0.2em] text-muted">
             Web · Hosting · 3D · Est. 2024
           </p>

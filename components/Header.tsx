@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { Logo } from "@/components/Logo";
 import { SECTIONS } from "@/lib/sections";
 
 export function Header() {
@@ -47,14 +48,7 @@ export function Header() {
     >
       <div className="grid-editorial py-4 md:items-center md:py-5">
         <div className="col-span-12 flex items-center justify-between md:col-span-3 md:block">
-          <Link
-            href="/"
-            className="font-display text-lg font-semibold tracking-tight text-foreground"
-            aria-label="Nexraft home"
-            data-cursor-hover
-          >
-            Nexraft
-          </Link>
+          <Logo height={26} priority />
           <Link
             href="/pay"
             className="link-underline font-mono text-xs uppercase tracking-widest text-accent md:hidden"
