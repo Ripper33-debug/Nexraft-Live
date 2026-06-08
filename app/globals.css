@@ -301,21 +301,221 @@
     transform-origin: left;
   }
 
-  /* Hero layout polish */
-  .hero-section {
-    isolation: isolate;
+  /* Site backdrop */
+  .site-backdrop-vignette {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+      ellipse 120% 80% at 50% 0%,
+      transparent 40%,
+      rgba(10, 18, 13, 0.55) 100%
+    );
   }
 
-  .hero-section::before {
+  .site-backdrop-glow {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(
+        ellipse 55% 45% at 78% 18%,
+        rgba(61, 220, 132, 0.045) 0%,
+        transparent 68%
+      ),
+      radial-gradient(
+        ellipse 40% 35% at 12% 72%,
+        rgba(61, 220, 132, 0.025) 0%,
+        transparent 70%
+      );
+  }
+
+  .site-backdrop-signal {
+    position: absolute;
+    inset: 0;
+    opacity: 0.55;
+    background-image: repeating-linear-gradient(
+      90deg,
+      transparent 0,
+      transparent 96px,
+      rgba(61, 220, 132, 0.035) 96px,
+      rgba(61, 220, 132, 0.035) 97px
+    );
+    animation: site-signal-drift 48s linear infinite;
+  }
+
+  @keyframes site-signal-drift {
+    to {
+      background-position: 194px 0;
+    }
+  }
+
+  .site-backdrop-scan {
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(61, 220, 132, 0.22),
+      transparent
+    );
+    opacity: 0;
+    animation: site-scan-pass 14s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+  }
+
+  @keyframes site-scan-pass {
+    0% {
+      top: -2%;
+      opacity: 0;
+    }
+    6% {
+      opacity: 0.45;
+    }
+    94% {
+      opacity: 0.45;
+    }
+    100% {
+      top: 102%;
+      opacity: 0;
+    }
+  }
+
+  .site-backdrop-grid {
+    position: relative;
+    height: 100%;
+  }
+
+  .site-backdrop-horizons {
+    position: absolute;
+    inset: 0;
+    background-image: repeating-linear-gradient(
+      to bottom,
+      transparent 0,
+      transparent calc(5rem - 1px),
+      rgba(61, 220, 132, 0.055) calc(5rem - 1px),
+      rgba(61, 220, 132, 0.055) 5rem
+    );
+    mask-image: linear-gradient(
+      to bottom,
+      #000 0%,
+      #000 55%,
+      transparent 100%
+    );
+  }
+
+  .site-backdrop-col {
+    position: relative;
+  }
+
+  .site-backdrop-col:nth-child(6)::after,
+  .site-backdrop-col:nth-child(12)::after {
     content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: -0.5px;
+    width: 1px;
+    background-color: rgba(61, 220, 132, 0.14);
+  }
+
+  .site-backdrop-origin {
+    position: absolute;
+    top: clamp(6rem, 18vh, 12rem);
+    right: clamp(2rem, 12vw, 14rem);
+    width: 24px;
+    height: 24px;
+    opacity: 0.35;
+    background:
+      linear-gradient(var(--color-accent), var(--color-accent)) center/1px 100% no-repeat,
+      linear-gradient(var(--color-accent), var(--color-accent)) center/100% 1px no-repeat;
+    mask-image: radial-gradient(circle at center, #000 30%, transparent 72%);
+  }
+
+  /* Hero backdrop */
+  .hero-section {
+    isolation: isolate;
+    background-color: rgba(10, 18, 13, 0.35);
+  }
+
+  .hero-backdrop {
+    z-index: 0;
+  }
+
+  .hero-backdrop-horizon {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 62%;
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(61, 220, 132, 0.2) 20%,
+      rgba(61, 220, 132, 0.2) 80%,
+      transparent
+    );
+  }
+
+  .hero-backdrop-fade {
     position: absolute;
     inset: 0;
     background: linear-gradient(
-      135deg,
-      rgba(61, 220, 132, 0.04) 0%,
-      transparent 42%
+      180deg,
+      transparent 0%,
+      rgba(15, 27, 21, 0.15) 55%,
+      rgba(15, 27, 21, 0.55) 100%
     );
-    pointer-events: none;
+  }
+
+  .hero-backdrop-mesh {
+    position: absolute;
+    right: -8%;
+    top: 50%;
+    width: min(72vw, 52rem);
+    height: auto;
+    transform: translateY(-48%);
+    transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+    opacity: 0.9;
+  }
+
+  .hero-backdrop-wire {
+    stroke-dasharray: 6 10;
+    animation: hero-backdrop-flow 12s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+  }
+
+  @keyframes hero-backdrop-flow {
+    to {
+      stroke-dashoffset: -32;
+    }
+  }
+
+  .hero-backdrop-stream {
+    position: absolute;
+    inset: 0;
+    background-image: repeating-linear-gradient(
+      -12deg,
+      transparent 0,
+      transparent 28px,
+      rgba(61, 220, 132, 0.025) 28px,
+      rgba(61, 220, 132, 0.025) 29px
+    );
+    mask-image: radial-gradient(
+      ellipse 70% 55% at 72% 42%,
+      #000 10%,
+      transparent 75%
+    );
+    animation: hero-stream-shift 20s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+  }
+
+  @keyframes hero-stream-shift {
+    0%, 100% {
+      opacity: 0.45;
+      transform: translateX(0);
+    }
+    50% {
+      opacity: 0.75;
+      transform: translateX(12px);
+    }
   }
 
   .hero-reg-mark {
@@ -643,6 +843,13 @@
 
     .hero-fig-live,
     .hero-fig-scan {
+      animation: none;
+    }
+
+    .site-backdrop-signal,
+    .site-backdrop-scan,
+    .hero-backdrop-wire,
+    .hero-backdrop-stream {
       animation: none;
     }
   }

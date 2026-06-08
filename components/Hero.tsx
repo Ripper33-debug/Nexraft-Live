@@ -1,3 +1,4 @@
+import { HeroBackdrop } from "@/components/HeroBackdrop";
 import { MagneticLink } from "@/components/MagneticLink";
 import { HeroBootBridge } from "@/components/HeroBootBridge";
 import { HeroEstTicker } from "@/components/HeroEstTicker";
@@ -11,16 +12,18 @@ export function Hero() {
     <HeroBootBridge>
       <section
         id="home"
-        className="hero-section section-pad scroll-mt-20 relative border-b border-border"
+        className="hero-section section-pad scroll-mt-20 relative overflow-hidden border-b border-border"
         aria-labelledby="hero-heading"
       >
+        <HeroBackdrop />
+
         <span className="hero-reg-mark hero-reg-mark-tl" aria-hidden="true" />
         <span className="hero-reg-mark hero-reg-mark-tr" aria-hidden="true" />
         <span className="hero-reg-mark hero-reg-mark-bl" aria-hidden="true" />
 
         <HeroEstTicker className="absolute right-[clamp(1.25rem,4vw,3rem)] top-6 z-10 hidden md:block" />
 
-        <div className="grid-editorial relative">
+        <div className="relative z-10 grid-editorial">
           <div className="col-span-12 min-w-0 lg:col-span-7">
             <div className="hero-line hero-line-1 mb-6 flex flex-wrap items-center gap-x-4 gap-y-3">
               <p className="hero-eyebrow font-mono text-[10px] uppercase tracking-[0.25em] text-muted">

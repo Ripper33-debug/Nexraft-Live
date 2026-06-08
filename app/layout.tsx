@@ -4,7 +4,7 @@ import { Analytics } from "@vercel/analytics/next";
 import { Bricolage_Grotesque } from "next/font/google";
 import { GeistSans } from "geist/font/sans";
 import { GeistMono } from "geist/font/mono";
-import { GridOverlay } from "@/components/GridOverlay";
+import { SiteBackdrop } from "@/components/SiteBackdrop";
 import { Grain } from "@/components/Grain";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
@@ -67,7 +67,7 @@ export default function RootLayout({
       <body className="relative min-h-screen overflow-x-clip antialiased">
         <BootSequence />
         <Grain />
-        <GridOverlay />
+        <SiteBackdrop />
         <ScrollProgress />
         <SectionRail />
         <StudioCursor />
