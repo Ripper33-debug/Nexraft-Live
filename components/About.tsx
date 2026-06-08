@@ -19,9 +19,9 @@ export function About() {
           <ScrollReveal
             as="h2"
             id="about-heading"
-            className="text-display-section font-display font-semibold text-foreground"
+            className="text-display-section text-pretty font-display font-semibold text-foreground"
           >
-            Built like infrastructure, not marketing.
+            Built like infrastructure, not&nbsp;marketing.
           </ScrollReveal>
 
           <div className="mt-8 space-y-5 border-t border-border pt-8">

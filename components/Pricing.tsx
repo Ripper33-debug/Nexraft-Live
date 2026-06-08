@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import Link from "next/link";
 import { ScrollReveal } from "@/components/ScrollReveal";
 import { CountUp } from "@/components/CountUp";
@@ -14,6 +14,7 @@ type Plan = {
   cadence: string;
   summary: string;
   deliverables: readonly string[];
+  popular?: boolean;
 };
 
 const categories: { id: Category; label: string }[] = [
@@ -43,6 +44,7 @@ const plans: Record<Category, Plan[]> = {
       name: "Growth",
       price: 2800,
       cadence: "monthly retainer",
+      popular: true,
       summary: "Active development hours for features, integrations, and optimization.",
       deliverables: [
         "Custom-built CMS included",
@@ -88,6 +90,7 @@ const plans: Record<Category, Plan[]> = {
       name: "Performance",
       price: 650,
       cadence: "monthly subscription",
+      popular: true,
       summary: "Edge tuning, CDN config, and proactive performance optimization.",
       deliverables: [
         "Everything in Managed",
@@ -129,6 +132,7 @@ const plans: Record<Category, Plan[]> = {
       name: "Scene",
       price: 1800,
       cadence: "monthly retainer",
+      popular: true,
       summary: "Interactive scenes and walkthroughs delivered on a rolling basis.",
       deliverables: [
         "1 interactive scene per month",
@@ -155,15 +159,40 @@ const plans: Record<Category, Plan[]> = {
 
 export function Pricing() {
   const [category, setCategory] = useState<Category>("web");
-  const [activePlan, setActivePlan] = useState<string>("01");
+  const [activePlan, setActivePlan] = useState<string>("02");
+  const [slideDir, setSlideDir] = useState<1 | -1>(1);
+  const tabListRef = useRef<HTMLDivElement>(null);
+  const [indicator, setIndicator] = useState({ left: 0, width: 0 });
+
   const current = plans[category];
   const selected =
     current.find((p) => p.index === activePlan) ?? current[0];
 
   const onCategoryChange = (id: Category) => {
+    const newIdx = categories.findIndex((c) => c.id === id);
+    const oldIdx = categories.findIndex((c) => c.id === category);
+    setSlideDir(newIdx > oldIdx ? 1 : -1);
     setCategory(id);
-    setActivePlan("01");
+    const popular = plans[id].find((p) => p.popular);
+    setActivePlan(popular?.index ?? "01");
   };
+
+  useEffect(() => {
+    const update = () => {
+      const el = document.getElementById(`tab-${category}`);
+      const list = tabListRef.current;
+      if (!el || !list) return;
+      const listRect = list.getBoundingClientRect();
+      const tabRect = el.getBoundingClientRect();
+      setIndicator({
+        left: tabRect.left - listRect.left,
+        width: tabRect.width,
+      });
+    };
+    update();
+    window.addEventListener("resize", update);
+    return () => window.removeEventListener("resize", update);
+  }, [category]);
 
   return (
     <section
@@ -182,9 +211,9 @@ export function Pricing() {
           <ScrollReveal
             as="h2"
             id="pricing-heading"
-            className="text-display-section font-display font-semibold text-foreground"
+            className="text-display-section text-pretty font-display font-semibold text-foreground"
           >
-            Monthly rates. No surprises.
+            Monthly rates. No&nbsp;surprises.
           </ScrollReveal>
 
           <p className="mt-6 max-w-xl font-mono text-xs leading-relaxed text-muted">
@@ -193,10 +222,19 @@ export function Pricing() {
           </p>
 
           <div
-            className="pricing-tabs mt-8 flex gap-0 border-b border-border"
+            ref={tabListRef}
+            className="pricing-tabs relative mt-8 flex gap-0 border-b border-border"
             role="tablist"
             aria-label="Pricing categories"
           >
+            <span
+              className="pricing-tab-indicator"
+              style={{
+                transform: `translateX(${indicator.left}px)`,
+                width: indicator.width,
+              }}
+              aria-hidden="true"
+            />
             {categories.map((cat) => (
               <button
                 key={cat.id}
@@ -206,11 +244,12 @@ export function Pricing() {
                 aria-controls={`panel-${cat.id}`}
                 id={`tab-${cat.id}`}
                 onClick={() => onCategoryChange(cat.id)}
-                className={`pricing-tab shrink-0 border-b px-5 py-4 font-mono text-xs uppercase tracking-widest transition-colors ${
+                className={`pricing-tab relative z-10 shrink-0 px-5 py-4 font-mono text-xs uppercase tracking-widest transition-colors duration-300 ${
                   category === cat.id
-                    ? "border-accent text-foreground"
-                    : "border-transparent text-muted hover:text-foreground"
+                    ? "text-foreground"
+                    : "text-muted hover:text-foreground"
                 }`}
+                data-cursor-hover
               >
                 {cat.label}
               </button>
@@ -222,12 +261,24 @@ export function Pricing() {
             id={`panel-${category}`}
             role="tabpanel"
             aria-labelledby={`tab-${category}`}
-            className="pricing-panel mt-0"
+            data-dir={slideDir}
+            className="pricing-panel-swap mt-0"
           >
-            <div className="border-b border-border py-8">
-              <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-muted">
-                Selected plan
-              </p>
+            <div
+              className={`pricing-selected border-b border-border py-8 transition-colors duration-300 ${
+                selected.popular ? "border-l-2 border-l-accent pl-4 md:pl-6" : ""
+              }`}
+            >
+              <div className="flex flex-wrap items-center gap-3">
+                <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-muted">
+                  Selected plan
+                </p>
+                {selected.popular && (
+                  <span className="font-mono text-[9px] uppercase tracking-[0.15em] text-accent">
+                    Most popular
+                  </span>
+                )}
+              </div>
               <div className="mt-4 flex flex-wrap items-baseline gap-x-4 gap-y-2">
                 <span className="font-display text-3xl font-semibold text-foreground md:text-4xl">
                   {selected.name}
@@ -256,8 +307,10 @@ export function Pricing() {
                   <article
                     key={plan.index}
                     role="listitem"
-                    className={`pricing-row group grid grid-cols-12 items-start gap-4 border-b border-border py-6 md:gap-6 md:py-8 ${
-                      isActive ? "bg-accent/[0.04]" : ""
+                    className={`pricing-row group grid grid-cols-12 items-start gap-4 border-b border-border py-6 transition-all duration-300 md:gap-6 md:py-8 ${
+                      isActive
+                        ? "bg-accent/[0.06] ring-1 ring-inset ring-accent/20"
+                        : ""
                     }`}
                   >
                     <button
@@ -280,9 +333,16 @@ export function Pricing() {
                       </div>
 
                       <div className="col-span-10 md:col-span-3">
-                        <h3 className="font-display text-xl font-semibold text-foreground md:text-2xl">
-                          {plan.name}
-                        </h3>
+                        <div className="flex flex-wrap items-center gap-2">
+                          <h3 className="font-display text-xl font-semibold text-foreground md:text-2xl">
+                            {plan.name}
+                          </h3>
+                          {plan.popular && (
+                            <span className="font-mono text-[9px] uppercase tracking-[0.12em] text-accent">
+                              Popular
+                            </span>
+                          )}
+                        </div>
                       </div>
 
                       <div className="col-span-10 col-start-3 md:col-span-4 md:col-start-auto">

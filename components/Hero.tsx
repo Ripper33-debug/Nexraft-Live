@@ -18,32 +18,32 @@ export function Hero() {
 
       <div className="grid-editorial">
         <div className="col-span-12 lg:col-span-7">
-          <p className="mb-6 font-mono text-[10px] uppercase tracking-[0.25em] text-muted">
+          <p className="hero-line hero-line-1 mb-6 font-mono text-[10px] uppercase tracking-[0.25em] text-muted">
             Engineering studio
           </p>
 
           <h1
             id="hero-heading"
-            className="text-display-hero text-balance font-display font-bold text-foreground"
+            className="text-display-hero text-balance text-pretty font-display font-bold text-foreground"
           >
-            <span className="hero-line block">Everything you need</span>
-            <span className="hero-line block">to launch —</span>
-            <span className="hero-line block">
+            <span className="hero-line hero-line-2 block">Everything you&nbsp;need</span>
+            <span className="hero-line hero-line-3 block">to&nbsp;launch —</span>
+            <span className="hero-line hero-line-4 block">
               and keep it <span className="text-accent">fast</span>.
             </span>
           </h1>
 
-          <p className="hero-line prose-measure mt-8 text-body text-muted">
+          <p className="hero-line hero-line-5 prose-measure mt-8 text-body-sm text-muted">
             Web builds, managed hosting, and 3D production — one studio, one
-            standard of precision. Monthly retainers, no lock-in.
+            standard of precision. Monthly retainers, no&nbsp;lock-in.
           </p>
         </div>
 
-        <div className="col-span-12 mt-10 lg:col-span-5 lg:mt-0 lg:flex lg:items-center lg:justify-end">
+        <div className="col-span-12 mt-10 hidden lg:col-span-5 lg:mt-0 lg:flex lg:items-center lg:justify-end">
           <HeroVisual />
         </div>
 
-        <div className="col-span-12 mt-12 grid grid-cols-12 gap-0 border-t border-border pt-6 md:mt-14">
+        <div className="hero-line hero-line-6 col-span-12 mt-12 grid grid-cols-12 gap-0 border-t border-border pt-6 md:mt-14">
           <div className="col-span-12 sm:col-span-4">
             <MagneticLink
               href="#contact"
@@ -70,7 +70,7 @@ export function Hero() {
           </div>
         </div>
 
-        <div className="col-span-12 mt-6 flex items-end justify-between border-t border-border pt-5">
+        <div className="hero-line hero-line-7 col-span-12 mt-6 flex items-end justify-between border-t border-border pt-5">
           <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-muted md:hidden">
             WEB · HOSTING · 3D — EST. 2024
           </p>

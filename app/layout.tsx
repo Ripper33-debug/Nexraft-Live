@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+import { Analytics } from "@vercel/analytics/next";
 import { Bricolage_Grotesque } from "next/font/google";
 import { GeistSans } from "geist/font/sans";
 import { GeistMono } from "geist/font/mono";
@@ -73,6 +74,7 @@ export default function RootLayout({
           <main id="main">{children}</main>
           <Footer />
         </div>
+        <Analytics />
       </body>
     </html>
   );

@@ -52,9 +52,9 @@ export function Services() {
           <ScrollReveal
             as="h2"
             id="services-heading"
-            className="text-display-section font-display font-semibold text-foreground"
+            className="text-display-section text-pretty font-display font-semibold text-foreground"
           >
-            What we build and run.
+            What we build and&nbsp;run.
           </ScrollReveal>
 
           <p className="mt-6 max-w-lg font-mono text-xs text-muted">
