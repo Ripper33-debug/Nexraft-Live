@@ -382,8 +382,6 @@
     transition: grid-template-rows 0.4s cubic-bezier(0.22, 1, 0.36, 1);
   }
 
-  .service-row:hover .service-detail-wrap,
-  .service-row:focus-within .service-detail-wrap,
   .service-detail-wrap.is-open {
     grid-template-rows: 1fr;
   }
@@ -394,10 +392,20 @@
     transition: opacity 0.3s cubic-bezier(0.22, 1, 0.36, 1);
   }
 
-  .service-row:hover .service-detail,
-  .service-row:focus-within .service-detail,
   .service-detail-wrap.is-open .service-detail {
     opacity: 1;
+    margin-top: 0.75rem;
+  }
+
+  @media (hover: hover) and (min-width: 768px) {
+    .service-row:hover .service-detail-wrap:not(.is-open) {
+      grid-template-rows: 0.35fr;
+    }
+
+    .service-row:hover .service-detail-wrap:not(.is-open) .service-detail {
+      opacity: 0.55;
+      margin-top: 0.5rem;
+    }
   }
 
   .pricing-tab {
@@ -545,29 +553,11 @@
     }
 
     .service-detail-wrap {
-      grid-template-rows: 1fr;
       transition: none;
     }
 
     .service-detail {
-      opacity: 1;
-      overflow: visible;
-    }
-  }
-
-  @media (hover: none), (max-width: 767px) {
-    .service-detail-wrap:not(.is-open) {
-      grid-template-rows: 0fr;
-    }
-
-    .service-detail-wrap:not(.is-open) .service-detail {
-      opacity: 0;
-      margin-top: 0;
-    }
-
-    .service-detail-wrap.is-open .service-detail {
-      opacity: 1;
-      margin-top: 0.75rem;
+      transition: none;
     }
   }
 }

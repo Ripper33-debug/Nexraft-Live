@@ -5,6 +5,7 @@ export const metadata: Metadata = {
   title: "Pay Bill — Nexraft",
   description:
     "Client billing portal for Nexraft monthly retainers and hosting subscriptions.",
+  robots: { index: false, follow: false },
 };
 
 const steps = [
@@ -77,10 +78,8 @@ export default function PayPage() {
                 Payment portal
               </p>
               <p className="mt-3 font-mono text-xs text-muted">
-                Status: awaiting provider
-              </p>
-              <p className="mt-2 font-mono text-[10px] text-foreground/40">
-                Route /pay
+                Online payments coming soon. Use the link in your invoice for
+                now.
               </p>
             </div>
             <div>

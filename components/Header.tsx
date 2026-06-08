@@ -47,19 +47,12 @@ export function Header() {
       }`}
     >
       <div className="grid-editorial min-w-0 py-4 md:items-center md:py-5">
-        <div className="col-span-12 flex min-w-0 items-center justify-between md:col-span-3 md:block">
+        <div className="col-span-12 min-w-0 md:col-span-3">
           <Logo height={22} priority />
-          <Link
-            href="/pay"
-            className="link-underline font-mono text-xs uppercase tracking-widest text-accent md:hidden"
-            data-cursor-hover
-          >
-            Pay Bill
-          </Link>
         </div>
 
         <nav
-          className="nav-scroll col-span-12 -mx-[clamp(1.25rem,4vw,3rem)] flex items-center gap-8 overflow-x-auto border-t border-border px-[clamp(1.25rem,4vw,3rem)] py-3 md:col-span-6 md:mx-0 md:justify-end md:border-t-0 md:px-0 md:py-0"
+          className="nav-scroll col-span-12 -mx-[clamp(1.25rem,4vw,3rem)] flex items-center gap-8 overflow-x-auto border-t border-border px-[clamp(1.25rem,4vw,3rem)] py-3 md:col-span-9 md:mx-0 md:justify-end md:border-t-0 md:px-0 md:py-0"
           aria-label="Primary"
         >
           {SECTIONS.map((item) => {
@@ -81,16 +74,6 @@ export function Header() {
             );
           })}
         </nav>
-
-        <div className="hidden md:col-span-3 md:flex md:items-center md:justify-end">
-          <Link
-            href="/pay"
-            className="link-underline font-mono text-xs uppercase tracking-widest text-accent"
-            data-cursor-hover
-          >
-            Pay Bill
-          </Link>
-        </div>
       </div>
     </header>
   );

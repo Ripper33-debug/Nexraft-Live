@@ -26,16 +26,16 @@ export function Hero() {
             id="hero-heading"
             className="text-display-hero text-balance text-pretty font-display font-bold text-foreground"
           >
-            <span className="hero-line hero-line-2 block">Everything you&nbsp;need</span>
-            <span className="hero-line hero-line-3 block">to&nbsp;launch —</span>
+            <span className="hero-line hero-line-2 block">Built like</span>
+            <span className="hero-line hero-line-3 block">infrastructure —</span>
             <span className="hero-line hero-line-4 block">
-              and keep it <span className="text-accent">fast</span>.
+              web, hosting, <span className="text-accent">3D</span>.
             </span>
           </h1>
 
           <p className="hero-line hero-line-5 prose-measure mt-8 text-body-sm text-muted">
-            Web builds, managed hosting, and 3D production — one studio, one
-            standard of precision. Monthly retainers, no&nbsp;lock-in.
+            Browser-ready 3D, managed Vercel stacks, and spec-grade web
+            builds — one studio, documented delivery. Monthly retainers.
           </p>
         </div>
 

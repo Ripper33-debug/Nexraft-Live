@@ -4,6 +4,7 @@ import { MagneticLink } from "@/components/MagneticLink";
 import { ContactForm } from "@/components/ContactForm";
 
 const EMAIL = "hello@nexraft.com";
+const BILLING_EMAIL = "billing@nexraft.com";
 
 const channels = [
   {
@@ -16,7 +17,7 @@ const channels = [
     index: "02",
     label: "Billing",
     detail: "Invoices, payment method, or account questions.",
-    href: "/pay",
+    href: `mailto:${BILLING_EMAIL}?subject=${encodeURIComponent("Billing inquiry — Nexraft")}`,
   },
 ] as const;
 

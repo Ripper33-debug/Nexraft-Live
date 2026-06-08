@@ -1,44 +1,44 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
+import { useState, useTransition, type FormEvent } from "react";
+import { submitContact } from "@/app/actions/contact";
 
-const EMAIL = "hello@nexraft.com";
 const dash = "\u2014";
 
 const plans = [
-  `Web ${dash} Starter`,
-  `Web ${dash} Growth`,
-  `Web ${dash} Build`,
-  `Hosting ${dash} Managed`,
-  `Hosting ${dash} Performance`,
-  `Hosting ${dash} Enterprise`,
-  `3D ${dash} Asset`,
-  `3D ${dash} Scene`,
-  `3D ${dash} Studio`,
-  "Not sure yet",
+  { group: "Web", options: ["Starter", "Growth", "Build"] },
+  { group: "Hosting", options: ["Managed", "Performance", "Enterprise"] },
+  { group: "3D", options: ["Asset", "Scene", "Studio"] },
 ] as const;
 
+type FormStatus = "idle" | "success" | "error";
+
 export function ContactForm() {
-  const [status, setStatus] = useState<"idle" | "sent">("idle");
+  const [status, setStatus] = useState<FormStatus>("idle");
+  const [message, setMessage] = useState("");
+  const [isPending, startTransition] = useTransition();
 
   const onSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const data = new FormData(e.currentTarget);
+    setStatus("idle");
+    setMessage("");
 
-    const body = [
-      `Name: ${data.get("name")}`,
-      `Company: ${data.get("company") || dash}`,
-      `Plan interest: ${data.get("plan")}`,
-      "",
-      "What they're building:",
-      String(data.get("project") || ""),
-      "",
-    ].join("\n");
+    const form = e.currentTarget;
+    const data = new FormData(form);
 
-    const href = `mailto:${EMAIL}?subject=${encodeURIComponent(`Project inquiry ${dash} Nexraft`)}&body=${encodeURIComponent(body)}`;
+    startTransition(async () => {
+      const result = await submitContact(data);
 
-    window.location.href = href;
-    setStatus("sent");
+      if (result.ok) {
+        setStatus("success");
+        setMessage("Inquiry sent. We will respond within two business days.");
+        form.reset();
+        return;
+      }
+
+      setStatus("error");
+      setMessage(result.error);
+    });
   };
 
   return (
@@ -56,33 +56,69 @@ export function ContactForm() {
             autoComplete="name"
             className="field-input"
             placeholder="Your name"
+            disabled={isPending}
           />
         </div>
         <div className="field-group">
-          <label htmlFor="contact-company" className="field-label">
-            Company
+          <label htmlFor="contact-email" className="field-label">
+            Email
           </label>
           <input
-            id="contact-company"
-            name="company"
-            type="text"
-            autoComplete="organization"
+            id="contact-email"
+            name="email"
+            type="email"
+            required
+            autoComplete="email"
             className="field-input"
-            placeholder="Optional"
+            placeholder="you@company.com"
+            disabled={isPending}
           />
         </div>
+      </div>
+
+      <div className="field-group">
+        <label htmlFor="contact-company" className="field-label">
+          Company
+        </label>
+        <input
+          id="contact-company"
+          name="company"
+          type="text"
+          autoComplete="organization"
+          className="field-input"
+          placeholder="Optional"
+          disabled={isPending}
+        />
       </div>
 
       <div className="field-group">
         <label htmlFor="contact-plan" className="field-label">
           Plan interest
         </label>
-        <select id="contact-plan" name="plan" className="field-input" required>
-          {plans.map((plan) => (
-            <option key={plan} value={plan}>
-              {plan}
-            </option>
+        <select
+          id="contact-plan"
+          name="plan"
+          className="field-input"
+          required
+          defaultValue=""
+          disabled={isPending}
+        >
+          <option value="" disabled>
+            Select a plan
+          </option>
+          {plans.map((group) => (
+            <optgroup key={group.group} label={group.group}>
+              {group.options.map((option) => (
+                <option
+                  key={`${group.group}-${option}`}
+                  value={`${group.group} ${dash} ${option}`}
+                >
+                  {option}
+                </option>
+              ))}
+            </optgroup>
           ))}
+          <option value="Not sure yet">Not sure yet</option>
         </select>
       </div>
 
@@ -97,16 +133,29 @@ export function ContactForm() {
           rows={4}
           className="field-input field-textarea"
           placeholder="Brief summary, timeline, and goals"
+          disabled={isPending}
         />
       </div>
 
       <div className="flex flex-col gap-4 border-t border-border pt-6 sm:flex-row sm:items-center sm:justify-between">
-        <button type="submit" className="btn-submit" data-cursor-hover>
-          Send inquiry
+        <button
+          type="submit"
+          className="btn-submit"
+          data-cursor-hover
+          disabled={isPending}
+          aria-busy={isPending}
+        >
+          {isPending ? "Sending\u2026" : "Send inquiry"}
         </button>
-        {status === "sent" && (
-          <p className="font-mono text-xs text-accent">
-            Opening your mail client
+        {status !== "idle" && (
+          <p
+            className={`font-mono text-xs ${
+              status === "success" ? "text-accent" : "text-foreground/70"
+            }`}
+            role="status"
+            aria-live="polite"
+          >
+            {message}
           </p>
         )}
       </div>

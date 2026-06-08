@@ -25,11 +25,12 @@ export const metadata: Metadata = {
     template: "%s — Nexraft",
   },
   description:
-    "Everything you need to launch — and keep it fast. Engineering studio for web development, hosting, and 3D. Monthly retainers.",
+    "Built like infrastructure — web, hosting, and 3D. Engineering studio for spec-grade builds, managed Vercel stacks, and browser-ready 3D. Monthly retainers.",
   metadataBase: new URL("https://nexraft.com"),
   openGraph: {
     title: "Nexraft — Web, Hosting & 3D Studio",
-    description: "Everything you need to launch — and keep it fast.",
+    description:
+      "Built like infrastructure — web, hosting, and 3D production.",
     type: "website",
     siteName: "Nexraft",
     locale: "en_US",
@@ -37,7 +38,8 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Nexraft",
-    description: "Everything you need to launch — and keep it fast.",
+    description:
+      "Built like infrastructure — web, hosting, and 3D production.",
   },
   robots: { index: true, follow: true },
 };

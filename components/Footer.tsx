@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { Logo } from "@/components/Logo";
 
 export function Footer() {
@@ -15,17 +14,17 @@ export function Footer() {
         </div>
 
         <div className="col-span-12 mt-8 flex flex-wrap items-center gap-6 md:col-span-6 md:mt-0 md:justify-end">
-          <Link
-            href="/pay"
-            className="link-underline font-mono text-xs uppercase tracking-widest text-accent"
-          >
-            Pay Bill
-          </Link>
           <a
             href="mailto:hello@nexraft.com"
             className="link-underline font-mono text-xs uppercase tracking-widest text-muted hover:text-foreground"
           >
             Contact
+          </a>
+          <a
+            href="mailto:billing@nexraft.com"
+            className="link-underline font-mono text-xs uppercase tracking-widest text-muted hover:text-foreground"
+          >
+            Billing
           </a>
           <p className="font-mono text-[10px] tabular-nums text-muted">
             © {year}
