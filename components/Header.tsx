@@ -2,13 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
-
-const navItems = [
-  { href: "#home", label: "Home", id: "home" },
-  { href: "#about", label: "About", id: "about" },
-  { href: "#services", label: "Services", id: "services" },
-  { href: "#contact", label: "Contact", id: "contact" },
-] as const;
+import { SECTIONS } from "@/lib/sections";
 
 export function Header() {
   const [scrolled, setScrolled] = useState(false);
@@ -22,9 +16,9 @@ export function Header() {
   }, []);
 
   useEffect(() => {
-    const sections = navItems
-      .map((item) => document.getElementById(item.id))
-      .filter(Boolean) as HTMLElement[];
+    const sections = SECTIONS.map((s) => document.getElementById(s.id)).filter(
+      Boolean,
+    ) as HTMLElement[];
 
     if (!sections.length) return;
 
@@ -34,9 +28,7 @@ export function Header() {
           .filter((e) => e.isIntersecting)
           .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
 
-        if (visible[0]?.target.id) {
-          setActive(visible[0].target.id);
-        }
+        if (visible[0]?.target.id) setActive(visible[0].target.id);
       },
       { rootMargin: "-40% 0px -45% 0px", threshold: [0, 0.25, 0.5] },
     );
@@ -59,12 +51,14 @@ export function Header() {
             href="/"
             className="font-display text-lg font-semibold tracking-tight text-foreground"
             aria-label="Nexraft home"
+            data-cursor-hover
           >
             Nexraft
           </Link>
           <Link
             href="/pay"
             className="link-underline font-mono text-xs uppercase tracking-widest text-accent md:hidden"
+            data-cursor-hover
           >
             Pay Bill
           </Link>
@@ -74,7 +68,7 @@ export function Header() {
           className="nav-scroll col-span-12 -mx-[clamp(1.25rem,4vw,3rem)] flex items-center gap-8 overflow-x-auto border-t border-border px-[clamp(1.25rem,4vw,3rem)] py-3 md:col-span-6 md:mx-0 md:justify-end md:border-t-0 md:px-0 md:py-0"
           aria-label="Primary"
         >
-          {navItems.map((item) => {
+          {SECTIONS.map((item) => {
             const isActive = active === item.id;
             return (
               <Link
@@ -86,6 +80,7 @@ export function Header() {
                     : "text-muted hover:text-foreground"
                 }`}
                 aria-current={isActive ? "page" : undefined}
+                data-cursor-hover
               >
                 {item.label}
               </Link>
@@ -97,6 +92,7 @@ export function Header() {
           <Link
             href="/pay"
             className="link-underline font-mono text-xs uppercase tracking-widest text-accent"
+            data-cursor-hover
           >
             Pay Bill
           </Link>

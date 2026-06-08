@@ -1,4 +1,6 @@
 import Link from "next/link";
+import { HeroVisual } from "@/components/HeroVisual";
+import { SECTION_COUNT } from "@/lib/sections";
 
 export function Hero() {
   return (
@@ -15,7 +17,7 @@ export function Hero() {
       </p>
 
       <div className="grid-editorial">
-        <div className="col-span-12 md:col-span-10 lg:col-span-9">
+        <div className="col-span-12 lg:col-span-7">
           <p className="mb-8 font-mono text-xs uppercase tracking-[0.25em] text-muted">
             Engineering studio
           </p>
@@ -33,35 +35,50 @@ export function Hero() {
 
           <p className="hero-line mt-10 max-w-md font-body text-base leading-relaxed text-muted md:text-lg">
             Web builds, managed hosting, and 3D production — one studio, one
-            standard of precision.
+            standard of precision. Monthly retainers, no lock-in.
           </p>
         </div>
 
+        <div className="col-span-12 mt-12 lg:col-span-5 lg:mt-0 lg:flex lg:items-center lg:justify-end">
+          <HeroVisual />
+        </div>
+
         <div className="col-span-12 mt-16 grid grid-cols-12 gap-0 border-t border-border pt-8 md:mt-20">
-          <div className="col-span-12 md:col-span-5 lg:col-span-4">
+          <div className="col-span-12 md:col-span-4 lg:col-span-3">
             <Link
               href="#contact"
               className="link-underline inline-block font-mono text-xs uppercase tracking-[0.2em] text-foreground"
+              data-cursor-hover
             >
               Start a project →
             </Link>
           </div>
-          <div className="col-span-12 mt-6 border-t border-border pt-6 md:col-span-5 md:col-start-7 md:mt-0 md:border-t-0 md:pt-0 lg:col-span-4 lg:col-start-6">
+          <div className="col-span-12 mt-6 border-t border-border pt-6 md:col-span-4 md:col-start-5 md:mt-0 md:border-t-0 md:pt-0">
+            <Link
+              href="#pricing"
+              className="link-underline inline-block font-mono text-xs uppercase tracking-[0.2em] text-muted hover:text-foreground"
+              data-cursor-hover
+            >
+              View pricing →
+            </Link>
+          </div>
+          <div className="col-span-12 mt-6 border-t border-border pt-6 md:col-span-4 md:col-start-9 md:mt-0 md:border-t-0 md:pt-0">
             <Link
               href="#services"
               className="link-underline inline-block font-mono text-xs uppercase tracking-[0.2em] text-muted hover:text-foreground"
+              data-cursor-hover
             >
               View services →
             </Link>
           </div>
         </div>
 
-        <div className="col-span-12 mt-8 flex items-end justify-between border-t border-border pt-6 md:col-span-6 md:col-start-7 lg:col-span-4 lg:col-start-9">
+        <div className="col-span-12 mt-8 flex items-end justify-between border-t border-border pt-6">
           <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-muted md:hidden">
             WEB · HOSTING · 3D — EST. 2024
           </p>
           <p className="ml-auto font-mono text-[10px] tabular-nums text-muted">
-            01 / 04
+            01 / {String(SECTION_COUNT).padStart(2, "0")}
           </p>
         </div>
       </div>

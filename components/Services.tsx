@@ -1,3 +1,6 @@
+"use client";
+
+import { useState } from "react";
 import { ScrollReveal } from "@/components/ScrollReveal";
 
 const services = [
@@ -29,6 +32,8 @@ const services = [
 ] as const;
 
 export function Services() {
+  const [expanded, setExpanded] = useState<string | null>(null);
+
   return (
     <section
       id="services"
@@ -52,62 +57,81 @@ export function Services() {
           </ScrollReveal>
 
           <p className="mt-6 max-w-lg font-mono text-xs text-muted">
-            Three disciplines. One delivery standard.
+            Three disciplines. One delivery standard. All available on monthly
+            retainers.
           </p>
         </div>
 
         <div className="col-span-12 mt-16 md:col-start-1">
           <div role="list" className="border-t border-border">
-            {services.map((service) => (
-              <article
-                key={service.index}
-                role="listitem"
-                className={`service-row group grid grid-cols-12 items-start gap-4 border-b border-border px-0 py-8 md:gap-6 md:py-10 ${
-                  "highlight" in service && service.highlight
-                    ? "border-l border-l-accent/30 pl-4 md:pl-6"
-                    : ""
-                }`}
-              >
-                <div className="col-span-2 md:col-span-1">
-                  <span
-                    className="font-display text-[clamp(2.5rem,6vw,4rem)] font-bold leading-none tracking-tighter text-foreground/20 transition-colors group-hover:text-accent/40"
-                    aria-hidden="true"
+            {services.map((service) => {
+              const isOpen = expanded === service.index;
+              return (
+                <article
+                  key={service.index}
+                  role="listitem"
+                  className={`service-row group grid grid-cols-12 items-start gap-4 border-b border-border px-0 py-8 md:gap-6 md:py-10 ${
+                    "highlight" in service && service.highlight
+                      ? "border-l border-l-accent/30 pl-4 md:pl-6"
+                      : ""
+                  } ${isOpen ? "bg-accent/[0.03]" : ""}`}
+                >
+                  <button
+                    type="button"
+                    className="col-span-12 grid grid-cols-12 items-start gap-4 text-left md:col-span-12 md:gap-6"
+                    onClick={() =>
+                      setExpanded(isOpen ? null : service.index)
+                    }
+                    aria-expanded={isOpen}
+                    data-cursor-hover
                   >
-                    {service.index}
-                  </span>
-                </div>
-
-                <div className="col-span-10 md:col-span-11 md:grid md:grid-cols-11 md:items-start md:gap-6">
-                  <div className="md:col-span-2">
-                    <h3 className="font-display text-2xl font-semibold tracking-tight text-foreground md:text-3xl">
-                      {service.name}
-                    </h3>
-                    {"highlight" in service && service.highlight && (
-                      <p className="mt-2 font-mono text-[10px] uppercase tracking-[0.2em] text-accent">
-                        Real-time · Print-ready
-                      </p>
-                    )}
-                  </div>
-
-                  <div className="mt-2 md:col-span-5 md:mt-0">
-                    <p className="text-sm leading-relaxed text-muted md:text-base">
-                      {service.summary}
-                    </p>
-                    <div className="service-detail-wrap">
-                      <p className="service-detail mt-3 font-mono text-xs leading-relaxed text-muted">
-                        {service.detail}
-                      </p>
+                    <div className="col-span-2 md:col-span-1">
+                      <span
+                        className="font-display text-[clamp(2.5rem,6vw,4rem)] font-bold leading-none tracking-tighter text-foreground/20 transition-colors group-hover:text-accent/40"
+                        aria-hidden="true"
+                      >
+                        {service.index}
+                      </span>
                     </div>
-                  </div>
 
-                  <div className="mt-3 md:col-span-4 md:mt-0 md:text-right">
-                    <p className="font-mono text-[10px] uppercase tracking-[0.15em] text-muted md:text-xs">
-                      {service.stack}
+                    <div className="col-span-10 md:col-span-11 md:grid md:grid-cols-11 md:items-start md:gap-6">
+                      <div className="md:col-span-2">
+                        <h3 className="font-display text-2xl font-semibold tracking-tight text-foreground md:text-3xl">
+                          {service.name}
+                        </h3>
+                        {"highlight" in service && service.highlight && (
+                          <p className="mt-2 font-mono text-[10px] uppercase tracking-[0.2em] text-accent">
+                            Real-time · Print-ready
+                          </p>
+                        )}
+                      </div>
+
+                      <div className="mt-2 md:col-span-5 md:mt-0">
+                        <p className="text-sm leading-relaxed text-muted md:text-base">
+                          {service.summary}
+                        </p>
+                      </div>
+
+                      <div className="mt-3 md:col-span-4 md:mt-0 md:text-right">
+                        <p className="font-mono text-[10px] uppercase tracking-[0.15em] text-muted md:text-xs">
+                          {service.stack}
+                        </p>
+                      </div>
+                    </div>
+                  </button>
+
+                  <div
+                    className={`service-detail-wrap col-span-12 md:col-span-11 md:col-start-2 ${
+                      isOpen ? "is-open" : ""
+                    }`}
+                  >
+                    <p className="service-detail mt-0 font-mono text-xs leading-relaxed text-muted md:mt-2">
+                      {service.detail}
                     </p>
                   </div>
-                </div>
-              </article>
-            ))}
+                </article>
+              );
+            })}
           </div>
         </div>
       </div>

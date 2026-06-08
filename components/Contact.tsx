@@ -4,18 +4,18 @@ const EMAIL = "hello@nexraft.com";
 
 const briefLines = [
   "What you're building and who it's for",
-  "Target launch date or timeline",
-  "Budget range (ballpark is fine)",
+  "Preferred monthly plan or budget range",
+  "Services needed (Web, Hosting, 3D)",
   "Links to references or existing work",
 ] as const;
 
-const mailtoHref = `mailto:${EMAIL}?subject=${encodeURIComponent("Project inquiry — Nexraft")}&body=${encodeURIComponent(
+const mailtoHref = `mailto:${EMAIL}?subject=${encodeURIComponent("Monthly plan inquiry — Nexraft")}&body=${encodeURIComponent(
   [
     "Project summary:",
     "",
-    "Timeline:",
+    "Preferred plan (Starter/Growth/Build etc.):",
     "",
-    "Budget range:",
+    "Monthly budget:",
     "",
     "References:",
     "",
@@ -32,7 +32,7 @@ export function Contact() {
       <div className="grid-editorial">
         <div className="col-span-12 mb-12 md:col-span-3">
           <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-muted">
-            04 / Contact
+            05 / Contact
           </p>
         </div>
 
@@ -51,13 +51,14 @@ export function Contact() {
               className="max-w-xl text-base text-muted md:text-lg"
             >
               Tell us what you&apos;re building. We respond within two business
-              days with scope, timeline, and a fixed quote.
+              days with a monthly scope, timeline, and fixed rate.
             </ScrollReveal>
 
             <div className="mt-10 flex flex-col gap-8 border-b border-border pb-10 sm:flex-row sm:items-start sm:justify-between">
               <a
                 href={mailtoHref}
                 className="link-underline font-display text-2xl font-medium text-foreground md:text-3xl"
+                data-cursor-hover
               >
                 {EMAIL}
               </a>
