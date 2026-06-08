@@ -46,9 +46,9 @@ export function Header() {
           : "border-transparent bg-transparent"
       }`}
     >
-      <div className="grid-editorial py-4 md:items-center md:py-5">
-        <div className="col-span-12 flex items-center justify-between md:col-span-3 md:block">
-          <Logo height={26} priority />
+      <div className="grid-editorial min-w-0 py-4 md:items-center md:py-5">
+        <div className="col-span-12 flex min-w-0 items-center justify-between md:col-span-3 md:block">
+          <Logo height={22} priority />
           <Link
             href="/pay"
             className="link-underline font-mono text-xs uppercase tracking-widest text-accent md:hidden"

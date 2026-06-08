@@ -17,7 +17,7 @@ export function Hero() {
       </p>
 
       <div className="grid-editorial">
-        <div className="col-span-12 lg:col-span-7">
+        <div className="col-span-12 min-w-0 lg:col-span-7">
           <p className="hero-line hero-line-1 mb-6 font-mono text-[10px] uppercase tracking-[0.25em] text-muted">
             Engineering studio
           </p>

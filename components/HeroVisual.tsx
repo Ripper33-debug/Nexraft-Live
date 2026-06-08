@@ -30,7 +30,7 @@ export function HeroVisual() {
   }, []);
 
   return (
-    <div className="hero-fig-enter relative w-full max-w-md" aria-hidden="true">
+    <div className="hero-fig-enter relative w-full min-w-0 max-w-md" aria-hidden="true">
       <p className="absolute -top-1 right-0 z-10 font-mono text-[10px] uppercase tracking-[0.2em] text-muted/60">
         Scale 1:1
       </p>

@@ -57,7 +57,7 @@ export default function RootLayout({
       lang="en"
       className={`${bricolage.variable} ${GeistSans.variable} ${GeistMono.variable}`}
     >
-      <body className="relative min-h-screen antialiased">
+      <body className="relative min-h-screen overflow-x-clip antialiased">
         <Grain />
         <GridOverlay />
         <ScrollProgress />

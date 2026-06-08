@@ -12,22 +12,25 @@ type LogoProps = {
 };
 
 export function Logo({
-  height = 28,
+  height = 22,
   href = "/",
   priority = false,
   className = "",
 }: LogoProps) {
-  const width = Math.round((LOGO_WIDTH / LOGO_HEIGHT) * height);
+  const displayWidth = Math.round((LOGO_WIDTH / LOGO_HEIGHT) * height);
+  const intrinsicHeight = height * 2;
+  const intrinsicWidth = Math.round((LOGO_WIDTH / LOGO_HEIGHT) * intrinsicHeight);
 
   const image = (
     <Image
-      src="/nexraft-logo.png"
+      src="/nexraft-logo-header.png"
       alt="Nexraft"
-      width={width}
-      height={height}
-      className={className}
-      style={{ width, height }}
+      width={intrinsicWidth}
+      height={intrinsicHeight}
+      sizes={`${displayWidth}px`}
       priority={priority}
+      className={`block max-w-full ${className}`}
+      style={{ height, width: "auto", maxHeight: height }}
     />
   );
 
@@ -35,7 +38,7 @@ export function Logo({
     return (
       <Link
         href={href}
-        className="inline-flex shrink-0 items-center"
+        className="inline-flex shrink-0 items-center bg-transparent"
         aria-label="Nexraft home"
         data-cursor-hover
       >
@@ -44,5 +47,9 @@ export function Logo({
     );
   }
 
-  return <span className="inline-flex shrink-0 items-center">{image}</span>;
+  return (
+    <span className="inline-flex shrink-0 items-center bg-transparent">
+      {image}
+    </span>
+  );
 }

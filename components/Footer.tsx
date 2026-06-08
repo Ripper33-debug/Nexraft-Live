@@ -8,7 +8,7 @@ export function Footer() {
     <footer className="py-10 md:py-12" role="contentinfo">
       <div className="grid-editorial items-end border-t border-border pt-8">
         <div className="col-span-12 md:col-span-6">
-          <Logo height={32} href={null} />
+          <Logo height={28} href={null} />
           <p className="mt-2 font-mono text-[10px] uppercase tracking-[0.2em] text-muted">
             Web · Hosting · 3D · Est. 2024
           </p>

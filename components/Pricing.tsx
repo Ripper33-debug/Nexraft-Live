@@ -200,14 +200,14 @@ export function Pricing() {
       className="section-pad scroll-mt-20 border-b border-border bg-surface-deep"
       aria-labelledby="pricing-heading"
     >
-      <div className="grid-editorial">
+      <div className="grid-editorial min-w-0">
         <div className="col-span-12 section-label-gap md:col-span-3">
           <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-muted">
             04 / Pricing
           </p>
         </div>
 
-        <div className="col-span-12 md:col-span-9">
+        <div className="col-span-12 min-w-0 md:col-span-9">
           <ScrollReveal
             as="h2"
             id="pricing-heading"
@@ -223,7 +223,7 @@ export function Pricing() {
 
           <div
             ref={tabListRef}
-            className="pricing-tabs relative mt-8 flex gap-0 border-b border-border"
+            className="pricing-tabs relative mt-8 flex max-w-full gap-0 overflow-x-auto border-b border-border"
             role="tablist"
             aria-label="Pricing categories"
           >
@@ -283,7 +283,7 @@ export function Pricing() {
                 <span className="font-display text-3xl font-semibold text-foreground md:text-4xl">
                   {selected.name}
                 </span>
-                <span className="font-display text-[clamp(2rem,5vw,3.5rem)] font-bold leading-none tracking-tight text-foreground">
+                <span className="font-display text-[clamp(1.75rem,5vw,3.5rem)] font-bold leading-none tracking-tight text-foreground">
                   <CountUp
                     key={`${category}-${selected.index}-${selected.price}`}
                     value={selected.price}
@@ -316,48 +316,58 @@ export function Pricing() {
                     <button
                       type="button"
                       onClick={() => setActivePlan(plan.index)}
-                      className="col-span-12 grid grid-cols-12 items-start gap-4 text-left md:col-span-12 md:gap-6"
+                      className="col-span-12 min-w-0 text-left"
                       aria-pressed={isActive}
                       data-cursor-hover
                     >
-                      <div className="col-span-2 md:col-span-1">
-                        <span
-                          className={`font-display text-2xl font-bold tabular-nums transition-colors md:text-3xl ${
-                            isActive
-                              ? "text-accent"
-                              : "text-foreground/20 group-hover:text-accent/40"
-                          }`}
-                        >
-                          {plan.index}
-                        </span>
-                      </div>
-
-                      <div className="col-span-10 md:col-span-3">
-                        <div className="flex flex-wrap items-center gap-2">
-                          <h3 className="font-display text-xl font-semibold text-foreground md:text-2xl">
-                            {plan.name}
-                          </h3>
-                          {plan.popular && (
-                            <span className="font-mono text-[9px] uppercase tracking-[0.12em] text-accent">
-                              Popular
-                            </span>
-                          )}
+                      <div className="flex items-start gap-3 md:grid md:grid-cols-12 md:gap-6">
+                        <div className="shrink-0 md:col-span-1">
+                          <span
+                            className={`font-display text-2xl font-bold tabular-nums transition-colors md:text-3xl ${
+                              isActive
+                                ? "text-accent"
+                                : "text-foreground/20 group-hover:text-accent/40"
+                            }`}
+                          >
+                            {plan.index}
+                          </span>
                         </div>
-                      </div>
 
-                      <div className="col-span-10 col-start-3 md:col-span-4 md:col-start-auto">
-                        <p className="text-sm text-muted">{plan.summary}</p>
-                      </div>
+                        <div className="min-w-0 flex-1 md:col-span-11 md:grid md:grid-cols-11 md:items-start md:gap-6">
+                          <div className="flex min-w-0 flex-wrap items-baseline justify-between gap-x-3 gap-y-1 md:col-span-3 md:block">
+                            <div className="flex flex-wrap items-center gap-2">
+                              <h3 className="font-display text-lg font-semibold text-foreground md:text-2xl">
+                                {plan.name}
+                              </h3>
+                              {plan.popular && (
+                                <span className="font-mono text-[9px] uppercase tracking-[0.12em] text-accent">
+                                  Popular
+                                </span>
+                              )}
+                            </div>
+                            <p className="shrink-0 font-display text-base font-medium text-foreground md:hidden">
+                              <CountUp
+                                key={`${category}-${plan.index}-${plan.price}-m`}
+                                value={plan.price}
+                                prefix="$"
+                                suffix="/mo"
+                              />
+                            </p>
+                          </div>
 
-                      <div className="col-span-10 col-start-3 md:col-span-4 md:col-start-auto md:text-right">
-                        <p className="font-display text-lg font-medium text-foreground md:text-xl">
-                          <CountUp
-                            key={`${category}-${plan.index}-${plan.price}`}
-                            value={plan.price}
-                            prefix="$"
-                            suffix="/mo"
-                          />
-                        </p>
+                          <p className="mt-2 text-sm text-muted md:col-span-5 md:mt-0">
+                            {plan.summary}
+                          </p>
+
+                          <p className="mt-2 hidden font-display text-lg font-medium text-foreground md:col-span-3 md:mt-0 md:block md:text-right md:text-xl">
+                            <CountUp
+                              key={`${category}-${plan.index}-${plan.price}`}
+                              value={plan.price}
+                              prefix="$"
+                              suffix="/mo"
+                            />
+                          </p>
+                        </div>
                       </div>
                     </button>
 
@@ -395,7 +405,7 @@ export function Pricing() {
               className="link-underline shrink-0 font-mono text-xs uppercase tracking-[0.2em] text-foreground"
               data-cursor-hover
             >
-              Request a quote ?
+              Request a quote →
             </Link>
           </div>
         </div>
