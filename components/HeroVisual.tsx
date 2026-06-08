@@ -1,9 +1,11 @@
 "use client";
 
 import dynamic from "next/dynamic";
-import { useEffect, useState, type CSSProperties } from "react";
+import { useCallback, useEffect, useState, type CSSProperties } from "react";
 import { CountUp } from "@/components/CountUp";
 import { HeroFigFallback } from "@/components/HeroFigFallback";
+import { HeroFigTelemetry } from "@/components/HeroFigTelemetry";
+import type { FigTelemetry } from "@/components/HeroFigMesh";
 
 const HeroFigMesh = dynamic(() => import("@/components/HeroFigMesh"), {
   ssr: false,
@@ -16,9 +18,20 @@ const pipeline = [
   { label: "Monitor", pct: 97 },
 ] as const;
 
+const defaultTelemetry: FigTelemetry = {
+  rotY: 0,
+  cursorX: 0,
+  cursorY: 0,
+};
+
 export function HeroVisual() {
   const [useWebGL, setUseWebGL] = useState(false);
   const [choreoReady, setChoreoReady] = useState(false);
+  const [telemetry, setTelemetry] = useState(defaultTelemetry);
+
+  const onTelemetry = useCallback((data: FigTelemetry) => {
+    setTelemetry(data);
+  }, []);
 
   useEffect(() => {
     const reduced = window.matchMedia(
@@ -45,21 +58,46 @@ export function HeroVisual() {
 
   return (
     <div
-      className={`hero-fig-enter relative w-full min-w-0 max-w-md ${
+      className={`hero-fig-enter relative w-full min-w-0 max-w-lg ${
         choreoReady ? "is-choreo-ready" : ""
       }`}
       aria-hidden="true"
     >
-      <p className="absolute -top-1 right-0 z-10 font-mono text-[10px] uppercase tracking-[0.2em] text-muted/60">
-        Scale 1:1
-      </p>
+      <div className="hero-fig-frame">
+        <span className="hero-fig-corner hero-fig-corner-tl" />
+        <span className="hero-fig-corner hero-fig-corner-tr" />
+        <span className="hero-fig-corner hero-fig-corner-bl" />
+        <span className="hero-fig-corner hero-fig-corner-br" />
 
-      <div className="relative">
-        <p className="absolute left-3 top-3 z-10 font-mono text-[10px] text-muted">
-          FIG.01
-        </p>
-        {useWebGL ? <HeroFigMesh active={choreoReady} /> : <HeroFigFallback />}
-        <p className="mt-2 font-mono text-[10px] text-muted/80">
+        <div className="hero-fig-header">
+          <div className="flex items-center gap-2">
+            <span className="hero-fig-live" />
+            <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-muted">
+              FIG.01
+            </p>
+          </div>
+          <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-muted/60">
+            Scale 1:1
+          </p>
+        </div>
+
+        <div className="hero-fig-stage relative">
+          {useWebGL ? (
+            <HeroFigMesh active={choreoReady} onTelemetry={onTelemetry} />
+          ) : (
+            <HeroFigFallback />
+          )}
+          {useWebGL && (
+            <HeroFigTelemetry
+              rotY={telemetry.rotY}
+              cursorX={telemetry.cursorX}
+              cursorY={telemetry.cursorY}
+            />
+          )}
+          <div className="hero-fig-scan" />
+        </div>
+
+        <p className="mt-3 font-mono text-[10px] text-muted/80">
           mesh / deploy / render
         </p>
       </div>

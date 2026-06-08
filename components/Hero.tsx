@@ -4,21 +4,39 @@ import { HeroEstTicker } from "@/components/HeroEstTicker";
 import { HeroVisual } from "@/components/HeroVisual";
 import { SECTION_COUNT } from "@/lib/sections";
 
+const disciplines = ["Web", "Hosting", "3D"] as const;
+
 export function Hero() {
   return (
     <HeroBootBridge>
       <section
         id="home"
-        className="section-pad scroll-mt-20 relative border-b border-border"
+        className="hero-section section-pad scroll-mt-20 relative border-b border-border"
         aria-labelledby="hero-heading"
       >
-        <HeroEstTicker className="absolute right-[clamp(1.25rem,4vw,3rem)] top-6 hidden md:block" />
+        <span className="hero-reg-mark hero-reg-mark-tl" aria-hidden="true" />
+        <span className="hero-reg-mark hero-reg-mark-tr" aria-hidden="true" />
+        <span className="hero-reg-mark hero-reg-mark-bl" aria-hidden="true" />
 
-        <div className="grid-editorial">
+        <HeroEstTicker className="absolute right-[clamp(1.25rem,4vw,3rem)] top-6 z-10 hidden md:block" />
+
+        <div className="grid-editorial relative">
           <div className="col-span-12 min-w-0 lg:col-span-7">
-            <p className="hero-line hero-line-1 mb-6 font-mono text-[10px] uppercase tracking-[0.25em] text-muted">
-              Engineering studio
-            </p>
+            <div className="hero-line hero-line-1 mb-6 flex flex-wrap items-center gap-x-4 gap-y-3">
+              <p className="hero-eyebrow font-mono text-[10px] uppercase tracking-[0.25em] text-muted">
+                Engineering studio
+              </p>
+              <ul className="hero-disciplines" aria-label="Disciplines">
+                {disciplines.map((item) => (
+                  <li
+                    key={item}
+                    className={item === "3D" ? "is-accent" : undefined}
+                  >
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
 
             <h1
               id="hero-heading"
@@ -27,9 +45,12 @@ export function Hero() {
               <span className="hero-line hero-line-2 block">Built like</span>
               <span className="hero-line hero-line-3 block">infrastructure —</span>
               <span className="hero-line hero-line-4 block">
-                web, hosting, <span className="text-accent">3D</span>.
+                web, hosting,{" "}
+                <span className="hero-accent-word text-accent">3D</span>.
               </span>
             </h1>
+
+            <div className="hero-headline-rule" aria-hidden="true" />
 
             <p className="hero-line hero-line-5 prose-measure mt-8 text-body-sm text-muted">
               Browser-ready 3D, managed Vercel stacks, and spec-grade web
@@ -46,7 +67,7 @@ export function Hero() {
               <MagneticLink
                 href="#contact"
                 strength="primary"
-                className="link-underline font-mono text-[10px] uppercase tracking-[0.2em] text-foreground"
+                className="hero-cta-primary link-underline font-mono text-[10px] uppercase tracking-[0.2em] text-foreground"
               >
                 Start a project →
               </MagneticLink>

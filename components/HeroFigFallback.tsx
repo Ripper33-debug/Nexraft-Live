@@ -33,15 +33,11 @@ export function HeroFigFallback({ loading = false }: HeroFigFallbackProps) {
 
   return (
     <div
-      className={`fig-fallback relative h-[min(24vw,20rem)] w-full max-w-md border border-border ${
+      className={`fig-fallback relative h-[min(28vw,24rem)] w-full ${
         loading ? "animate-pulse opacity-40" : ""
       }`}
       aria-hidden="true"
     >
-      <p className="absolute right-3 top-3 font-mono text-[10px] uppercase tracking-[0.2em] text-muted/60">
-        Scale 1:1
-      </p>
-
       <svg
         ref={ref}
         viewBox="0 0 400 400"
@@ -89,12 +85,6 @@ export function HeroFigFallback({ loading = false }: HeroFigFallbackProps) {
             className="fig-flow-line"
           />
 
-          <text x="48" y="58" fill="#c7d2cb" fontSize="10" fontFamily="var(--font-geist-mono)">
-            FIG.01
-          </text>
-          <text x="48" y="380" fill="#c7d2cb" fontSize="10" fontFamily="var(--font-geist-mono)">
-            mesh / deploy / render
-          </text>
         </g>
       </svg>
     </div>

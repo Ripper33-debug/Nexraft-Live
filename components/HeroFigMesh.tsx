@@ -3,11 +3,21 @@
 import { useEffect, useRef } from "react";
 import * as THREE from "three";
 
-type HeroFigMeshProps = {
-  active?: boolean;
+export type FigTelemetry = {
+  rotY: number;
+  cursorX: number;
+  cursorY: number;
 };
 
-export default function HeroFigMesh({ active = true }: HeroFigMeshProps) {
+type HeroFigMeshProps = {
+  active?: boolean;
+  onTelemetry?: (data: FigTelemetry) => void;
+};
+
+export default function HeroFigMesh({
+  active = true,
+  onTelemetry,
+}: HeroFigMeshProps) {
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -19,11 +29,11 @@ export default function HeroFigMesh({ active = true }: HeroFigMeshProps) {
     ).matches;
 
     const width = container.clientWidth;
-    const height = Math.max(container.clientHeight, 280);
+    const height = Math.max(container.clientHeight, 300);
 
     const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(42, width / height, 0.1, 100);
-    camera.position.z = 3.8;
+    const camera = new THREE.PerspectiveCamera(40, width / height, 0.1, 100);
+    camera.position.z = 3.6;
 
     const renderer = new THREE.WebGLRenderer({
       alpha: true,
@@ -35,7 +45,7 @@ export default function HeroFigMesh({ active = true }: HeroFigMeshProps) {
     renderer.setClearColor(0x000000, 0);
     container.appendChild(renderer.domElement);
 
-    const geometry = new THREE.IcosahedronGeometry(1.15, 1);
+    const geometry = new THREE.IcosahedronGeometry(1.2, 1);
     const edges = new THREE.EdgesGeometry(geometry);
 
     const wire = new THREE.LineSegments(
@@ -43,24 +53,36 @@ export default function HeroFigMesh({ active = true }: HeroFigMeshProps) {
       new THREE.LineBasicMaterial({
         color: 0x3ddc84,
         transparent: true,
-        opacity: 0.72,
+        opacity: 0.78,
       }),
     );
 
-    const edgesInner = new THREE.EdgesGeometry(geometry);
+    const innerGeo = new THREE.IcosahedronGeometry(1.05, 0);
+    const innerEdges = new THREE.EdgesGeometry(innerGeo);
     const inner = new THREE.LineSegments(
-      edgesInner,
+      innerEdges,
       new THREE.LineBasicMaterial({
         color: 0xffffff,
         transparent: true,
-        opacity: 0.12,
+        opacity: 0.14,
       }),
     );
-    inner.scale.setScalar(0.92);
+
+    const vertices = new THREE.Points(
+      geometry,
+      new THREE.PointsMaterial({
+        color: 0x3ddc84,
+        size: 3,
+        transparent: true,
+        opacity: 0.55,
+        sizeAttenuation: true,
+      }),
+    );
 
     const group = new THREE.Group();
     group.add(wire);
     group.add(inner);
+    group.add(vertices);
     scene.add(group);
 
     const mouse = { x: 0, y: 0 };
@@ -70,6 +92,7 @@ export default function HeroFigMesh({ active = true }: HeroFigMeshProps) {
     let visible = true;
     let animId = 0;
     let lastFrame = 0;
+    let telemetryTick = 0;
     const startTime = performance.now();
     const frameInterval = 1000 / 30;
 
@@ -93,22 +116,24 @@ export default function HeroFigMesh({ active = true }: HeroFigMeshProps) {
       lastFrame = now;
 
       const elapsed = (now - startTime) / 1000;
+      const rotY = rotation.y + elapsed * 0.18;
 
       if (!reduced) {
-        target.x = mouse.y * 0.22;
-        target.y = mouse.x * 0.28;
+        target.x = mouse.y * 0.28;
+        target.y = mouse.x * 0.34;
 
-        rotation.x += (target.x - rotation.x) * 0.07;
-        rotation.y += (target.y - rotation.y) * 0.07;
-        rotation.z += 0.0018;
+        rotation.x += (target.x - rotation.x) * 0.08;
+        rotation.y += (target.y - rotation.y) * 0.08;
+        rotation.z += 0.0022;
 
         group.rotation.x = rotation.x;
-        group.rotation.y = rotation.y + elapsed * 0.18;
+        group.rotation.y = rotY;
         group.rotation.z = rotation.z;
 
-        const pulse = 0.58 + Math.sin(elapsed * 2.4) * 0.17;
+        const pulse = 0.62 + Math.sin(elapsed * 2.6) * 0.18;
         wire.material.opacity = pulse;
-        inner.material.opacity = 0.08 + Math.sin(elapsed * 2.4 + 0.6) * 0.05;
+        inner.material.opacity = 0.1 + Math.sin(elapsed * 2.6 + 0.5) * 0.06;
+        vertices.material.opacity = 0.45 + Math.sin(elapsed * 2.6 + 1) * 0.2;
       }
 
       const scaleTarget = active ? 1 : 0.86;
@@ -116,6 +141,15 @@ export default function HeroFigMesh({ active = true }: HeroFigMeshProps) {
       group.scale.setScalar(scaleCurrent);
 
       renderer.render(scene, camera);
+
+      telemetryTick += 1;
+      if (onTelemetry && telemetryTick % 2 === 0) {
+        onTelemetry({
+          rotY,
+          cursorX: mouse.x,
+          cursorY: mouse.y,
+        });
+      }
     };
 
     window.addEventListener("mousemove", onMove, { passive: true });
@@ -123,7 +157,7 @@ export default function HeroFigMesh({ active = true }: HeroFigMeshProps) {
 
     const onResize = () => {
       const w = container.clientWidth;
-      const h = Math.max(container.clientHeight, 280);
+      const h = Math.max(container.clientHeight, 300);
       camera.aspect = w / h;
       camera.updateProjectionMatrix();
       renderer.setSize(w, h);
@@ -136,21 +170,23 @@ export default function HeroFigMesh({ active = true }: HeroFigMeshProps) {
       window.removeEventListener("mousemove", onMove);
       window.removeEventListener("resize", onResize);
       geometry.dispose();
+      innerGeo.dispose();
       edges.dispose();
-      edgesInner.dispose();
+      innerEdges.dispose();
       (wire.material as THREE.Material).dispose();
       (inner.material as THREE.Material).dispose();
+      (vertices.material as THREE.Material).dispose();
       renderer.dispose();
       if (renderer.domElement.parentNode === container) {
         container.removeChild(renderer.domElement);
       }
     };
-  }, [active]);
+  }, [active, onTelemetry]);
 
   return (
     <div
       ref={containerRef}
-      className="fig-canvas h-[min(26vw,22rem)] w-full max-w-md border border-border"
+      className="fig-canvas relative h-[min(28vw,24rem)] w-full"
       aria-hidden="true"
     />
   );
