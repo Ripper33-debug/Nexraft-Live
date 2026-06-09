@@ -22,6 +22,7 @@ Add these to `.env.local` (development) and your hosting provider (Vercel):
 | `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Browser | Supabase publishable key (`sb_publishable_...` or `eyJ...` anon key) |
 | `SUPABASE_SECRET_KEY` | Server only | Supabase secret key (`sb_secret_...` or service role) — bypasses RLS for webhooks |
 | `NEXT_PUBLIC_SITE_URL` | Browser + server | Canonical site URL (e.g. `http://localhost:3000` or `https://nexraft.com`) |
+| `NEXT_PUBLIC_BOOKING_URL` | Browser | Cal.com or Calendly link for pricing and hero “Book a call” CTAs |
 
 `SUPABASE_SERVICE_ROLE_KEY` is still accepted as a fallback for `SUPABASE_SECRET_KEY`.
 

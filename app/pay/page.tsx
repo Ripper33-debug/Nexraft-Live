@@ -1,31 +1,14 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ManageBilling } from "@/components/ManageBilling";
+import { StartPlanSection } from "@/components/StartPlanSection";
 
 export const metadata: Metadata = {
   title: "Billing — Nexraft",
   description:
-    "Manage Nexraft monthly retainer subscriptions, invoices, and payment methods.",
+    "Start a Nexraft retainer plan or manage your subscription, payment method, and invoices.",
   robots: { index: false, follow: false },
 };
-
-const steps = [
-  {
-    index: "01",
-    title: "Subscribe",
-    detail: "Pick a Web retainer on pricing and complete Stripe Checkout.",
-  },
-  {
-    index: "02",
-    title: "Manage billing",
-    detail: "Update cards, pay invoices, or cancel in the hosted customer portal.",
-  },
-  {
-    index: "03",
-    title: "Stay active",
-    detail: "Receipts and renewals are handled automatically each month.",
-  },
-] as const;
 
 type PayPageProps = {
   searchParams: Promise<{ status?: string }>;
@@ -57,54 +40,40 @@ export default async function PayPage({ searchParams }: PayPageProps) {
           )}
 
           <p className="prose-measure mt-6 text-body text-muted">
-            Monthly retainers run through Stripe. Checkout and billing management
-            use Stripe&apos;s hosted flows — cards are never handled on this site.
+            Retainers are scoped on a call first. When you&apos;re ready to
+            activate, subscribe below. Existing clients can manage billing in the
+            Stripe customer portal.
           </p>
+
+          <div className="mt-8 border-t border-border pt-8">
+            <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-muted">
+              Start your plan
+            </p>
+            <p className="mt-3 max-w-lg font-mono text-xs leading-relaxed text-muted">
+              Setting up after our call? Choose the plan we discussed.
+            </p>
+            <div className="mt-6">
+              <StartPlanSection />
+            </div>
+          </div>
 
           <div className="mt-8 border-t border-border pt-8">
             <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-muted">
               Manage billing
             </p>
             <p className="mt-3 max-w-lg font-mono text-xs leading-relaxed text-muted">
-              Enter the email you used at checkout. You&apos;ll be redirected to
-              Stripe&apos;s customer portal to update cards, view invoices, or
-              cancel.
+              Already a client? Manage your subscription, payment method, and
+              invoices here.
             </p>
             <div className="mt-6 max-w-md">
               <ManageBilling />
             </div>
           </div>
 
-          <div className="mt-8 border-t border-border pt-8">
-            <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-muted">
-              How billing works
-            </p>
-            <ol className="mt-5 divide-y divide-border" role="list">
-              {steps.map((step) => (
-                <li
-                  key={step.index}
-                  className="grid grid-cols-12 gap-3 py-5 md:gap-5"
-                >
-                  <span className="col-span-2 font-mono text-xs tabular-nums text-muted md:col-span-1">
-                    {step.index}
-                  </span>
-                  <div className="col-span-10 md:col-span-11">
-                    <p className="font-display text-base font-medium text-foreground">
-                      {step.title}
-                    </p>
-                    <p className="mt-1 font-mono text-xs leading-relaxed text-muted">
-                      {step.detail}
-                    </p>
-                  </div>
-                </li>
-              ))}
-            </ol>
-          </div>
-
           <div className="mt-8 grid gap-6 border-t border-border pt-8 sm:grid-cols-2">
             <div>
               <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-muted">
-                New subscription
+                Not a client yet?
               </p>
               <Link
                 href="/#pricing"

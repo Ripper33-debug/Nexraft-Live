@@ -4,8 +4,7 @@ import { useRef, useState, useEffect } from "react";
 import Link from "next/link";
 import { ScrollReveal } from "@/components/ScrollReveal";
 import { CountUp } from "@/components/CountUp";
-import { SubscribeButton } from "@/components/SubscribeButton";
-import { planKeyFromWebIndex } from "@/lib/stripe/plan-keys";
+import { BookCallButton } from "@/components/BookCallButton";
 
 type Category = "web" | "hosting" | "threeD";
 
@@ -300,13 +299,9 @@ export function Pricing() {
               <p className="mt-4 max-w-lg text-sm text-muted md:text-base">
                 {selected.summary}
               </p>
-              {category === "web" && planKeyFromWebIndex(selected.index) && (
+              {category === "web" && (
                 <div className="mt-6">
-                  <SubscribeButton
-                    plan={planKeyFromWebIndex(selected.index)!}
-                    label="Subscribe"
-                    variant="primary"
-                  />
+                  <BookCallButton label="Book a call" variant="primary" />
                 </div>
               )}
             </div>
@@ -400,12 +395,9 @@ export function Pricing() {
                           </li>
                         ))}
                       </ul>
-                      {category === "web" && planKeyFromWebIndex(plan.index) && (
+                      {category === "web" && (
                         <div className="mt-4 border-t border-border pt-4">
-                          <SubscribeButton
-                            plan={planKeyFromWebIndex(plan.index)!}
-                            label={isActive ? "Subscribe" : "Get started"}
-                          />
+                          <BookCallButton label="Book a call" />
                         </div>
                       )}
                     </div>

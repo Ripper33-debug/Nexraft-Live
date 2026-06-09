@@ -1,4 +1,5 @@
 import { HeroBackdrop } from "@/components/HeroBackdrop";
+import { BookCallLink } from "@/components/BookCallButton";
 import { MagneticLink } from "@/components/MagneticLink";
 import { HeroBootBridge } from "@/components/HeroBootBridge";
 import { HeroEstTicker } from "@/components/HeroEstTicker";
@@ -67,13 +68,9 @@ export function Hero() {
 
           <div className="hero-line hero-line-6 col-span-12 mt-12 grid grid-cols-12 gap-0 border-t border-border pt-6 md:mt-14">
             <div className="col-span-12 sm:col-span-4">
-              <MagneticLink
-                href="#contact"
-                strength="primary"
-                className="hero-cta-primary link-underline font-mono text-[10px] uppercase tracking-[0.2em] text-foreground"
-              >
+              <BookCallLink className="hero-cta-primary magnetic-link-primary link-underline font-mono text-[10px] uppercase tracking-[0.2em] text-foreground">
                 Start a project →
-              </MagneticLink>
+              </BookCallLink>
             </div>
             <div className="col-span-12 mt-5 border-t border-border pt-5 sm:col-span-4 sm:mt-0 sm:border-t-0 sm:pt-0">
               <MagneticLink
