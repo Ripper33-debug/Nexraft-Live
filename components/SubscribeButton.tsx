@@ -4,7 +4,8 @@ import { useState } from "react";
 import type { StripePlanKey } from "@/lib/stripe/plan-keys";
 
 type SubscribeButtonProps = {
-  plan: StripePlanKey;
+  plan?: StripePlanKey;
+  plans?: StripePlanKey[];
   label?: string;
   className?: string;
   variant?: "primary" | "default";
@@ -12,6 +13,7 @@ type SubscribeButtonProps = {
 
 export function SubscribeButton({
   plan,
+  plans,
   label = "Get started",
   className = "",
   variant = "default",
@@ -23,11 +25,23 @@ export function SubscribeButton({
     setLoading(true);
     setError("");
 
+    const payload = plans?.length
+      ? { plans }
+      : plan
+        ? { plan }
+        : null;
+
+    if (!payload) {
+      setError("No plan selected.");
+      setLoading(false);
+      return;
+    }
+
     try {
       const response = await fetch("/api/checkout", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ plan }),
+        body: JSON.stringify(payload),
       });
 
       const data = (await response.json()) as { url?: string; error?: string };

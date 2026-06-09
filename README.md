@@ -18,6 +18,12 @@ Add these to `.env.local` (development) and your hosting provider (Vercel):
 | `STRIPE_PRICE_STARTER` | Server only | Price ID for Web Starter retainer |
 | `STRIPE_PRICE_GROWTH` | Server only | Price ID for Web Growth retainer |
 | `STRIPE_PRICE_BUILD` | Server only | Price ID for Web Build retainer |
+| `STRIPE_PRICE_HOSTING_MANAGED` | Server only | Price ID for Hosting Managed |
+| `STRIPE_PRICE_HOSTING_PERFORMANCE` | Server only | Price ID for Hosting Performance |
+| `STRIPE_PRICE_HOSTING_ENTERPRISE` | Server only | Price ID for Hosting Enterprise |
+| `STRIPE_PRICE_THREE_D_ASSET` | Server only | Price ID for 3D Asset retainer |
+| `STRIPE_PRICE_THREE_D_SCENE` | Server only | Price ID for 3D Scene retainer |
+| `STRIPE_PRICE_THREE_D_STUDIO` | Server only | Price ID for 3D Studio retainer |
 | `NEXT_PUBLIC_SUPABASE_URL` | Browser + server | Supabase project URL |
 | `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Browser | Supabase publishable key (`sb_publishable_...` or `eyJ...` anon key) |
 | `SUPABASE_SECRET_KEY` | Server only | Supabase secret key (`sb_secret_...` or service role) — bypasses RLS for webhooks |

@@ -3,50 +3,44 @@ import { getSiteUrl, getStripe } from "@/lib/stripe/client";
 import {
   getPlanLabel,
   getStripePriceId,
-  isStripePlanKey,
+  resolveCheckoutPlans,
 } from "@/lib/stripe/plans";
 
 export const runtime = "nodejs";
 
 export async function POST(request: NextRequest) {
   try {
-    const body = (await request.json()) as { plan?: string };
-    const plan = body.plan?.toLowerCase();
+    const body = (await request.json()) as { plan?: string; plans?: string[] };
+    const resolved = resolveCheckoutPlans(body);
 
-    if (!plan || !isStripePlanKey(plan)) {
-      return NextResponse.json(
-        { error: "Select a valid retainer plan to subscribe." },
-        { status: 400 },
-      );
+    if ("error" in resolved) {
+      return NextResponse.json({ error: resolved.error }, { status: 400 });
     }
 
-    const priceId = getStripePriceId(plan);
-
-    if (!priceId) {
-      return NextResponse.json(
-        { error: "Billing is not configured for this plan yet." },
-        { status: 503 },
-      );
-    }
-
+    const { plans } = resolved;
     const stripe = getStripe();
     const siteUrl = getSiteUrl();
+    const planKeys = plans.join(",");
+    const planNames = plans.map((p) => getPlanLabel(p)).join(", ");
 
     const session = await stripe.checkout.sessions.create({
       mode: "subscription",
-      line_items: [{ price: priceId, quantity: 1 }],
+      line_items: plans.map((plan) => ({
+        price: getStripePriceId(plan)!,
+        quantity: 1,
+      })),
       success_url: `${siteUrl}/pay?status=success`,
       cancel_url: `${siteUrl}/pricing`,
       allow_promotion_codes: true,
       billing_address_collection: "auto",
       metadata: {
-        plan_key: plan,
-        plan_name: getPlanLabel(plan),
+        plan_keys: planKeys,
+        plan_names: planNames,
       },
       subscription_data: {
         metadata: {
-          plan_key: plan,
-          plan_name: getPlanLabel(plan),
+          plan_keys: planKeys,
+          plan_names: planNames,
         },
       },
     });

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ManageBilling } from "@/components/ManageBilling";
-import { StartPlanSection } from "@/components/StartPlanSection";
+import { PlanCheckoutConfigurator } from "@/components/PlanCheckoutConfigurator";
 
 export const metadata: Metadata = {
   title: "Billing — Nexraft",
@@ -50,10 +50,11 @@ export default async function PayPage({ searchParams }: PayPageProps) {
               Start your plan
             </p>
             <p className="mt-3 max-w-lg font-mono text-xs leading-relaxed text-muted">
-              Setting up after our call? Choose the plan we discussed.
+              Setting up after our call? Pick one plan per category — Web,
+              Hosting, and 3D combine into a single monthly subscription.
             </p>
             <div className="mt-6">
-              <StartPlanSection />
+              <PlanCheckoutConfigurator />
             </div>
           </div>
 

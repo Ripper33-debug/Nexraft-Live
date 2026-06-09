@@ -1,20 +1,9 @@
 import "server-only";
 
 import type Stripe from "stripe";
-import { getStripePriceId, type StripePlanKey } from "@/lib/stripe/plans";
+import { planKeyFromPriceId } from "@/lib/stripe/plans";
 import { getStripe } from "@/lib/stripe/client";
 import { getSupabaseAdmin } from "@/lib/supabase/admin";
-
-function planKeyFromPriceId(priceId: string | null | undefined): StripePlanKey | null {
-  if (!priceId) return null;
-
-  const entries: StripePlanKey[] = ["starter", "growth", "build"];
-  for (const plan of entries) {
-    if (getStripePriceId(plan) === priceId) return plan;
-  }
-
-  return null;
-}
 
 async function resolveCustomerEmail(
   customerId: string,
@@ -29,6 +18,26 @@ async function resolveCustomerEmail(
   return customer.email ?? null;
 }
 
+function plansFromSubscription(subscription: Stripe.Subscription): string | null {
+  const keys = subscription.items.data
+    .map((item) => planKeyFromPriceId(item.price?.id))
+    .filter((key): key is NonNullable<typeof key> => !!key);
+
+  return keys.length > 0 ? keys.join(",") : null;
+}
+
+function periodEndFromSubscription(
+  subscription: Stripe.Subscription,
+): string | null {
+  const ends = subscription.items.data
+    .map((item) => item.current_period_end)
+    .filter((n): n is number => typeof n === "number");
+
+  if (ends.length === 0) return null;
+  const max = Math.max(...ends);
+  return new Date(max * 1000).toISOString();
+}
+
 export async function upsertSubscription(input: {
   stripeCustomerId: string;
   stripeSubscriptionId: string;
@@ -37,12 +46,8 @@ export async function upsertSubscription(input: {
 }) {
   const supabase = getSupabaseAdmin();
   const now = new Date().toISOString();
-
-  const primaryItem = input.subscription.items.data[0];
-  const priceId = primaryItem?.price?.id ?? null;
-  const plan = planKeyFromPriceId(priceId);
-  const periodEnd = primaryItem?.current_period_end;
-
+  const plan = plansFromSubscription(input.subscription);
+  const periodEnd = periodEndFromSubscription(input.subscription);
   const email = await resolveCustomerEmail(input.stripeCustomerId, input.email);
 
   const { error } = await supabase.from("subscriptions").upsert(
@@ -52,9 +57,7 @@ export async function upsertSubscription(input: {
       email,
       plan,
       status: input.subscription.status,
-      current_period_end: periodEnd
-        ? new Date(periodEnd * 1000).toISOString()
-        : null,
+      current_period_end: periodEnd,
       updated_at: now,
     },
     { onConflict: "stripe_subscription_id" },
