@@ -1,35 +1,67 @@
 "use client";
 
 import { usePathname } from "next/navigation";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
+import { Logo } from "@/components/Logo";
 import { BOOT_KEY, completeBoot } from "@/lib/boot";
 
-const BOOT_MS = 580;
-const MODULES = "Web \u00b7 Hosting \u00b7 3D";
+const LOADER_MS = 2000;
+const WIPE_MS = 420;
+
+function easeOutCubic(t: number): number {
+  return 1 - (1 - t) ** 3;
+}
+
+async function preloadAssets(): Promise<void> {
+  const tasks: Promise<unknown>[] = [
+    document.fonts?.ready ?? Promise.resolve(),
+    new Promise<void>((resolve) => {
+      if (document.readyState === "complete") resolve();
+      else window.addEventListener("load", () => resolve(), { once: true });
+    }),
+  ];
+
+  const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const lg = window.matchMedia("(min-width: 1024px)").matches;
+
+  if (lg && !reduced) {
+    tasks.push(import("@/components/HeroFigR3F"));
+  }
+
+  await Promise.all(tasks);
+}
 
 export function BootSequence() {
   const pathname = usePathname();
   const [visible, setVisible] = useState(false);
-  const [phase, setPhase] = useState<"init" | "wipe">("init");
+  const [phase, setPhase] = useState<"load" | "wipe">("load");
+  const [progress, setProgress] = useState(0);
+  const rafRef = useRef<number>(0);
 
-  const finish = useCallback((choreo = false) => {
-    completeBoot(choreo);
+  const finish = useCallback(() => {
+    completeBoot(false);
     setVisible(false);
   }, []);
 
+  const dismiss = useCallback(() => {
+    cancelAnimationFrame(rafRef.current);
+    setProgress(100);
+    setPhase("wipe");
+    window.setTimeout(finish, WIPE_MS);
+  }, [finish]);
+
   useEffect(() => {
     if (pathname !== "/") {
-      finish(false);
+      finish();
       return;
     }
 
     const reduced = window.matchMedia(
       "(prefers-reduced-motion: reduce)",
     ).matches;
-    const mobile = window.matchMedia("(max-width: 767px)").matches;
 
-    if (reduced || mobile) {
-      finish(false);
+    if (reduced) {
+      finish();
       return;
     }
 
@@ -41,106 +73,106 @@ export function BootSequence() {
     }
 
     if (seen || !document.documentElement.classList.contains("boot-pending")) {
-      finish(false);
+      finish();
       return;
     }
 
     setVisible(true);
 
-    const wipeTimer = window.setTimeout(() => setPhase("wipe"), 360);
-    const doneTimer = window.setTimeout(() => finish(false), BOOT_MS);
+    let assetsReady = false;
+    preloadAssets().then(() => {
+      assetsReady = true;
+    });
 
-    const skip = () => {
-      window.clearTimeout(wipeTimer);
-      window.clearTimeout(doneTimer);
-      finish(false);
+    const start = performance.now();
+
+    const tick = (now: number) => {
+      const elapsed = now - start;
+      const timeRatio = Math.min(1, elapsed / LOADER_MS);
+      let next = easeOutCubic(timeRatio) * 100;
+
+      if (!assetsReady && next > 88) {
+        next = 88 + Math.sin(elapsed / 180) * 2;
+      }
+
+      if (assetsReady && timeRatio >= 1) {
+        next = 100;
+      } else {
+        next = Math.min(next, assetsReady ? 100 : 92);
+      }
+
+      setProgress(Math.round(next));
+
+      if (elapsed >= LOADER_MS && assetsReady) {
+        setProgress(100);
+        setPhase("wipe");
+        window.setTimeout(finish, WIPE_MS);
+        return;
+      }
+
+      if (elapsed >= LOADER_MS + 800) {
+        setProgress(100);
+        setPhase("wipe");
+        window.setTimeout(finish, WIPE_MS);
+        return;
+      }
+
+      rafRef.current = requestAnimationFrame(tick);
     };
 
+    rafRef.current = requestAnimationFrame(tick);
+
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape" || e.key === " " || e.key === "Enter") skip();
+      if (e.key === "Escape" || e.key === " " || e.key === "Enter") dismiss();
     };
 
     window.addEventListener("keydown", onKey, { once: true });
-    window.addEventListener("wheel", skip, { once: true, passive: true });
-    window.addEventListener("touchstart", skip, { once: true, passive: true });
+    window.addEventListener("wheel", dismiss, { once: true, passive: true });
+    window.addEventListener("touchstart", dismiss, { once: true, passive: true });
 
     return () => {
-      window.clearTimeout(wipeTimer);
-      window.clearTimeout(doneTimer);
+      cancelAnimationFrame(rafRef.current);
       window.removeEventListener("keydown", onKey);
-      window.removeEventListener("wheel", skip);
-      window.removeEventListener("touchstart", skip);
+      window.removeEventListener("wheel", dismiss);
+      window.removeEventListener("touchstart", dismiss);
     };
-  }, [finish, pathname]);
+  }, [dismiss, finish, pathname]);
 
   if (!visible) return null;
 
   return (
     <div
       className={`boot-overlay ${phase === "wipe" ? "is-wipe" : ""}`}
-      onClick={() => finish(false)}
+      onClick={dismiss}
       onKeyDown={(e) => {
-        if (e.key === "Enter" || e.key === " ") finish(false);
+        if (e.key === "Enter" || e.key === " ") dismiss();
       }}
-      role="presentation"
-      aria-hidden="true"
+      role="progressbar"
+      aria-valuemin={0}
+      aria-valuemax={100}
+      aria-valuenow={progress}
+      aria-label="Loading Nexraft"
     >
       <div className="boot-scanline" />
       <div className="boot-progress-track">
-        <div className="boot-progress-bar" />
+        <div
+          className="boot-progress-bar"
+          style={{ width: `${progress}%` }}
+        />
       </div>
 
-      <div className="boot-panel">
-        <p className="boot-label">Initializing</p>
-        <p className="boot-modules">{MODULES}</p>
-
-        <svg
-          viewBox="0 0 120 120"
-          className="boot-fig"
-          fill="none"
-          aria-hidden="true"
-        >
-          <g stroke="#3ddc84" strokeWidth="0.75" strokeLinecap="square">
-            <polygon
-              points="60,18 95,42 82,82 38,82 25,42"
-              className="boot-fig-stroke"
-            />
-            <polygon
-              points="60,102 95,78 82,38 38,38 25,78"
-              className="boot-fig-stroke boot-fig-stroke-2"
-            />
-            <line
-              x1="60"
-              y1="18"
-              x2="60"
-              y2="102"
-              className="boot-fig-stroke boot-fig-stroke-3"
-            />
-            <line
-              x1="25"
-              y1="42"
-              x2="95"
-              y2="78"
-              className="boot-fig-stroke boot-fig-stroke-4"
-            />
-            <line
-              x1="95"
-              y1="42"
-              x2="25"
-              y2="78"
-              className="boot-fig-stroke boot-fig-stroke-5"
-            />
-          </g>
-          <circle
-            cx="60"
-            cy="60"
-            r="2.5"
-            fill="#3ddc84"
-            className="boot-fig-core"
+      <div className="boot-loader-panel">
+        <Logo height={44} href={null} priority className="boot-loader-logo" />
+        <p className="boot-loader-percent font-mono tabular-nums">
+          {String(progress).padStart(3, "0")}
+        </p>
+        <div className="boot-loader-track">
+          <div
+            className="boot-loader-fill"
+            style={{ width: `${progress}%` }}
           />
-        </svg>
-
-        <p className="boot-fig-tag">FIG.01</p>
+        </div>
+        <p className="boot-label">Loading studio</p>
       </div>
     </div>
   );

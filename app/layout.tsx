@@ -63,7 +63,7 @@ export default function RootLayout({
       className={`${bricolage.variable} ${GeistSans.variable} ${GeistMono.variable}`}
     >
       <Script id="nexraft-boot" strategy="beforeInteractive">
-        {`(function(){try{var p=location.pathname;var s=sessionStorage.getItem("nexraft-boot");var r=window.matchMedia("(prefers-reduced-motion: reduce)").matches;var m=window.matchMedia("(max-width: 767px)").matches;if(p!=="/"||s==="1"||r||m){document.documentElement.classList.add("boot-complete");}else{document.documentElement.classList.add("boot-pending");}}catch(e){document.documentElement.classList.add("boot-complete");}})();`}
+        {`(function(){try{var p=location.pathname;var s=sessionStorage.getItem("nexraft-boot");var r=window.matchMedia("(prefers-reduced-motion: reduce)").matches;if(p!=="/"||s==="1"||r){document.documentElement.classList.add("boot-complete");}else{document.documentElement.classList.add("boot-pending");}}catch(e){document.documentElement.classList.add("boot-complete");}})();`}
       </Script>
       <body className="relative min-h-screen overflow-x-clip antialiased">
         <SmoothScroll />
@@ -79,7 +79,7 @@ export default function RootLayout({
         >
           Skip to content
         </a>
-        <div className="relative z-10">
+        <div className="site-shell relative z-10">
           <Header />
           <main id="main">{children}</main>
           <Footer />
