@@ -21,7 +21,7 @@ export function Footer() {
             Contact
           </a>
           <a
-            href="mailto:billing@nexraft.com"
+            href="/pay"
             className="link-underline font-mono text-xs uppercase tracking-widest text-muted hover:text-foreground"
           >
             Billing

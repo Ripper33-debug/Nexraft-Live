@@ -1,32 +1,40 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { ManageBilling } from "@/components/ManageBilling";
 
 export const metadata: Metadata = {
-  title: "Pay Bill — Nexraft",
+  title: "Billing — Nexraft",
   description:
-    "Client billing portal for Nexraft monthly retainers and hosting subscriptions.",
+    "Manage Nexraft monthly retainer subscriptions, invoices, and payment methods.",
   robots: { index: false, follow: false },
 };
 
 const steps = [
   {
     index: "01",
-    title: "Locate your invoice",
-    detail: "Check your email for the monthly invoice from hello@nexraft.com.",
+    title: "Subscribe",
+    detail: "Pick a Web retainer on pricing and complete Stripe Checkout.",
   },
   {
     index: "02",
-    title: "Pay online",
-    detail: "Use the secure payment link in your invoice. Cards and ACH accepted.",
+    title: "Manage billing",
+    detail: "Update cards, pay invoices, or cancel in the hosted customer portal.",
   },
   {
     index: "03",
-    title: "Confirmation",
-    detail: "Receipt sent automatically. Hosting and retainers stay active.",
+    title: "Stay active",
+    detail: "Receipts and renewals are handled automatically each month.",
   },
 ] as const;
 
-export default function PayPage() {
+type PayPageProps = {
+  searchParams: Promise<{ status?: string }>;
+};
+
+export default async function PayPage({ searchParams }: PayPageProps) {
+  const { status } = await searchParams;
+  const success = status === "success";
+
   return (
     <section className="section-pad border-b border-border">
       <div className="grid-editorial">
@@ -38,13 +46,34 @@ export default function PayPage() {
 
         <div className="col-span-12 md:col-span-9">
           <h1 className="text-display-section font-display font-semibold text-foreground">
-            Pay bill
+            Billing
           </h1>
 
+          {success && (
+            <p className="mt-6 border border-border bg-accent/[0.06] px-4 py-3 font-mono text-xs text-accent">
+              Subscription started. Use the portal below to manage payment methods
+              and invoices.
+            </p>
+          )}
+
           <p className="prose-measure mt-6 text-body text-muted">
-            Monthly invoices for retainers and hosting. Payment portal connects
-            here when your provider is configured.
+            Monthly retainers run through Stripe. Checkout and billing management
+            use Stripe&apos;s hosted flows — cards are never handled on this site.
           </p>
+
+          <div className="mt-8 border-t border-border pt-8">
+            <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-muted">
+              Manage billing
+            </p>
+            <p className="mt-3 max-w-lg font-mono text-xs leading-relaxed text-muted">
+              Enter the email you used at checkout. You&apos;ll be redirected to
+              Stripe&apos;s customer portal to update cards, view invoices, or
+              cancel.
+            </p>
+            <div className="mt-6 max-w-md">
+              <ManageBilling />
+            </div>
+          </div>
 
           <div className="mt-8 border-t border-border pt-8">
             <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-muted">
@@ -75,12 +104,15 @@ export default function PayPage() {
           <div className="mt-8 grid gap-6 border-t border-border pt-8 sm:grid-cols-2">
             <div>
               <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-muted">
-                Payment portal
+                New subscription
               </p>
-              <p className="mt-3 font-mono text-xs text-muted">
-                Online payments coming soon. Use the link in your invoice for
-                now.
-              </p>
+              <Link
+                href="/#pricing"
+                className="link-underline mt-3 inline-block font-mono text-xs uppercase tracking-[0.2em] text-foreground"
+                data-cursor-hover
+              >
+                View pricing →
+              </Link>
             </div>
             <div>
               <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-muted">
