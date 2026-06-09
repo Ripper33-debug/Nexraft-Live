@@ -9,7 +9,7 @@ const records = [
     index: "01",
     client: "Weatherhaven",
     project: "Corporate marketing site",
-    href: "https://weatherhaven.com",
+    href: "https://weatherhavenusa.com",
     stack: `Next.js ${dot} CMS ${dot} Product catalog`,
     metric: "95-country deploy map",
     kind: "image" as const,
