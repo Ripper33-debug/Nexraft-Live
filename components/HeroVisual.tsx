@@ -5,9 +5,9 @@ import { useCallback, useEffect, useState, type CSSProperties } from "react";
 import { CountUp } from "@/components/CountUp";
 import { HeroFigFallback } from "@/components/HeroFigFallback";
 import { HeroFigTelemetry } from "@/components/HeroFigTelemetry";
-import type { FigTelemetry } from "@/components/HeroFigMesh";
+import type { FigTelemetry } from "@/components/HeroFigR3F";
 
-const HeroFigMesh = dynamic(() => import("@/components/HeroFigMesh"), {
+const HeroFigR3F = dynamic(() => import("@/components/HeroFigR3F"), {
   ssr: false,
   loading: () => <HeroFigFallback loading />,
 });
@@ -22,6 +22,8 @@ const defaultTelemetry: FigTelemetry = {
   rotY: 0,
   cursorX: 0,
   cursorY: 0,
+  vertCount: 42,
+  faceCount: 80,
 };
 
 export function HeroVisual() {
@@ -83,7 +85,7 @@ export function HeroVisual() {
 
         <div className="hero-fig-stage relative">
           {useWebGL ? (
-            <HeroFigMesh active={choreoReady} onTelemetry={onTelemetry} />
+            <HeroFigR3F active={choreoReady} onTelemetry={onTelemetry} />
           ) : (
             <HeroFigFallback />
           )}
@@ -92,6 +94,8 @@ export function HeroVisual() {
               rotY={telemetry.rotY}
               cursorX={telemetry.cursorX}
               cursorY={telemetry.cursorY}
+              vertCount={telemetry.vertCount}
+              faceCount={telemetry.faceCount}
             />
           )}
           <div className="hero-fig-scan" />

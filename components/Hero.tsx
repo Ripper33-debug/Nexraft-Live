@@ -1,5 +1,5 @@
 import { HeroBackdrop } from "@/components/HeroBackdrop";
-import { BookCallLink } from "@/components/BookCallButton";
+import { BookCallButton } from "@/components/BookCallButton";
 import { MagneticLink } from "@/components/MagneticLink";
 import { HeroBootBridge } from "@/components/HeroBootBridge";
 import { HeroEstTicker } from "@/components/HeroEstTicker";
@@ -13,7 +13,7 @@ export function Hero() {
     <HeroBootBridge>
       <section
         id="home"
-        className="hero-section section-pad scroll-mt-20 relative overflow-hidden border-b border-border"
+        className="hero-section section-pad-hero scroll-mt-20 relative overflow-hidden border-b border-border"
         aria-labelledby="hero-heading"
       >
         <HeroBackdrop />
@@ -57,35 +57,43 @@ export function Hero() {
             <div className="hero-headline-rule" aria-hidden="true" />
 
             <p className="hero-line hero-line-5 prose-measure mt-8 text-body-sm text-muted">
-              Browser-ready 3D, managed Vercel stacks, and spec-grade web
-              builds — one studio, documented delivery. Monthly retainers.
+              Spec-grade web, managed Vercel hosting, and browser-ready 3D —
+              one studio, one invoice, documented delivery.
             </p>
+
+            <div className="hero-line hero-line-5b mt-8 flex flex-col gap-3 sm:flex-row sm:items-center lg:hidden">
+              <BookCallButton label="Book a call" variant="primary" />
+              <MagneticLink
+                href="#about"
+                className="btn-ghost text-center font-mono text-[10px] uppercase tracking-[0.2em] text-muted hover:text-foreground"
+              >
+                See work
+              </MagneticLink>
+            </div>
           </div>
 
           <div className="col-span-12 mt-10 hidden lg:col-span-5 lg:mt-0 lg:flex lg:items-center lg:justify-end">
             <HeroVisual />
           </div>
 
-          <div className="hero-line hero-line-6 col-span-12 mt-12 grid grid-cols-12 gap-0 border-t border-border pt-6 md:mt-14">
-            <div className="col-span-12 sm:col-span-4">
-              <BookCallLink className="hero-cta-primary magnetic-link-primary link-underline font-mono text-[10px] uppercase tracking-[0.2em] text-foreground">
-                Start a project →
-              </BookCallLink>
+          <div className="hero-line hero-line-6 col-span-12 mt-12 hidden grid-cols-12 gap-0 border-t border-border pt-6 md:mt-14 lg:grid">
+            <div className="col-span-12 sm:col-span-5">
+              <BookCallButton label="Book a call" variant="primary" />
             </div>
-            <div className="col-span-12 mt-5 border-t border-border pt-5 sm:col-span-4 sm:mt-0 sm:border-t-0 sm:pt-0">
+            <div className="col-span-12 mt-5 border-t border-border pt-5 sm:col-span-3 sm:mt-0 sm:border-t-0 sm:pt-0 sm:flex sm:items-center">
+              <MagneticLink
+                href="#about"
+                className="btn-ghost font-mono text-[10px] uppercase tracking-[0.2em] text-muted hover:text-foreground"
+              >
+                See work
+              </MagneticLink>
+            </div>
+            <div className="col-span-12 mt-5 border-t border-border pt-5 sm:col-span-4 sm:mt-0 sm:border-t-0 sm:pt-0 sm:flex sm:items-center sm:justify-end">
               <MagneticLink
                 href="#pricing"
                 className="link-underline font-mono text-[10px] uppercase tracking-[0.2em] text-muted hover:text-foreground"
               >
-                View pricing →
-              </MagneticLink>
-            </div>
-            <div className="col-span-12 mt-5 border-t border-border pt-5 sm:col-span-4 sm:mt-0 sm:border-t-0 sm:pt-0">
-              <MagneticLink
-                href="#services"
-                className="link-underline font-mono text-[10px] uppercase tracking-[0.2em] text-muted hover:text-foreground"
-              >
-                View services →
+                View pricing
               </MagneticLink>
             </div>
           </div>

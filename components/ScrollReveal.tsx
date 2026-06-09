@@ -1,61 +1,42 @@
 "use client";
 
-import {
-  useEffect,
-  useRef,
-  createElement,
-  type ReactNode,
-  type HTMLAttributes,
-} from "react";
+import { type ReactNode } from "react";
+import { motion, useReducedMotion } from "framer-motion";
 
 type ScrollRevealProps = {
   children: ReactNode;
   className?: string;
   as?: "div" | "p" | "h2" | "h3" | "span";
-} & HTMLAttributes<HTMLElement>;
+  id?: string;
+};
+
+const motionTags = {
+  div: motion.div,
+  p: motion.p,
+  h2: motion.h2,
+  h3: motion.h3,
+  span: motion.span,
+} as const;
 
 export function ScrollReveal({
   children,
   className = "",
   as: Tag = "div",
-  ...rest
+  id,
 }: ScrollRevealProps) {
-  const ref = useRef<HTMLElement>(null);
+  const reduced = useReducedMotion();
+  const MotionTag = motionTags[Tag];
 
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-
-    const prefersReduced = window.matchMedia(
-      "(prefers-reduced-motion: reduce)",
-    ).matches;
-
-    if (prefersReduced) {
-      el.classList.add("is-visible");
-      return;
-    }
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          el.classList.add("is-visible");
-          observer.unobserve(el);
-        }
-      },
-      { threshold: 0.2, rootMargin: "0px 0px -10% 0px" },
-    );
-
-    observer.observe(el);
-    return () => observer.disconnect();
-  }, []);
-
-  return createElement(
-    Tag,
-    {
-      ref,
-      className: `scroll-reveal-line ${className}`.trim(),
-      ...rest,
-    },
-    children,
+  return (
+    <MotionTag
+      id={id}
+      className={className}
+      initial={reduced ? false : { opacity: 0, y: 20 }}
+      whileInView={reduced ? undefined : { opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "0px 0px -8% 0px" }}
+      transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+    >
+      {children}
+    </MotionTag>
   );
 }

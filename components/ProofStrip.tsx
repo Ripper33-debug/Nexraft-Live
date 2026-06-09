@@ -32,15 +32,22 @@ type ProofFrameProps = {
   href: string;
   imageSrc: string;
   imageAlt: string;
+  priority?: boolean;
 };
 
-function ProofFrame({ label, href, imageSrc, imageAlt }: ProofFrameProps) {
+function ProofFrame({
+  label,
+  href,
+  imageSrc,
+  imageAlt,
+  priority = false,
+}: ProofFrameProps) {
   return (
     <Link
       href={href}
       target="_blank"
       rel="noopener noreferrer"
-      className="proof-frame group relative block aspect-[16/10] w-full overflow-hidden border border-border bg-surface-deep"
+      className="proof-frame group relative block aspect-[16/10] w-full overflow-hidden border border-border bg-surface-deep transition-transform duration-300 ease-out hover:scale-[1.02]"
       aria-label={`${label} — view live site`}
       data-cursor-hover
     >
@@ -48,6 +55,7 @@ function ProofFrame({ label, href, imageSrc, imageAlt }: ProofFrameProps) {
         src={imageSrc}
         alt={imageAlt}
         fill
+        priority={priority}
         className="object-cover object-top transition-opacity duration-300 group-hover:opacity-90"
         sizes="(max-width: 768px) 100vw, 25vw"
       />
@@ -60,7 +68,7 @@ function ProofFrame({ label, href, imageSrc, imageAlt }: ProofFrameProps) {
 
 export function ProofStrip() {
   return (
-    <div className="mt-10 border-t border-border pt-8">
+    <div className="mt-6 border-t border-border pt-6">
       <ScrollReveal
         as="p"
         className="font-mono text-[10px] uppercase tracking-[0.25em] text-muted"
@@ -73,11 +81,11 @@ export function ProofStrip() {
         role="list"
         aria-label="Selected project outcomes"
       >
-        {records.map((record) => (
+        {records.map((record, i) => (
           <div
             key={record.index}
             role="listitem"
-            className="grid grid-cols-12 items-start gap-4 border-b border-border py-5 md:gap-6 md:py-6"
+            className="grid grid-cols-12 items-start gap-4 border-b border-border py-4 md:gap-5 md:py-5"
           >
             <div className="col-span-12 min-w-0 md:col-span-3">
               <ProofFrame
@@ -85,6 +93,7 @@ export function ProofStrip() {
                 href={record.href}
                 imageSrc={record.imageSrc}
                 imageAlt={record.imageAlt}
+                priority={i === 0}
               />
             </div>
 

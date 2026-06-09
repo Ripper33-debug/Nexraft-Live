@@ -5,6 +5,7 @@ import Link from "next/link";
 import { ScrollReveal } from "@/components/ScrollReveal";
 import { CountUp } from "@/components/CountUp";
 import { BookCallButton } from "@/components/BookCallButton";
+import { sectionLabel } from "@/lib/sections";
 
 type Category = "web" | "hosting" | "threeD";
 
@@ -198,13 +199,13 @@ export function Pricing() {
   return (
     <section
       id="pricing"
-      className="section-pad scroll-mt-20 border-b border-border bg-surface-deep"
+      className="section-pad-tight scroll-mt-20 border-b border-border bg-surface-deep"
       aria-labelledby="pricing-heading"
     >
       <div className="grid-editorial min-w-0">
         <div className="col-span-12 section-label-gap md:col-span-3">
           <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-muted">
-            04 / Pricing
+            {sectionLabel("pricing")}
           </p>
         </div>
 
@@ -218,8 +219,11 @@ export function Pricing() {
           </ScrollReveal>
 
           <p className="mt-6 max-w-xl font-mono text-xs leading-relaxed text-muted">
-            All plans billed monthly. Cancel with 30 days notice. Custom scope
-            quoted on request.
+            All plans billed monthly. Pause or cancel anytime with 30 days
+            notice. Custom scope quoted on request.
+          </p>
+          <p className="mt-3 font-mono text-[10px] uppercase tracking-[0.18em] text-accent">
+            Taking 2 new retainers this quarter.
           </p>
 
           <div
@@ -266,8 +270,10 @@ export function Pricing() {
             className="pricing-panel-swap mt-0"
           >
             <div
-              className={`pricing-selected border-b border-border py-8 transition-colors duration-300 ${
-                selected.popular ? "border-l-2 border-l-accent pl-4 md:pl-6" : ""
+              className={`pricing-selected border-b border-border py-6 transition-colors duration-300 md:py-7 ${
+                selected.popular
+                  ? "pricing-selected-popular pl-4 md:pl-6"
+                  : ""
               }`}
             >
               <div className="flex flex-wrap items-center gap-3">
@@ -275,9 +281,7 @@ export function Pricing() {
                   Selected plan
                 </p>
                 {selected.popular && (
-                  <span className="font-mono text-[9px] uppercase tracking-[0.15em] text-accent">
-                    Most popular
-                  </span>
+                  <span className="pricing-popular-badge">Most popular</span>
                 )}
               </div>
               <div className="mt-4 flex flex-wrap items-baseline gap-x-4 gap-y-2">
@@ -313,9 +317,11 @@ export function Pricing() {
                   <article
                     key={plan.index}
                     role="listitem"
-                    className={`pricing-row group grid grid-cols-12 items-start gap-4 border-b border-border py-6 transition-all duration-300 md:gap-6 md:py-8 ${
+                    className={`pricing-row group grid grid-cols-12 items-start gap-4 border-b border-border py-5 transition-all duration-300 md:gap-6 md:py-6 ${
+                      plan.popular ? "pricing-row-popular" : ""
+                    } ${
                       isActive
-                        ? "bg-accent/[0.06] ring-1 ring-inset ring-accent/20"
+                        ? "is-active bg-accent/[0.06] ring-1 ring-inset ring-accent/20"
                         : ""
                     }`}
                   >
@@ -346,7 +352,7 @@ export function Pricing() {
                                 {plan.name}
                               </h3>
                               {plan.popular && (
-                                <span className="font-mono text-[9px] uppercase tracking-[0.12em] text-accent">
+                                <span className="pricing-popular-badge">
                                   Popular
                                 </span>
                               )}

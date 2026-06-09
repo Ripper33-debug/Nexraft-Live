@@ -10,7 +10,7 @@ function getBookingUrl(): string | null {
 type BookCallButtonProps = {
   label?: string;
   className?: string;
-  variant?: "primary" | "default";
+  variant?: "primary" | "default" | "nav";
 };
 
 export function BookCallButton({
@@ -23,7 +23,9 @@ export function BookCallButton({
   const classes =
     variant === "primary"
       ? `hero-cta-primary btn-submit ${className}`
-      : `btn-submit ${className}`;
+      : variant === "nav"
+        ? `btn-nav-cta ${className}`
+        : `btn-submit ${className}`;
 
   if (!url) {
     return (

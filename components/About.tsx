@@ -1,17 +1,18 @@
 import { ScrollReveal } from "@/components/ScrollReveal";
 import { ProofStrip } from "@/components/ProofStrip";
+import { sectionLabel } from "@/lib/sections";
 
 export function About() {
   return (
     <section
       id="about"
-      className="section-pad scroll-mt-20 border-b border-border bg-surface-deep"
+      className="section-pad-tight scroll-mt-20 border-b border-border bg-surface-deep"
       aria-labelledby="about-heading"
     >
       <div className="grid-editorial">
         <div className="col-span-12 section-label-gap md:col-span-3">
           <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-muted">
-            02 / About
+            {sectionLabel("about")}
           </p>
         </div>
 
@@ -24,7 +25,7 @@ export function About() {
             Built like infrastructure, not&nbsp;marketing.
           </ScrollReveal>
 
-          <div className="mt-8 space-y-5 border-t border-border pt-8">
+          <div className="mt-6 space-y-4 border-t border-border pt-6">
             <ScrollReveal as="p" className="prose-measure text-body text-muted">
               Nexraft is an engineering studio — not a product company. We ship
               web applications, run the hosting underneath them, and produce 3D

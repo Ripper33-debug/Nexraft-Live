@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { BookCallButton } from "@/components/BookCallButton";
 import { Logo } from "@/components/Logo";
 import { SECTIONS } from "@/lib/sections";
 
@@ -52,7 +53,7 @@ export function Header() {
         </div>
 
         <nav
-          className="nav-scroll col-span-12 -mx-[clamp(1.25rem,4vw,3rem)] flex items-center gap-8 overflow-x-auto border-t border-border px-[clamp(1.25rem,4vw,3rem)] py-3 md:col-span-9 md:mx-0 md:justify-end md:border-t-0 md:px-0 md:py-0"
+          className="nav-scroll col-span-12 -mx-[clamp(1.25rem,4vw,3rem)] flex items-center gap-6 overflow-x-auto border-t border-border px-[clamp(1.25rem,4vw,3rem)] py-3 md:col-span-9 md:mx-0 md:justify-end md:gap-8 md:border-t-0 md:px-0 md:py-0"
           aria-label="Primary"
         >
           {SECTIONS.map((item) => {
@@ -73,6 +74,7 @@ export function Header() {
               </Link>
             );
           })}
+          <BookCallButton label="Book a call" variant="nav" />
         </nav>
       </div>
     </header>

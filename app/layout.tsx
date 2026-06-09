@@ -12,6 +12,7 @@ import { ScrollProgress } from "@/components/ScrollProgress";
 import { SectionRail } from "@/components/SectionRail";
 import { BootSequence } from "@/components/BootSequence";
 import { StudioCursor } from "@/components/StudioCursor";
+import { SmoothScroll } from "@/components/SmoothScroll";
 import "./globals.css";
 
 const bricolage = Bricolage_Grotesque({
@@ -47,7 +48,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#0f1b15",
+  themeColor: "#0a0e0c",
   colorScheme: "dark",
 };
 
@@ -65,6 +66,7 @@ export default function RootLayout({
         {`(function(){try{var p=location.pathname;var s=sessionStorage.getItem("nexraft-boot");var r=window.matchMedia("(prefers-reduced-motion: reduce)").matches;if(p!=="/"||s==="1"||r){document.documentElement.classList.add("boot-complete");}else{document.documentElement.classList.add("boot-pending");}}catch(e){document.documentElement.classList.add("boot-complete");}})();`}
       </Script>
       <body className="relative min-h-screen overflow-x-clip antialiased">
+        <SmoothScroll />
         <BootSequence />
         <Grain />
         <SiteBackdrop />

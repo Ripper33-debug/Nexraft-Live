@@ -4,7 +4,7 @@ import { usePathname } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
 import { BOOT_KEY, completeBoot } from "@/lib/boot";
 
-const BOOT_MS = 1300;
+const BOOT_MS = 920;
 const MODULES = "Web \u00b7 Hosting \u00b7 3D";
 
 export function BootSequence() {
@@ -46,7 +46,7 @@ export function BootSequence() {
 
     setVisible(true);
 
-    const wipeTimer = window.setTimeout(() => setPhase("wipe"), 820);
+    const wipeTimer = window.setTimeout(() => setPhase("wipe"), 580);
     const doneTimer = window.setTimeout(() => finish(true), BOOT_MS);
 
     const skip = () => {

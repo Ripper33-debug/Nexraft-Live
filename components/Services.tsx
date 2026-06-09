@@ -2,11 +2,14 @@
 
 import { useId, useState } from "react";
 import { ScrollReveal } from "@/components/ScrollReveal";
+import { ServiceGlyph } from "@/components/ServiceGlyph";
+import { sectionLabel } from "@/lib/sections";
 
 const services = [
   {
     index: "01",
     name: "Web",
+    glyph: "web" as const,
     summary:
       "Applications, sites, and APIs — each ships with a custom-built CMS.",
     detail:
@@ -16,6 +19,7 @@ const services = [
   {
     index: "02",
     name: "Hosting",
+    glyph: "hosting" as const,
     summary: "Managed infrastructure with uptime you can measure.",
     detail:
       "Vercel, edge config, CDN tuning, monitoring, SSL, backups. We run what we build.",
@@ -24,6 +28,7 @@ const services = [
   {
     index: "03",
     name: "3D",
+    glyph: "threeD" as const,
     summary: "Models, renders, and real-time assets for web and print.",
     detail:
       "Product visualization, architectural walkthroughs, WebGL scenes, GLTF pipelines — from mesh to browser.",
@@ -61,13 +66,13 @@ export function Services() {
   return (
     <section
       id="services"
-      className="section-pad scroll-mt-20 border-b border-border"
+      className="section-pad-tight scroll-mt-20 border-b border-border"
       aria-labelledby="services-heading"
     >
       <div className="grid-editorial">
         <div className="col-span-12 section-label-gap md:col-span-3">
           <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-muted">
-            03 / Services
+            {sectionLabel("services")}
           </p>
         </div>
 
@@ -80,13 +85,13 @@ export function Services() {
             What we build and&nbsp;run.
           </ScrollReveal>
 
-          <p className="mt-6 max-w-lg font-mono text-xs text-muted">
+          <p className="mt-5 max-w-lg font-mono text-xs text-muted">
             Three disciplines. One delivery standard. All available on monthly
             retainers.
           </p>
         </div>
 
-        <div className="col-span-12 mt-10 md:col-start-1">
+        <div className="col-span-12 mt-6 md:col-start-1">
           <div role="list" className="border-t border-border">
             {services.map((service) => {
               const isOpen = expanded === service.index;
@@ -96,15 +101,17 @@ export function Services() {
                 <article
                   key={service.index}
                   role="listitem"
-                  className={`service-row group grid grid-cols-12 items-start gap-4 border-b border-border px-0 py-8 md:gap-6 md:py-10 ${
+                  className={`service-row group relative grid grid-cols-12 items-start gap-4 border-b border-border py-5 md:gap-5 md:py-6 ${
                     "highlight" in service && service.highlight
-                      ? "border-l border-l-accent/30 pl-4 md:pl-6"
+                      ? "border-l-2 border-l-accent/40 pl-4 md:pl-5"
                       : ""
-                  } ${isOpen ? "bg-accent/[0.03]" : ""}`}
+                  } ${isOpen ? "is-open bg-accent/[0.04]" : ""}`}
                 >
+                  <span className="service-row-accent" aria-hidden="true" />
+
                   <button
                     type="button"
-                    className="col-span-12 grid grid-cols-12 items-start gap-4 text-left md:col-span-12 md:gap-6"
+                    className="col-span-12 grid grid-cols-12 items-start gap-4 text-left md:col-span-12 md:gap-5"
                     onClick={() =>
                       setExpanded(isOpen ? null : service.index)
                     }
@@ -114,7 +121,7 @@ export function Services() {
                   >
                     <div className="col-span-2 md:col-span-1">
                       <span
-                        className={`font-display text-[clamp(2.5rem,6vw,4rem)] font-bold leading-none tracking-tighter transition-colors ${
+                        className={`font-display text-[clamp(2rem,5vw,3.25rem)] font-bold leading-none tracking-tighter transition-colors ${
                           isOpen
                             ? "text-accent/60"
                             : "text-foreground/20 group-hover:text-accent/40"
@@ -125,23 +132,23 @@ export function Services() {
                       </span>
                     </div>
 
-                    <div className="col-span-10 md:col-span-11 md:grid md:grid-cols-11 md:items-start md:gap-6">
+                    <div className="col-span-10 md:col-span-10 md:grid md:grid-cols-10 md:items-start md:gap-5">
                       <div className="flex items-start justify-between gap-3 md:col-span-2 md:block">
                         <div>
-                          <h3 className="font-display text-2xl font-semibold tracking-tight text-foreground md:text-3xl">
+                          <h3 className="font-display text-xl font-semibold tracking-tight text-foreground md:text-2xl">
                             {service.name}
                           </h3>
                           {"highlight" in service && service.highlight && (
-                            <p className="mt-2 font-mono text-[10px] uppercase tracking-[0.2em] text-accent">
-                              Real-time · Print-ready
+                            <p className="mt-1.5 font-mono text-[10px] uppercase tracking-[0.2em] text-accent">
+                              Real-time / Print-ready
                             </p>
                           )}
                         </div>
                         <ServiceChevron open={isOpen} />
                       </div>
 
-                      <div className="mt-2 md:col-span-5 md:mt-0">
-                        <p className="text-sm leading-relaxed text-muted md:text-base">
+                      <div className="mt-2 md:col-span-4 md:mt-0">
+                        <p className="text-sm leading-relaxed text-muted">
                           {service.summary}
                         </p>
                         <p className="mt-2 font-mono text-[10px] uppercase tracking-[0.15em] text-muted/80 md:hidden">
@@ -149,21 +156,25 @@ export function Services() {
                         </p>
                       </div>
 
-                      <div className="mt-3 md:col-span-4 md:mt-0 md:text-right">
-                        <p className="font-mono text-[10px] uppercase tracking-[0.15em] text-muted md:text-xs">
+                      <div className="mt-3 md:col-span-2 md:mt-0">
+                        <p className="font-mono text-[10px] uppercase tracking-[0.15em] text-muted">
                           {service.stack}
                         </p>
+                      </div>
+
+                      <div className="hidden md:col-span-2 md:flex md:justify-end md:opacity-0 md:transition-opacity md:duration-300 md:group-hover:opacity-100 md:group-focus-within:opacity-100">
+                        <ServiceGlyph variant={service.glyph} />
                       </div>
                     </div>
                   </button>
 
                   <div
                     id={panelId}
-                    className={`service-detail-wrap col-span-12 md:col-span-11 md:col-start-2 ${
+                    className={`service-detail-wrap col-span-12 md:col-span-10 md:col-start-2 ${
                       isOpen ? "is-open" : ""
                     }`}
                   >
-                    <p className="service-detail mt-0 font-mono text-xs leading-relaxed text-muted md:mt-2">
+                    <p className="service-detail mt-0 font-mono text-xs leading-relaxed text-muted md:mt-1">
                       {service.detail}
                     </p>
                   </div>

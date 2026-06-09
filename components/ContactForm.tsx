@@ -99,13 +99,10 @@ export function ContactForm() {
           id="contact-plan"
           name="plan"
           className="field-input"
-          required
           defaultValue=""
           disabled={isPending}
         >
-          <option value="" disabled>
-            Select a plan
-          </option>
+          <option value="">Optional — select a plan</option>
           {plans.map((group) => (
             <optgroup key={group.group} label={group.group}>
               {group.options.map((option) => (
