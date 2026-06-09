@@ -5,6 +5,7 @@ import Link from "next/link";
 import { ScrollReveal } from "@/components/ScrollReveal";
 import { CountUp } from "@/components/CountUp";
 import { BookCallButton } from "@/components/BookCallButton";
+import { PricingCompare } from "@/components/PricingCompare";
 import { sectionLabel } from "@/lib/sections";
 
 type Category = "web" | "hosting" | "threeD";
@@ -225,6 +226,8 @@ export function Pricing() {
           <p className="mt-3 font-mono text-[10px] uppercase tracking-[0.18em] text-accent">
             Taking 2 new retainers this quarter.
           </p>
+
+          <PricingCompare />
 
           <div className="pricing-anchor mt-6 border border-border bg-accent/[0.04] p-4 md:p-5">
             <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-muted">

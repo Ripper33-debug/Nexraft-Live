@@ -10,12 +10,27 @@ export function SiteBackdrop() {
     const reduced = window.matchMedia(
       "(prefers-reduced-motion: reduce)",
     ).matches;
-    setMotion(!reduced);
+    const mobile = window.matchMedia("(max-width: 767px)").matches;
+    setMotion(!reduced && !mobile);
 
     const onScroll = () => setScroll(window.scrollY);
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+    const enableScroll = () => {
+      onScroll();
+      window.addEventListener("scroll", onScroll, { passive: true });
+    };
+
+    if (document.documentElement.classList.contains("boot-complete")) {
+      enableScroll();
+    } else {
+      window.addEventListener("nexraft:boot-complete", enableScroll, {
+        once: true,
+      });
+    }
+
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("nexraft:boot-complete", enableScroll);
+    };
   }, []);
 
   const parallax = motion

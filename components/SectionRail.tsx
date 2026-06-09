@@ -42,7 +42,8 @@ export function SectionRail() {
             className={`pointer-events-auto group flex items-center gap-3 transition-opacity duration-300 ${
               isActive ? "opacity-100" : "opacity-35 hover:opacity-70"
             }`}
-            aria-current={isActive ? "true" : undefined}
+            aria-current={isActive ? "location" : undefined}
+            aria-label={`${section.index} ${section.label}`}
             data-cursor-hover
           >
             <span

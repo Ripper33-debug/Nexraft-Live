@@ -1,3 +1,4 @@
+import { FounderCard } from "@/components/FounderCard";
 import { ScrollReveal } from "@/components/ScrollReveal";
 import { ProofStrip } from "@/components/ProofStrip";
 import { sectionLabel } from "@/lib/sections";
@@ -38,14 +39,7 @@ export function About() {
               timelines, measurable performance targets, and no hand-waving.
             </ScrollReveal>
 
-            <ScrollReveal
-              as="blockquote"
-              className="border-l-2 border-accent/40 pl-4 font-mono text-sm leading-relaxed text-foreground/90"
-            >
-              You work directly with the people building your product — no
-              account managers, no handoffs. We scope on a discovery call, then
-              ship in short sprints with demos you can click.
-            </ScrollReveal>
+            <FounderCard />
 
             <ScrollReveal
               as="p"

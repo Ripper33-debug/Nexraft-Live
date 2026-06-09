@@ -13,6 +13,7 @@ import { SectionRail } from "@/components/SectionRail";
 import { BootSequence } from "@/components/BootSequence";
 import { StudioCursor } from "@/components/StudioCursor";
 import { SmoothScroll } from "@/components/SmoothScroll";
+import { StickyBookCall } from "@/components/StickyBookCall";
 import "./globals.css";
 
 const bricolage = Bricolage_Grotesque({
@@ -84,6 +85,7 @@ export default function RootLayout({
           <main id="main">{children}</main>
           <Footer />
         </div>
+        <StickyBookCall />
         <Analytics />
       </body>
     </html>

@@ -5,8 +5,8 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { Logo } from "@/components/Logo";
 import { BOOT_KEY, completeBoot } from "@/lib/boot";
 
-const LOADER_MS = 2000;
-const WIPE_MS = 420;
+const LOADER_MS = 1600;
+const WIPE_MS = 380;
 
 function easeOutCubic(t: number): number {
   return 1 - (1 - t) ** 3;
@@ -110,7 +110,7 @@ export function BootSequence() {
         return;
       }
 
-      if (elapsed >= LOADER_MS + 800) {
+      if (elapsed >= LOADER_MS + 600) {
         setProgress(100);
         setPhase("wipe");
         window.setTimeout(finish, WIPE_MS);
@@ -143,36 +143,60 @@ export function BootSequence() {
   return (
     <div
       className={`boot-overlay ${phase === "wipe" ? "is-wipe" : ""}`}
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="boot-loader-title"
+      aria-describedby="boot-loader-desc"
       onClick={dismiss}
       onKeyDown={(e) => {
         if (e.key === "Enter" || e.key === " ") dismiss();
       }}
-      role="progressbar"
-      aria-valuemin={0}
-      aria-valuemax={100}
-      aria-valuenow={progress}
-      aria-label="Loading Nexraft"
     >
-      <div className="boot-scanline" />
-      <div className="boot-progress-track">
+      <button
+        type="button"
+        className="boot-skip sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-10 focus:bg-surface-deep focus:px-3 focus:py-2 focus:font-mono focus:text-xs focus:text-accent"
+        onClick={dismiss}
+      >
+        Skip loading
+      </button>
+
+      <div className="boot-scanline" aria-hidden="true" />
+      <div className="boot-progress-track" aria-hidden="true">
         <div
           className="boot-progress-bar"
           style={{ width: `${progress}%` }}
         />
       </div>
 
-      <div className="boot-loader-panel">
+      <div
+        className="boot-loader-panel"
+        onClick={(e) => e.stopPropagation()}
+        onKeyDown={(e) => e.stopPropagation()}
+      >
         <Logo height={44} href={null} priority className="boot-loader-logo" />
-        <p className="boot-loader-percent font-mono tabular-nums">
+        <p
+          id="boot-loader-title"
+          className="boot-loader-percent font-mono tabular-nums"
+          aria-live="polite"
+        >
           {String(progress).padStart(3, "0")}
         </p>
-        <div className="boot-loader-track">
+        <div
+          className="boot-loader-track"
+          role="progressbar"
+          aria-valuemin={0}
+          aria-valuemax={100}
+          aria-valuenow={progress}
+          aria-labelledby="boot-loader-title boot-loader-desc"
+        >
           <div
             className="boot-loader-fill"
             style={{ width: `${progress}%` }}
           />
         </div>
-        <p className="boot-label">Loading studio</p>
+        <p id="boot-loader-desc" className="boot-label">
+          Loading studio
+        </p>
       </div>
     </div>
   );

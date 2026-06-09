@@ -1,4 +1,5 @@
 import { NextResponse, type NextRequest } from "next/server";
+import { checkRateLimit, clientIpFromHeaders } from "@/lib/rate-limit";
 import { getSiteUrl, getStripe } from "@/lib/stripe/client";
 import {
   getPlanLabel,
@@ -10,6 +11,16 @@ export const runtime = "nodejs";
 
 export async function POST(request: NextRequest) {
   try {
+    const ip = clientIpFromHeaders(request.headers.get("x-forwarded-for"));
+    const limit = checkRateLimit(`checkout:${ip}`, 10, 10 * 60 * 1000);
+
+    if (!limit.ok) {
+      return NextResponse.json(
+        { error: `Too many checkout attempts. Try again in ${limit.retryAfterSec}s.` },
+        { status: 429 },
+      );
+    }
+
     const body = (await request.json()) as { plan?: string; plans?: string[] };
     const resolved = resolveCheckoutPlans(body);
 

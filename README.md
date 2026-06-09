@@ -28,9 +28,29 @@ Add these to `.env.local` (development) and your hosting provider (Vercel):
 | `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Browser | Supabase publishable key (`sb_publishable_...` or `eyJ...` anon key) |
 | `SUPABASE_SECRET_KEY` | Server only | Supabase secret key (`sb_secret_...` or service role) — bypasses RLS for webhooks |
 | `NEXT_PUBLIC_SITE_URL` | Browser + server | Canonical site URL (e.g. `http://localhost:3000` or `https://nexraft.com`) |
-| `NEXT_PUBLIC_BOOKING_URL` | Browser | Cal.com or Calendly link for pricing and hero “Book a call” CTAs |
+| `NEXT_PUBLIC_BOOKING_URL` | Browser | Cal.com or Calendly link for pricing and hero "Book a call" CTAs |
+| `FORMSPREE_FORM_ID` | Server only | Formspree form ID for homepage contact inquiries |
 
 `SUPABASE_SERVICE_ROLE_KEY` is still accepted as a fallback for `SUPABASE_SECRET_KEY`.
+
+### Contact form (Formspree)
+
+Submissions email **barry@nexraft.com** and **alex@nexraft.com** via [Formspree](https://formspree.io).
+
+**Setup**
+
+1. Sign in at [formspree.io](https://formspree.io) and create a new form (e.g. "Nexraft inquiries").
+2. Under **Settings ? Email**, set the notification address to `barry@nexraft.com`. Add `alex@nexraft.com` as an additional recipient (Business plan) or forward from Barry's inbox.
+3. Copy the form ID from the form endpoint: `https://formspree.io/f/YOUR_FORM_ID` ? use `YOUR_FORM_ID`.
+4. Add to `.env.local` and Vercel Production:
+
+   ```bash
+   FORMSPREE_FORM_ID=your_form_id
+   ```
+
+5. Restart the dev server (or redeploy). Submit a test inquiry on the homepage contact form.
+
+If `FORMSPREE_FORM_ID` is missing, the form shows an error and visitors can email barry@nexraft.com or alex@nexraft.com directly.
 
 ### Supabase schema
 

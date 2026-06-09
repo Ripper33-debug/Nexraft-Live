@@ -53,7 +53,7 @@ export function HeroFigFallback({ loading = false }: HeroFigFallbackProps) {
             transition: "transform 0.6s cubic-bezier(0.22, 1, 0.36, 1)",
           }}
         >
-          <g transform="translate(-200, -200)">
+          <g className="fig-fallback-mesh" transform="translate(-200, -200)">
             <polygon points="200,72 290,130 260,230 140,230 110,130" />
             <polygon points="200,328 290,270 260,170 140,170 110,270" />
             <line x1="200" y1="72" x2="200" y2="328" strokeOpacity="0.45" />

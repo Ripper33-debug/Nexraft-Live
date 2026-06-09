@@ -72,8 +72,10 @@ export function Hero() {
             </div>
           </div>
 
-          <div className="col-span-12 mt-10 hidden lg:col-span-5 lg:mt-0 lg:flex lg:items-center lg:justify-end">
-            <HeroVisual />
+          <div className="hero-line col-span-12 mt-8 flex w-full justify-center lg:col-span-5 lg:mt-0 lg:justify-end">
+            <div className="w-full max-w-md lg:max-w-lg">
+              <HeroVisual />
+            </div>
           </div>
 
           <div className="hero-line hero-line-choreo hero-line-6 col-span-12 mt-12 hidden grid-cols-12 gap-0 border-t border-border pt-6 md:mt-14 lg:grid">

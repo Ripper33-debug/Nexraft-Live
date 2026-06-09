@@ -8,10 +8,10 @@ const records = [
   {
     index: "01",
     client: "Weatherhaven",
-    project: "Corporate marketing site",
+    project: "Global deploy-map catalog for 95-country ops",
     href: "https://weatherhavenusa.com",
     stack: `Next.js ${dot} CMS ${dot} Product catalog`,
-    metric: "95-country deploy map",
+    metric: "Enterprise marketing rebuild",
     kind: "image" as const,
     imageSrc: "/case-studies/weatherhaven.png",
     imageAlt: "Weatherhaven corporate website",
@@ -30,10 +30,10 @@ const records = [
   {
     index: "03",
     client: "Nexraft",
-    project: "FIG.01 live WebGL hero",
+    project: "Live WebGL product visualization pipeline",
     href: "#home",
-    stack: `Three.js ${dot} R3F ${dot} GLTF pipeline`,
-    metric: "Real-time wireframe",
+    stack: `Three.js ${dot} R3F ${dot} GLTF ${dot} Draco`,
+    metric: "Real-time · Browser-native",
     kind: "wireframe" as const,
   },
 ] as const;

@@ -13,15 +13,23 @@ const plans = [
 
 type FormStatus = "idle" | "success" | "error";
 
+function createReferenceId(): string {
+  const year = new Date().getFullYear();
+  const suffix = Math.floor(1000 + Math.random() * 9000);
+  return `NX-${year}-${suffix}`;
+}
+
 export function ContactForm() {
   const [status, setStatus] = useState<FormStatus>("idle");
   const [message, setMessage] = useState("");
+  const [referenceId, setReferenceId] = useState("");
   const [isPending, startTransition] = useTransition();
 
   const onSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setStatus("idle");
     setMessage("");
+    setReferenceId("");
 
     const form = e.currentTarget;
     const data = new FormData(form);
@@ -31,7 +39,7 @@ export function ContactForm() {
 
       if (result.ok) {
         setStatus("success");
-        setMessage("Inquiry sent. We will respond within two business days.");
+        setReferenceId(createReferenceId());
         form.reset();
         return;
       }
@@ -41,8 +49,46 @@ export function ContactForm() {
     });
   };
 
+  if (status === "success") {
+    return (
+      <div className="contact-success border border-border bg-accent/[0.04] p-5" role="status">
+        <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-accent">
+          Status: received
+        </p>
+        <p className="mt-3 font-display text-xl font-semibold text-foreground">
+          Inquiry logged
+        </p>
+        <dl className="mt-4 space-y-2 font-mono text-xs text-muted">
+          <div className="flex flex-wrap gap-x-2">
+            <dt className="text-muted/70">Ref</dt>
+            <dd className="text-foreground">{referenceId}</dd>
+          </div>
+          <div className="flex flex-wrap gap-x-2">
+            <dt className="text-muted/70">Response window</dt>
+            <dd className="text-foreground">2 business days</dd>
+          </div>
+        </dl>
+        <p className="mt-4 text-sm text-muted">
+          We&apos;ll reply with scope and a fixed monthly rate. Need it faster?
+          Scroll up to book a call.
+        </p>
+      </div>
+    );
+  }
+
   return (
-    <form onSubmit={onSubmit} className="contact-form space-y-6" noValidate>
+    <form onSubmit={onSubmit} className="contact-form relative space-y-6" noValidate>
+      <div className="absolute -left-[9999px] h-px w-px overflow-hidden" aria-hidden="true">
+        <label htmlFor="contact-website">Website</label>
+        <input
+          id="contact-website"
+          name="website"
+          type="text"
+          tabIndex={-1}
+          autoComplete="off"
+        />
+      </div>
+
       <div className="grid gap-6 sm:grid-cols-2">
         <div className="field-group">
           <label htmlFor="contact-name" className="field-label">
@@ -144,12 +190,10 @@ export function ContactForm() {
         >
           {isPending ? "Sending\u2026" : "Send inquiry"}
         </button>
-        {status !== "idle" && (
+        {status === "error" && (
           <p
-            className={`font-mono text-xs ${
-              status === "success" ? "text-accent" : "text-foreground/70"
-            }`}
-            role="status"
+            className="font-mono text-xs text-foreground/70"
+            role="alert"
             aria-live="polite"
           >
             {message}
