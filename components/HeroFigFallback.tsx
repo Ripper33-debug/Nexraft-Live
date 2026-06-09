@@ -41,51 +41,45 @@ export function HeroFigFallback({ loading = false }: HeroFigFallbackProps) {
       <svg
         ref={ref}
         viewBox="0 0 400 400"
-        className="fig-diagram h-full w-full text-border"
+        className="fig-diagram h-full w-full"
         fill="none"
       >
         <g
+          stroke="#3ddc84"
+          strokeWidth="0.75"
+          strokeOpacity="0.65"
           style={{
-            transform: `translate(${offset.x}px, ${offset.y}px)`,
+            transform: `translate(${offset.x + 200}px, ${offset.y + 200}px)`,
             transition: "transform 0.6s cubic-bezier(0.22, 1, 0.36, 1)",
           }}
         >
-          <rect x="40" y="40" width="320" height="320" stroke="currentColor" />
-          <line x1="40" y1="200" x2="360" y2="200" stroke="currentColor" />
-          <line x1="200" y1="40" x2="200" y2="360" stroke="currentColor" />
-          <line
-            x1="40"
-            y1="120"
-            x2="360"
-            y2="280"
-            stroke="currentColor"
-            className="fig-flow-line"
-          />
-          <line
-            x1="40"
-            y1="280"
-            x2="360"
-            y2="120"
-            stroke="currentColor"
-            className="fig-flow-line"
-            style={{ animationDelay: "1.5s" }}
-          />
-
-          <circle className="fig-node fig-node-center" cx="200" cy="200" r="6" fill="#3ddc84" />
-          <circle className="fig-node" cx="120" cy="120" r="4" fill="#ffffff" fillOpacity="0.6" />
-          <circle className="fig-node" cx="280" cy="120" r="4" fill="#ffffff" fillOpacity="0.6" />
-          <circle className="fig-node" cx="120" cy="280" r="4" fill="#ffffff" fillOpacity="0.6" />
-          <circle className="fig-node" cx="280" cy="280" r="4" fill="#ffffff" fillOpacity="0.6" />
-
-          <path
-            d="M120 120 L200 200 L280 120"
-            stroke="#3ddc84"
-            strokeWidth="1"
-            strokeOpacity="0.5"
-            className="fig-flow-line"
-          />
-
+          <g transform="translate(-200, -200)">
+            <polygon points="200,72 290,130 260,230 140,230 110,130" />
+            <polygon points="200,328 290,270 260,170 140,170 110,270" />
+            <line x1="200" y1="72" x2="200" y2="328" strokeOpacity="0.45" />
+            <line x1="110" y1="130" x2="290" y2="270" strokeOpacity="0.4" />
+            <line x1="290" y1="130" x2="110" y2="270" strokeOpacity="0.4" />
+            <line x1="140" y1="230" x2="260" y2="170" strokeOpacity="0.35" />
+            <line x1="260" y1="230" x2="140" y2="170" strokeOpacity="0.35" />
+            <line x1="200" y1="72" x2="260" y2="230" strokeOpacity="0.35" />
+            <line x1="200" y1="72" x2="140" y2="230" strokeOpacity="0.35" />
+            <line x1="290" y1="130" x2="140" y2="230" strokeOpacity="0.35" />
+            <line x1="110" y1="130" x2="260" y2="230" strokeOpacity="0.35" />
+            <line x1="200" y1="328" x2="260" y2="170" strokeOpacity="0.35" />
+            <line x1="200" y1="328" x2="140" y2="170" strokeOpacity="0.35" />
+            <line x1="290" y1="270" x2="140" y2="170" strokeOpacity="0.35" />
+            <line x1="110" y1="270" x2="260" y2="170" strokeOpacity="0.35" />
+          </g>
         </g>
+
+        <circle
+          cx="200"
+          cy="200"
+          r="2"
+          fill="#3ddc84"
+          fillOpacity="0.5"
+          stroke="none"
+        />
       </svg>
     </div>
   );

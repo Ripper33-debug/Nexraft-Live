@@ -46,43 +46,47 @@ export default function HeroFigMesh({
     container.appendChild(renderer.domElement);
 
     const geometry = new THREE.IcosahedronGeometry(1.2, 1);
-    const edges = new THREE.EdgesGeometry(geometry);
+    const wireGeo = new THREE.WireframeGeometry(geometry);
 
     const wire = new THREE.LineSegments(
-      edges,
+      wireGeo,
       new THREE.LineBasicMaterial({
         color: 0x3ddc84,
         transparent: true,
-        opacity: 0.78,
+        opacity: 0.72,
+        depthWrite: false,
       }),
     );
 
     const innerGeo = new THREE.IcosahedronGeometry(1.05, 0);
-    const innerEdges = new THREE.EdgesGeometry(innerGeo);
+    const innerWireGeo = new THREE.WireframeGeometry(innerGeo);
     const inner = new THREE.LineSegments(
-      innerEdges,
+      innerWireGeo,
       new THREE.LineBasicMaterial({
         color: 0xffffff,
         transparent: true,
-        opacity: 0.14,
+        opacity: 0.12,
+        depthWrite: false,
       }),
     );
 
-    const vertices = new THREE.Points(
-      geometry,
+    const cornerGeo = new THREE.IcosahedronGeometry(1.2, 0);
+    const corners = new THREE.Points(
+      cornerGeo,
       new THREE.PointsMaterial({
         color: 0x3ddc84,
-        size: 3,
+        size: 1.25,
         transparent: true,
-        opacity: 0.55,
+        opacity: 0.35,
         sizeAttenuation: true,
+        depthWrite: false,
       }),
     );
 
     const group = new THREE.Group();
     group.add(wire);
     group.add(inner);
-    group.add(vertices);
+    group.add(corners);
     scene.add(group);
 
     const mouse = { x: 0, y: 0 };
@@ -130,10 +134,10 @@ export default function HeroFigMesh({
         group.rotation.y = rotY;
         group.rotation.z = rotation.z;
 
-        const pulse = 0.62 + Math.sin(elapsed * 2.6) * 0.18;
+        const pulse = 0.58 + Math.sin(elapsed * 2.6) * 0.14;
         wire.material.opacity = pulse;
-        inner.material.opacity = 0.1 + Math.sin(elapsed * 2.6 + 0.5) * 0.06;
-        vertices.material.opacity = 0.45 + Math.sin(elapsed * 2.6 + 1) * 0.2;
+        inner.material.opacity = 0.08 + Math.sin(elapsed * 2.6 + 0.5) * 0.05;
+        corners.material.opacity = 0.28 + Math.sin(elapsed * 2.6 + 1) * 0.1;
       }
 
       const scaleTarget = active ? 1 : 0.86;
@@ -170,12 +174,13 @@ export default function HeroFigMesh({
       window.removeEventListener("mousemove", onMove);
       window.removeEventListener("resize", onResize);
       geometry.dispose();
+      wireGeo.dispose();
       innerGeo.dispose();
-      edges.dispose();
-      innerEdges.dispose();
+      innerWireGeo.dispose();
+      cornerGeo.dispose();
       (wire.material as THREE.Material).dispose();
       (inner.material as THREE.Material).dispose();
-      (vertices.material as THREE.Material).dispose();
+      (corners.material as THREE.Material).dispose();
       renderer.dispose();
       if (renderer.domElement.parentNode === container) {
         container.removeChild(renderer.domElement);
