@@ -6,7 +6,7 @@ import { motion, useReducedMotion } from "framer-motion";
 type ScrollRevealProps = {
   children: ReactNode;
   className?: string;
-  as?: "div" | "p" | "h2" | "h3" | "span";
+  as?: "div" | "p" | "h2" | "h3" | "span" | "blockquote";
   id?: string;
 };
 
@@ -16,6 +16,7 @@ const motionTags = {
   h2: motion.h2,
   h3: motion.h3,
   span: motion.span,
+  blockquote: motion.blockquote,
 } as const;
 
 export function ScrollReveal({

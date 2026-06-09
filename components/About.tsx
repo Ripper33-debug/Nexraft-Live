@@ -39,6 +39,15 @@ export function About() {
             </ScrollReveal>
 
             <ScrollReveal
+              as="blockquote"
+              className="border-l-2 border-accent/40 pl-4 font-mono text-sm leading-relaxed text-foreground/90"
+            >
+              You work directly with the people building your product — no
+              account managers, no handoffs. We scope on a discovery call, then
+              ship in short sprints with demos you can click.
+            </ScrollReveal>
+
+            <ScrollReveal
               as="p"
               className="font-mono text-xs leading-relaxed text-muted"
             >

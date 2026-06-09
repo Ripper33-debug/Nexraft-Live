@@ -226,6 +226,28 @@ export function Pricing() {
             Taking 2 new retainers this quarter.
           </p>
 
+          <div className="pricing-anchor mt-6 border border-border bg-accent/[0.04] p-4 md:p-5">
+            <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-muted">
+              Where most teams start
+            </p>
+            <p className="mt-3 font-display text-lg font-semibold text-foreground md:text-xl">
+              Growth + Managed hosting
+            </p>
+            <p className="mt-2 font-mono text-xs text-muted">
+              Active dev hours with production care on the stack underneath —
+              the combination we recommend after a discovery call.
+            </p>
+            <p className="mt-4 font-display text-2xl font-bold tracking-tight text-foreground md:text-3xl">
+              <CountUp value={3150} prefix="$" suffix="/mo" />
+            </p>
+            <p className="mt-1 font-mono text-[10px] uppercase tracking-[0.15em] text-muted">
+              $2,800 Growth + $350 Managed
+            </p>
+            <div className="mt-5">
+              <BookCallButton label="Book a call" variant="primary" />
+            </div>
+          </div>
+
           <div
             ref={tabListRef}
             className="pricing-tabs relative mt-8 flex max-w-full gap-0 overflow-x-auto border-b border-border"

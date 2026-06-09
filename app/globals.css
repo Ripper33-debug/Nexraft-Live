@@ -228,24 +228,15 @@
     opacity: 1;
   }
 
-  html.boot-pending .hero-line {
-    clip-path: inset(0 100% 0 0);
-    opacity: 0;
-  }
-
-  html.boot-complete.boot-choreo .hero-line {
+  html.boot-complete.boot-choreo .hero-line.hero-line-choreo {
     clip-path: inset(0 100% 0 0);
     opacity: 0;
     animation: hero-reveal 0.72s cubic-bezier(0.22, 1, 0.36, 1) forwards;
   }
 
   html.boot-complete.boot-choreo .hero-line-1 { animation-delay: 0.02s; }
-  html.boot-complete.boot-choreo .hero-line-2 { animation-delay: 0.06s; }
-  html.boot-complete.boot-choreo .hero-line-3 { animation-delay: 0.1s; }
-  html.boot-complete.boot-choreo .hero-line-4 { animation-delay: 0.14s; }
-  html.boot-complete.boot-choreo .hero-line-5 { animation-delay: 0.18s; }
-  html.boot-complete.boot-choreo .hero-line-6 { animation-delay: 0.24s; }
-  html.boot-complete.boot-choreo .hero-line-7 { animation-delay: 0.28s; }
+  html.boot-complete.boot-choreo .hero-line-6 { animation-delay: 0.12s; }
+  html.boot-complete.boot-choreo .hero-line-7 { animation-delay: 0.18s; }
 
   .hero-fig-enter {
     opacity: 1;

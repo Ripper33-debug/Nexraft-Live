@@ -4,7 +4,7 @@ import { usePathname } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
 import { BOOT_KEY, completeBoot } from "@/lib/boot";
 
-const BOOT_MS = 920;
+const BOOT_MS = 580;
 const MODULES = "Web \u00b7 Hosting \u00b7 3D";
 
 export function BootSequence() {
@@ -26,8 +26,9 @@ export function BootSequence() {
     const reduced = window.matchMedia(
       "(prefers-reduced-motion: reduce)",
     ).matches;
+    const mobile = window.matchMedia("(max-width: 767px)").matches;
 
-    if (reduced) {
+    if (reduced || mobile) {
       finish(false);
       return;
     }
@@ -46,13 +47,13 @@ export function BootSequence() {
 
     setVisible(true);
 
-    const wipeTimer = window.setTimeout(() => setPhase("wipe"), 580);
-    const doneTimer = window.setTimeout(() => finish(true), BOOT_MS);
+    const wipeTimer = window.setTimeout(() => setPhase("wipe"), 360);
+    const doneTimer = window.setTimeout(() => finish(false), BOOT_MS);
 
     const skip = () => {
       window.clearTimeout(wipeTimer);
       window.clearTimeout(doneTimer);
-      finish(true);
+      finish(false);
     };
 
     const onKey = (e: KeyboardEvent) => {
@@ -77,9 +78,9 @@ export function BootSequence() {
   return (
     <div
       className={`boot-overlay ${phase === "wipe" ? "is-wipe" : ""}`}
-      onClick={() => finish(true)}
+      onClick={() => finish(false)}
       onKeyDown={(e) => {
-        if (e.key === "Enter" || e.key === " ") finish(true);
+        if (e.key === "Enter" || e.key === " ") finish(false);
       }}
       role="presentation"
       aria-hidden="true"

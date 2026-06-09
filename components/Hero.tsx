@@ -26,7 +26,7 @@ export function Hero() {
 
         <div className="relative z-10 grid-editorial">
           <div className="col-span-12 min-w-0 lg:col-span-7">
-            <div className="hero-line hero-line-1 mb-6 flex flex-wrap items-center gap-x-4 gap-y-3">
+            <div className="hero-line hero-line-choreo hero-line-1 mb-6 flex flex-wrap items-center gap-x-4 gap-y-3">
               <p className="hero-eyebrow font-mono text-[10px] uppercase tracking-[0.25em] text-muted">
                 Engineering studio
               </p>
@@ -76,7 +76,7 @@ export function Hero() {
             <HeroVisual />
           </div>
 
-          <div className="hero-line hero-line-6 col-span-12 mt-12 hidden grid-cols-12 gap-0 border-t border-border pt-6 md:mt-14 lg:grid">
+          <div className="hero-line hero-line-choreo hero-line-6 col-span-12 mt-12 hidden grid-cols-12 gap-0 border-t border-border pt-6 md:mt-14 lg:grid">
             <div className="col-span-12 sm:col-span-5">
               <BookCallButton label="Book a call" variant="primary" />
             </div>
@@ -98,7 +98,7 @@ export function Hero() {
             </div>
           </div>
 
-          <div className="hero-line hero-line-7 col-span-12 mt-6 flex items-end justify-between border-t border-border pt-5">
+          <div className="hero-line hero-line-choreo hero-line-7 col-span-12 mt-6 flex items-end justify-between border-t border-border pt-5">
             <HeroEstTicker className="md:hidden" />
             <p className="ml-auto font-mono text-[10px] tabular-nums text-muted">
               01 / {String(SECTION_COUNT).padStart(2, "0")}
