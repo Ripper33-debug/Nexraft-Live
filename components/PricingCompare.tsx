@@ -1,19 +1,21 @@
+import { PRICES, formatUsd } from "@/lib/pricing";
+
 const webPlans = [
   {
     name: "Starter",
-    price: "$1,200",
+    price: PRICES.web.starter,
     summary: "Care & updates",
     popular: false,
   },
   {
     name: "Growth",
-    price: "$2,800",
+    price: PRICES.web.growth,
     summary: "Dev hours + roadmap",
     popular: true,
   },
   {
     name: "Build",
-    price: "$4,500",
+    price: PRICES.web.build,
     summary: "Full capacity",
     popular: false,
   },
@@ -39,7 +41,7 @@ export function PricingCompare() {
               )}
             </div>
             <p className="mt-2 font-display text-2xl font-bold tracking-tight text-foreground">
-              {plan.price}
+              {formatUsd(plan.price)}
               <span className="text-base font-medium text-muted">/mo</span>
             </p>
             <p className="mt-2 font-mono text-xs text-muted">{plan.summary}</p>

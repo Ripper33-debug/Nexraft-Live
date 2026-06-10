@@ -13,7 +13,8 @@ export function Footer() {
             Ready to scope your build?
           </p>
           <p className="mt-3 max-w-md font-display text-xl font-semibold text-foreground md:text-2xl">
-            Web, hosting & 3D — monthly from $1,200.
+            One-time from $3,500 · retainers from $1,200/mo · hosting from
+            $350/mo.
           </p>
           <div className="mt-5">
             <BookCallButton label="Book a call" variant="primary" />

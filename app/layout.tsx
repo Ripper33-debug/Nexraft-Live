@@ -29,7 +29,7 @@ export const metadata: Metadata = {
     template: "%s — Nexraft",
   },
   description:
-    "Built like infrastructure — web, hosting, and 3D. Engineering studio for spec-grade builds, managed Vercel stacks, and browser-ready 3D. Monthly retainers.",
+    "Built like infrastructure — web, hosting, and 3D. Engineering studio for spec-grade builds, managed Vercel stacks, and browser-ready 3D. Monthly retainers. One-time launch sprints and founding-client rates available.",
   metadataBase: new URL("https://nexraft.com"),
   openGraph: {
     title: "Nexraft — Web, Hosting & 3D Studio",

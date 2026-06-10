@@ -6,7 +6,14 @@ import { ScrollReveal } from "@/components/ScrollReveal";
 import { CountUp } from "@/components/CountUp";
 import { BookCallButton } from "@/components/BookCallButton";
 import { PricingCompare } from "@/components/PricingCompare";
+import { LaunchSprint } from "@/components/LaunchSprint";
 import { sectionLabel } from "@/lib/sections";
+import {
+  BUNDLE_GROWTH_MANAGED,
+  FOUNDING_RATE_LINE,
+  PRICES,
+  formatUsd,
+} from "@/lib/pricing";
 
 type Category = "web" | "hosting" | "threeD";
 
@@ -18,6 +25,7 @@ type Plan = {
   summary: string;
   deliverables: readonly string[];
   popular?: boolean;
+  foundingEligible?: boolean;
 };
 
 const categories: { id: Category; label: string }[] = [
@@ -31,8 +39,9 @@ const plans: Record<Category, Plan[]> = {
     {
       index: "01",
       name: "Starter",
-      price: 1200,
+      price: PRICES.web.starter,
       cadence: "monthly retainer",
+      foundingEligible: true,
       summary: "Ongoing site care, content updates, and performance monitoring.",
       deliverables: [
         "Custom-built CMS included",
@@ -45,9 +54,10 @@ const plans: Record<Category, Plan[]> = {
     {
       index: "02",
       name: "Growth",
-      price: 2800,
+      price: PRICES.web.growth,
       cadence: "monthly retainer",
       popular: true,
+      foundingEligible: true,
       summary: "Active development hours for features, integrations, and optimization.",
       deliverables: [
         "Custom-built CMS included",
@@ -61,8 +71,9 @@ const plans: Record<Category, Plan[]> = {
     {
       index: "03",
       name: "Build",
-      price: 4500,
+      price: PRICES.web.build,
       cadence: "monthly retainer",
+      foundingEligible: true,
       summary: "Dedicated build capacity for apps, platforms, and complex systems.",
       deliverables: [
         "Custom-built CMS included",
@@ -78,7 +89,7 @@ const plans: Record<Category, Plan[]> = {
     {
       index: "01",
       name: "Managed",
-      price: 350,
+      price: PRICES.hosting.managed,
       cadence: "monthly subscription",
       summary: "Production hosting with SSL, backups, and uptime monitoring.",
       deliverables: [
@@ -91,7 +102,7 @@ const plans: Record<Category, Plan[]> = {
     {
       index: "02",
       name: "Performance",
-      price: 650,
+      price: PRICES.hosting.performance,
       cadence: "monthly subscription",
       popular: true,
       summary: "Edge tuning, CDN config, and proactive performance optimization.",
@@ -105,7 +116,7 @@ const plans: Record<Category, Plan[]> = {
     {
       index: "03",
       name: "Enterprise",
-      price: 1200,
+      price: PRICES.hosting.enterprise,
       cadence: "monthly subscription",
       summary: "Multi-environment ops with observability and incident response.",
       deliverables: [
@@ -120,7 +131,7 @@ const plans: Record<Category, Plan[]> = {
     {
       index: "01",
       name: "Asset",
-      price: 800,
+      price: PRICES.threeD.asset,
       cadence: "monthly retainer",
       summary: "Steady output of models and renders for catalog and marketing.",
       deliverables: [
@@ -133,7 +144,7 @@ const plans: Record<Category, Plan[]> = {
     {
       index: "02",
       name: "Scene",
-      price: 1800,
+      price: PRICES.threeD.scene,
       cadence: "monthly retainer",
       popular: true,
       summary: "Interactive scenes and walkthroughs delivered on a rolling basis.",
@@ -147,7 +158,7 @@ const plans: Record<Category, Plan[]> = {
     {
       index: "03",
       name: "Studio",
-      price: 3500,
+      price: PRICES.threeD.studio,
       cadence: "monthly retainer",
       summary: "Full 3D pipeline capacity for product lines and real-time assets.",
       deliverables: [
@@ -223,9 +234,11 @@ export function Pricing() {
             All plans billed monthly. Pause or cancel anytime with 30 days
             notice. Custom scope quoted on request.
           </p>
-          <p className="mt-3 font-mono text-[10px] uppercase tracking-[0.18em] text-accent">
-            Taking 2 new retainers this quarter.
+          <p className="mt-4 inline-block border border-accent/35 bg-accent/[0.07] px-3 py-2 font-mono text-[10px] uppercase tracking-[0.18em] text-accent">
+            {FOUNDING_RATE_LINE}
           </p>
+
+          <LaunchSprint />
 
           <PricingCompare />
 
@@ -241,10 +254,10 @@ export function Pricing() {
               the combination we recommend after a discovery call.
             </p>
             <p className="mt-4 font-display text-2xl font-bold tracking-tight text-foreground md:text-3xl">
-              <CountUp value={3150} prefix="$" suffix="/mo" />
+              <CountUp value={BUNDLE_GROWTH_MANAGED} prefix="$" suffix="/mo" />
             </p>
             <p className="mt-1 font-mono text-[10px] uppercase tracking-[0.15em] text-muted">
-              $2,800 Growth + $350 Managed
+              {formatUsd(PRICES.web.growth)} Growth + {formatUsd(PRICES.hosting.managed)} Managed
             </p>
             <div className="mt-5">
               <BookCallButton label="Book a call" variant="primary" />
@@ -307,6 +320,11 @@ export function Pricing() {
                 </p>
                 {selected.popular && (
                   <span className="pricing-popular-badge">Most popular</span>
+                )}
+                {selected.foundingEligible && (
+                  <span className="pricing-founding-badge">
+                    Founding rate eligible
+                  </span>
                 )}
               </div>
               <div className="mt-4 flex flex-wrap items-baseline gap-x-4 gap-y-2">
@@ -381,6 +399,11 @@ export function Pricing() {
                                   Popular
                                 </span>
                               )}
+                              {plan.foundingEligible && (
+                                <span className="pricing-founding-badge">
+                                  Founding rate eligible
+                                </span>
+                              )}
                             </div>
                             <p className="shrink-0 font-display text-base font-medium text-foreground md:hidden">
                               <CountUp
@@ -413,28 +436,46 @@ export function Pricing() {
                         isActive ? "is-open" : ""
                       }`}
                     >
-                      <ul className="mt-2 space-y-2 border-t border-border pt-4 md:mt-0 md:pt-4">
-                        {plan.deliverables.map((item, i) => (
-                          <li
-                            key={item}
-                            className="flex items-baseline gap-4 font-mono text-xs text-muted"
-                          >
-                            <span className="tabular-nums text-foreground/30">
-                              {String(i + 1).padStart(2, "0")}
-                            </span>
-                            {item}
-                          </li>
-                        ))}
-                      </ul>
-                      {category === "web" && (
-                        <div className="mt-4 border-t border-border pt-4">
-                          <BookCallButton label="Book a call" />
-                        </div>
-                      )}
+                      <div className="overflow-hidden">
+                        <ul className="mt-2 space-y-2 border-t border-border pt-4 md:mt-0 md:pt-4">
+                          {plan.deliverables.map((item, i) => (
+                            <li
+                              key={item}
+                              className="flex items-baseline gap-4 font-mono text-xs text-muted"
+                            >
+                              <span className="tabular-nums text-foreground/30">
+                                {String(i + 1).padStart(2, "0")}
+                              </span>
+                              {item}
+                            </li>
+                          ))}
+                        </ul>
+                        {category === "web" && (
+                          <div className="mt-4 border-t border-border pt-4">
+                            <BookCallButton label="Book a call" />
+                          </div>
+                        )}
+                      </div>
                     </div>
                   </article>
                 );
               })}
+            </div>
+          </div>
+
+          <div className="mt-8 border border-border p-4 md:flex md:items-center md:justify-between md:gap-6 md:p-5">
+            <div className="min-w-0">
+              <p className="font-display text-lg font-semibold text-foreground">
+                Hosting rescue {"\u2014"} {formatUsd(PRICES.hosting.managed)}/mo
+              </p>
+              <p className="mt-2 max-w-2xl font-mono text-xs leading-relaxed text-muted">
+                On Squarespace, Wix, or WordPress? We migrate your site to our
+                managed Vercel stack and run it. Migration included. 99.9%
+                uptime on stacks we operate.
+              </p>
+            </div>
+            <div className="mt-4 shrink-0 md:mt-0">
+              <BookCallButton label="Book a call" />
             </div>
           </div>
 
@@ -449,6 +490,24 @@ export function Pricing() {
             >
               Request a quote →
             </Link>
+          </div>
+
+          <div
+            className="mt-8 grid gap-px border border-border bg-border sm:grid-cols-2"
+            aria-label="Guarantees"
+          >
+            <div className="bg-surface-deep px-4 py-3 md:px-5">
+              <p className="flex items-baseline gap-4 font-mono text-xs text-muted">
+                <span className="tabular-nums text-foreground/30">01</span>
+                First month money-back on any retainer.
+              </p>
+            </div>
+            <div className="bg-surface-deep px-4 py-3 md:px-5">
+              <p className="flex items-baseline gap-4 font-mono text-xs text-muted">
+                <span className="tabular-nums text-foreground/30">02</span>
+                Launch Sprint: working demo before the first invoice.
+              </p>
+            </div>
           </div>
         </div>
       </div>

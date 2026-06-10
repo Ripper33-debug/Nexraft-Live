@@ -1724,6 +1724,18 @@
     color: var(--color-accent);
   }
 
+  .pricing-founding-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.2rem 0.45rem;
+    border: 1px solid rgba(61, 220, 132, 0.2);
+    font-family: var(--font-mono);
+    font-size: 9px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-muted);
+  }
+
   .pricing-selected-popular {
     border-left: 2px solid var(--color-accent);
     background: linear-gradient(
