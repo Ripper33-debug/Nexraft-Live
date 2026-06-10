@@ -54,30 +54,55 @@ export function HeroFigFallback({ loading = false }: HeroFigFallbackProps) {
           }}
         >
           <g className="fig-fallback-mesh" transform="translate(-200, -200)">
-            <polygon points="200,72 290,130 260,230 140,230 110,130" />
-            <polygon points="200,328 290,270 260,170 140,170 110,270" />
-            <line x1="200" y1="72" x2="200" y2="328" strokeOpacity="0.45" />
-            <line x1="110" y1="130" x2="290" y2="270" strokeOpacity="0.4" />
-            <line x1="290" y1="130" x2="110" y2="270" strokeOpacity="0.4" />
-            <line x1="140" y1="230" x2="260" y2="170" strokeOpacity="0.35" />
-            <line x1="260" y1="230" x2="140" y2="170" strokeOpacity="0.35" />
-            <line x1="200" y1="72" x2="260" y2="230" strokeOpacity="0.35" />
-            <line x1="200" y1="72" x2="140" y2="230" strokeOpacity="0.35" />
-            <line x1="290" y1="130" x2="140" y2="230" strokeOpacity="0.35" />
-            <line x1="110" y1="130" x2="260" y2="230" strokeOpacity="0.35" />
-            <line x1="200" y1="328" x2="260" y2="170" strokeOpacity="0.35" />
-            <line x1="200" y1="328" x2="140" y2="170" strokeOpacity="0.35" />
-            <line x1="290" y1="270" x2="140" y2="170" strokeOpacity="0.35" />
-            <line x1="110" y1="270" x2="260" y2="170" strokeOpacity="0.35" />
+            {/* Trefoil knot - 2D projection of the WebGL torus knot */}
+            <polygon
+              points="200,162 248,171 285,195 303,227 299,257 275,276 238,276 199,256 167,219 151,173 153,129 172,97 200,86 228,97 247,129 249,173 233,219 201,256 162,276 125,276 101,257 97,227 115,195 152,171"
+              strokeOpacity="0.7"
+            />
+            <polygon
+              points="200,162 248,171 285,195 303,227 299,257 275,276 238,276 199,256 167,219 151,173 153,129 172,97 200,86 228,97 247,129 249,173 233,219 201,256 162,276 125,276 101,257 97,227 115,195 152,171"
+              strokeOpacity="0.25"
+              transform="translate(200, 200) scale(0.8) translate(-200, -200)"
+            />
+            {/* Counter-rotating core */}
+            <polygon
+              points="200,168 228,184 228,216 200,232 172,216 172,184"
+              strokeOpacity="0.55"
+            />
+            <line x1="200" y1="168" x2="200" y2="232" strokeOpacity="0.3" />
+            <line x1="172" y1="184" x2="228" y2="216" strokeOpacity="0.3" />
+            <line x1="228" y1="184" x2="172" y2="216" strokeOpacity="0.3" />
+          </g>
+
+          {/* Gyroscope rings */}
+          <g transform="translate(-200, -200)">
+            <ellipse
+              cx="200"
+              cy="200"
+              rx="148"
+              ry="46"
+              strokeOpacity="0.3"
+              strokeDasharray="8 6"
+              transform="rotate(-18 200 200)"
+            />
+            <ellipse
+              cx="200"
+              cy="200"
+              rx="128"
+              ry="38"
+              strokeOpacity="0.2"
+              strokeDasharray="6 8"
+              transform="rotate(32 200 200)"
+            />
           </g>
         </g>
 
         <circle
           cx="200"
           cy="200"
-          r="2"
+          r="2.5"
           fill="#3ddc84"
-          fillOpacity="0.5"
+          fillOpacity="0.7"
           stroke="none"
         />
       </svg>

@@ -22,8 +22,8 @@ const defaultTelemetry: FigTelemetry = {
   rotY: 0,
   cursorX: 0,
   cursorY: 0,
-  vertCount: 42,
-  faceCount: 80,
+  vertCount: 891,
+  faceCount: 1600,
 };
 
 export function HeroVisual() {
