@@ -5,7 +5,7 @@ const comparisons = [
     index: "01",
     versus: "Freelancer",
     detail:
-      "One invoice for web, hosting, and 3D \u2014 not three vendors to coordinate.",
+      "One invoice for web, hosting, and 3D. Not three vendors to coordinate.",
   },
   {
     index: "02",
@@ -17,7 +17,7 @@ const comparisons = [
     index: "03",
     versus: "In-house hire",
     detail:
-      "Retainer flex without recruiting lag \u2014 scale hours up or down monthly.",
+      "Retainer flex without recruiting lag. Scale hours up or down monthly.",
   },
 ] as const;
 

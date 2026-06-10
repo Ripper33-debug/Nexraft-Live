@@ -3,7 +3,7 @@
 import { useState, useTransition, type FormEvent } from "react";
 import { submitContact } from "@/app/actions/contact";
 
-const dash = "\u2014";
+const dash = "-";
 
 const plans = [
   { group: "One-time", options: ["Launch Sprint"] },
@@ -149,7 +149,7 @@ export function ContactForm() {
           defaultValue=""
           disabled={isPending}
         >
-          <option value="">Optional — select a plan</option>
+          <option value="">Select a plan (optional)</option>
           {plans.map((group) => (
             <optgroup key={group.group} label={group.group}>
               {group.options.map((option) => (

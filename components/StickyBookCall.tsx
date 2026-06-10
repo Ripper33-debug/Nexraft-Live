@@ -9,25 +9,43 @@ import {
 } from "@/lib/pricing";
 
 export function StickyBookCall() {
-  const [visible, setVisible] = useState(false);
+  const [pastHero, setPastHero] = useState(false);
+  const [endInView, setEndInView] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => {
-      setVisible(window.scrollY > window.innerHeight * 0.42);
-    };
+    const hero = document.getElementById("home");
+    const contact = document.getElementById("contact");
+    const footer = document.querySelector("footer");
 
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+    const visibility = new Map<Element, boolean>();
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          visibility.set(entry.target, entry.isIntersecting);
+        }
+        setPastHero(hero ? visibility.get(hero) === false : true);
+        setEndInView(
+          [contact, footer].some((el) => el && visibility.get(el)),
+        );
+      },
+      { threshold: 0 },
+    );
+
+    for (const el of [hero, contact, footer]) {
+      if (el) observer.observe(el);
+    }
+
+    return () => observer.disconnect();
   }, []);
 
-  if (!visible) return null;
+  if (!pastHero || endInView) return null;
 
   return (
     <div className="sticky-cta" role="complementary" aria-label="Book a call">
       <div className="sticky-cta-inner grid-editorial items-center gap-3 py-3 md:py-3.5">
         <p className="sticky-cta-copy col-span-12 font-mono text-[10px] uppercase tracking-[0.16em] text-muted md:col-span-6">
-          Founding rate {"\u2014"} {FOUNDING_DISCOUNT_PCT}% off retainers{" "}
+          Founding rate: {FOUNDING_DISCOUNT_PCT}% off retainers{" "}
           {"\u00b7"} {FOUNDING_SLOTS_REMAINING} of {FOUNDING_SLOTS_TOTAL} slots
           open
         </p>

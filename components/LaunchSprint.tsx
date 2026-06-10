@@ -5,7 +5,7 @@ const features = [
   "Up to 6 pages, custom CMS included",
   "Vercel deploy, DNS, SSL, handoff docs",
   "Clickable demo before the first invoice",
-  "Rolls into Starter or Managed hosting \u2014 optional, never required",
+  "Rolls into Starter or Managed hosting. Optional, never required",
   "14-day delivery from kickoff",
 ] as const;
 
@@ -17,7 +17,7 @@ export function LaunchSprint() {
     >
       <div className="flex flex-wrap items-center justify-between gap-2">
         <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-accent">
-          00 {"\u2014"} Launch Sprint
+          00 / Launch Sprint
         </p>
         <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-muted">
           One-time
@@ -47,14 +47,8 @@ export function LaunchSprint() {
         </div>
 
         <ul className="space-y-2 md:col-span-7">
-          {features.map((item, i) => (
-            <li
-              key={item}
-              className="flex items-baseline gap-4 font-mono text-xs text-muted"
-            >
-              <span className="tabular-nums text-foreground/30">
-                {String(i + 1).padStart(2, "0")}
-              </span>
+          {features.map((item) => (
+            <li key={item} className="font-mono text-xs text-muted">
               {item}
             </li>
           ))}

@@ -59,7 +59,7 @@ function ProofFrame({
       target={href.startsWith("http") ? "_blank" : undefined}
       rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
       className="proof-frame group relative block aspect-[16/10] w-full overflow-hidden border border-border bg-surface-deep transition-transform duration-300 ease-out hover:scale-[1.02]"
-      aria-label={`${label} — view`}
+      aria-label={`${label}: view`}
       data-cursor-hover
     >
       <Image
@@ -82,7 +82,7 @@ function WireframeProofFrame({ label, href }: { label: string; href: string }) {
     <Link
       href={href}
       className="proof-frame proof-frame-wire group relative flex aspect-[16/10] w-full items-center justify-center overflow-hidden border border-border bg-surface-deep transition-transform duration-300 ease-out hover:scale-[1.02]"
-      aria-label={`${label} — view live 3D`}
+      aria-label={`${label}: view live 3D`}
       data-cursor-hover
     >
       <svg
@@ -112,12 +112,12 @@ function WireframeProofFrame({ label, href }: { label: string; href: string }) {
 
 export function ProofStrip() {
   return (
-    <div className="mt-6 border-t border-border pt-6">
+    <div id="work" className="mt-6 scroll-mt-20 border-t border-border pt-6">
       <ScrollReveal
         as="p"
         className="font-mono text-[10px] uppercase tracking-[0.25em] text-muted"
       >
-        Record {"\u2014"} selected delivery
+        Record / selected delivery
       </ScrollReveal>
 
       <div

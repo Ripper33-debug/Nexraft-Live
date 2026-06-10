@@ -227,7 +227,7 @@ export function Pricing() {
             id="pricing-heading"
             className="text-display-section text-pretty font-display font-semibold text-foreground"
           >
-            Monthly rates. No&nbsp;surprises.
+            Fixed rates. No&nbsp;surprises.
           </ScrollReveal>
 
           <p className="mt-6 max-w-xl font-mono text-xs leading-relaxed text-muted">
@@ -250,8 +250,8 @@ export function Pricing() {
               Growth + Managed hosting
             </p>
             <p className="mt-2 font-mono text-xs text-muted">
-              Active dev hours with production care on the stack underneath —
-              the combination we recommend after a discovery call.
+              Active dev hours with production care on the stack underneath.
+              The combination we recommend after a discovery call.
             </p>
             <p className="mt-4 font-display text-2xl font-bold tracking-tight text-foreground md:text-3xl">
               <CountUp value={BUNDLE_GROWTH_MANAGED} prefix="$" suffix="/mo" />
@@ -346,11 +346,6 @@ export function Pricing() {
               <p className="mt-4 max-w-lg text-sm text-muted md:text-base">
                 {selected.summary}
               </p>
-              {category === "web" && (
-                <div className="mt-6">
-                  <BookCallButton label="Book a call" variant="primary" />
-                </div>
-              )}
             </div>
 
             <div role="list" className="border-b border-border">
@@ -438,23 +433,15 @@ export function Pricing() {
                     >
                       <div className="overflow-hidden">
                         <ul className="mt-2 space-y-2 border-t border-border pt-4 md:mt-0 md:pt-4">
-                          {plan.deliverables.map((item, i) => (
+                          {plan.deliverables.map((item) => (
                             <li
                               key={item}
-                              className="flex items-baseline gap-4 font-mono text-xs text-muted"
+                              className="font-mono text-xs text-muted"
                             >
-                              <span className="tabular-nums text-foreground/30">
-                                {String(i + 1).padStart(2, "0")}
-                              </span>
                               {item}
                             </li>
                           ))}
                         </ul>
-                        {category === "web" && (
-                          <div className="mt-4 border-t border-border pt-4">
-                            <BookCallButton label="Book a call" />
-                          </div>
-                        )}
                       </div>
                     </div>
                   </article>
@@ -466,7 +453,7 @@ export function Pricing() {
           <div className="mt-8 border border-border p-4 md:flex md:items-center md:justify-between md:gap-6 md:p-5">
             <div className="min-w-0">
               <p className="font-display text-lg font-semibold text-foreground">
-                Hosting rescue {"\u2014"} {formatUsd(PRICES.hosting.managed)}/mo
+                Hosting rescue {"\u00b7"} {formatUsd(PRICES.hosting.managed)}/mo
               </p>
               <p className="mt-2 max-w-2xl font-mono text-xs leading-relaxed text-muted">
                 On Squarespace, Wix, or WordPress? We migrate your site to our

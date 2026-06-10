@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { ScrollReveal } from "@/components/ScrollReveal";
-import { MagneticLink } from "@/components/MagneticLink";
 import { BookCallButton } from "@/components/BookCallButton";
 import { ContactForm } from "@/components/ContactForm";
 import { CalEmbed } from "@/components/CalEmbed";
@@ -10,13 +9,11 @@ import { CONTACT_EMAILS } from "@/lib/site";
 
 const channels = [
   {
-    index: "01",
     label: "Plan change",
     detail: "Upgrade or adjust your monthly retainer.",
-    href: `mailto:${CONTACT_EMAILS[0]}?subject=${encodeURIComponent("Plan change — Nexraft")}`,
+    href: `mailto:${CONTACT_EMAILS[0]}?subject=${encodeURIComponent("Plan change - Nexraft")}`,
   },
   {
-    index: "02",
     label: "Billing",
     detail: "Subscribe, manage payment method, or view invoices.",
     href: "/pay",
@@ -50,7 +47,7 @@ export function Contact() {
             as="p"
             className="prose-measure mt-5 text-body-sm text-muted"
           >
-            Book a discovery call for the fastest path — or send a written brief
+            Book a discovery call for the fastest path, or send a written brief
             if you prefer. We respond within two business days with scope and a
             fixed monthly rate.
           </ScrollReveal>
@@ -89,15 +86,12 @@ export function Contact() {
                 </p>
                 <ul className="mt-3 divide-y divide-border" role="list">
                   {channels.map((channel) => (
-                    <li key={channel.index}>
+                    <li key={channel.label}>
                       <Link
                         href={channel.href}
-                        className="contact-channel group flex min-h-11 items-start gap-3 py-3"
+                        className="contact-channel group flex min-h-11 items-start py-3"
                         data-cursor-hover
                       >
-                        <span className="font-mono text-[10px] tabular-nums text-muted">
-                          {channel.index}
-                        </span>
                         <div>
                           <p className="font-display text-sm font-medium text-foreground">
                             {channel.label}

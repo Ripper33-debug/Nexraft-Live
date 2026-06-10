@@ -3,7 +3,7 @@
 import { useEffect, useLayoutEffect, useState } from "react";
 import { BOOT_KEY } from "@/lib/boot";
 
-const TEXT = "WEB \u00b7 HOSTING \u00b7 3D \u2014 EST. 2024";
+const TEXT = "EST. 2024";
 
 type HeroEstTickerProps = {
   className?: string;

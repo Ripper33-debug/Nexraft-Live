@@ -36,7 +36,7 @@ export function TrustBar() {
                   <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-foreground/90">
                     {item.label}
                   </p>
-                  <p className="mt-0.5 font-mono text-[9px] tracking-[0.08em] text-muted/80">
+                  <p className="mt-0.5 font-mono text-[10px] tracking-[0.08em] text-muted/80">
                     {item.detail}
                   </p>
                 </div>

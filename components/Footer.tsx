@@ -13,8 +13,9 @@ export function Footer() {
             Ready to scope your build?
           </p>
           <p className="mt-3 max-w-md font-display text-xl font-semibold text-foreground md:text-2xl">
-            One-time from $3,500 · retainers from $1,200/mo · hosting from
-            $350/mo.
+            One-time from $3,500.
+            <br />
+            Retainers from $1,200/mo. Hosting from $350/mo.
           </p>
           <div className="mt-5">
             <BookCallButton label="Book a call" variant="primary" />
@@ -24,7 +25,9 @@ export function Footer() {
         <div className="col-span-12 mt-8 md:col-span-4 md:mt-0 md:text-right">
           <Logo height={28} href={null} />
           <p className="mt-2 font-mono text-[10px] uppercase tracking-[0.2em] text-muted">
-            Web · Hosting · 3D · Est. 2024
+            Web / Hosting / 3D
+            <br />
+            Est. 2024
           </p>
         </div>
 

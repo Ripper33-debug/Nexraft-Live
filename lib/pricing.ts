@@ -34,4 +34,4 @@ export function formatUsd(value: number): string {
   return `$${value.toLocaleString("en-US")}`;
 }
 
-export const FOUNDING_RATE_LINE = `Founding rate \u2014 first ${FOUNDING_SLOTS_TOTAL} clients get ${FOUNDING_DISCOUNT_PCT}% off any retainer for the first ${FOUNDING_DISCOUNT_MONTHS} months. ${FOUNDING_SLOTS_REMAINING} of ${FOUNDING_SLOTS_TOTAL} slots open.`;
+export const FOUNDING_RATE_LINE = `Founding rate: first ${FOUNDING_SLOTS_TOTAL} clients get ${FOUNDING_DISCOUNT_PCT}% off any retainer for the first ${FOUNDING_DISCOUNT_MONTHS} months. ${FOUNDING_SLOTS_REMAINING} of ${FOUNDING_SLOTS_TOTAL} slots open.`;

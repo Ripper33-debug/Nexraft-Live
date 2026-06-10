@@ -132,7 +132,7 @@ export function PlanCheckoutConfigurator() {
                         {plan.name}
                       </span>
                       {plan.popular && (
-                        <span className="font-mono text-[9px] uppercase tracking-[0.12em] text-accent">
+                        <span className="font-mono text-[10px] uppercase tracking-[0.12em] text-accent">
                           Popular
                         </span>
                       )}
@@ -179,7 +179,7 @@ export function PlanCheckoutConfigurator() {
             <p className="mt-1 font-display text-2xl font-semibold tabular-nums text-foreground">
               {selectedPlans.length > 0
                 ? `$${monthlyTotal.toLocaleString()}/mo`
-                : "\u2014"}
+                : "$0/mo"}
             </p>
             <p className="mt-1 font-mono text-[10px] text-muted">
               One subscription, combined on a single Stripe invoice.

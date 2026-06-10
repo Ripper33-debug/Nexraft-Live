@@ -11,9 +11,9 @@ const services = [
     name: "Web",
     glyph: "web" as const,
     summary:
-      "Applications, sites, and APIs — each ships with a custom-built CMS.",
+      "Applications, sites, and APIs. Each ships with a custom-built CMS.",
     detail:
-      "Next.js, TypeScript, and a CMS tailored to your content workflow — not WordPress, not a generic dashboard. E-commerce, internal tools, performance budgets enforced from day one.",
+      "Next.js, TypeScript, and a CMS tailored to your content workflow. Not WordPress, not a generic dashboard. E-commerce, internal tools, performance budgets enforced from day one.",
     stack: "Next.js · Custom CMS · TypeScript",
   },
   {
@@ -31,7 +31,7 @@ const services = [
     glyph: "threeD" as const,
     summary: "Models, renders, and real-time assets for web and print.",
     detail:
-      "Product visualization, architectural walkthroughs, WebGL scenes, GLTF pipelines — from mesh to browser.",
+      "Product visualization, architectural walkthroughs, WebGL scenes, GLTF pipelines, from mesh to browser.",
     stack: "Blender · GLTF · Three.js · WebGL",
     highlight: true,
   },

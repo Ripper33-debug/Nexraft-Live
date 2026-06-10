@@ -28,7 +28,7 @@ export function About() {
 
           <div className="mt-6 space-y-4 border-t border-border pt-6">
             <ScrollReveal as="p" className="prose-measure text-body text-muted">
-              Nexraft is an engineering studio — not a product company. We ship
+              Nexraft is an engineering studio, not a product company. We ship
               web applications, run the hosting underneath them, and produce 3D
               assets when the brief demands it.
             </ScrollReveal>

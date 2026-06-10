@@ -1,8 +1,7 @@
 "use client";
 
 import dynamic from "next/dynamic";
-import { useCallback, useEffect, useState, type CSSProperties } from "react";
-import { CountUp } from "@/components/CountUp";
+import { useCallback, useEffect, useState } from "react";
 import { HeroFigFallback } from "@/components/HeroFigFallback";
 import { HeroFigTelemetry } from "@/components/HeroFigTelemetry";
 import type { FigTelemetry } from "@/components/HeroFigR3F";
@@ -12,11 +11,7 @@ const HeroFigR3F = dynamic(() => import("@/components/HeroFigR3F"), {
   loading: () => <HeroFigFallback loading />,
 });
 
-const pipeline = [
-  { label: "Build", pct: 100 },
-  { label: "Deploy", pct: 100 },
-  { label: "Monitor", pct: 97 },
-] as const;
+const pipeline = ["Build", "Deploy", "Monitor"] as const;
 
 const defaultTelemetry: FigTelemetry = {
   rotY: 0,
@@ -79,7 +74,7 @@ export function HeroVisual() {
             </p>
           </div>
           <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-muted/60">
-            Scale 1:1
+            R3F / WebGL2
           </p>
         </div>
 
@@ -112,43 +107,20 @@ export function HeroVisual() {
         }`}
       >
         <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-muted">
-          Pipeline status
+          Pipeline
         </p>
-        <div className="mt-3 space-y-2">
-          {pipeline.map((bar, i) => (
-            <div key={bar.label} className="flex items-center gap-3">
-              <span className="w-14 font-mono text-[10px] text-muted">
-                {bar.label}
-              </span>
-              <div className="h-px flex-1 bg-border">
-                <div
-                  className={`pipeline-bar h-px bg-accent ${
-                    choreoReady ? "is-choreo-ready" : ""
-                  }`}
-                  style={
-                    {
-                      "--target": `${bar.pct}%`,
-                      "--delay": `${0.08 + i * 0.12}s`,
-                    } as CSSProperties
-                  }
-                />
-              </div>
-              <span className="w-10 text-right font-mono text-[10px] tabular-nums text-muted">
-                {choreoReady ? (
-                  <CountUp
-                    key={bar.label}
-                    value={bar.pct}
-                    suffix="%"
-                    duration={700 + i * 120}
-                    delay={80 + i * 120}
-                  />
-                ) : (
-                  "0%"
-                )}
-              </span>
-            </div>
+        <ul className="mt-3 flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.15em] text-muted">
+          {pipeline.map((label, i) => (
+            <li key={label} className="flex items-center gap-2">
+              {i > 0 && (
+                <span className="text-muted/40" aria-hidden="true">
+                  /
+                </span>
+              )}
+              {label}
+            </li>
           ))}
-        </div>
+        </ul>
       </div>
     </div>
   );

@@ -12,8 +12,8 @@ export function FounderCard() {
         Founders
       </p>
       <p className="mt-3 max-w-xl font-mono text-sm leading-relaxed text-muted">
-        You work directly with us on the discovery call and every sprint after
-        {" \u2014 "}no account managers, no handoffs. We scope in writing, then
+        You work directly with us on the discovery call and every sprint
+        after. No account managers, no handoffs. We scope in writing, then
         ship demos you can click.
       </p>
 

@@ -69,11 +69,11 @@ export async function submitContact(formData: FormData): Promise<ContactResult> 
     body: JSON.stringify({
       name,
       email,
-      company: company || "\u2014",
+      company: company || "n/a",
       plan,
       project,
       _replyto: email,
-      _subject: `Project inquiry \u2014 Nexraft (${plan})`,
+      _subject: `Project inquiry - Nexraft (${plan})`,
     }),
   });
 

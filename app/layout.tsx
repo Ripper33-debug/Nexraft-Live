@@ -11,7 +11,6 @@ import { Footer } from "@/components/Footer";
 import { ScrollProgress } from "@/components/ScrollProgress";
 import { SectionRail } from "@/components/SectionRail";
 import { BootSequence } from "@/components/BootSequence";
-import { StudioCursor } from "@/components/StudioCursor";
 import { SmoothScroll } from "@/components/SmoothScroll";
 import { StickyBookCall } from "@/components/StickyBookCall";
 import "./globals.css";
@@ -25,16 +24,16 @@ const bricolage = Bricolage_Grotesque({
 
 export const metadata: Metadata = {
   title: {
-    default: "Nexraft — Web, Hosting & 3D Studio",
-    template: "%s — Nexraft",
+    default: "Nexraft · Web, Hosting & 3D Studio",
+    template: "%s · Nexraft",
   },
   description:
-    "Built like infrastructure — web, hosting, and 3D. Engineering studio for spec-grade builds, managed Vercel stacks, and browser-ready 3D. Monthly retainers. One-time launch sprints and founding-client rates available.",
+    "Built like infrastructure. Web, hosting, and 3D. Engineering studio for spec-grade builds, managed Vercel stacks, and browser-ready 3D. Monthly retainers. One-time launch sprints and founding-client rates available.",
   metadataBase: new URL("https://nexraft.com"),
   openGraph: {
-    title: "Nexraft — Web, Hosting & 3D Studio",
+    title: "Nexraft · Web, Hosting & 3D Studio",
     description:
-      "Built like infrastructure — web, hosting, and 3D production.",
+      "Built like infrastructure. Web, hosting, and 3D production.",
     type: "website",
     siteName: "Nexraft",
     locale: "en_US",
@@ -43,7 +42,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Nexraft",
     description:
-      "Built like infrastructure — web, hosting, and 3D production.",
+      "Built like infrastructure. Web, hosting, and 3D production.",
   },
   robots: { index: true, follow: true },
 };
@@ -73,7 +72,6 @@ export default function RootLayout({
         <SiteBackdrop />
         <ScrollProgress />
         <SectionRail />
-        <StudioCursor />
         <a
           href="#main"
           className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:bg-surface-deep focus:px-4 focus:py-2 focus:font-mono focus:text-sm focus:text-accent"
