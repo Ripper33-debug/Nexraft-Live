@@ -92,7 +92,7 @@ const plans: Record<Category, Plan[]> = {
       cadence: "monthly subscription",
       summary: "Production hosting with SSL, backups, and uptime monitoring.",
       deliverables: [
-        "Vercel or equivalent deploy",
+        "Managed edge deployment",
         "SSL and DNS management",
         "Daily automated backups",
         "99.9% uptime SLA",
@@ -454,8 +454,8 @@ export function Pricing() {
               </p>
               <p className="mt-2 max-w-2xl font-mono text-xs leading-relaxed text-muted">
                 On Squarespace, Wix, or WordPress? We migrate your site to our
-                managed Vercel stack and run it. Migration included. 99.9%
-                uptime on stacks we operate.
+                managed edge infrastructure and run it. Migration included.
+                99.9% uptime on stacks we operate.
               </p>
             </div>
             <div className="mt-4 shrink-0 md:mt-0">

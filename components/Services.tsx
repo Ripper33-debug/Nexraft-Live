@@ -22,8 +22,8 @@ const services = [
     glyph: "hosting" as const,
     summary: "Managed infrastructure with uptime you can measure.",
     detail:
-      "Vercel, edge config, CDN tuning, monitoring, SSL, backups. We run what we build.",
-    stack: "Vercel · Edge · Observability",
+      "Global edge network, CDN tuning, monitoring, SSL, backups. We run what we build.",
+    stack: "Edge network · CDN · Observability",
   },
   {
     index: "03",

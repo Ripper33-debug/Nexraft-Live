@@ -45,7 +45,7 @@ export function Hero() {
             <div className="hero-headline-rule" aria-hidden="true" />
 
             <p className="hero-line hero-line-5 prose-measure mt-8 text-body-sm text-muted">
-              Spec-grade web, managed Vercel hosting, and browser-ready 3D.
+              Spec-grade web, managed edge hosting, and browser-ready 3D.
               One studio, one invoice, documented delivery.
             </p>
 

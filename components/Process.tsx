@@ -15,7 +15,7 @@ const steps = [
   {
     index: "03",
     title: "Ship",
-    detail: "Vercel deploy, DNS, monitoring, and handoff docs. Production-ready.",
+    detail: "Production deploy, DNS, monitoring, and handoff docs. Zero-downtime cutover.",
   },
   {
     index: "04",

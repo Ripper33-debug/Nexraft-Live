@@ -21,7 +21,7 @@ const records = [
     client: "Outfyre",
     project: "AI growth studio site",
     href: "https://outfyre.com",
-    stack: `Next.js ${dot} Vercel ${dot} Tailwind`,
+    stack: `Next.js ${dot} TypeScript ${dot} Tailwind`,
     metric: "3-tier retainer funnel",
     kind: "image" as const,
     imageSrc: "/case-studies/outfyre.png",
