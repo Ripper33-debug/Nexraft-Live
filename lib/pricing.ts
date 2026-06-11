@@ -9,7 +9,6 @@ export const FOUNDING_DISCOUNT_PCT = 25;
 export const FOUNDING_DISCOUNT_MONTHS = 3;
 
 export const PRICES = {
-  launchSprint: 3500,
   web: {
     starter: 1200,
     growth: 2800,

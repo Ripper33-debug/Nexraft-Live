@@ -13,9 +13,9 @@ export function Footer() {
             Ready to scope your build?
           </p>
           <p className="mt-3 max-w-md font-display text-xl font-semibold text-foreground md:text-2xl">
-            One-time from $3,500.
+            Retainers from $1,200/mo.
             <br />
-            Retainers from $1,200/mo. Hosting from $350/mo.
+            Hosting from $350/mo.
           </p>
           <div className="mt-5">
             <BookCallButton label="Book a call" variant="primary" />

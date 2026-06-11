@@ -6,7 +6,6 @@ import { ScrollReveal } from "@/components/ScrollReveal";
 import { CountUp } from "@/components/CountUp";
 import { BookCallButton } from "@/components/BookCallButton";
 import { PricingCompare } from "@/components/PricingCompare";
-import { LaunchSprint } from "@/components/LaunchSprint";
 import { sectionLabel } from "@/lib/sections";
 import {
   BUNDLE_GROWTH_MANAGED,
@@ -227,7 +226,7 @@ export function Pricing() {
             id="pricing-heading"
             className="text-display-section text-pretty font-display font-semibold text-foreground"
           >
-            Fixed rates. No&nbsp;surprises.
+            Monthly rates. No&nbsp;surprises.
           </ScrollReveal>
 
           <p className="mt-6 max-w-xl font-mono text-xs leading-relaxed text-muted">
@@ -237,8 +236,6 @@ export function Pricing() {
           <p className="mt-4 inline-block border border-accent/35 bg-accent/[0.07] px-3 py-2 font-mono text-[10px] uppercase tracking-[0.18em] text-accent">
             {FOUNDING_RATE_LINE}
           </p>
-
-          <LaunchSprint />
 
           <PricingCompare />
 
@@ -480,19 +477,12 @@ export function Pricing() {
           </div>
 
           <div
-            className="mt-8 grid gap-px border border-border bg-border sm:grid-cols-2"
+            className="mt-8 border border-border"
             aria-label="Guarantees"
           >
             <div className="bg-surface-deep px-4 py-3 md:px-5">
-              <p className="flex items-baseline gap-4 font-mono text-xs text-muted">
-                <span className="tabular-nums text-foreground/30">01</span>
+              <p className="font-mono text-xs text-muted">
                 First month money-back on any retainer.
-              </p>
-            </div>
-            <div className="bg-surface-deep px-4 py-3 md:px-5">
-              <p className="flex items-baseline gap-4 font-mono text-xs text-muted">
-                <span className="tabular-nums text-foreground/30">02</span>
-                Launch Sprint: working demo before the first invoice.
               </p>
             </div>
           </div>
