@@ -7,12 +7,7 @@ import { CountUp } from "@/components/CountUp";
 import { BookCallButton } from "@/components/BookCallButton";
 import { PricingCompare } from "@/components/PricingCompare";
 import { sectionLabel } from "@/lib/sections";
-import {
-  BUNDLE_GROWTH_MANAGED,
-  FOUNDING_RATE_LINE,
-  PRICES,
-  formatUsd,
-} from "@/lib/pricing";
+import { FOUNDING_RATE_LINE, PRICES, formatUsd } from "@/lib/pricing";
 
 type Category = "web" | "hosting" | "threeD";
 
@@ -90,8 +85,10 @@ const plans: Record<Category, Plan[]> = {
       name: "Managed",
       price: PRICES.hosting.managed,
       cadence: "monthly subscription",
-      summary: "Production hosting with SSL, backups, and uptime monitoring.",
+      summary:
+        "Production hosting with SSL, backups, and uptime monitoring. Included with any web retainer.",
       deliverables: [
+        "Included with any web retainer",
         "Managed edge deployment",
         "SSL and DNS management",
         "Daily automated backups",
@@ -104,7 +101,8 @@ const plans: Record<Category, Plan[]> = {
       price: PRICES.hosting.performance,
       cadence: "monthly subscription",
       popular: true,
-      summary: "Edge tuning, CDN config, and proactive performance optimization.",
+      summary:
+        "Upgrade for heavier traffic. Edge tuning, CDN config, and proactive performance optimization.",
       deliverables: [
         "Everything in Managed",
         "CDN and edge configuration",
@@ -117,7 +115,8 @@ const plans: Record<Category, Plan[]> = {
       name: "Enterprise",
       price: PRICES.hosting.enterprise,
       cadence: "monthly subscription",
-      summary: "Multi-environment ops with observability and incident response.",
+      summary:
+        "Upgrade for complex operations. Multi-environment ops with observability and incident response.",
       deliverables: [
         "Staging and production environments",
         "Log aggregation and alerting",
@@ -251,10 +250,10 @@ export function Pricing() {
               The combination we recommend after a discovery call.
             </p>
             <p className="mt-4 font-display text-2xl font-bold tracking-tight text-foreground md:text-3xl">
-              <CountUp value={BUNDLE_GROWTH_MANAGED} prefix="$" suffix="/mo" />
+              <CountUp value={PRICES.web.growth} prefix="$" suffix="/mo" />
             </p>
             <p className="mt-1 font-mono text-[10px] uppercase tracking-[0.15em] text-muted">
-              {formatUsd(PRICES.web.growth)} Growth + {formatUsd(PRICES.hosting.managed)} Managed
+              Managed hosting ({formatUsd(PRICES.hosting.managed)}/mo value) included
             </p>
             <div className="mt-5">
               <BookCallButton label="Book a call" variant="primary" />
@@ -304,6 +303,18 @@ export function Pricing() {
             data-dir={slideDir}
             className="pricing-panel-swap mt-0"
           >
+            {category === "web" && (
+              <div className="border-b border-border py-4">
+                <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-accent">
+                  Managed hosting included
+                </p>
+                <p className="mt-2 max-w-xl font-mono text-xs leading-relaxed text-muted">
+                  Every web retainer includes Managed hosting
+                  ({formatUsd(PRICES.hosting.managed)}/mo value) at no extra
+                  charge. Built, hosted, operated.
+                </p>
+              </div>
+            )}
             <div
               className={`pricing-selected border-b border-border py-6 transition-colors duration-300 md:py-7 ${
                 selected.popular

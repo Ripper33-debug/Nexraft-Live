@@ -50,7 +50,7 @@ export function PricingCompare() {
       </div>
       <div className="border-t border-border px-4 py-3 md:px-5">
         <p className="font-mono text-[10px] uppercase tracking-[0.15em] text-muted">
-          Web retainers {"\u00b7"} Hosting & 3D priced separately below
+          Web retainers {"\u00b7"} Managed hosting included {"\u00b7"} 3D priced separately below
         </p>
       </div>
     </div>

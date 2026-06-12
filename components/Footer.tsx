@@ -13,9 +13,9 @@ export function Footer() {
             Ready to scope your build?
           </p>
           <p className="mt-3 max-w-md font-display text-xl font-semibold text-foreground md:text-2xl">
-            Retainers from $1,200/mo.
+            Retainers from $1,200/mo, hosting included.
             <br />
-            Hosting from $350/mo.
+            Hosting-only from $350/mo.
           </p>
           <div className="mt-5">
             <BookCallButton label="Book a call" variant="primary" />
@@ -31,7 +31,34 @@ export function Footer() {
           </p>
         </div>
 
-        <div className="col-span-12 mt-8 flex flex-wrap items-center gap-6 border-t border-border pt-6 md:col-span-12">
+        <div className="col-span-12 mt-8 flex flex-wrap items-center gap-x-6 gap-y-3 border-t border-border pt-6 md:col-span-12">
+          <a
+            href="/work/weatherhaven"
+            className="link-underline font-mono text-xs uppercase tracking-widest text-muted hover:text-foreground"
+          >
+            Case study
+          </a>
+          <a
+            href="/squarespace-migration"
+            className="link-underline font-mono text-xs uppercase tracking-widest text-muted hover:text-foreground"
+          >
+            Squarespace migration
+          </a>
+          <a
+            href="/wordpress-too-slow"
+            className="link-underline font-mono text-xs uppercase tracking-widest text-muted hover:text-foreground"
+          >
+            Slow WordPress
+          </a>
+          <a
+            href="/3d-product-viewer"
+            className="link-underline font-mono text-xs uppercase tracking-widest text-muted hover:text-foreground"
+          >
+            3D viewer
+          </a>
+        </div>
+
+        <div className="col-span-12 mt-6 flex flex-wrap items-center gap-6 border-t border-border pt-6 md:col-span-12">
           <ContactEmails />
           <a
             href="/pay"
