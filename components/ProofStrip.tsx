@@ -9,7 +9,7 @@ const records = [
     index: "01",
     client: "Weatherhaven",
     project: "Global deploy-map catalog for 95-country ops",
-    href: "https://weatherhavenusa.com",
+    href: "/work/weatherhaven",
     stack: `Next.js ${dot} CMS ${dot} Product catalog`,
     metric: "Enterprise marketing rebuild",
     kind: "image" as const,
@@ -71,7 +71,7 @@ function ProofFrame({
         sizes="(max-width: 768px) 100vw, 25vw"
       />
       <span className="absolute bottom-2 right-2 font-mono text-[9px] uppercase tracking-[0.15em] text-foreground/50">
-        Live
+        {href.startsWith("http") ? "Live" : "Case study"}
       </span>
     </Link>
   );

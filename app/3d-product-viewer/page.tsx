@@ -1,0 +1,199 @@
+import type { Metadata } from "next";
+import Link from "next/link";
+import { BookCallButton } from "@/components/BookCallButton";
+import { ContactEmails } from "@/components/ContactEmails";
+import { PRICES, formatUsd } from "@/lib/pricing";
+
+export const metadata: Metadata = {
+  title: "3D Product Viewer for Your Website",
+  description:
+    "Add an interactive 3D product viewer to your website. Browser-native WebGL, no app download. Optimized GLTF pipeline from CAD or Blender. From $800/mo.",
+  openGraph: {
+    title: "A 3D product viewer for your website",
+    description:
+      "Browser-native WebGL product visualization. Spin, zoom, configure. No app download.",
+  },
+};
+
+const pipeline = [
+  {
+    index: "01",
+    title: "Source",
+    detail:
+      "We start from your CAD files, Blender scenes, or photos. No 3D assets yet? We model them.",
+  },
+  {
+    index: "02",
+    title: "Optimize",
+    detail:
+      "Meshes decimated and compressed with Draco. Textures baked and sized for the web. Models load in under a second.",
+  },
+  {
+    index: "03",
+    title: "Embed",
+    detail:
+      "A WebGL viewer embedded directly in your product pages. Spin, zoom, explode views, configurators. Works on phones.",
+  },
+  {
+    index: "04",
+    title: "Operate",
+    detail:
+      "Viewer performance and loading monitored under retainer. New SKUs added as your catalog grows.",
+  },
+] as const;
+
+const useCases = [
+  {
+    index: "01",
+    title: "Product pages",
+    detail: "Let buyers inspect the product before they commit. Fewer returns, longer sessions.",
+  },
+  {
+    index: "02",
+    title: "Configurators",
+    detail: "Colors, materials, options, all rendered live in the browser.",
+  },
+  {
+    index: "03",
+    title: "Technical sales",
+    detail: "Exploded views and cutaways that flat photography cannot show.",
+  },
+] as const;
+
+export default function ThreeDProductViewerPage() {
+  return (
+    <section className="section-pad-tight border-b border-border bg-surface-deep">
+      <div className="grid-editorial">
+        <div className="col-span-12 section-label-gap md:col-span-3">
+          <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-muted">
+            3D / Product viewer
+          </p>
+        </div>
+
+        <div className="col-span-12 md:col-span-9">
+          <h1 className="text-display-section font-display font-semibold text-foreground">
+            A 3D product viewer for your website.
+          </h1>
+
+          <p className="prose-measure mt-6 text-body text-muted">
+            Browser-native WebGL. No app download, no plugin, no third-party
+            iframe. Your customers spin, zoom, and configure the product
+            directly on the page. There is a live one running on{" "}
+            <Link
+              href="/#home"
+              className="link-underline text-foreground"
+              data-cursor-hover
+            >
+              our homepage
+            </Link>{" "}
+            right now.
+          </p>
+
+          <div className="mt-10 border-t border-border pt-8">
+            <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-muted">
+              The pipeline
+            </p>
+            <div className="mt-4 border-t border-border">
+              {pipeline.map((row) => (
+                <div
+                  key={row.index}
+                  className="grid grid-cols-12 gap-4 border-b border-border py-5 md:gap-6"
+                >
+                  <div className="col-span-2 md:col-span-1">
+                    <span className="font-mono text-xs tabular-nums text-muted">
+                      {row.index}
+                    </span>
+                  </div>
+                  <div className="col-span-10 md:col-span-3">
+                    <h2 className="font-display text-base font-semibold text-foreground">
+                      {row.title}
+                    </h2>
+                  </div>
+                  <div className="col-span-10 col-start-3 md:col-span-8 md:col-start-auto">
+                    <p className="font-mono text-xs leading-relaxed text-muted">
+                      {row.detail}
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
+            <p className="mt-4 font-mono text-[10px] uppercase tracking-[0.15em] text-muted">
+              Blender {"\u00b7"} GLTF {"\u00b7"} Draco {"\u00b7"} Three.js{" "}
+              {"\u00b7"} React Three Fiber
+            </p>
+          </div>
+
+          <div className="mt-10 border-t border-border pt-8">
+            <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-muted">
+              Where it earns
+            </p>
+            <div className="mt-4 border-t border-border">
+              {useCases.map((row) => (
+                <div
+                  key={row.index}
+                  className="grid grid-cols-12 gap-4 border-b border-border py-5 md:gap-6"
+                >
+                  <div className="col-span-2 md:col-span-1">
+                    <span className="font-mono text-xs tabular-nums text-muted">
+                      {row.index}
+                    </span>
+                  </div>
+                  <div className="col-span-10 md:col-span-3">
+                    <h2 className="font-display text-base font-semibold text-foreground">
+                      {row.title}
+                    </h2>
+                  </div>
+                  <div className="col-span-10 col-start-3 md:col-span-8 md:col-start-auto">
+                    <p className="font-mono text-xs leading-relaxed text-muted">
+                      {row.detail}
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="mt-10 border border-border bg-accent/[0.04] p-4 md:p-5">
+            <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-muted">
+              3D retainers
+            </p>
+            <p className="mt-3 font-display text-2xl font-bold tracking-tight text-foreground md:text-3xl">
+              From {formatUsd(PRICES.threeD.asset)}/mo
+            </p>
+            <p className="mt-2 max-w-lg font-mono text-xs leading-relaxed text-muted">
+              Asset production from {formatUsd(PRICES.threeD.asset)}/mo, full
+              interactive scenes from {formatUsd(PRICES.threeD.scene)}/mo.
+              One-off viewers are quoted fixed on a discovery call.
+            </p>
+            <div className="mt-5">
+              <BookCallButton label="Book a call" variant="primary" />
+            </div>
+          </div>
+
+          <div className="mt-8 grid gap-6 border-t border-border pt-8 sm:grid-cols-2">
+            <div>
+              <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-muted">
+                See it live
+              </p>
+              <Link
+                href="/#home"
+                className="link-underline mt-3 inline-block font-mono text-xs uppercase tracking-[0.2em] text-foreground"
+                data-cursor-hover
+              >
+                FIG.01 on our homepage
+              </Link>
+            </div>
+            <div>
+              <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-muted">
+                Direct line
+              </p>
+              <div className="mt-3">
+                <ContactEmails stacked />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
