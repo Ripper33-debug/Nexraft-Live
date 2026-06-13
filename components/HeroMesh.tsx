@@ -68,20 +68,19 @@ const fragmentShader = /* glsl */ `
     prox = clamp(prox, 0.0, 1.0);
 
     // Resting color is bone (markedly brighter on crests); green only near pointer.
-    vec3 col = bone * (0.82 + relief * 0.5);
+    vec3 col = bone * (0.88 + relief * 0.55);
     col = mix(col, signal, smoothstep(0.05, 0.6, prox));
 
     // Subtle left/right border fade only.
     float sideFade =
-      smoothstep(0.0, 0.07, vUv.x) * smoothstep(0.0, 0.07, 1.0 - vUv.x);
+      smoothstep(0.0, 0.05, vUv.x) * smoothstep(0.0, 0.05, 1.0 - vUv.x);
 
     // Keep the grid strong deep into the scene; soft fade only near the horizon.
-    float depth = mix(1.0, 0.65, smoothstep(0.8, 1.0, vUv.y));
+    float depth = mix(1.0, 0.72, smoothstep(0.82, 1.0, vUv.y));
 
-    // Strong bone base, lifted by relief, plus pointer bloom on top.
-    float baseAlpha = 0.32 + relief * 0.23; // ~0.32 troughs -> ~0.55 crests
+    float baseAlpha = 0.48 + relief * 0.32;
     float alpha = (baseAlpha + prox * 0.55) * sideFade * depth;
-    alpha = clamp(alpha, 0.0, 0.95);
+    alpha = clamp(alpha, 0.0, 0.98);
 
     gl_FragColor = vec4(col, alpha);
   }
@@ -154,7 +153,7 @@ function Terrain({ reduced }: { reduced: boolean }) {
       geometry={geometry}
       material={material}
       rotation={[-Math.PI / 2, 0, 0]}
-      position={[0, -1.4, -47]}
+      position={[0, -2.2, -28]}
       onPointerMove={handleMove}
       onPointerOut={handleOut}
     />
@@ -172,12 +171,12 @@ export default function HeroMesh() {
   return (
     <Canvas
       className="h-full w-full"
-      camera={{ position: [0, 2.0, 10], fov: 52, near: 0.1, far: 240 }}
+      camera={{ position: [0, 3.2, 9], fov: 58, near: 0.1, far: 200 }}
       dpr={[1, 2]}
-      gl={{ alpha: true, antialias: true, powerPreference: "low-power" }}
+      gl={{ alpha: true, antialias: true, powerPreference: "high-performance" }}
       style={{ background: "transparent" }}
       frameloop={reduced ? "demand" : "always"}
-      onCreated={({ camera }) => camera.lookAt(0, -0.8, -12)}
+      onCreated={({ camera }) => camera.lookAt(0, -1.2, -18)}
     >
       <Terrain reduced={reduced} />
     </Canvas>

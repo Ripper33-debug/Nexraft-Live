@@ -29,8 +29,9 @@ function HeroMeshFallback() {
         fill="none"
       >
         <defs>
-          <radialGradient id="hm-fallback-glow" cx="50%" cy="40%" r="55%">
-            <stop offset="0%" stopColor="#E8EDE9" stopOpacity="0.08" />
+          <radialGradient id="hm-fallback-glow" cx="50%" cy="38%" r="60%">
+            <stop offset="0%" stopColor="#E8EDE9" stopOpacity="0.14" />
+            <stop offset="55%" stopColor="#E8EDE9" stopOpacity="0.04" />
             <stop offset="100%" stopColor="#E8EDE9" stopOpacity="0" />
           </radialGradient>
         </defs>
@@ -43,7 +44,7 @@ function HeroMeshFallback() {
               y1={FLOOR_Y}
               x2={VANISH_X}
               y2={VANISH_Y}
-              strokeOpacity="0.3"
+              strokeOpacity="0.55"
             />
           ))}
           {FALLBACK_HORIZONTALS.map((y, i) => (
@@ -53,7 +54,7 @@ function HeroMeshFallback() {
               y1={y}
               x2="1200"
               y2={y}
-              strokeOpacity={(0.18 + (i / 15) * 0.34).toFixed(3)}
+              strokeOpacity={(0.35 + (i / 15) * 0.45).toFixed(3)}
             />
           ))}
         </g>
@@ -74,10 +75,8 @@ export function Hero() {
     const reduced = window.matchMedia(
       "(prefers-reduced-motion: reduce)",
     ).matches;
-    const smallOrCoarse = window.matchMedia(
-      "(max-width: 767px), (pointer: coarse)",
-    ).matches;
-    if (!reduced && !smallOrCoarse) setMode("mesh");
+    const narrow = window.matchMedia("(max-width: 767px)").matches;
+    if (!reduced && !narrow) setMode("mesh");
   }, []);
 
   return (
@@ -87,7 +86,12 @@ export function Hero() {
       className="relative -mt-[68px] flex min-h-[100svh] flex-col overflow-hidden border-b border-line bg-ink pt-[68px]"
     >
       <div className="absolute inset-0 z-0">
-        {mode === "mesh" ? <HeroMesh /> : <HeroMeshFallback />}
+        <HeroMeshFallback />
+        {mode === "mesh" ? (
+          <div className="absolute inset-0">
+            <HeroMesh />
+          </div>
+        ) : null}
       </div>
 
       <div
@@ -95,15 +99,15 @@ export function Hero() {
         className="pointer-events-none absolute inset-0 z-[1]"
         style={{
           background:
-            "radial-gradient(ellipse 78% 62% at 50% 42%, transparent 0%, transparent 52%, #0A0E0C 100%)",
+            "radial-gradient(ellipse 130% 95% at 50% 42%, transparent 45%, rgba(10,14,12,0.35) 78%, rgba(10,14,12,0.72) 100%)",
         }}
       />
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-x-0 bottom-0 z-[1] h-2/3"
+        className="pointer-events-none absolute inset-x-0 bottom-0 z-[1] h-40"
         style={{
           background:
-            "linear-gradient(to bottom, transparent 0%, rgba(10,14,12,0.55) 55%, #0A0E0C 100%)",
+            "linear-gradient(to bottom, transparent 0%, rgba(10,14,12,0.65) 100%)",
         }}
       />
 
