@@ -63,7 +63,7 @@ export default function OutfyreCaseStudy() {
         <div className="relative mt-10 aspect-[16/9] w-full overflow-hidden border border-line">
           <Image
             src="/case-studies/outfyre.png"
-            alt="Outfyre growth site built by Nexraft"
+            alt="Outfyre homepage hero — AI growth team on retainer"
             fill
             priority
             className="object-cover object-top"
