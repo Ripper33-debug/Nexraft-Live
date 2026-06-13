@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { Logo } from "@/components/Logo";
 import { BOOK_CALL_URL } from "@/lib/site";
 
 const focusRing =
@@ -15,16 +16,7 @@ export function Footer() {
   return (
     <footer className="border-t border-line bg-ink" role="contentinfo">
       <div className="mx-auto flex max-w-[1180px] flex-col gap-6 px-7 py-8 md:flex-row md:items-center md:justify-between">
-        <Link href="/" className={`inline-flex items-center gap-2.5 ${focusRing}`}>
-          <span
-            aria-hidden="true"
-            className="block h-[9px] w-[9px] bg-signal"
-            style={{ boxShadow: "0 0 10px 0 rgba(158, 255, 91, 0.45)" }}
-          />
-          <span className="font-display text-[15px] font-semibold tracking-[-0.02em] text-bone">
-            Nexraft
-          </span>
-        </Link>
+        <Logo height={24} linkClassName={focusRing} />
 
         <p className="text-sm text-faint">
           Web, hosting, and 3D {"\u00b7"} Est. 2024

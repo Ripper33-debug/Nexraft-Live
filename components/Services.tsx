@@ -1,30 +1,32 @@
 "use client";
 
+import Link from "next/link";
 import { SectionHeader, SectionShell } from "@/components/ui/SectionShell";
 import { Reveal } from "@/components/ui/Reveal";
 
 const dot = "\u00b7";
 
-const services = [
-  {
-    title: "Web",
-    summary:
-      "Fast, custom sites and apps built to convert, not just look good. Every one ships with its own CMS.",
-    stack: `Next.js ${dot} Custom CMS ${dot} TypeScript`,
-  },
-  {
-    title: "Hosting",
-    summary:
-      "We run what we build. Uptime, CDN, SSL, backups and monitoring, handled, and included with every retainer.",
-    stack: `Edge network ${dot} CDN ${dot} Observability`,
-  },
-  {
-    title: "3D",
-    summary:
-      "Product spins, walkthroughs and web-ready 3D that make you look like nobody else in your market.",
-    stack: `Blender ${dot} GLTF ${dot} Three.js ${dot} WebGL`,
-  },
-] as const;
+const web = {
+  title: "Web",
+  summary:
+    "Fast, custom sites and apps built to convert, not just look good. Every one ships with its own CMS.",
+  stack: `Next.js ${dot} Custom CMS ${dot} TypeScript`,
+};
+
+const hosting = {
+  title: "Hosting",
+  summary:
+    "We run what we build. Uptime, CDN, SSL, backups and monitoring, handled, and included with every retainer.",
+  stack: `Edge network ${dot} CDN ${dot} Observability`,
+};
+
+const threeD = {
+  title: "3D",
+  summary:
+    "Product spins, walkthroughs and web-ready 3D that make you look like nobody else in your market.",
+  stack: `Blender ${dot} GLTF ${dot} Three.js ${dot} WebGL`,
+  href: "/3d-product-viewer",
+};
 
 export function Services() {
   return (
@@ -37,21 +39,42 @@ export function Services() {
         />
       </Reveal>
 
-      <div className="mt-12 grid grid-cols-1 gap-6 md:grid-cols-3 md:gap-8">
-        {services.map((service) => (
-          <article
-            key={service.title}
-            className="border-t border-line pt-6 transition-colors hover:border-mute/40"
+      <div className="mt-12 grid grid-cols-1 gap-6 md:grid-cols-12 md:gap-6">
+        <article className="border-t border-line pt-6 md:col-span-12 md:border md:border-line md:bg-ink2 md:p-8 md:pt-8">
+          <h3 className="font-display text-2xl font-semibold text-bone md:text-3xl">
+            {web.title}
+          </h3>
+          <p className="mt-4 max-w-2xl text-sm leading-relaxed text-mute md:text-base">
+            {web.summary}
+          </p>
+          <p className="mt-6 text-xs text-faint">{web.stack}</p>
+        </article>
+
+        <article className="border-t border-line pt-6 md:col-span-5 md:border md:border-line md:bg-ink2 md:p-7 md:pt-7">
+          <h3 className="font-display text-xl font-semibold text-bone">
+            {hosting.title}
+          </h3>
+          <p className="mt-3 text-sm leading-relaxed text-mute">
+            {hosting.summary}
+          </p>
+          <p className="mt-5 text-xs text-faint">{hosting.stack}</p>
+        </article>
+
+        <article className="border-t border-line pt-6 md:col-span-7 md:border md:border-line md:bg-panel md:p-7 md:pt-7">
+          <h3 className="font-display text-xl font-semibold text-bone">
+            {threeD.title}
+          </h3>
+          <p className="mt-3 text-sm leading-relaxed text-mute">
+            {threeD.summary}
+          </p>
+          <p className="mt-5 text-xs text-faint">{threeD.stack}</p>
+          <Link
+            href={threeD.href}
+            className="mt-6 inline-block text-sm text-bone underline decoration-line underline-offset-4 transition-colors hover:text-signal"
           >
-            <h3 className="font-display text-xl font-semibold text-bone">
-              {service.title}
-            </h3>
-            <p className="mt-3 text-sm leading-relaxed text-mute">
-              {service.summary}
-            </p>
-            <p className="mt-5 text-xs text-faint">{service.stack}</p>
-          </article>
-        ))}
+            See the live demo
+          </Link>
+        </article>
       </div>
     </SectionShell>
   );

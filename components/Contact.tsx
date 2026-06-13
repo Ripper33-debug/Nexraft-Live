@@ -38,7 +38,9 @@ export function Contact() {
           delay={0.14}
           className="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row"
         >
-          <MagneticButton href={BOOK_CALL_URL}>Book a call</MagneticButton>
+          <MagneticButton href={BOOK_CALL_URL} magnetic>
+            Book a call
+          </MagneticButton>
           <a
             href="mailto:barry@nexraft.com"
             className={`inline-flex items-center justify-center border border-line px-5 py-3 text-sm text-bone transition-colors duration-300 hover:border-mute ${focusRing}`}

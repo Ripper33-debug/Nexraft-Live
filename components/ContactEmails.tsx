@@ -15,12 +15,12 @@ export function ContactEmails({
 }: ContactEmailsProps) {
   if (stacked) {
     return (
-      <div className={`space-y-3 ${className}`}>
+      <div className={`space-y-2 ${className}`}>
         {CONTACT_EMAILS.map((email) => (
           <Link
             key={email}
             href={`mailto:${email}`}
-            className={`link-underline block font-grotesk text-lg font-medium text-bone ${focusRing}`}
+            className={`block text-sm text-bone transition-colors hover:text-mute ${focusRing}`}
           >
             {email}
           </Link>
@@ -30,15 +30,13 @@ export function ContactEmails({
   }
 
   return (
-    <p
-      className={`font-jetbrains text-xs uppercase tracking-widest text-mute ${className}`}
-    >
+    <p className={`text-sm text-mute ${className}`}>
       {CONTACT_EMAILS.map((email, i) => (
         <span key={email}>
           {i > 0 && <span className="text-faint"> / </span>}
           <Link
             href={`mailto:${email}`}
-            className={`link-underline text-mute transition-colors hover:text-bone ${focusRing}`}
+            className={`text-mute transition-colors hover:text-bone ${focusRing}`}
           >
             {email}
           </Link>

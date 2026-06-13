@@ -30,8 +30,8 @@ function HeroMeshFallback() {
       >
         <defs>
           <radialGradient id="hm-fallback-glow" cx="50%" cy="38%" r="60%">
-            <stop offset="0%" stopColor="#E8EDE9" stopOpacity="0.14" />
-            <stop offset="55%" stopColor="#E8EDE9" stopOpacity="0.04" />
+            <stop offset="0%" stopColor="#E8EDE9" stopOpacity="0.18" />
+            <stop offset="55%" stopColor="#E8EDE9" stopOpacity="0.06" />
             <stop offset="100%" stopColor="#E8EDE9" stopOpacity="0" />
           </radialGradient>
         </defs>
@@ -44,7 +44,7 @@ function HeroMeshFallback() {
               y1={FLOOR_Y}
               x2={VANISH_X}
               y2={VANISH_Y}
-              strokeOpacity="0.55"
+              strokeOpacity="0.65"
             />
           ))}
           {FALLBACK_HORIZONTALS.map((y, i) => (
@@ -54,7 +54,7 @@ function HeroMeshFallback() {
               y1={y}
               x2="1200"
               y2={y}
-              strokeOpacity={(0.35 + (i / 15) * 0.45).toFixed(3)}
+              strokeOpacity={(0.42 + (i / 15) * 0.48).toFixed(3)}
             />
           ))}
         </g>
@@ -116,29 +116,30 @@ export function Hero() {
 
         <h1
           id="hero-heading"
-          className="hm-fade mt-4 max-w-[14ch] font-display font-semibold tracking-[-0.03em] text-bone"
+          className="hm-fade mt-4 max-w-[18ch] font-display font-semibold tracking-[-0.03em] text-bone"
           style={{
             animationDelay: "0.06s",
-            fontSize: "clamp(2.75rem, 7.5vw, 5.25rem)",
-            lineHeight: 1.05,
+            fontSize: "clamp(2.25rem, 6.5vw, 4.5rem)",
+            lineHeight: 1.08,
           }}
         >
-          Built like infrastructure.
+          We build your website, run the servers under it, and make the 3D.
         </h1>
 
         <p
-          className="hm-fade mt-6 max-w-[52ch] text-base leading-relaxed text-mute md:text-lg"
+          className="hm-fade mt-5 max-w-[40ch] font-display text-lg text-mute md:text-xl"
           style={{ animationDelay: "0.12s" }}
         >
-          We build your website, run the servers under it, and make the 3D.
-          One studio, one invoice.
+          Built like infrastructure. One studio, one invoice.
         </p>
 
         <div
           className="hm-fade pointer-events-auto mt-8 flex flex-col gap-3 sm:flex-row sm:items-center"
           style={{ animationDelay: "0.18s" }}
         >
-          <MagneticButton href={BOOK_CALL_URL}>Book a call</MagneticButton>
+          <MagneticButton href={BOOK_CALL_URL} magnetic>
+            Book a call
+          </MagneticButton>
           <a
             href="#work"
             className="pointer-events-auto text-sm text-mute underline decoration-line underline-offset-4 transition-colors hover:text-bone focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-signal"

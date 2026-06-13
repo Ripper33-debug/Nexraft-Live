@@ -85,19 +85,19 @@ export function PlanCheckoutConfigurator() {
         return (
           <fieldset
             key={category.id}
-            className="border border-line bg-ink2 p-5 sm:p-6"
+            className="border border-line bg-ink p-5 sm:p-6"
           >
-            <legend className="px-1 font-jetbrains text-[11px] uppercase tracking-[0.2em] text-faint">
+            <legend className="px-1 text-sm font-medium text-bone">
               {category.label}
             </legend>
             {category.hint && (
-              <p className="mt-2 font-jetbrains text-xs leading-relaxed text-mute">
+              <p className="mt-2 text-sm leading-relaxed text-mute">
                 {category.hint}
               </p>
             )}
 
             <div className="mt-4 space-y-2">
-              <label className="flex cursor-pointer items-start gap-3 border border-line px-4 py-3 transition-colors has-[:checked]:border-signal-dim/50 has-[:checked]:bg-signal/[0.06]">
+              <label className="flex cursor-pointer items-start gap-3 border border-line px-4 py-3 transition-colors has-[:checked]:border-mute has-[:checked]:bg-panel">
                 <input
                   type="radio"
                   name={`plan-${category.id}`}
@@ -107,10 +107,8 @@ export function PlanCheckoutConfigurator() {
                   disabled={loading}
                 />
                 <span className="min-w-0">
-                  <span className="font-grotesk text-sm font-medium text-bone">
-                    None
-                  </span>
-                  <span className="mt-0.5 block font-jetbrains text-[10px] text-faint">
+                  <span className="text-sm font-medium text-bone">None</span>
+                  <span className="mt-0.5 block text-xs text-faint">
                     Skip this category
                   </span>
                 </span>
@@ -119,7 +117,7 @@ export function PlanCheckoutConfigurator() {
               {options.map((plan) => (
                 <label
                   key={plan.key}
-                  className="flex cursor-pointer items-start gap-3 border border-line px-4 py-3 transition-colors has-[:checked]:border-signal-dim/50 has-[:checked]:bg-signal/[0.06]"
+                  className="flex cursor-pointer items-start gap-3 border border-line px-4 py-3 transition-colors has-[:checked]:border-mute has-[:checked]:bg-panel"
                 >
                   <input
                     type="radio"
@@ -131,19 +129,19 @@ export function PlanCheckoutConfigurator() {
                   />
                   <span className="min-w-0 flex-1">
                     <span className="flex flex-wrap items-center gap-2">
-                      <span className="font-grotesk text-sm font-medium text-bone">
+                      <span className="text-sm font-medium text-bone">
                         {plan.name}
                       </span>
                       {plan.popular && (
-                        <span className="bg-signal px-1.5 py-0.5 font-jetbrains text-[9px] uppercase tracking-[0.12em] text-ink">
+                        <span className="rounded-sm border border-line px-1.5 py-0.5 text-xs text-faint">
                           Popular
                         </span>
                       )}
-                      <span className="font-grotesk text-sm font-semibold tabular-nums text-bone">
+                      <span className="text-sm font-semibold tabular-nums text-bone">
                         ${plan.price.toLocaleString()}/mo
                       </span>
                     </span>
-                    <span className="mt-1 block font-jetbrains text-[10px] leading-relaxed text-mute">
+                    <span className="mt-1 block text-xs leading-relaxed text-mute">
                       {plan.summary}
                     </span>
                   </span>
@@ -155,8 +153,8 @@ export function PlanCheckoutConfigurator() {
       })}
 
       {webWithoutHosting && (
-        <div className="border border-line bg-signal/[0.04] px-4 py-3">
-          <p className="font-jetbrains text-xs leading-relaxed text-mute">
+        <div className="border border-line bg-panel px-4 py-3">
+          <p className="text-sm leading-relaxed text-mute">
             Building a live site? Most clients add{" "}
             <strong className="font-medium text-bone">Managed hosting</strong>{" "}
             ($350/mo) so we deploy and monitor production for you.
@@ -164,26 +162,24 @@ export function PlanCheckoutConfigurator() {
           <button
             type="button"
             onClick={addManagedHosting}
-            className={`link-underline mt-2 font-jetbrains text-[10px] uppercase tracking-[0.2em] text-bone ${focusRing}`}
+            className={`mt-2 text-sm text-bone underline decoration-line underline-offset-4 hover:text-mute ${focusRing}`}
             disabled={loading}
           >
-            + Add Managed hosting
+            Add managed hosting
           </button>
         </div>
       )}
 
-      <div className="border border-line bg-ink2 p-5 sm:p-6">
+      <div className="border border-line bg-ink p-5 sm:p-6">
         <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <div>
-            <p className="font-jetbrains text-[11px] uppercase tracking-[0.2em] text-faint">
-              Monthly total
-            </p>
-            <p className="mt-1 font-grotesk text-2xl font-bold tabular-nums text-bone">
+            <p className="text-sm text-faint">Monthly total</p>
+            <p className="mt-1 font-display text-2xl font-semibold tabular-nums text-bone">
               {selectedPlans.length > 0
                 ? `$${monthlyTotal.toLocaleString()}/mo`
                 : "$0/mo"}
             </p>
-            <p className="mt-1 font-jetbrains text-[10px] text-faint">
+            <p className="mt-1 text-xs text-faint">
               One subscription, combined on a single Stripe invoice.
             </p>
           </div>
@@ -192,7 +188,7 @@ export function PlanCheckoutConfigurator() {
             type="button"
             onClick={onSubscribe}
             disabled={loading || selectedPlans.length === 0}
-            className={`inline-flex shrink-0 items-center justify-center bg-signal px-5 py-3 font-jetbrains text-[12px] uppercase tracking-[0.2em] text-ink transition-colors duration-300 hover:bg-signal-dim disabled:cursor-not-allowed disabled:opacity-50 ${focusRing}`}
+            className={`inline-flex shrink-0 items-center justify-center bg-signal px-5 py-3 text-sm font-medium text-ink transition-colors duration-300 hover:bg-signal-dim disabled:cursor-not-allowed disabled:opacity-50 ${focusRing}`}
             aria-busy={loading}
           >
             {loading ? "Redirecting..." : "Subscribe"}
@@ -200,7 +196,7 @@ export function PlanCheckoutConfigurator() {
         </div>
 
         {error && (
-          <p className="mt-4 font-jetbrains text-xs text-mute" role="alert">
+          <p className="mt-4 text-sm text-mute" role="alert">
             {error}
           </p>
         )}

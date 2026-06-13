@@ -44,10 +44,7 @@ export function ManageBilling({ defaultEmail = "" }: ManageBillingProps) {
   return (
     <form onSubmit={onSubmit} className="space-y-4">
       <div className="flex flex-col gap-2">
-        <label
-          htmlFor="billing-email"
-          className="font-jetbrains text-[11px] uppercase tracking-[0.2em] text-faint"
-        >
+        <label htmlFor="billing-email" className="text-sm text-faint">
           Email
         </label>
         <input
@@ -58,7 +55,7 @@ export function ManageBilling({ defaultEmail = "" }: ManageBillingProps) {
           autoComplete="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          className="w-full border-b border-line bg-transparent py-3 font-jetbrains text-sm text-bone placeholder:text-faint focus:border-signal focus:outline-none"
+          className="w-full border-b border-line bg-transparent py-3 text-sm text-bone placeholder:text-faint focus:border-mute focus:outline-none"
           placeholder="you@company.com"
           disabled={loading}
         />
@@ -66,7 +63,7 @@ export function ManageBilling({ defaultEmail = "" }: ManageBillingProps) {
 
       <button
         type="submit"
-        className={`inline-flex items-center justify-center border border-line px-5 py-3 font-jetbrains text-[12px] uppercase tracking-[0.2em] text-bone transition-colors duration-300 hover:border-mute disabled:cursor-not-allowed disabled:opacity-50 ${focusRing}`}
+        className={`inline-flex items-center justify-center border border-line px-5 py-3 text-sm text-bone transition-colors duration-300 hover:border-mute disabled:cursor-not-allowed disabled:opacity-50 ${focusRing}`}
         disabled={loading}
         aria-busy={loading}
       >
@@ -74,7 +71,7 @@ export function ManageBilling({ defaultEmail = "" }: ManageBillingProps) {
       </button>
 
       {error && (
-        <p className="font-jetbrains text-xs text-mute" role="alert">
+        <p className="text-sm text-mute" role="alert">
           {error}
         </p>
       )}

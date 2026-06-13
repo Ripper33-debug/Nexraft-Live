@@ -8,14 +8,14 @@ type LogoProps = {
   height?: number;
   href?: string | null;
   priority?: boolean;
-  className?: string;
+  linkClassName?: string;
 };
 
 export function Logo({
-  height = 22,
+  height = 26,
   href = "/",
   priority = false,
-  className = "",
+  linkClassName = "",
 }: LogoProps) {
   const displayWidth = Math.round((LOGO_WIDTH / LOGO_HEIGHT) * height);
   const intrinsicHeight = height * 2;
@@ -29,7 +29,7 @@ export function Logo({
       height={intrinsicHeight}
       sizes={`${displayWidth}px`}
       priority={priority}
-      className={`block max-w-full ${className}`}
+      className="block max-w-full"
       style={{ height, width: "auto", maxHeight: height }}
     />
   );
@@ -38,9 +38,8 @@ export function Logo({
     return (
       <Link
         href={href}
-        className="inline-flex shrink-0 items-center bg-transparent"
+        className={`inline-flex shrink-0 items-center bg-transparent ${linkClassName}`.trim()}
         aria-label="Nexraft home"
-        data-cursor-hover
       >
         {image}
       </Link>
@@ -48,7 +47,9 @@ export function Logo({
   }
 
   return (
-    <span className="inline-flex shrink-0 items-center bg-transparent">
+    <span
+      className={`inline-flex shrink-0 items-center bg-transparent ${linkClassName}`.trim()}
+    >
       {image}
     </span>
   );

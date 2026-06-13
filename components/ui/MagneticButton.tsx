@@ -10,6 +10,7 @@ type MagneticButtonProps = {
   children: ReactNode;
   className?: string;
   external?: boolean;
+  magnetic?: boolean;
 };
 
 export function MagneticButton({
@@ -17,10 +18,12 @@ export function MagneticButton({
   children,
   className = "",
   external = true,
+  magnetic = true,
 }: MagneticButtonProps) {
   const ref = useRef<HTMLAnchorElement>(null);
 
   const handleMove = (event: React.MouseEvent<HTMLAnchorElement>) => {
+    if (!magnetic) return;
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     const el = ref.current;
     if (!el) return;
@@ -42,9 +45,9 @@ export function MagneticButton({
       href={href}
       target={external ? "_blank" : undefined}
       rel={external ? "noopener noreferrer" : undefined}
-      onMouseMove={handleMove}
-      onMouseLeave={handleLeave}
-      className={`magnetic-btn inline-flex items-center justify-center bg-signal px-5 py-3 font-jetbrains text-[12px] uppercase tracking-[0.2em] text-ink transition-[background-color,transform] duration-300 ease-[cubic-bezier(.16,1,.3,1)] hover:bg-signal-dim ${focusRing} ${className}`}
+      onMouseMove={magnetic ? handleMove : undefined}
+      onMouseLeave={magnetic ? handleLeave : undefined}
+      className={`inline-flex items-center justify-center bg-signal px-5 py-3 text-sm font-medium text-ink transition-[background-color,transform] duration-300 ease-[cubic-bezier(.16,1,.3,1)] hover:bg-signal-dim ${focusRing} ${className}`}
     >
       {children}
     </a>

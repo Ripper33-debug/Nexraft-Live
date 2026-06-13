@@ -25,7 +25,7 @@ export function BookCallButton({
         href={url}
         target="_blank"
         rel="noopener noreferrer"
-        className={`inline-flex items-center justify-center bg-signal px-5 py-3 font-jetbrains text-[12px] uppercase tracking-[0.2em] text-ink transition-colors duration-300 hover:bg-signal-dim ${focusRing} ${className}`}
+        className={`inline-flex items-center justify-center bg-signal px-5 py-3 text-sm font-medium text-ink transition-colors duration-300 hover:bg-signal-dim ${focusRing} ${className}`}
       >
         {label}
       </a>
@@ -37,7 +37,7 @@ export function BookCallButton({
       href={url}
       target="_blank"
       rel="noopener noreferrer"
-      className={`inline-flex items-center justify-center border border-line px-5 py-3 font-jetbrains text-[12px] uppercase tracking-[0.2em] text-bone transition-colors duration-300 hover:border-mute ${focusRing} ${className}`}
+      className={`inline-flex items-center justify-center border border-line px-5 py-3 text-sm text-bone transition-colors duration-300 hover:border-mute ${focusRing} ${className}`}
     >
       {label}
     </a>
@@ -57,7 +57,7 @@ export function BookCallLink({ children, className = "" }: BookCallLinkProps) {
       href={url}
       target="_blank"
       rel="noopener noreferrer"
-      className={`link-underline font-jetbrains text-xs uppercase tracking-[0.2em] text-mute transition-colors hover:text-bone ${className}`}
+      className={`link-underline text-sm text-mute transition-colors hover:text-bone ${className}`}
     >
       {children}
     </a>

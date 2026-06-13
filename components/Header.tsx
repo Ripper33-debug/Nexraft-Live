@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
+import { Logo } from "@/components/Logo";
 import { BOOK_CALL_URL } from "@/lib/site";
 
 const NAV_LINKS = [
@@ -57,20 +58,7 @@ export function Header() {
       }`}
     >
       <div className="mx-auto flex h-[68px] max-w-[1180px] items-center justify-between px-7">
-        <Link
-          href="/"
-          aria-label="Nexraft home"
-          className={`inline-flex items-center gap-2.5 ${focusRing}`}
-        >
-          <span
-            aria-hidden="true"
-            className="block h-[9px] w-[9px] bg-signal"
-            style={{ boxShadow: "0 0 10px 0 rgba(158, 255, 91, 0.45)" }}
-          />
-          <span className="font-display text-[15px] font-semibold tracking-[-0.02em] text-bone">
-            Nexraft
-          </span>
-        </Link>
+        <Logo height={26} priority linkClassName={focusRing} />
 
         <nav
           aria-label="Primary"

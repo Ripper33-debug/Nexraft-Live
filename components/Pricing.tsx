@@ -1,9 +1,8 @@
 "use client";
 
-import Link from "next/link";
 import { SectionHeader, SectionShell } from "@/components/ui/SectionShell";
 import { Reveal } from "@/components/ui/Reveal";
-import { MagneticButton } from "@/components/ui/MagneticButton";
+import { PrimaryButton, GhostButton } from "@/components/ui/PrimaryButton";
 import {
   FOUNDING_DISCOUNT_MONTHS,
   FOUNDING_DISCOUNT_PCT,
@@ -13,9 +12,6 @@ import {
   formatUsd,
 } from "@/lib/pricing";
 import { BOOK_CALL_URL } from "@/lib/site";
-
-const focusRing =
-  "outline-none focus-visible:[outline:2px_solid_var(--color-signal)] focus-visible:[outline-offset:2px]";
 
 const plans = [
   {
@@ -122,20 +118,9 @@ export function Pricing() {
             </ul>
 
             <div className="mt-8">
-              {plan.popular ? (
-                <MagneticButton href={BOOK_CALL_URL} className="w-full">
-                  Book a call
-                </MagneticButton>
-              ) : (
-                <a
-                  href={BOOK_CALL_URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={`inline-flex w-full items-center justify-center border border-line px-5 py-3 text-sm text-bone transition-colors duration-300 hover:border-mute ${focusRing}`}
-                >
-                  Book a call
-                </a>
-              )}
+              <PrimaryButton href={BOOK_CALL_URL} className="w-full">
+                Book a call
+              </PrimaryButton>
             </div>
           </article>
         ))}
@@ -151,14 +136,9 @@ export function Pricing() {
             infrastructure and run it. Migration included.
           </p>
         </div>
-        <Link
-          href={BOOK_CALL_URL}
-          target="_blank"
-          rel="noopener noreferrer"
-          className={`inline-flex shrink-0 items-center justify-center border border-line px-5 py-3 text-sm text-bone transition-colors duration-300 hover:border-mute ${focusRing}`}
-        >
+        <GhostButton href={BOOK_CALL_URL} external>
           Migrate my site
-        </Link>
+        </GhostButton>
       </div>
 
       <p className="mt-8 text-xs leading-relaxed text-faint">

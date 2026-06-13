@@ -5,6 +5,8 @@ type SectionShellProps = {
   ariaLabelledBy?: string;
   children: ReactNode;
   className?: string;
+  /** Full-width inner container (no max-width/padding) */
+  wide?: boolean;
 };
 
 export function SectionShell({
@@ -12,6 +14,7 @@ export function SectionShell({
   ariaLabelledBy,
   children,
   className = "",
+  wide = false,
 }: SectionShellProps) {
   return (
     <section
@@ -19,7 +22,13 @@ export function SectionShell({
       aria-labelledby={ariaLabelledBy}
       className={`scroll-mt-[68px] border-t border-line bg-ink py-[84px] md:py-[120px] ${className}`.trim()}
     >
-      <div className="mx-auto max-w-[1180px] px-7">{children}</div>
+      <div
+        className={
+          wide ? "w-full" : "mx-auto max-w-[1180px] px-7"
+        }
+      >
+        {children}
+      </div>
     </section>
   );
 }
