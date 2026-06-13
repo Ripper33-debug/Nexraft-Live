@@ -144,7 +144,7 @@ export function Pricing() {
       <p className="mt-8 text-xs leading-relaxed text-faint">
         Managed hosting ({formatUsd(PRICES.hosting.managed)}/mo value) included
         with every retainer {"\u00b7"} First-month money-back {"\u00b7"} Cancel
-        anytime, 30 days notice
+        anytime, 30 days notice {"\u00b7"} All prices in USD
       </p>
     </SectionShell>
   );
