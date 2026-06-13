@@ -6,6 +6,9 @@ type ManageBillingProps = {
   defaultEmail?: string;
 };
 
+const focusRing =
+  "outline-none focus-visible:[outline:2px_solid_var(--color-signal)] focus-visible:[outline-offset:2px]";
+
 export function ManageBilling({ defaultEmail = "" }: ManageBillingProps) {
   const [email, setEmail] = useState(defaultEmail);
   const [loading, setLoading] = useState(false);
@@ -40,8 +43,11 @@ export function ManageBilling({ defaultEmail = "" }: ManageBillingProps) {
 
   return (
     <form onSubmit={onSubmit} className="space-y-4">
-      <div className="field-group">
-        <label htmlFor="billing-email" className="field-label">
+      <div className="flex flex-col gap-2">
+        <label
+          htmlFor="billing-email"
+          className="font-jetbrains text-[11px] uppercase tracking-[0.2em] text-faint"
+        >
           Email
         </label>
         <input
@@ -52,7 +58,7 @@ export function ManageBilling({ defaultEmail = "" }: ManageBillingProps) {
           autoComplete="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          className="field-input"
+          className="w-full border-b border-line bg-transparent py-3 font-jetbrains text-sm text-bone placeholder:text-faint focus:border-signal focus:outline-none"
           placeholder="you@company.com"
           disabled={loading}
         />
@@ -60,16 +66,15 @@ export function ManageBilling({ defaultEmail = "" }: ManageBillingProps) {
 
       <button
         type="submit"
-        className="hero-cta-primary btn-submit"
+        className={`inline-flex items-center justify-center border border-line px-5 py-3 font-jetbrains text-[12px] uppercase tracking-[0.2em] text-bone transition-colors duration-300 hover:border-mute disabled:cursor-not-allowed disabled:opacity-50 ${focusRing}`}
         disabled={loading}
-        data-cursor-hover
         aria-busy={loading}
       >
-        {loading ? "Opening portal\u2026" : "Manage billing"}
+        {loading ? "Opening portal..." : "Manage billing"}
       </button>
 
       {error && (
-        <p className="font-mono text-xs text-muted" role="alert">
+        <p className="font-jetbrains text-xs text-mute" role="alert">
           {error}
         </p>
       )}

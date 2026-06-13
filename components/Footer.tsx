@@ -1,75 +1,67 @@
-import { BookCallButton } from "@/components/BookCallButton";
-import { Logo } from "@/components/Logo";
-import { ContactEmails } from "@/components/ContactEmails";
+import Link from "next/link";
+import { BOOK_CALL_URL } from "@/lib/site";
+
+const focusRing =
+  "outline-none focus-visible:[outline:2px_solid_var(--color-signal)] focus-visible:[outline-offset:2px]";
+
+const seoLinks = [
+  { label: "Case study", href: "/work/weatherhaven" },
+  { label: "Squarespace migration", href: "/squarespace-migration" },
+  { label: "Slow WordPress", href: "/wordpress-too-slow" },
+  { label: "3D viewer", href: "/3d-product-viewer" },
+] as const;
 
 export function Footer() {
-  const year = new Date().getFullYear();
-
   return (
-    <footer className="pb-24 pt-10 md:pb-12 md:pt-12" role="contentinfo">
-      <div className="grid-editorial border-t border-border pt-8">
-        <div className="col-span-12 border-b border-border pb-8 md:col-span-8">
-          <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-muted">
-            Ready to scope your build?
-          </p>
-          <p className="mt-3 max-w-md font-display text-xl font-semibold text-foreground md:text-2xl">
-            Retainers from $1,200/mo, hosting included.
-            <br />
-            Hosting-only from $350/mo.
-          </p>
-          <div className="mt-5">
-            <BookCallButton label="Book a call" variant="primary" />
-          </div>
-        </div>
+    <footer className="border-t border-line bg-ink" role="contentinfo">
+      <div className="mx-auto flex max-w-[1180px] flex-col gap-6 px-7 py-8 md:flex-row md:items-center md:justify-between">
+        <Link href="/" className={`inline-flex items-center gap-2.5 ${focusRing}`}>
+          <span
+            aria-hidden="true"
+            className="block h-[9px] w-[9px] bg-signal"
+            style={{ boxShadow: "0 0 10px 0 rgba(158, 255, 91, 0.45)" }}
+          />
+          <span className="font-grotesk text-[15px] font-bold tracking-[0.04em] text-bone">
+            NEXRAFT
+          </span>
+        </Link>
 
-        <div className="col-span-12 mt-8 md:col-span-4 md:mt-0 md:text-right">
-          <Logo height={28} href={null} />
-          <p className="mt-2 font-mono text-[10px] uppercase tracking-[0.2em] text-muted">
-            Web / Hosting / 3D
-            <br />
-            Est. 2024
-          </p>
-        </div>
+        <p className="font-jetbrains text-[11px] uppercase tracking-[0.2em] text-faint">
+          Web / Hosting / 3D {"\u00b7"} Est. 2024
+        </p>
 
-        <div className="col-span-12 mt-8 flex flex-wrap items-center gap-x-6 gap-y-3 border-t border-border pt-6 md:col-span-12">
-          <a
-            href="/work/weatherhaven"
-            className="link-underline font-mono text-xs uppercase tracking-widest text-muted hover:text-foreground"
-          >
-            Case study
-          </a>
-          <a
-            href="/squarespace-migration"
-            className="link-underline font-mono text-xs uppercase tracking-widest text-muted hover:text-foreground"
-          >
-            Squarespace migration
-          </a>
-          <a
-            href="/wordpress-too-slow"
-            className="link-underline font-mono text-xs uppercase tracking-widest text-muted hover:text-foreground"
-          >
-            Slow WordPress
-          </a>
-          <a
-            href="/3d-product-viewer"
-            className="link-underline font-mono text-xs uppercase tracking-widest text-muted hover:text-foreground"
-          >
-            3D viewer
-          </a>
-        </div>
+        <a
+          href={`mailto:barry@nexraft.com`}
+          className={`font-jetbrains text-[11px] uppercase tracking-[0.2em] text-mute transition-colors duration-300 hover:text-bone ${focusRing}`}
+        >
+          barry@nexraft.com {"\u2197"}
+        </a>
+      </div>
 
-        <div className="col-span-12 mt-6 flex flex-wrap items-center gap-6 border-t border-border pt-6 md:col-span-12">
-          <ContactEmails />
-          <a
-            href="/pay"
-            className="link-underline font-mono text-xs uppercase tracking-widest text-muted hover:text-foreground"
+      <div className="mx-auto flex max-w-[1180px] flex-wrap items-center gap-x-6 gap-y-3 border-t border-line px-7 py-5">
+        {seoLinks.map((link) => (
+          <Link
+            key={link.href}
+            href={link.href}
+            className={`font-jetbrains text-[10px] uppercase tracking-[0.18em] text-faint transition-colors duration-300 hover:text-mute ${focusRing}`}
           >
-            Billing
-          </a>
-          <p className="ml-auto font-mono text-[10px] tabular-nums text-muted">
-            © {year}
-          </p>
-        </div>
+            {link.label}
+          </Link>
+        ))}
+        <Link
+          href="/pay"
+          className={`font-jetbrains text-[10px] uppercase tracking-[0.18em] text-faint transition-colors duration-300 hover:text-mute ${focusRing}`}
+        >
+          Billing
+        </Link>
+        <a
+          href={BOOK_CALL_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          className={`ml-auto font-jetbrains text-[10px] uppercase tracking-[0.18em] text-faint transition-colors duration-300 hover:text-mute ${focusRing}`}
+        >
+          Book a call
+        </a>
       </div>
     </footer>
   );

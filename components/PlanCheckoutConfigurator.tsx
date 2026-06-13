@@ -18,6 +18,9 @@ const EMPTY_SELECTION: Selection = {
   three_d: null,
 };
 
+const focusRing =
+  "outline-none focus-visible:[outline:2px_solid_var(--color-signal)] focus-visible:[outline-offset:2px]";
+
 export function PlanCheckoutConfigurator() {
   const [selection, setSelection] = useState<Selection>(EMPTY_SELECTION);
   const [loading, setLoading] = useState(false);
@@ -75,39 +78,39 @@ export function PlanCheckoutConfigurator() {
   };
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-6">
       {PLAN_CATEGORIES.map((category) => {
         const options = plansForCategory(category.id);
 
         return (
           <fieldset
             key={category.id}
-            className="border border-border p-5 sm:p-6"
+            className="border border-line bg-ink2 p-5 sm:p-6"
           >
-            <legend className="px-1 font-mono text-[10px] uppercase tracking-[0.25em] text-muted">
+            <legend className="px-1 font-jetbrains text-[11px] uppercase tracking-[0.2em] text-faint">
               {category.label}
             </legend>
             {category.hint && (
-              <p className="mt-2 font-mono text-xs leading-relaxed text-muted">
+              <p className="mt-2 font-jetbrains text-xs leading-relaxed text-mute">
                 {category.hint}
               </p>
             )}
 
             <div className="mt-4 space-y-2">
-              <label className="flex cursor-pointer items-start gap-3 border border-border px-4 py-3 transition-colors has-[:checked]:border-accent/40 has-[:checked]:bg-accent/[0.06]">
+              <label className="flex cursor-pointer items-start gap-3 border border-line px-4 py-3 transition-colors has-[:checked]:border-signal-dim/50 has-[:checked]:bg-signal/[0.06]">
                 <input
                   type="radio"
                   name={`plan-${category.id}`}
-                  className="mt-1 accent-[var(--color-accent)]"
+                  className="mt-1 accent-[var(--color-signal)]"
                   checked={selection[category.id] === null}
                   onChange={() => setCategory(category.id, null)}
                   disabled={loading}
                 />
                 <span className="min-w-0">
-                  <span className="font-display text-sm font-medium text-foreground">
+                  <span className="font-grotesk text-sm font-medium text-bone">
                     None
                   </span>
-                  <span className="mt-0.5 block font-mono text-[10px] text-muted">
+                  <span className="mt-0.5 block font-jetbrains text-[10px] text-faint">
                     Skip this category
                   </span>
                 </span>
@@ -116,31 +119,31 @@ export function PlanCheckoutConfigurator() {
               {options.map((plan) => (
                 <label
                   key={plan.key}
-                  className="flex cursor-pointer items-start gap-3 border border-border px-4 py-3 transition-colors has-[:checked]:border-accent/40 has-[:checked]:bg-accent/[0.06]"
+                  className="flex cursor-pointer items-start gap-3 border border-line px-4 py-3 transition-colors has-[:checked]:border-signal-dim/50 has-[:checked]:bg-signal/[0.06]"
                 >
                   <input
                     type="radio"
                     name={`plan-${category.id}`}
-                    className="mt-1 accent-[var(--color-accent)]"
+                    className="mt-1 accent-[var(--color-signal)]"
                     checked={selection[category.id] === plan.key}
                     onChange={() => setCategory(category.id, plan.key)}
                     disabled={loading}
                   />
                   <span className="min-w-0 flex-1">
                     <span className="flex flex-wrap items-center gap-2">
-                      <span className="font-display text-sm font-medium text-foreground">
+                      <span className="font-grotesk text-sm font-medium text-bone">
                         {plan.name}
                       </span>
                       {plan.popular && (
-                        <span className="font-mono text-[10px] uppercase tracking-[0.12em] text-accent">
+                        <span className="bg-signal px-1.5 py-0.5 font-jetbrains text-[9px] uppercase tracking-[0.12em] text-ink">
                           Popular
                         </span>
                       )}
-                      <span className="font-display text-sm font-medium tabular-nums text-foreground">
+                      <span className="font-grotesk text-sm font-semibold tabular-nums text-bone">
                         ${plan.price.toLocaleString()}/mo
                       </span>
                     </span>
-                    <span className="mt-1 block font-mono text-[10px] leading-relaxed text-muted">
+                    <span className="mt-1 block font-jetbrains text-[10px] leading-relaxed text-mute">
                       {plan.summary}
                     </span>
                   </span>
@@ -152,36 +155,35 @@ export function PlanCheckoutConfigurator() {
       })}
 
       {webWithoutHosting && (
-        <div className="border border-border bg-accent/[0.04] px-4 py-3">
-          <p className="font-mono text-xs leading-relaxed text-muted">
+        <div className="border border-line bg-signal/[0.04] px-4 py-3">
+          <p className="font-jetbrains text-xs leading-relaxed text-mute">
             Building a live site? Most clients add{" "}
-            <strong className="font-medium text-foreground">Managed hosting</strong>{" "}
+            <strong className="font-medium text-bone">Managed hosting</strong>{" "}
             ($350/mo) so we deploy and monitor production for you.
           </p>
           <button
             type="button"
             onClick={addManagedHosting}
-            className="link-underline mt-2 font-mono text-[10px] uppercase tracking-[0.2em] text-foreground"
+            className={`link-underline mt-2 font-jetbrains text-[10px] uppercase tracking-[0.2em] text-bone ${focusRing}`}
             disabled={loading}
-            data-cursor-hover
           >
             + Add Managed hosting
           </button>
         </div>
       )}
 
-      <div className="border-t border-border pt-6">
+      <div className="border border-line bg-ink2 p-5 sm:p-6">
         <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <div>
-            <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-muted">
+            <p className="font-jetbrains text-[11px] uppercase tracking-[0.2em] text-faint">
               Monthly total
             </p>
-            <p className="mt-1 font-display text-2xl font-semibold tabular-nums text-foreground">
+            <p className="mt-1 font-grotesk text-2xl font-bold tabular-nums text-bone">
               {selectedPlans.length > 0
                 ? `$${monthlyTotal.toLocaleString()}/mo`
                 : "$0/mo"}
             </p>
-            <p className="mt-1 font-mono text-[10px] text-muted">
+            <p className="mt-1 font-jetbrains text-[10px] text-faint">
               One subscription, combined on a single Stripe invoice.
             </p>
           </div>
@@ -190,16 +192,15 @@ export function PlanCheckoutConfigurator() {
             type="button"
             onClick={onSubscribe}
             disabled={loading || selectedPlans.length === 0}
-            className="hero-cta-primary btn-submit shrink-0"
-            data-cursor-hover
+            className={`inline-flex shrink-0 items-center justify-center bg-signal px-5 py-3 font-jetbrains text-[12px] uppercase tracking-[0.2em] text-ink transition-colors duration-300 hover:bg-signal-dim disabled:cursor-not-allowed disabled:opacity-50 ${focusRing}`}
             aria-busy={loading}
           >
-            {loading ? "Redirecting\u2026" : "Subscribe"}
+            {loading ? "Redirecting..." : "Subscribe"}
           </button>
         </div>
 
         {error && (
-          <p className="mt-4 font-mono text-xs text-muted" role="alert">
+          <p className="mt-4 font-jetbrains text-xs text-mute" role="alert">
             {error}
           </p>
         )}

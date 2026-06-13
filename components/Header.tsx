@@ -1,94 +1,145 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useState } from "react";
-import { BookCallButton } from "@/components/BookCallButton";
-import { Logo } from "@/components/Logo";
-import { SECTIONS } from "@/lib/sections";
+import { useEffect, useRef, useState } from "react";
+import { BOOK_CALL_URL } from "@/lib/site";
+
+const NAV_LINKS = [
+  { label: "Services", href: "/#do" },
+  { label: "Work", href: "/#work" },
+  { label: "Process", href: "/#process" },
+  { label: "Pricing", href: "/#pricing" },
+] as const;
+
+const focusRing =
+  "outline-none focus-visible:[outline:2px_solid_var(--color-signal)] focus-visible:[outline-offset:2px]";
 
 export function Header() {
   const [scrolled, setScrolled] = useState(false);
-  const [active, setActive] = useState<string>("home");
+  const [open, setOpen] = useState(false);
+  const toggleRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
-    // Sentinel spanning the top 24px of the page; header gains its surface
-    // once it scrolls out of view.
-    const sentinel = document.createElement("div");
-    sentinel.setAttribute("aria-hidden", "true");
-    sentinel.style.cssText =
-      "position:absolute;top:0;left:0;width:1px;height:24px;pointer-events:none;opacity:0;";
-    document.body.prepend(sentinel);
-
-    const observer = new IntersectionObserver(([entry]) => {
-      setScrolled(!entry.isIntersecting);
-    });
-    observer.observe(sentinel);
-
-    return () => {
-      observer.disconnect();
-      sentinel.remove();
+    const onScroll = () => {
+      const next = window.scrollY > 40;
+      setScrolled((prev) => (prev === next ? prev : next));
     };
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   useEffect(() => {
-    const sections = SECTIONS.map((s) => document.getElementById(s.id)).filter(
-      Boolean,
-    ) as HTMLElement[];
+    if (!open) return;
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setOpen(false);
+        toggleRef.current?.focus();
+      }
+    };
+    document.addEventListener("keydown", onKeyDown);
+    const prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.removeEventListener("keydown", onKeyDown);
+      document.body.style.overflow = prevOverflow;
+    };
+  }, [open]);
 
-    if (!sections.length) return;
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visible = entries
-          .filter((e) => e.isIntersecting)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
-
-        if (visible[0]?.target.id) setActive(visible[0].target.id);
-      },
-      { rootMargin: "-40% 0px -45% 0px", threshold: [0, 0.25, 0.5] },
-    );
-
-    sections.forEach((section) => observer.observe(section));
-    return () => observer.disconnect();
-  }, []);
+  const surface = scrolled || open;
 
   return (
     <header
-      className={`sticky top-0 z-40 border-b transition-colors duration-300 ${
-        scrolled
-          ? "border-border bg-surface/95 backdrop-blur-sm"
+      className={`sticky top-0 z-40 border-b transition-colors duration-500 ease-[cubic-bezier(.16,1,.3,1)] ${
+        surface
+          ? "border-line bg-[rgba(10,14,12,0.72)] backdrop-blur-md"
           : "border-transparent bg-transparent"
       }`}
     >
-      <div className="grid-editorial min-w-0 py-4 md:items-center md:py-5">
-        <div className="col-span-12 min-w-0 md:col-span-3">
-          <Logo height={22} priority />
-        </div>
+      <div className="mx-auto flex h-[68px] max-w-[1180px] items-center justify-between px-7">
+        <Link
+          href="/"
+          aria-label="Nexraft home"
+          className={`inline-flex items-center gap-2.5 ${focusRing}`}
+        >
+          <span
+            aria-hidden="true"
+            className="block h-[9px] w-[9px] bg-signal"
+            style={{ boxShadow: "0 0 10px 0 rgba(158, 255, 91, 0.45)" }}
+          />
+          <span className="font-grotesk text-[15px] font-bold tracking-[0.04em] text-bone">
+            NEXRAFT
+          </span>
+        </Link>
 
         <nav
-          className="nav-scroll col-span-12 -mx-[clamp(1.25rem,4vw,3rem)] flex items-center gap-6 overflow-x-auto border-t border-border px-[clamp(1.25rem,4vw,3rem)] py-3 md:col-span-9 md:mx-0 md:justify-end md:gap-8 md:border-t-0 md:px-0 md:py-0"
           aria-label="Primary"
+          className="hidden items-center gap-8 min-[860px]:flex"
         >
-          {SECTIONS.map((item) => {
-            const isActive = active === item.id;
-            return (
-              <Link
-                key={item.href}
-                href={item.href}
-                className={`link-underline shrink-0 font-mono text-xs uppercase tracking-widest transition-colors ${
-                  isActive
-                    ? "text-foreground"
-                    : "text-muted hover:text-foreground"
-                }`}
-                aria-current={isActive ? "page" : undefined}
-                data-cursor-hover
-              >
-                {item.label}
-              </Link>
-            );
-          })}
-          <BookCallButton label="Book a call" variant="nav" />
+          {NAV_LINKS.map((link) => (
+            <Link
+              key={link.href}
+              href={link.href}
+              className={`font-jetbrains text-[11px] uppercase tracking-[0.2em] text-mute transition-colors duration-300 hover:text-bone ${focusRing}`}
+            >
+              {link.label}
+            </Link>
+          ))}
+          <a
+            href={BOOK_CALL_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={`inline-flex items-center bg-signal px-4 py-2.5 font-jetbrains text-[11px] uppercase tracking-[0.2em] text-ink transition-colors duration-300 hover:bg-signal-dim ${focusRing}`}
+          >
+            Book a call
+          </a>
         </nav>
+
+        <button
+          ref={toggleRef}
+          type="button"
+          aria-expanded={open}
+          aria-controls="mobile-menu"
+          onClick={() => setOpen((value) => !value)}
+          className={`font-jetbrains text-[11px] uppercase tracking-[0.2em] text-mute transition-colors duration-300 hover:text-bone min-[860px]:hidden ${focusRing}`}
+        >
+          {open ? "Close" : "Menu"}
+        </button>
+      </div>
+
+      <div
+        id="mobile-menu"
+        aria-hidden={!open}
+        className={`mobile-menu-shell grid min-[860px]:hidden ${
+          open ? "mobile-menu-open" : ""
+        }`}
+      >
+        <div className="overflow-hidden border-t border-line bg-[rgba(10,14,12,0.96)] backdrop-blur-md">
+          <nav
+            aria-label="Primary"
+            className="mobile-menu-panel mx-auto flex max-w-[1180px] flex-col px-7 py-4"
+          >
+            {NAV_LINKS.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                onClick={() => setOpen(false)}
+                className={`border-b border-line py-4 font-jetbrains text-[12px] uppercase tracking-[0.2em] text-mute transition-colors duration-300 hover:text-bone ${focusRing}`}
+              >
+                {link.label}
+              </Link>
+            ))}
+            <a
+              href={BOOK_CALL_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => setOpen(false)}
+              className={`mt-4 inline-flex w-full items-center justify-center bg-signal px-4 py-3 font-jetbrains text-[12px] uppercase tracking-[0.2em] text-ink transition-colors duration-300 hover:bg-signal-dim ${focusRing}`}
+            >
+              Book a call
+            </a>
+          </nav>
+        </div>
       </div>
     </header>
   );

@@ -1,18 +1,13 @@
 import type { Metadata, Viewport } from "next";
-import Script from "next/script";
 import { Analytics } from "@vercel/analytics/next";
-import { Bricolage_Grotesque } from "next/font/google";
+import { Bricolage_Grotesque, Space_Grotesk, JetBrains_Mono } from "next/font/google";
 import { GeistSans } from "geist/font/sans";
 import { GeistMono } from "geist/font/mono";
-import { SiteBackdrop } from "@/components/SiteBackdrop";
 import { Grain } from "@/components/Grain";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { ScrollProgress } from "@/components/ScrollProgress";
-import { SectionRail } from "@/components/SectionRail";
-import { BootSequence } from "@/components/BootSequence";
 import { SmoothScroll } from "@/components/SmoothScroll";
-import { StickyBookCall } from "@/components/StickyBookCall";
 import "./globals.css";
 
 const bricolage = Bricolage_Grotesque({
@@ -20,6 +15,20 @@ const bricolage = Bricolage_Grotesque({
   variable: "--font-bricolage",
   display: "swap",
   weight: ["400", "500", "600", "700", "800"],
+});
+
+const spaceGrotesk = Space_Grotesk({
+  subsets: ["latin"],
+  variable: "--font-space-grotesk",
+  display: "swap",
+  weight: ["400", "500", "600", "700"],
+});
+
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ["latin"],
+  variable: "--font-jetbrains-mono",
+  display: "swap",
+  weight: ["400", "500"],
 });
 
 export const metadata: Metadata = {
@@ -60,21 +69,15 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${bricolage.variable} ${GeistSans.variable} ${GeistMono.variable}`}
+      className={`${bricolage.variable} ${spaceGrotesk.variable} ${jetbrainsMono.variable} ${GeistSans.variable} ${GeistMono.variable}`}
     >
-      <Script id="nexraft-boot" strategy="beforeInteractive">
-        {`(function(){try{var p=location.pathname;var s=sessionStorage.getItem("nexraft-boot");var r=window.matchMedia("(prefers-reduced-motion: reduce)").matches;if(p!=="/"||s==="1"||r){document.documentElement.classList.add("boot-complete");}else{document.documentElement.classList.add("boot-pending");}}catch(e){document.documentElement.classList.add("boot-complete");}})();`}
-      </Script>
-      <body className="relative min-h-screen overflow-x-clip antialiased">
+      <body className="relative min-h-screen overflow-x-clip bg-ink font-body text-bone antialiased">
         <SmoothScroll />
-        <BootSequence />
         <Grain />
-        <SiteBackdrop />
         <ScrollProgress />
-        <SectionRail />
         <a
           href="#main"
-          className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:bg-surface-deep focus:px-4 focus:py-2 focus:font-mono focus:text-sm focus:text-accent"
+          className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:bg-ink2 focus:px-4 focus:py-2 focus:font-jetbrains focus:text-sm focus:text-signal"
         >
           Skip to content
         </a>
@@ -83,7 +86,6 @@ export default function RootLayout({
           <main id="main">{children}</main>
           <Footer />
         </div>
-        <StickyBookCall />
         <Analytics />
       </body>
     </html>

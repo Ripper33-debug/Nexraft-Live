@@ -49,29 +49,29 @@ const buildRows = [
 
 export default function WeatherhavenCaseStudy() {
   return (
-    <section className="section-pad-tight border-b border-border bg-surface-deep">
-      <div className="grid-editorial">
-        <div className="col-span-12 section-label-gap md:col-span-3">
-          <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-muted">
+    <section className="border-t border-line bg-ink py-[84px] md:py-[120px]">
+      <div className="mx-auto max-w-[1180px] px-7">
+        <div className="">
+          <p className="font-jetbrains text-[11px] uppercase tracking-[0.2em] text-faint">
             Record / 01
           </p>
         </div>
 
-        <div className="col-span-12 md:col-span-9">
-          <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-accent">
+        <div className="">
+          <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-signal-dim">
             Case study
           </p>
-          <h1 className="mt-3 text-display-section font-display font-semibold text-foreground">
+          <h1 className="mt-3 font-grotesk text-[clamp(1.75rem,4vw,2.75rem)] font-semibold leading-[1.05] tracking-[-0.03em] text-bone">
             Weatherhaven. A 95-country deploy catalog.
           </h1>
 
-          <p className="prose-measure mt-6 text-body text-muted">
+          <p className="prose-measure mt-6 text-sm text-mute">
             Weatherhaven engineers rapidly deployable shelter systems used in
             defense, medical, and remote operations worldwide. Their web
             presence had to carry the same weight as their hardware.
           </p>
 
-          <div className="relative mt-8 aspect-[16/9] w-full overflow-hidden border border-border">
+          <div className="relative mt-8 aspect-[16/9] w-full overflow-hidden border border-line">
             <Image
               src="/case-studies/weatherhaven.png"
               alt="Weatherhaven corporate website rebuilt by Nexraft"
@@ -81,15 +81,15 @@ export default function WeatherhavenCaseStudy() {
               sizes="(max-width: 768px) 100vw, 66vw"
             />
           </div>
-          <p className="mt-2 font-mono text-[10px] uppercase tracking-[0.15em] text-muted">
+          <p className="mt-2 font-mono text-[10px] uppercase tracking-[0.15em] text-mute">
             weatherhavenusa.com {"\u00b7"} live production
           </p>
 
-          <div className="mt-10 border-t border-border pt-8">
-            <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-muted">
+          <div className="mt-10 border-t border-line pt-8">
+            <p className="font-jetbrains text-[11px] uppercase tracking-[0.2em] text-faint">
               The brief
             </p>
-            <p className="prose-measure mt-4 text-body-sm text-muted">
+            <p className="prose-measure mt-4 text-sm text-mute">
               A complex, engineered product line spread across formats that
               buyers could not navigate. The mandate: rebuild the corporate
               site as a structured catalog, make global reach visible, and
@@ -97,51 +97,51 @@ export default function WeatherhavenCaseStudy() {
             </p>
           </div>
 
-          <div className="mt-10 border-t border-border pt-8">
-            <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-muted">
+          <div className="mt-10 border-t border-line pt-8">
+            <p className="font-jetbrains text-[11px] uppercase tracking-[0.2em] text-faint">
               The build
             </p>
-            <div className="mt-4 border-t border-border">
+            <div className="mt-4 border-t border-line">
               {buildRows.map((row) => (
                 <div
                   key={row.index}
-                  className="grid grid-cols-12 gap-4 border-b border-border py-5 md:gap-6"
+                  className="grid grid-cols-12 gap-4 border-b border-line py-5 md:gap-6"
                 >
                   <div className="col-span-2 md:col-span-1">
-                    <span className="font-mono text-xs tabular-nums text-muted">
+                    <span className="font-jetbrains text-xs tabular-nums text-mute">
                       {row.index}
                     </span>
                   </div>
                   <div className="col-span-10 md:col-span-3">
-                    <h2 className="font-display text-base font-semibold text-foreground">
+                    <h2 className="font-display text-base font-semibold text-bone">
                       {row.title}
                     </h2>
                   </div>
                   <div className="col-span-10 col-start-3 md:col-span-8 md:col-start-auto">
-                    <p className="font-mono text-xs leading-relaxed text-muted">
+                    <p className="font-jetbrains text-xs leading-relaxed text-mute">
                       {row.detail}
                     </p>
                   </div>
                 </div>
               ))}
             </div>
-            <p className="mt-4 font-mono text-[10px] uppercase tracking-[0.15em] text-muted">
+            <p className="mt-4 font-mono text-[10px] uppercase tracking-[0.15em] text-mute">
               Next.js {"\u00b7"} TypeScript {"\u00b7"} Custom CMS {"\u00b7"} Edge
               delivery
             </p>
           </div>
 
-          <div className="mt-10 border-t border-border pt-8">
-            <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-muted">
+          <div className="mt-10 border-t border-line pt-8">
+            <p className="font-jetbrains text-[11px] uppercase tracking-[0.2em] text-faint">
               The numbers
             </p>
-            <div className="mt-4 grid gap-px border border-border bg-border sm:grid-cols-3">
+            <div className="mt-4 grid gap-px border border-line bg-border sm:grid-cols-3">
               {numbers.map((n) => (
                 <div key={n.label} className="bg-surface-deep p-4 md:p-5">
-                  <p className="font-display text-3xl font-bold tracking-tight text-foreground">
+                  <p className="font-display text-3xl font-bold tracking-tight text-bone">
                     {n.value}
                   </p>
-                  <p className="mt-2 font-mono text-[10px] uppercase tracking-[0.15em] text-muted">
+                  <p className="mt-2 font-mono text-[10px] uppercase tracking-[0.15em] text-mute">
                     {n.label}
                   </p>
                 </div>
@@ -149,11 +149,11 @@ export default function WeatherhavenCaseStudy() {
             </div>
           </div>
 
-          <div className="mt-10 border border-border bg-accent/[0.04] p-4 md:p-5">
-            <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-muted">
+          <div className="mt-10 border border-line bg-accent/[0.04] p-4 md:p-5">
+            <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-mute">
               Want a build like this?
             </p>
-            <p className="mt-3 max-w-lg font-mono text-xs leading-relaxed text-muted">
+            <p className="mt-3 max-w-lg font-jetbrains text-xs leading-relaxed text-mute">
               We scope enterprise rebuilds on a discovery call and quote a
               fixed monthly rate in writing before any work starts.
             </p>
@@ -163,7 +163,7 @@ export default function WeatherhavenCaseStudy() {
                 href="https://weatherhavenusa.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="link-underline font-mono text-xs uppercase tracking-[0.2em] text-foreground"
+                className="link-underline font-jetbrains text-xs uppercase tracking-[0.2em] text-bone"
                 data-cursor-hover
               >
                 View the live site
@@ -171,10 +171,10 @@ export default function WeatherhavenCaseStudy() {
             </div>
           </div>
 
-          <div className="mt-8 border-t border-border pt-8">
+          <div className="mt-8 border-t border-line pt-8">
             <Link
               href="/"
-              className="link-underline inline-block font-mono text-[10px] uppercase tracking-[0.2em] text-foreground"
+              className="link-underline inline-block font-mono text-[10px] uppercase tracking-[0.2em] text-bone"
               data-cursor-hover
             >
               Back to home

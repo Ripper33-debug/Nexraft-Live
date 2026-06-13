@@ -16,62 +16,51 @@ type PayPageProps = {
   searchParams: Promise<{ status?: string }>;
 };
 
+const focusRing =
+  "outline-none focus-visible:[outline:2px_solid_var(--color-signal)] focus-visible:[outline-offset:2px]";
+
 export default async function PayPage({ searchParams }: PayPageProps) {
   const { status } = await searchParams;
   const success = status === "success";
 
   return (
-    <section className="section-pad-tight border-b border-border bg-surface-deep">
-      <div className="grid-editorial">
-        <div className="col-span-12 section-label-gap md:col-span-3">
-          <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-muted">
-            07 / Billing
+    <section className="border-t border-line bg-ink py-[84px] md:py-[120px]">
+      <div className="mx-auto max-w-[1180px] px-7">
+        <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+          <h1 className="font-grotesk text-[clamp(1.75rem,4vw,2.75rem)] font-semibold leading-[1.05] tracking-[-0.03em] text-bone">
+            Activate your retainer.
+          </h1>
+          <p className="font-jetbrains text-[11px] uppercase tracking-[0.2em] text-faint">
+            Billing
           </p>
         </div>
 
-        <div className="col-span-12 md:col-span-9">
-          <h1 className="text-display-section font-display font-semibold text-foreground">
-            Activate your retainer.
-          </h1>
-
-          {success ? (
-            <div
-              className="mt-6 border border-accent/30 bg-accent/[0.06] p-4 md:p-5"
-              role="status"
-            >
-              <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-accent">
-                Status: subscribed
-              </p>
-              <p className="mt-3 text-sm text-foreground">
-                Subscription started. Use the portal below to manage payment
-                methods and invoices.
-              </p>
-            </div>
-          ) : (
-            <p className="prose-measure mt-6 text-body text-muted">
-              Configured on your discovery call? Pick your plans below. Web,
-              Hosting, and 3D combine into one monthly Stripe subscription.
+        {success ? (
+          <div
+            className="mt-8 border border-signal-dim/40 bg-signal/[0.06] p-5 md:p-6"
+            role="status"
+          >
+            <p className="font-jetbrains text-[11px] uppercase tracking-[0.2em] text-signal-dim">
+              Status: subscribed
             </p>
-          )}
-
-          <div className="mt-8 border border-border bg-surface/40 p-4 md:p-5">
-            <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-muted">
-              Not set up yet?
+            <p className="mt-3 text-sm text-mute">
+              Subscription started. Use the portal below to manage payment
+              methods and invoices.
             </p>
-            <p className="mt-3 max-w-lg font-mono text-xs leading-relaxed text-muted">
-              Retainers are scoped on a call first. Book a discovery session and
-              we&apos;ll quote a fixed monthly rate before you subscribe.
-            </p>
-            <div className="mt-5">
-              <BookCallButton label="Book a call" variant="primary" />
-            </div>
           </div>
+        ) : (
+          <p className="mt-6 max-w-2xl text-sm leading-relaxed text-mute">
+            Configured on your discovery call? Pick your plans below. Web,
+            Hosting, and 3D combine into one monthly Stripe subscription.
+          </p>
+        )}
 
-          <div className="mt-8 border-t border-border pt-8">
-            <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-muted">
+        <div className="mt-10 grid gap-px border border-line bg-line lg:grid-cols-2">
+          <div className="bg-ink2 p-6 md:p-8">
+            <p className="font-jetbrains text-[11px] uppercase tracking-[0.2em] text-faint">
               Start your plan
             </p>
-            <p className="mt-3 max-w-lg font-mono text-xs leading-relaxed text-muted">
+            <p className="mt-3 max-w-lg font-jetbrains text-xs leading-relaxed text-mute">
               One plan per category. Combined into a single monthly invoice.
             </p>
             <div className="mt-6">
@@ -79,51 +68,62 @@ export default async function PayPage({ searchParams }: PayPageProps) {
             </div>
           </div>
 
-          <div className="mt-8 border-t border-border pt-8">
-            <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-muted">
+          <div className="flex flex-col bg-ink2 p-6 md:p-8">
+            <p className="font-jetbrains text-[11px] uppercase tracking-[0.2em] text-faint">
               Manage billing
             </p>
-            <p className="mt-3 max-w-lg font-mono text-xs leading-relaxed text-muted">
+            <p className="mt-3 max-w-lg font-jetbrains text-xs leading-relaxed text-mute">
               Already a client? Update payment method, view invoices, or cancel
               through the Stripe customer portal.
             </p>
-            <div className="mt-6 max-w-md">
+            <div className="mt-6 flex-1">
               <ManageBilling />
             </div>
-          </div>
 
-          <div className="mt-8 grid gap-6 border-t border-border pt-8 sm:grid-cols-2">
-            <div>
-              <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-muted">
-                Compare plans
+            <div className="mt-10 border-t border-line pt-8">
+              <p className="font-jetbrains text-[11px] uppercase tracking-[0.2em] text-faint">
+                Not set up yet?
               </p>
-              <Link
-                href="/#pricing"
-                className="link-underline mt-3 inline-block font-mono text-xs uppercase tracking-[0.2em] text-foreground"
-                data-cursor-hover
-              >
-                View pricing
-              </Link>
-            </div>
-            <div>
-              <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-muted">
-                Billing support
+              <p className="mt-3 font-jetbrains text-xs leading-relaxed text-mute">
+                Retainers are scoped on a call first. We quote a fixed monthly
+                rate before you subscribe.
               </p>
-              <div className="mt-3">
-                <ContactEmails stacked />
+              <div className="mt-5">
+                <BookCallButton label="Book a call" variant="primary" />
               </div>
             </div>
           </div>
+        </div>
 
-          <div className="mt-8 border-t border-border pt-8">
+        <div className="mt-10 flex flex-col gap-6 border-t border-line pt-8 sm:flex-row sm:items-start sm:justify-between">
+          <div>
+            <p className="font-jetbrains text-[11px] uppercase tracking-[0.2em] text-faint">
+              Compare plans
+            </p>
             <Link
-              href="/"
-              className="link-underline inline-block font-mono text-[10px] uppercase tracking-[0.2em] text-foreground"
-              data-cursor-hover
+              href="/#pricing"
+              className={`link-underline mt-3 inline-block font-jetbrains text-xs uppercase tracking-[0.2em] text-bone ${focusRing}`}
             >
-              Back to home
+              View pricing
             </Link>
           </div>
+          <div>
+            <p className="font-jetbrains text-[11px] uppercase tracking-[0.2em] text-faint">
+              Billing support
+            </p>
+            <div className="mt-3">
+              <ContactEmails stacked />
+            </div>
+          </div>
+        </div>
+
+        <div className="mt-8 border-t border-line pt-8">
+          <Link
+            href="/"
+            className={`link-underline inline-block font-jetbrains text-[11px] uppercase tracking-[0.2em] text-mute transition-colors hover:text-bone ${focusRing}`}
+          >
+            Back to home
+          </Link>
         </div>
       </div>
     </section>

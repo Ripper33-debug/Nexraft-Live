@@ -1,127 +1,41 @@
-import Link from "next/link";
-import { ScrollReveal } from "@/components/ScrollReveal";
-import { BookCallButton } from "@/components/BookCallButton";
-import { ContactForm } from "@/components/ContactForm";
-import { CalEmbed } from "@/components/CalEmbed";
-import { sectionLabel } from "@/lib/sections";
-import { ContactEmails } from "@/components/ContactEmails";
-import { CONTACT_EMAILS } from "@/lib/site";
+import { SectionShell } from "@/components/ui/SectionShell";
+import { Reveal } from "@/components/ui/Reveal";
+import { MagneticButton } from "@/components/ui/MagneticButton";
+import { BOOK_CALL_URL } from "@/lib/site";
 
-const channels = [
-  {
-    label: "Plan change",
-    detail: "Upgrade or adjust your monthly retainer.",
-    href: `mailto:${CONTACT_EMAILS[0]}?subject=${encodeURIComponent("Plan change - Nexraft")}`,
-  },
-  {
-    label: "Billing",
-    detail: "Subscribe, manage payment method, or view invoices.",
-    href: "/pay",
-  },
-] as const;
+const focusRing =
+  "outline-none focus-visible:[outline:2px_solid_var(--color-signal)] focus-visible:[outline-offset:2px]";
 
 export function Contact() {
   return (
-    <section
-      id="contact"
-      className="section-pad-tight scroll-mt-20 border-b border-border bg-surface-deep"
-      aria-labelledby="contact-heading"
-    >
-      <div className="grid-editorial">
-        <div className="col-span-12 section-label-gap md:col-span-3">
-          <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-muted">
-            {sectionLabel("contact")}
-          </p>
-        </div>
-
-        <div className="col-span-12 md:col-span-9">
-          <ScrollReveal
-            as="h2"
+    <SectionShell id="contact" ariaLabelledBy="contact-heading">
+      <div className="mx-auto max-w-2xl text-center">
+        <Reveal>
+          <h2
             id="contact-heading"
-            className="text-display-section text-pretty font-display font-semibold text-foreground"
+            className="font-grotesk text-[clamp(2rem,5vw,3.25rem)] font-semibold leading-[1.05] tracking-[-0.03em] text-bone"
           >
-            Start a&nbsp;project.
-          </ScrollReveal>
+            Start a project.
+          </h2>
+        </Reveal>
 
-          <ScrollReveal
-            as="p"
-            className="prose-measure mt-5 text-body-sm text-muted"
+        <Reveal delay={0.08}>
+          <p className="mt-5 font-jetbrains text-sm leading-relaxed text-mute md:text-base">
+            30-minute call. We scope your build and quote a fixed monthly rate
+            on the spot.
+          </p>
+        </Reveal>
+
+        <Reveal delay={0.16} className="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
+          <MagneticButton href={BOOK_CALL_URL}>Book a call -&gt;</MagneticButton>
+          <a
+            href="mailto:barry@nexraft.com"
+            className={`inline-flex items-center justify-center border border-line px-5 py-3 font-jetbrains text-[12px] uppercase tracking-[0.2em] text-bone transition-colors duration-300 hover:border-mute ${focusRing}`}
           >
-            Book a discovery call for the fastest path, or send a written brief
-            if you prefer. We respond within two business days with scope and a
-            fixed monthly rate.
-          </ScrollReveal>
-        </div>
-
-        <div className="col-span-12 mt-8 border-t border-border md:col-start-1">
-          <div className="grid grid-cols-12 gap-0 lg:gap-8">
-            <div className="col-span-12 py-6 lg:col-span-6 lg:py-8">
-              <div className="flex flex-wrap items-center gap-3">
-                <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-muted">
-                  Book a call
-                </p>
-                <span className="contact-path-badge">Recommended</span>
-              </div>
-              <p className="mt-3 max-w-md font-mono text-xs leading-relaxed text-muted">
-                30 minutes. We scope your build, recommend a plan, and quote a
-                fixed monthly rate on the call.
-              </p>
-              <div className="mt-5">
-                <BookCallButton label="Book a call" variant="primary" />
-              </div>
-              <CalEmbed />
-
-              <div className="mt-8 border-t border-border pt-6">
-                <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-muted">
-                  Direct line
-                </p>
-                <div className="mt-4">
-                  <ContactEmails stacked />
-                </div>
-              </div>
-
-              <div className="mt-8 border-t border-border pt-6">
-                <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-muted">
-                  Other inquiries
-                </p>
-                <ul className="mt-3 divide-y divide-border" role="list">
-                  {channels.map((channel) => (
-                    <li key={channel.label}>
-                      <Link
-                        href={channel.href}
-                        className="contact-channel group flex min-h-11 items-start py-3"
-                        data-cursor-hover
-                      >
-                        <div>
-                          <p className="font-display text-sm font-medium text-foreground">
-                            {channel.label}
-                          </p>
-                          <p className="mt-0.5 font-mono text-[11px] text-muted">
-                            {channel.detail}
-                          </p>
-                        </div>
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-
-            <div className="col-span-12 border-t border-border py-6 lg:col-span-6 lg:border-l lg:border-t-0 lg:py-8 lg:pl-10">
-              <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-muted">
-                Written brief
-              </p>
-              <p className="mt-3 font-mono text-xs leading-relaxed text-muted">
-                Prefer email-style intake? Send a short summary and we&apos;ll
-                reply with scope and pricing.
-              </p>
-              <div className="mt-5">
-                <ContactForm />
-              </div>
-            </div>
-          </div>
-        </div>
+            Send a brief
+          </a>
+        </Reveal>
       </div>
-    </section>
+    </SectionShell>
   );
 }

@@ -1,3 +1,5 @@
+export const BOOK_CALL_URL = "https://cal.com/nexraft/discovery-call";
+
 export const FOUNDERS = [
   {
     name: "Barry Castelli",

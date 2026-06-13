@@ -1,0 +1,70 @@
+---
+description: Nexraft visual redesign design system - Tailwind v4 color/type tokens, layout, motion, and project guardrails
+alwaysApply: true
+---
+
+# Nexraft Redesign Design System
+
+Foundation for the visual redesign. Use these tokens and rules for all new or
+redesigned sections. Tokens live in the `@theme` block of `app/globals.css`
+(Tailwind v4) and become utilities automatically.
+
+## Colors
+
+Defined as `--color-*` in the `app/globals.css` `@theme` block. Use the
+generated utilities, never raw hex.
+
+| Token | Hex | Role | Utility |
+|-------|-----|------|---------|
+| ink | #0A0E0C | Page background | `bg-ink` |
+| ink2 | #0E1310 | Cards / panels | `bg-ink2` |
+| panel | #10160F | Hover / popular panel | `bg-panel` |
+| line | #1E2723 | Hairline borders + grid | `border-line` |
+| bone | #E8EDE9 | Primary text (never pure white) | `text-bone` |
+| mute | #7C8A82 | Secondary text | `text-mute` |
+| faint | #566159 | Labels / captions | `text-faint` |
+| signal | #9EFF5B | Accent (see rule below) | `text-signal` / `bg-signal` |
+| signal-dim | #6FBF3F | Small accent text / eyebrows | `text-signal-dim` |
+
+Use `signal` ONLY on: the primary CTA, active cursor nodes, status dots, and the
+founding-rate badge. Everything else stays in the ink/bone/mute range. Keep the
+accent rare so it reads as a signal.
+
+## Type
+
+Loaded via `next/font/google` in `app/layout.tsx`, exposed as Tailwind utilities
+through `@theme`.
+
+- Space Grotesk: display font, weights 400-700, utility `font-grotesk`.
+- JetBrains Mono: labels, data, and eyebrows, utility `font-jetbrains`.
+- Display headlines: tight leading, `letter-spacing: -0.03em`.
+- All-caps eyebrows and spec labels (e.g. "03 / SERVICES", "GRID_REF A1"):
+  JetBrains Mono, 11px, `letter-spacing: 0.2em`.
+
+The live site still uses `font-display` / `font-body` / `font-mono`. Do not
+repoint those existing tokens.
+
+## Layout
+
+- Max content width 1180px with 28px gutters.
+- Separate sections with a 1px `var(--color-line)` top border.
+- Vertical padding around 120px on desktop, 84px on mobile.
+- Zero or minimal border-radius. The brand is "built like infrastructure":
+  squared and precise.
+
+## Motion
+
+- Standard easing: `cubic-bezier(.16,1,.3,1)`.
+- Deliberate, not everywhere. Motion should feel intentional.
+- Always respect `prefers-reduced-motion`: disable the mesh loop and scroll
+  reveals.
+
+## Project guardrails
+
+- Tailwind v4: design tokens live in the `@theme` block of `app/globals.css`.
+  There is NO `tailwind.config`. Add new tokens there.
+- Never mention "Vercel" in site copy. Use "managed edge infrastructure" or
+  "global edge network".
+- ASCII-only copy. No em-dashes, no smart quotes. Past builds broke on
+  non-ASCII bytes.
+- Primary CTA links go to https://cal.com/nexraft/discovery-call.

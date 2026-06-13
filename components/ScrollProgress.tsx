@@ -30,7 +30,7 @@ export function ScrollProgress() {
       aria-hidden="true"
     >
       <div
-        className="h-full origin-left bg-accent transition-transform duration-150 ease-out will-change-transform"
+        className="h-full origin-left bg-signal transition-transform duration-150 ease-out will-change-transform"
         style={{ transform: `scaleX(${progress / 100})` }}
       />
     </div>

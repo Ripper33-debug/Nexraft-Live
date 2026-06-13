@@ -1,37 +1,34 @@
 "use client";
 
 import type { ReactNode } from "react";
+import { BOOK_CALL_URL } from "@/lib/site";
 
-function getBookingUrl(): string | null {
-  const url = process.env.NEXT_PUBLIC_BOOKING_URL?.trim();
-  return url || null;
-}
+const focusRing =
+  "outline-none focus-visible:[outline:2px_solid_var(--color-signal)] focus-visible:[outline-offset:2px]";
 
 type BookCallButtonProps = {
   label?: string;
   className?: string;
-  variant?: "primary" | "default" | "nav";
+  variant?: "primary" | "ghost" | "nav";
 };
 
 export function BookCallButton({
   label = "Book a call",
   className = "",
-  variant = "default",
+  variant = "ghost",
 }: BookCallButtonProps) {
-  const url = getBookingUrl();
+  const url = process.env.NEXT_PUBLIC_BOOKING_URL?.trim() || BOOK_CALL_URL;
 
-  const classes =
-    variant === "primary"
-      ? `hero-cta-primary btn-submit ${className}`
-      : variant === "nav"
-        ? `btn-nav-cta ${className}`
-        : `btn-submit ${className}`;
-
-  if (!url) {
+  if (variant === "primary" || variant === "nav") {
     return (
-      <p className="font-mono text-[10px] text-muted" role="status">
-        Booking link not configured yet.
-      </p>
+      <a
+        href={url}
+        target="_blank"
+        rel="noopener noreferrer"
+        className={`inline-flex items-center justify-center bg-signal px-5 py-3 font-jetbrains text-[12px] uppercase tracking-[0.2em] text-ink transition-colors duration-300 hover:bg-signal-dim ${focusRing} ${className}`}
+      >
+        {label}
+      </a>
     );
   }
 
@@ -40,8 +37,7 @@ export function BookCallButton({
       href={url}
       target="_blank"
       rel="noopener noreferrer"
-      className={classes}
-      data-cursor-hover
+      className={`inline-flex items-center justify-center border border-line px-5 py-3 font-jetbrains text-[12px] uppercase tracking-[0.2em] text-bone transition-colors duration-300 hover:border-mute ${focusRing} ${className}`}
     >
       {label}
     </a>
@@ -54,23 +50,14 @@ type BookCallLinkProps = {
 };
 
 export function BookCallLink({ children, className = "" }: BookCallLinkProps) {
-  const url = getBookingUrl();
-
-  if (!url) {
-    return (
-      <span className={`font-mono text-[10px] text-muted ${className}`} role="status">
-        {children}
-      </span>
-    );
-  }
+  const url = process.env.NEXT_PUBLIC_BOOKING_URL?.trim() || BOOK_CALL_URL;
 
   return (
     <a
       href={url}
       target="_blank"
       rel="noopener noreferrer"
-      className={`magnetic-link inline-block transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] ${className}`}
-      data-cursor-hover
+      className={`link-underline font-jetbrains text-xs uppercase tracking-[0.2em] text-mute transition-colors hover:text-bone ${className}`}
     >
       {children}
     </a>
