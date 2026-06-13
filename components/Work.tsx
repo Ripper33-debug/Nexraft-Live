@@ -31,7 +31,7 @@ function ProjectVisual({
       <div className="relative aspect-[16/10] w-full overflow-hidden border border-line bg-ink md:aspect-auto md:h-full md:min-h-[140px]">
         <Image
           src={image}
-          alt=""
+          alt={`${name} project preview`}
           fill
           className="object-cover object-top transition-transform duration-500 group-hover:scale-[1.02]"
           sizes="(max-width: 768px) 100vw, 400px"
@@ -55,6 +55,7 @@ export function Work() {
       <div className="px-7">
         <Reveal>
           <SectionHeader
+            specLabel="03 / DELIVERY"
             titleId="work-heading"
             title="Selected delivery."
             subtitle="Recent builds across web, hosting, and 3D."
@@ -71,7 +72,7 @@ export function Work() {
             <div className="relative aspect-[21/9] min-h-[220px] w-full md:min-h-[320px]">
               <Image
                 src={FEATURED_PROJECT.image}
-                alt=""
+                alt={`${FEATURED_PROJECT.name} case study preview`}
                 fill
                 className="object-cover object-top transition-transform duration-700 group-hover:scale-[1.015]"
                 sizes="100vw"

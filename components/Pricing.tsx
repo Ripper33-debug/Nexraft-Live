@@ -62,6 +62,7 @@ export function Pricing() {
     <SectionShell id="pricing" ariaLabelledBy="pricing-heading">
       <Reveal>
         <SectionHeader
+          specLabel="06 / PRICING"
           titleId="pricing-heading"
           title="Monthly rates. No surprises."
         />
@@ -117,10 +118,13 @@ export function Pricing() {
               ))}
             </ul>
 
-            <div className="mt-8">
+            <div className="mt-8 space-y-3">
               <PrimaryButton href={BOOK_CALL_URL} className="w-full">
                 Book a call
               </PrimaryButton>
+              <GhostButton href="/pay" className="w-full">
+                Activate retainer
+              </GhostButton>
             </div>
           </article>
         ))}
@@ -144,7 +148,10 @@ export function Pricing() {
       <p className="mt-8 text-xs leading-relaxed text-faint">
         Managed hosting ({formatUsd(PRICES.hosting.managed)}/mo value) included
         with every retainer {"\u00b7"} First-month money-back {"\u00b7"} Cancel
-        anytime, 30 days notice {"\u00b7"} All prices in USD
+        anytime, 30 days notice {"\u00b7"} All prices in USD {"\u00b7"}{" "}
+        <a href="/legal/sla" className="text-mute underline decoration-line underline-offset-2 hover:text-bone">
+          SLA summary
+        </a>
       </p>
     </SectionShell>
   );

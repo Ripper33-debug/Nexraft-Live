@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import { SpecLabel } from "@/components/ui/SpecLabel";
 
 type SectionShellProps = {
   id: string;
@@ -37,11 +38,18 @@ type SectionHeaderProps = {
   title: string;
   titleId?: string;
   subtitle?: string;
+  specLabel?: string;
 };
 
-export function SectionHeader({ title, titleId, subtitle }: SectionHeaderProps) {
+export function SectionHeader({
+  title,
+  titleId,
+  subtitle,
+  specLabel,
+}: SectionHeaderProps) {
   return (
     <div className="max-w-2xl">
+      {specLabel ? <SpecLabel className="mb-4">{specLabel}</SpecLabel> : null}
       <h2
         id={titleId}
         className="font-display text-[clamp(1.75rem,4vw,2.75rem)] font-semibold leading-[1.08] tracking-[-0.03em] text-bone"

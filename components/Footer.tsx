@@ -1,15 +1,23 @@
 import Link from "next/link";
 import { Logo } from "@/components/Logo";
-import { BOOK_CALL_URL } from "@/lib/site";
+import { BOOK_CALL_URL, CONTACT_EMAILS } from "@/lib/site";
 
 const focusRing =
   "outline-none focus-visible:[outline:2px_solid_var(--color-signal)] focus-visible:[outline-offset:2px]";
 
 const seoLinks = [
-  { label: "Case study", href: "/work/weatherhaven" },
+  { label: "Weatherhaven", href: "/work/weatherhaven" },
+  { label: "Outfyre", href: "/work/outfyre" },
   { label: "Squarespace migration", href: "/squarespace-migration" },
   { label: "Slow WordPress", href: "/wordpress-too-slow" },
   { label: "3D viewer", href: "/3d-product-viewer" },
+] as const;
+
+const legalLinks = [
+  { label: "Privacy", href: "/legal/privacy" },
+  { label: "Terms", href: "/legal/terms" },
+  { label: "Subprocessors", href: "/legal/subprocessors" },
+  { label: "SLA", href: "/legal/sla" },
 ] as const;
 
 export function Footer() {
@@ -23,10 +31,10 @@ export function Footer() {
         </p>
 
         <a
-          href={`mailto:barry@nexraft.com`}
+          href={`mailto:${CONTACT_EMAILS[0]}`}
           className={`text-sm text-mute transition-colors duration-300 hover:text-bone ${focusRing}`}
         >
-          barry@nexraft.com {"\u2197"}
+          {CONTACT_EMAILS[0]} {"\u2197"}
         </a>
       </div>
 
@@ -46,6 +54,15 @@ export function Footer() {
         >
           Billing
         </Link>
+        {legalLinks.map((link) => (
+          <Link
+            key={link.href}
+            href={link.href}
+            className={`text-xs text-faint transition-colors duration-300 hover:text-mute ${focusRing}`}
+          >
+            {link.label}
+          </Link>
+        ))}
         <a
           href={BOOK_CALL_URL}
           target="_blank"

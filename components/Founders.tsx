@@ -4,6 +4,7 @@ import { useState } from "react";
 import Image from "next/image";
 import { SectionShell } from "@/components/ui/SectionShell";
 import { Reveal } from "@/components/ui/Reveal";
+import { SpecLabel } from "@/components/ui/SpecLabel";
 import { FOUNDERS } from "@/lib/site";
 
 const bios: Record<string, string> = {
@@ -28,7 +29,7 @@ function FounderAvatar({
       {!failed ? (
         <Image
           src={photo}
-          alt=""
+          alt={`${initials} portrait`}
           fill
           className="object-cover"
           sizes="64px"
@@ -49,6 +50,7 @@ export function Founders() {
   return (
     <SectionShell id="team" ariaLabelledBy="founders-heading">
       <Reveal>
+        <SpecLabel className="mb-4">02 / TEAM</SpecLabel>
         <h2
           id="founders-heading"
           className="font-display text-[clamp(1.75rem,4vw,2.5rem)] font-semibold leading-[1.08] tracking-[-0.03em] text-bone"

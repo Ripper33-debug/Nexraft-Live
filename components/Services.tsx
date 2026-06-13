@@ -33,6 +33,7 @@ export function Services() {
     <SectionShell id="do" ariaLabelledBy="services-heading">
       <Reveal>
         <SectionHeader
+          specLabel="01 / SERVICES"
           titleId="services-heading"
           title="Web, hosting, and 3D."
           subtitle="Three disciplines. One delivery standard."
@@ -47,7 +48,7 @@ export function Services() {
           <p className="mt-4 max-w-2xl text-sm leading-relaxed text-mute md:text-base">
             {web.summary}
           </p>
-          <p className="mt-6 text-xs text-faint">{web.stack}</p>
+          <p className="mt-6 font-jetbrains text-[11px] uppercase tracking-[0.16em] text-faint">{web.stack}</p>
         </article>
 
         <article className="border-t border-line pt-6 md:col-span-5 md:border md:border-line md:bg-ink2 md:p-7 md:pt-7">
@@ -57,7 +58,7 @@ export function Services() {
           <p className="mt-3 text-sm leading-relaxed text-mute">
             {hosting.summary}
           </p>
-          <p className="mt-5 text-xs text-faint">{hosting.stack}</p>
+          <p className="mt-5 font-jetbrains text-[11px] uppercase tracking-[0.16em] text-faint">{hosting.stack}</p>
         </article>
 
         <article className="border-t border-line pt-6 md:col-span-7 md:border md:border-line md:bg-panel md:p-7 md:pt-7">
@@ -67,7 +68,7 @@ export function Services() {
           <p className="mt-3 text-sm leading-relaxed text-mute">
             {threeD.summary}
           </p>
-          <p className="mt-5 text-xs text-faint">{threeD.stack}</p>
+          <p className="mt-5 font-jetbrains text-[11px] uppercase tracking-[0.16em] text-faint">{threeD.stack}</p>
           <Link
             href={threeD.href}
             className="mt-6 inline-block text-sm text-bone underline decoration-line underline-offset-4 transition-colors hover:text-signal"

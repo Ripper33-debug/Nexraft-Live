@@ -10,6 +10,7 @@ const NAV_LINKS = [
   { label: "Work", href: "/#work" },
   { label: "Process", href: "/#process" },
   { label: "Pricing", href: "/#pricing" },
+  { label: "Contact", href: "/#contact" },
 ] as const;
 
 const focusRing =
@@ -98,6 +99,7 @@ export function Header() {
       <div
         id="mobile-menu"
         aria-hidden={!open}
+        inert={!open}
         className={`mobile-menu-shell grid min-[860px]:hidden ${
           open ? "mobile-menu-open" : ""
         }`}

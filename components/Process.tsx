@@ -30,7 +30,11 @@ export function Process() {
   return (
     <SectionShell id="process" ariaLabelledBy="process-heading">
       <Reveal>
-        <SectionHeader titleId="process-heading" title="How we work." />
+        <SectionHeader
+          specLabel="05 / PROCESS"
+          titleId="process-heading"
+          title="How we work."
+        />
       </Reveal>
 
       <div className="mt-12 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4 lg:gap-10">

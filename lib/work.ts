@@ -23,8 +23,7 @@ export const WORK_PROJECTS: WorkProject[] = [
     id: "outfyre",
     name: "Outfyre",
     outcome: "Retainer funnel and growth site for an AI studio.",
-    href: "https://outfyre.com",
-    external: true,
+    href: "/work/outfyre",
     image: "/case-studies/outfyre.png",
   },
   {

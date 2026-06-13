@@ -4,46 +4,46 @@ import Link from "next/link";
 import { BookCallButton } from "@/components/BookCallButton";
 
 export const metadata: Metadata = {
-  title: "Weatherhaven Case Study",
+  title: "Outfyre Case Study",
   description:
-    "How Nexraft rebuilt Weatherhaven's corporate web presence: a Next.js product catalog and deploy map covering operations in 95 countries, on managed edge infrastructure.",
+    "How Nexraft built a retainer funnel and growth site for Outfyre, an AI studio, on managed edge infrastructure.",
   openGraph: {
-    title: "Case study: Weatherhaven",
+    title: "Case study: Outfyre",
     description:
-      "Enterprise marketing rebuild. A 95-country deploy catalog on a custom CMS.",
+      "Retainer funnel and growth site for an AI studio. Fast launches without a dev bottleneck.",
   },
 };
 
 const buildItems = [
   {
-    title: "Catalog architecture",
+    title: "Retainer funnel",
     detail:
-      "Product families, variants, and spec data modeled in a custom CMS. Editors update content without touching code.",
+      "Discovery-to-subscribe path aligned with how Outfyre sells services. Clear CTAs, pricing context, and contact paths without a bloated CMS.",
   },
   {
-    title: "Global deploy map",
+    title: "Growth pages",
     detail:
-      "Interactive map of deployments across 95 countries. Built as a first-class proof asset, not a static graphic.",
+      "Landing pages built to ship quickly as offers evolve. Component-driven layout so marketing updates do not require full redeploys for every copy change.",
   },
   {
-    title: "Performance budget",
+    title: "Performance baseline",
     detail:
-      "Static-first rendering with edge delivery. Budgets enforced from the first sprint, not patched at the end.",
+      "Static-first Next.js delivery with edge caching. Core pages stay fast under campaign traffic.",
   },
   {
-    title: "Managed operations",
+    title: "Managed hosting",
     detail:
-      "We run the stack we shipped: DNS, SSL, monitoring, and backups under a hosting retainer.",
+      "DNS, SSL, monitoring, and deploy pipeline under Nexraft hosting retainer. Outfyre focuses on product, not server patches.",
   },
 ] as const;
 
 const numbers = [
-  { value: "95", label: "Countries on the deploy map" },
-  { value: "1", label: "Unified product catalog and CMS" },
-  { value: "99.9%", label: "Uptime target on stacks we operate" },
+  { value: "1", label: "Unified growth site and funnel" },
+  { value: "48h", label: "Typical content turnaround on retainer" },
+  { value: "99.9%", label: "Uptime target on managed stack" },
 ] as const;
 
-export default function WeatherhavenCaseStudy() {
+export default function OutfyreCaseStudy() {
   return (
     <section className="border-t border-line bg-ink py-[84px] md:py-[120px]">
       <div className="mx-auto max-w-[1180px] px-7">
@@ -51,19 +51,19 @@ export default function WeatherhavenCaseStudy() {
           Case study
         </p>
         <h1 className="mt-3 font-display text-[clamp(1.75rem,4vw,2.75rem)] font-semibold leading-[1.05] tracking-[-0.03em] text-bone">
-          Weatherhaven. A 95-country deploy catalog.
+          Outfyre. Retainer funnel for an AI studio.
         </h1>
 
         <p className="prose-measure mt-6 text-base leading-relaxed text-mute">
-          Weatherhaven engineers rapidly deployable shelter systems used in
-          defense, medical, and remote operations worldwide. Their web
-          presence had to carry the same weight as their hardware.
+          Outfyre builds AI-powered products and needed a web presence that
+          could keep pace with launches. The site had to convert interest,
+          support campaigns, and stay maintainable without a full-time dev hire.
         </p>
 
         <div className="relative mt-10 aspect-[16/9] w-full overflow-hidden border border-line">
           <Image
-            src="/case-studies/weatherhaven.png"
-            alt="Weatherhaven corporate website rebuilt by Nexraft"
+            src="/case-studies/outfyre.png"
+            alt="Outfyre growth site built by Nexraft"
             fill
             priority
             className="object-cover object-top"
@@ -71,7 +71,7 @@ export default function WeatherhavenCaseStudy() {
           />
         </div>
         <p className="mt-3 text-sm text-faint">
-          weatherhavenusa.com {"\u00b7"} live production
+          outfyre.com {"\u00b7"} live production
         </p>
 
         <div className="mt-12 border-t border-line pt-10">
@@ -79,10 +79,9 @@ export default function WeatherhavenCaseStudy() {
             The brief
           </h2>
           <p className="prose-measure mt-4 text-sm leading-relaxed text-mute">
-            A complex, engineered product line spread across formats that
-            buyers could not navigate. The mandate: rebuild the corporate site
-            as a structured catalog, make global reach visible, and put
-            publishing in the hands of the internal team.
+            Ship a credible studio site fast, then iterate under retainer as
+            offers and campaigns change. No WordPress plugin stack. No agency
+            handoffs. Direct founder access for scope and delivery.
           </p>
         </div>
 
@@ -125,16 +124,16 @@ export default function WeatherhavenCaseStudy() {
 
         <div className="mt-12 border border-line bg-ink2 p-6 md:p-8">
           <p className="font-display text-lg font-semibold text-bone">
-            Want a build like this?
+            Need a site that ships and stays fast?
           </p>
           <p className="mt-3 max-w-lg text-sm leading-relaxed text-mute">
-            We scope enterprise rebuilds on a discovery call and quote a fixed
-            monthly rate in writing before any work starts.
+            We scope growth sites and retainers on a discovery call. Fixed
+            monthly rate, one invoice for web and hosting.
           </p>
           <div className="mt-6 flex flex-wrap items-center gap-4">
             <BookCallButton label="Book a call" variant="primary" />
             <Link
-              href="https://weatherhavenusa.com"
+              href="https://outfyre.com"
               target="_blank"
               rel="noopener noreferrer"
               className="text-sm text-bone underline decoration-line underline-offset-4 transition-colors hover:text-mute"
