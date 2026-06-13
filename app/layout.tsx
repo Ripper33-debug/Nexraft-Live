@@ -7,7 +7,6 @@ import { Grain } from "@/components/Grain";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { ScrollProgress } from "@/components/ScrollProgress";
-import { SmoothScroll } from "@/components/SmoothScroll";
 import "./globals.css";
 
 const bricolage = Bricolage_Grotesque({
@@ -72,7 +71,6 @@ export default function RootLayout({
       className={`${bricolage.variable} ${spaceGrotesk.variable} ${jetbrainsMono.variable} ${GeistSans.variable} ${GeistMono.variable}`}
     >
       <body className="relative min-h-screen overflow-x-clip bg-ink font-body text-bone antialiased">
-        <SmoothScroll />
         <Grain />
         <ScrollProgress />
         <a

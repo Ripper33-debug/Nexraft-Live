@@ -41,7 +41,7 @@ export function Contact() {
           delay={0.14}
           className="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row"
         >
-          <MagneticButton href={BOOK_CALL_URL} magnetic>
+          <MagneticButton href={BOOK_CALL_URL} magnetic={false}>
             Book a call
           </MagneticButton>
           <a

@@ -4,6 +4,7 @@ import dynamic from "next/dynamic";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { Reveal } from "@/components/ui/Reveal";
+import { useInView, usePageVisible } from "@/lib/use-in-view";
 
 const ProductDemoScene = dynamic(() => import("@/components/ProductDemoScene"), {
   ssr: false,
@@ -31,15 +32,22 @@ function ProductDemoFallback() {
 }
 
 export function ProductDemo() {
-  const [interactive, setInteractive] = useState(false);
+  const [interactiveAllowed, setInteractiveAllowed] = useState(false);
+  const pageVisible = usePageVisible();
+  const { ref, inView } = useInView<HTMLDivElement>({
+    disabled: !interactiveAllowed,
+    rootMargin: "120px",
+  });
 
   useEffect(() => {
     const reduced = window.matchMedia(
       "(prefers-reduced-motion: reduce)",
     ).matches;
     const narrow = window.matchMedia("(max-width: 767px)").matches;
-    if (!reduced && !narrow) setInteractive(true);
+    if (!reduced && !narrow) setInteractiveAllowed(true);
   }, []);
+
+  const showScene = interactiveAllowed && pageVisible && inView;
 
   return (
     <section
@@ -71,14 +79,17 @@ export function ProductDemo() {
         </Reveal>
 
         <Reveal delay={0.08}>
-          <div className="relative aspect-[4/3] overflow-hidden border border-line bg-ink">
-            {interactive ? (
-              <ProductDemoScene />
+          <div
+            ref={ref}
+            className="relative aspect-[4/3] overflow-hidden border border-line bg-ink"
+          >
+            {showScene ? (
+              <ProductDemoScene active={showScene} />
             ) : (
               <ProductDemoFallback />
             )}
             <p className="pointer-events-none absolute bottom-3 left-3 text-xs text-faint">
-              {interactive ? "Drag to rotate" : "3D preview"}
+              {showScene ? "Drag to rotate" : "3D preview"}
             </p>
           </div>
         </Reveal>

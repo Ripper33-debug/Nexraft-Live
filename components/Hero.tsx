@@ -3,6 +3,7 @@
 import dynamic from "next/dynamic";
 import { useEffect, useState } from "react";
 import { MagneticButton } from "@/components/ui/MagneticButton";
+import { useInView, usePageVisible } from "@/lib/use-in-view";
 import { BOOK_CALL_URL } from "@/lib/site";
 
 const VANISH_X = 600;
@@ -65,31 +66,39 @@ function HeroMeshFallback() {
 
 const HeroMesh = dynamic(() => import("@/components/HeroMesh"), {
   ssr: false,
-  loading: () => <HeroMeshFallback />,
+  loading: () => null,
 });
 
 export function Hero() {
-  const [mode, setMode] = useState<"static" | "mesh">("static");
+  const [meshAllowed, setMeshAllowed] = useState(false);
+  const pageVisible = usePageVisible();
+  const { ref: sectionRef, inView } = useInView<HTMLElement>({
+    disabled: !meshAllowed,
+    rootMargin: "0px 0px 15% 0px",
+  });
 
   useEffect(() => {
     const reduced = window.matchMedia(
       "(prefers-reduced-motion: reduce)",
     ).matches;
     const narrow = window.matchMedia("(max-width: 767px)").matches;
-    if (!reduced && !narrow) setMode("mesh");
+    if (!reduced && !narrow) setMeshAllowed(true);
   }, []);
+
+  const showMesh = meshAllowed && pageVisible && inView;
 
   return (
     <section
+      ref={sectionRef}
       id="home"
       aria-labelledby="hero-heading"
       className="relative -mt-[68px] flex min-h-[100svh] flex-col overflow-hidden border-b border-line bg-ink pt-[68px]"
     >
       <div className="absolute inset-0 z-0">
         <HeroMeshFallback />
-        {mode === "mesh" ? (
+        {showMesh ? (
           <div className="absolute inset-0">
-            <HeroMesh />
+            <HeroMesh active={showMesh} />
           </div>
         ) : null}
       </div>
@@ -137,7 +146,7 @@ export function Hero() {
           className="hm-fade pointer-events-auto mt-8 flex flex-col gap-3 sm:flex-row sm:items-center"
           style={{ animationDelay: "0.18s" }}
         >
-          <MagneticButton href={BOOK_CALL_URL} magnetic>
+          <MagneticButton href={BOOK_CALL_URL} magnetic={false}>
             Book a call
           </MagneticButton>
           <a
@@ -152,8 +161,8 @@ export function Hero() {
           className="hm-fade mt-12 max-w-xl text-sm text-faint"
           style={{ animationDelay: "0.24s" }}
         >
-          99.9% uptime on stacks we operate. Weatherhaven, Outfyre, and 12+
-          projects since 2024.
+          99.9% uptime on stacks we operate. Weatherhaven, Outfyre, Family
+          Care Pharmacy, and more since 2024.
         </p>
       </div>
     </section>

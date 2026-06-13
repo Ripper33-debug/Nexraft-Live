@@ -54,7 +54,7 @@ export function Header() {
     <header
       className={`sticky top-0 z-40 border-b transition-colors duration-500 ease-[cubic-bezier(.16,1,.3,1)] ${
         surface
-          ? "border-line bg-[rgba(10,14,12,0.72)] backdrop-blur-md"
+          ? "border-line bg-[rgba(10,14,12,0.94)]"
           : "border-transparent bg-transparent"
       }`}
     >
@@ -104,7 +104,7 @@ export function Header() {
           open ? "mobile-menu-open" : ""
         }`}
       >
-        <div className="overflow-hidden border-t border-line bg-[rgba(10,14,12,0.96)] backdrop-blur-md">
+        <div className="overflow-hidden border-t border-line bg-[rgba(10,14,12,0.98)]">
           <nav
             aria-label="Primary"
             className="mobile-menu-panel mx-auto flex max-w-[1180px] flex-col px-7 py-4"

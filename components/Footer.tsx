@@ -8,6 +8,7 @@ const focusRing =
 const seoLinks = [
   { label: "Weatherhaven", href: "/work/weatherhaven" },
   { label: "Outfyre", href: "/work/outfyre" },
+  { label: "Family Care Pharmacy", href: "/work/family-care-pharmacy" },
   { label: "Squarespace migration", href: "/squarespace-migration" },
   { label: "Slow WordPress", href: "/wordpress-too-slow" },
   { label: "3D viewer", href: "/3d-product-viewer" },
