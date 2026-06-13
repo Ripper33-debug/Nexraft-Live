@@ -71,7 +71,24 @@ export default function WeatherhavenCaseStudy() {
           />
         </div>
         <p className="mt-3 text-sm text-faint">
-          weatherhavenusa.com {"\u00b7"} live production
+          <a
+            href="https://weatherhaven.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-mute transition-colors hover:text-bone"
+          >
+            weatherhaven.com
+          </a>
+          {" \u00b7 "}
+          <a
+            href="https://weatherhavenusa.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-mute transition-colors hover:text-bone"
+          >
+            weatherhavenusa.com
+          </a>
+          {" \u00b7 "} live production
         </p>
 
         <div className="mt-12 border-t border-line pt-10">
@@ -131,15 +148,23 @@ export default function WeatherhavenCaseStudy() {
             We scope enterprise rebuilds on a discovery call and quote a fixed
             monthly rate in writing before any work starts.
           </p>
-          <div className="mt-6 flex flex-wrap items-center gap-4">
+          <div className="mt-6 flex flex-wrap items-center gap-x-4 gap-y-3">
             <BookCallButton label="Book a call" variant="primary" />
+            <Link
+              href="https://weatherhaven.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-sm text-bone underline decoration-line underline-offset-4 transition-colors hover:text-mute"
+            >
+              weatherhaven.com
+            </Link>
             <Link
               href="https://weatherhavenusa.com"
               target="_blank"
               rel="noopener noreferrer"
               className="text-sm text-bone underline decoration-line underline-offset-4 transition-colors hover:text-mute"
             >
-              View the live site
+              weatherhavenusa.com
             </Link>
           </div>
         </div>
