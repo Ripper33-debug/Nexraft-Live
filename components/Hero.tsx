@@ -5,15 +5,6 @@ import { useEffect, useState } from "react";
 import { MagneticButton } from "@/components/ui/MagneticButton";
 import { BOOK_CALL_URL } from "@/lib/site";
 
-const STATS = [
-  { value: "99.9%", label: "UPTIME ON OUR STACKS" },
-  { value: "Days", label: "NOT QUARTER-LONG HOLDS" },
-  { value: "12+ PROJECTS", label: "SINCE 2024" },
-  { value: "Weatherhaven \u00b7 Outfyre", label: "SELECTED DELIVERY" },
-] as const;
-
-// Static perspective grid used while the R3F chunk loads, under reduced
-// motion, and on small / coarse-pointer devices. No animation loop.
 const VANISH_X = 600;
 const VANISH_Y = 320;
 const FLOOR_Y = 800;
@@ -76,14 +67,6 @@ const HeroMesh = dynamic(() => import("@/components/HeroMesh"), {
   loading: () => <HeroMeshFallback />,
 });
 
-function statCellBorders(i: number): string {
-  const classes: string[] = [];
-  if (i % 2 === 1) classes.push("border-l border-line");
-  if (i > 0) classes.push("md:border-l md:border-line");
-  if (i >= 2) classes.push("border-t border-line md:border-t-0");
-  return classes.join(" ");
-}
-
 export function Hero() {
   const [mode, setMode] = useState<"static" | "mesh">("static");
 
@@ -124,91 +107,49 @@ export function Hero() {
         }}
       />
 
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute right-7 top-[88px] z-10 hidden font-jetbrains text-[11px] tracking-[0.18em] text-faint md:block"
-      >
-        GRID_REF A1 / ORIGIN 0,0 / RENDER{" "}
-        <span className="text-signal-dim">live</span>
-      </div>
+      <div className="pointer-events-none relative z-10 mx-auto flex w-full max-w-[1180px] flex-1 flex-col justify-center px-7 py-16 md:py-20">
+        <p className="hm-fade text-sm text-mute">Est. 2024</p>
 
-      <div className="pointer-events-none relative z-10 mx-auto flex w-full max-w-[1180px] flex-1 flex-col px-7 py-8">
-        <div className="flex flex-1 flex-col justify-center">
-          <p className="hm-fade flex items-center gap-2.5 font-jetbrains text-[11px] uppercase tracking-[0.2em] text-faint">
-            <span
-              className="h-1.5 w-1.5 bg-signal motion-safe:animate-pulse"
-              aria-hidden="true"
-            />
-            <span>
-              Engineering studio <span className="text-mute">{"\u00b7"}</span>{" "}
-              Est. 2024
-            </span>
-          </p>
+        <h1
+          id="hero-heading"
+          className="hm-fade mt-4 max-w-[14ch] font-display font-semibold tracking-[-0.03em] text-bone"
+          style={{
+            animationDelay: "0.06s",
+            fontSize: "clamp(2.75rem, 7.5vw, 5.25rem)",
+            lineHeight: 1.05,
+          }}
+        >
+          Built like infrastructure.
+        </h1>
 
-          <h1
-            id="hero-heading"
-            className="mt-6 font-grotesk font-bold tracking-[-0.03em] text-bone"
-            style={{ fontSize: "clamp(2.5rem, 8vw, 6rem)", lineHeight: 1.02 }}
+        <p
+          className="hm-fade mt-6 max-w-[52ch] text-base leading-relaxed text-mute md:text-lg"
+          style={{ animationDelay: "0.12s" }}
+        >
+          We build your website, run the servers under it, and make the 3D.
+          One studio, one invoice.
+        </p>
+
+        <div
+          className="hm-fade pointer-events-auto mt-8 flex flex-col gap-3 sm:flex-row sm:items-center"
+          style={{ animationDelay: "0.18s" }}
+        >
+          <MagneticButton href={BOOK_CALL_URL}>Book a call</MagneticButton>
+          <a
+            href="#work"
+            className="pointer-events-auto text-sm text-mute underline decoration-line underline-offset-4 transition-colors hover:text-bone focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-signal"
           >
-            <span className="hm-rise-mask">
-              <span className="hm-rise hm-rise-1 block">Built like</span>
-            </span>
-            <span className="hm-rise-mask">
-              <span className="hm-rise hm-rise-2 block text-signal">
-                infrastructure.
-              </span>
-            </span>
-          </h1>
-
-          <p
-            className="hm-fade mt-7 max-w-[60ch] text-mute"
-            style={{
-              animationDelay: "0.12s",
-              fontSize: "clamp(1rem, 1.4vw, 1.1875rem)",
-              lineHeight: 1.6,
-            }}
-          >
-            We <strong className="font-semibold text-bone">build</strong> your
-            website, <strong className="font-semibold text-bone">run</strong>{" "}
-            the servers under it, and{" "}
-            <strong className="font-semibold text-bone">make</strong> the 3D.
-            One studio, one invoice, work you can click before you pay.
-          </p>
-
-          <div
-            className="hm-fade pointer-events-auto mt-9 flex flex-col gap-3 sm:flex-row sm:items-center"
-            style={{ animationDelay: "0.2s" }}
-          >
-            <MagneticButton href={BOOK_CALL_URL}>
-              Book a call -&gt;
-            </MagneticButton>
-            <a
-              href="#do"
-              className="pointer-events-auto inline-flex items-center justify-center border border-line px-5 py-3 font-jetbrains text-[12px] uppercase tracking-[0.2em] text-bone transition-colors duration-300 hover:border-mute focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-signal"
-            >
-              See what we do
-            </a>
-          </div>
+            See our work
+          </a>
         </div>
 
-        <dl
-          className="hm-fade mt-12 grid grid-cols-2 border-t border-line md:grid-cols-4"
-          style={{ animationDelay: "0.28s" }}
+        <p
+          className="hm-fade mt-12 max-w-xl text-sm text-faint"
+          style={{ animationDelay: "0.24s" }}
         >
-          {STATS.map((stat, i) => (
-            <div
-              key={stat.label}
-              className={`px-1 py-4 md:px-5 ${statCellBorders(i)}`}
-            >
-              <dt className="font-jetbrains text-[13px] text-bone md:text-[15px]">
-                {stat.value}
-              </dt>
-              <dd className="mt-1 font-jetbrains text-[10px] uppercase tracking-[0.18em] text-faint">
-                {stat.label}
-              </dd>
-            </div>
-          ))}
-        </dl>
+          99.9% uptime on stacks we operate. Weatherhaven, Outfyre, and 12+
+          projects since 2024.
+        </p>
       </div>
     </section>
   );

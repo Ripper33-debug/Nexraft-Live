@@ -21,18 +21,18 @@ export function Footer() {
             className="block h-[9px] w-[9px] bg-signal"
             style={{ boxShadow: "0 0 10px 0 rgba(158, 255, 91, 0.45)" }}
           />
-          <span className="font-grotesk text-[15px] font-bold tracking-[0.04em] text-bone">
-            NEXRAFT
+          <span className="font-display text-[15px] font-semibold tracking-[-0.02em] text-bone">
+            Nexraft
           </span>
         </Link>
 
-        <p className="font-jetbrains text-[11px] uppercase tracking-[0.2em] text-faint">
-          Web / Hosting / 3D {"\u00b7"} Est. 2024
+        <p className="text-sm text-faint">
+          Web, hosting, and 3D {"\u00b7"} Est. 2024
         </p>
 
         <a
           href={`mailto:barry@nexraft.com`}
-          className={`font-jetbrains text-[11px] uppercase tracking-[0.2em] text-mute transition-colors duration-300 hover:text-bone ${focusRing}`}
+          className={`text-sm text-mute transition-colors duration-300 hover:text-bone ${focusRing}`}
         >
           barry@nexraft.com {"\u2197"}
         </a>
@@ -43,14 +43,14 @@ export function Footer() {
           <Link
             key={link.href}
             href={link.href}
-            className={`font-jetbrains text-[10px] uppercase tracking-[0.18em] text-faint transition-colors duration-300 hover:text-mute ${focusRing}`}
+            className={`text-xs text-faint transition-colors duration-300 hover:text-mute ${focusRing}`}
           >
             {link.label}
           </Link>
         ))}
         <Link
           href="/pay"
-          className={`font-jetbrains text-[10px] uppercase tracking-[0.18em] text-faint transition-colors duration-300 hover:text-mute ${focusRing}`}
+          className={`text-xs text-faint transition-colors duration-300 hover:text-mute ${focusRing}`}
         >
           Billing
         </Link>
@@ -58,7 +58,7 @@ export function Footer() {
           href={BOOK_CALL_URL}
           target="_blank"
           rel="noopener noreferrer"
-          className={`ml-auto font-jetbrains text-[10px] uppercase tracking-[0.18em] text-faint transition-colors duration-300 hover:text-mute ${focusRing}`}
+          className={`ml-auto text-xs text-faint transition-colors duration-300 hover:text-mute ${focusRing}`}
         >
           Book a call
         </a>

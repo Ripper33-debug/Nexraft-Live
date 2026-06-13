@@ -26,22 +26,22 @@ export function SectionShell({
 
 type SectionHeaderProps = {
   title: string;
-  tag: string;
   titleId?: string;
+  subtitle?: string;
 };
 
-export function SectionHeader({ title, tag, titleId }: SectionHeaderProps) {
+export function SectionHeader({ title, titleId, subtitle }: SectionHeaderProps) {
   return (
-    <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+    <div className="max-w-2xl">
       <h2
         id={titleId}
-        className="font-grotesk text-[clamp(1.75rem,4vw,2.75rem)] font-semibold leading-[1.05] tracking-[-0.03em] text-bone"
+        className="font-display text-[clamp(1.75rem,4vw,2.75rem)] font-semibold leading-[1.08] tracking-[-0.03em] text-bone"
       >
         {title}
       </h2>
-      <p className="shrink-0 font-jetbrains text-[11px] uppercase tracking-[0.2em] text-faint">
-        {tag}
-      </p>
+      {subtitle ? (
+        <p className="mt-4 text-base leading-relaxed text-mute">{subtitle}</p>
+      ) : null}
     </div>
   );
 }

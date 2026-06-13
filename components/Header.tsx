@@ -67,8 +67,8 @@ export function Header() {
             className="block h-[9px] w-[9px] bg-signal"
             style={{ boxShadow: "0 0 10px 0 rgba(158, 255, 91, 0.45)" }}
           />
-          <span className="font-grotesk text-[15px] font-bold tracking-[0.04em] text-bone">
-            NEXRAFT
+          <span className="font-display text-[15px] font-semibold tracking-[-0.02em] text-bone">
+            Nexraft
           </span>
         </Link>
 
@@ -80,7 +80,7 @@ export function Header() {
             <Link
               key={link.href}
               href={link.href}
-              className={`font-jetbrains text-[11px] uppercase tracking-[0.2em] text-mute transition-colors duration-300 hover:text-bone ${focusRing}`}
+              className={`text-sm text-mute transition-colors duration-300 hover:text-bone ${focusRing}`}
             >
               {link.label}
             </Link>
@@ -89,7 +89,7 @@ export function Header() {
             href={BOOK_CALL_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className={`inline-flex items-center bg-signal px-4 py-2.5 font-jetbrains text-[11px] uppercase tracking-[0.2em] text-ink transition-colors duration-300 hover:bg-signal-dim ${focusRing}`}
+            className={`inline-flex items-center bg-signal px-4 py-2.5 text-sm font-medium text-ink transition-colors duration-300 hover:bg-signal-dim ${focusRing}`}
           >
             Book a call
           </a>
@@ -101,7 +101,7 @@ export function Header() {
           aria-expanded={open}
           aria-controls="mobile-menu"
           onClick={() => setOpen((value) => !value)}
-          className={`font-jetbrains text-[11px] uppercase tracking-[0.2em] text-mute transition-colors duration-300 hover:text-bone min-[860px]:hidden ${focusRing}`}
+          className={`text-sm text-mute transition-colors duration-300 hover:text-bone min-[860px]:hidden ${focusRing}`}
         >
           {open ? "Close" : "Menu"}
         </button>
@@ -124,7 +124,7 @@ export function Header() {
                 key={link.href}
                 href={link.href}
                 onClick={() => setOpen(false)}
-                className={`border-b border-line py-4 font-jetbrains text-[12px] uppercase tracking-[0.2em] text-mute transition-colors duration-300 hover:text-bone ${focusRing}`}
+                className={`border-b border-line py-4 text-base text-mute transition-colors duration-300 hover:text-bone ${focusRing}`}
               >
                 {link.label}
               </Link>
@@ -134,7 +134,7 @@ export function Header() {
               target="_blank"
               rel="noopener noreferrer"
               onClick={() => setOpen(false)}
-              className={`mt-4 inline-flex w-full items-center justify-center bg-signal px-4 py-3 font-jetbrains text-[12px] uppercase tracking-[0.2em] text-ink transition-colors duration-300 hover:bg-signal-dim ${focusRing}`}
+              className={`mt-4 inline-flex w-full items-center justify-center bg-signal px-4 py-3 text-sm font-medium text-ink transition-colors duration-300 hover:bg-signal-dim ${focusRing}`}
             >
               Book a call
             </a>
