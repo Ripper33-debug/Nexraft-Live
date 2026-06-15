@@ -27,13 +27,6 @@ export const WORK_PROJECTS: WorkProject[] = [
     image: "/case-studies/outfyre.png",
   },
   {
-    id: "family-care-pharmacy",
-    name: "Family Care Pharmacy",
-    outcome: "Community pharmacy site with prescriptions, services, and click-to-call.",
-    href: "/work/family-care-pharmacy",
-    image: "/case-studies/family-care-pharmacy.png",
-  },
-  {
     id: "product-viewer",
     name: "3D product viewer",
     outcome: "Browser-native spins and configurators, no app download.",
@@ -51,6 +44,13 @@ export const WORK_PROJECTS: WorkProject[] = [
     name: "WordPress rebuild",
     outcome: "Static-first rebuilds that cut load time from seconds to milliseconds.",
     href: "/wordpress-too-slow",
+  },
+  {
+    id: "family-care-pharmacy",
+    name: "Family Care Pharmacy",
+    outcome: "Community pharmacy site with prescriptions, services, and click-to-call.",
+    href: "/work/family-care-pharmacy",
+    image: "/case-studies/family-care-pharmacy.png",
   },
 ];
 

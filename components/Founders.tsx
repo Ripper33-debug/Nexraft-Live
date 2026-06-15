@@ -1,7 +1,5 @@
 "use client";
 
-import { useState } from "react";
-import Image from "next/image";
 import { SectionShell } from "@/components/ui/SectionShell";
 import { Reveal } from "@/components/ui/Reveal";
 import { SpecLabel } from "@/components/ui/SpecLabel";
@@ -15,33 +13,13 @@ const bios: Record<string, string> = {
 const focusRing =
   "outline-none focus-visible:[outline:2px_solid_var(--color-signal)] focus-visible:[outline-offset:2px]";
 
-function FounderAvatar({
-  initials,
-  photo,
-}: {
-  initials: string;
-  photo: string;
-}) {
-  const [failed, setFailed] = useState(false);
-
+function FounderAvatar({ initials }: { initials: string }) {
   return (
-    <div className="relative h-16 w-16 shrink-0 overflow-hidden rounded-full border border-line bg-panel">
-      {!failed ? (
-        <Image
-          src={photo}
-          alt={`${initials} portrait`}
-          fill
-          className="object-cover"
-          sizes="64px"
-          onError={() => setFailed(true)}
-        />
-      ) : null}
-      <span
-        aria-hidden="true"
-        className={`absolute inset-0 flex items-center justify-center font-display text-lg font-semibold text-bone ${failed ? "" : "opacity-0"}`}
-      >
-        {initials}
-      </span>
+    <div
+      aria-hidden="true"
+      className="flex h-16 w-16 shrink-0 items-center justify-center border border-line bg-ink2 font-display text-lg font-semibold tracking-[-0.02em] text-bone"
+    >
+      {initials}
     </div>
   );
 }
@@ -66,10 +44,7 @@ export function Founders() {
         {FOUNDERS.map((founder) => (
           <Reveal key={founder.email} delay={0.06}>
             <div className="flex gap-5">
-              <FounderAvatar
-                initials={founder.initials}
-                photo={founder.photo}
-              />
+              <FounderAvatar initials={founder.initials} />
               <div className="min-w-0">
                 <p className="font-display text-lg font-semibold text-bone">
                   {founder.name}

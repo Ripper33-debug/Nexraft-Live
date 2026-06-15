@@ -6,7 +6,7 @@ import { Services } from "@/components/Services";
 import { Founders } from "@/components/Founders";
 import { Work } from "@/components/Work";
 import { MigrationProof } from "@/components/MigrationProof";
-import { Testimonials } from "@/components/Testimonials";
+import { ClientProof } from "@/components/ClientProof";
 import { Process } from "@/components/Process";
 import { Pricing } from "@/components/Pricing";
 import { Faq } from "@/components/Faq";
@@ -23,7 +23,7 @@ export default function HomePage() {
       <Founders />
       <Work />
       <MigrationProof />
-      <Testimonials />
+      <ClientProof />
       <Process />
       <Pricing />
       <Faq />

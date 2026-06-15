@@ -2,39 +2,32 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { SubpageShell } from "@/components/SubpageShell";
 import { CONTACT_EMAILS } from "@/lib/site";
+import {
+  overallStatus,
+  runStatusProbes,
+  type ProbeResult,
+} from "@/lib/status-checks";
 
 export const metadata: Metadata = {
   title: "System Status",
   description:
-    "Operational status for Nexraft-managed edge delivery, hosting, billing, and client-facing services.",
+    "Live HTTP probes for Nexraft and client production sites we operate.",
   robots: { index: true, follow: true },
 };
 
-const components = [
-  {
-    name: "Edge delivery network",
-    detail:
-      "Operational. Global CDN, TLS termination, and static asset delivery for nexraft.com and client production sites.",
-  },
-  {
-    name: "Managed hosting",
-    detail:
-      "Operational. Production site hosting, automated deploys, backups, and uptime monitoring on retainer stacks.",
-  },
-  {
-    name: "Billing and subscriptions",
-    detail:
-      "Operational. Stripe checkout, customer portal, and webhook sync for retainer billing.",
-  },
-  {
-    name: "Contact and scheduling",
-    detail:
-      "Operational. Contact form relay and discovery call booking.",
-  },
-];
+export const revalidate = 60;
 
-export default function StatusPage() {
-  const checked = new Date().toISOString().slice(0, 16).replace("T", " ") + " UTC";
+function statusLabel(status: ProbeResult["status"]) {
+  if (status === "operational") return "Operational";
+  if (status === "degraded") return "Degraded";
+  return "Outage";
+}
+
+export default async function StatusPage() {
+  const { checkedAt, results } = await runStatusProbes();
+  const aggregate = overallStatus(results);
+  const checkedDisplay =
+    new Date(checkedAt).toISOString().slice(0, 19).replace("T", " ") + " UTC";
 
   return (
     <SubpageShell
@@ -42,8 +35,9 @@ export default function StatusPage() {
       intro={
         <>
           <p>
-            Current operational status for Nexraft-managed infrastructure and
-            client-facing services. For active incidents, email{" "}
+            Live HTTP probes against nexraft.com and client production sites we
+            operate. Refreshes about every 60 seconds. For active incidents,
+            email{" "}
             <a
               href={`mailto:${CONTACT_EMAILS[0]}?subject=Incident`}
               className="text-bone hover:underline"
@@ -53,30 +47,36 @@ export default function StatusPage() {
             with subject &ldquo;Incident&rdquo;.
           </p>
           <p className="mt-4 font-jetbrains text-[11px] uppercase tracking-[0.16em] text-faint">
-            Last checked: {checked}
+            Last probed: {checkedDisplay} {"\u00b7"} Overall:{" "}
+            {statusLabel(aggregate)}
           </p>
         </>
       }
       sections={[
         {
-          heading: "All systems operational",
-          items: components.map((item) => ({
+          heading:
+            aggregate === "operational"
+              ? "All probed endpoints responding"
+              : "Probe alerts",
+          items: results.map((item) => ({
             title: item.name,
-            detail: item.detail,
+            detail: `${statusLabel(item.status)}. ${item.detail} Response in ${item.latencyMs}ms${
+              item.httpStatus ? ` (HTTP ${item.httpStatus})` : ""
+            }${item.error ? `. ${item.error}` : ""}.`,
           })),
         },
         {
-          heading: "Uptime commitment",
+          heading: "What this page is",
           items: [
             {
-              title: "Retainer hosting target",
+              title: "Synthetic checks",
               detail:
-                "99.9% monthly uptime on production sites we operate under an active retainer. See the SLA summary for response targets and exclusions.",
+                "Each row is a real GET request from this server. It is not a historical SLA report and does not cover every client stack or third-party billing provider.",
             },
             {
-              title: "Maintenance windows",
+              title: "Uptime commitment",
               detail:
-                "Scheduled maintenance is communicated in advance. Emergency patches may deploy without notice when required for security.",
+                "Retainer hosting targets 99.9% monthly uptime on sites we operate. See the SLA summary for contractual terms, response targets, and exclusions.",
             },
           ],
         },

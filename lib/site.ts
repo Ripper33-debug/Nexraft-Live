@@ -5,13 +5,11 @@ export const FOUNDERS = [
     name: "Barry Castelli",
     email: "barry@nexraft.com",
     initials: "BC",
-    photo: "/founders/barry.svg",
   },
   {
     name: "Alex Cridge",
     email: "alex@nexraft.com",
     initials: "AC",
-    photo: "/founders/alex.svg",
   },
 ] as const;
 

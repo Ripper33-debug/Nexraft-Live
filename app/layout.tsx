@@ -10,6 +10,7 @@ import { ScrollProgress } from "@/components/ScrollProgress";
 import { StructuredData } from "@/components/StructuredData";
 import { CookieNotice } from "@/components/CookieNotice";
 import { LoadingScreen } from "@/components/LoadingScreen";
+import { StickyBookCall } from "@/components/StickyBookCall";
 import "./globals.css";
 
 const bricolage = Bricolage_Grotesque({
@@ -90,6 +91,7 @@ export default function RootLayout({
           <Footer />
         </div>
         <CookieNotice />
+        <StickyBookCall />
         <Analytics />
       </body>
     </html>

@@ -161,8 +161,8 @@ export function Hero() {
           className="hm-fade mt-12 max-w-xl text-sm text-faint"
           style={{ animationDelay: "0.24s" }}
         >
-          99.9% uptime on stacks we operate. Weatherhaven, Outfyre, Family
-          Care Pharmacy, and more since 2024.
+          99.9% uptime on stacks we operate. Weatherhaven, Outfyre, and more
+          since 2024.
         </p>
       </div>
     </section>

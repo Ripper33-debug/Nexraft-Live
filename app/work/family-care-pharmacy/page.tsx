@@ -6,7 +6,7 @@ import { BookCallButton } from "@/components/BookCallButton";
 export const metadata: Metadata = {
   title: "Family Care Pharmacy Case Study",
   description:
-    "How Nexraft built a fast, trustworthy web presence for Family Care Pharmacy in Langley, BC — prescriptions, services, and contact paths on managed edge infrastructure.",
+    "How Nexraft built a fast, trustworthy web presence for Family Care Pharmacy in Langley, BC - prescriptions, services, and contact paths on managed edge infrastructure.",
   openGraph: {
     title: "Case study: Family Care Pharmacy",
     description:
@@ -28,7 +28,7 @@ const buildItems = [
   {
     title: "Performance baseline",
     detail:
-      "Static-first Next.js delivery on Vercel edge. Fast loads on mobile — where most prescription and directions lookups happen.",
+      "Static-first Next.js delivery on managed edge infrastructure. Fast loads on mobile - where most prescription and directions lookups happen.",
   },
   {
     title: "Managed operations",
@@ -82,7 +82,7 @@ export default function FamilyCarePharmacyCaseStudy() {
           >
             familycarepharm.vercel.app
           </a>
-          {" \u00b7 "} live production
+          {" \u00b7 "} staging preview (custom domain pending)
         </p>
 
         <div className="mt-12 border-t border-line pt-10">
