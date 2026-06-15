@@ -45,7 +45,7 @@ export default function PrivacyPage() {
             {
               title: "Site analytics",
               detail:
-                "Aggregated usage metrics via Vercel Analytics (page views, performance). We do not use third-party advertising trackers.",
+                "First-party, aggregated usage metrics (page views, Core Web Vitals). No advertising identifiers and no cross-site tracking.",
             },
             {
               title: "Technical logs",
