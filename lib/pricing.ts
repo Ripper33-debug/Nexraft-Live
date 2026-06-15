@@ -33,4 +33,29 @@ export function formatUsd(value: number): string {
   return `$${value.toLocaleString("en-US")}`;
 }
 
-export const FOUNDING_RATE_LINE = `Founding rate: first ${FOUNDING_SLOTS_TOTAL} clients get ${FOUNDING_DISCOUNT_PCT}% off any retainer for the first ${FOUNDING_DISCOUNT_MONTHS} months. ${FOUNDING_SLOTS_REMAINING} of ${FOUNDING_SLOTS_TOTAL} slots open.`;
+export const FOUNDING_RATE_LINE = `Founding client rate available for the first ${FOUNDING_SLOTS_TOTAL} qualified retainer clients — ${FOUNDING_DISCOUNT_PCT}% off for the first ${FOUNDING_DISCOUNT_MONTHS} months.`;
+
+/** Homepage 3D configurators section (scoped on discovery call; not self-serve checkout). */
+export const THREE_D_OFFERS = [
+  {
+    id: "viewer",
+    name: "3D Viewer",
+    price: "From $3,500 setup + $500/mo",
+    description:
+      "For companies that want customers to view and explore a product in 3D.",
+  },
+  {
+    id: "configurator",
+    name: "3D Configurator",
+    price: "From $8,000–$15,000 setup + $1,000–$3,000/mo",
+    description:
+      "For products with options, colors, parts, layouts, or custom configurations.",
+  },
+  {
+    id: "enterprise",
+    name: "Industrial / Enterprise Configurator",
+    price: "Custom quote",
+    description:
+      "For complex products, large models, CAD workflows, private portals, or advanced integrations.",
+  },
+] as const;

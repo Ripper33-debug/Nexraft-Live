@@ -6,55 +6,81 @@ import { PrimaryButton, GhostButton } from "@/components/ui/PrimaryButton";
 import {
   FOUNDING_DISCOUNT_MONTHS,
   FOUNDING_DISCOUNT_PCT,
-  FOUNDING_SLOTS_REMAINING,
   FOUNDING_SLOTS_TOTAL,
   PRICES,
+  THREE_D_OFFERS,
   formatUsd,
 } from "@/lib/pricing";
 import { BOOK_CALL_URL } from "@/lib/site";
 
-const plans = [
+const webPlans = [
   {
+    id: "starter",
     name: "Starter",
+    tier: "Managed Website Ops",
     price: PRICES.web.starter,
     summary:
-      "Ongoing site care, content updates, and performance monitoring.",
+      "Your website, fully handled. We run hosting, CMS, monitoring, and fixes so you do not have to think about it.",
     items: [
-      "Custom-built CMS included",
-      "Up to 8 pages maintained",
-      "Content updates & publishing",
+      "Managed hosting included",
+      "CMS support",
+      "Uptime monitoring",
+      "Backups",
+      "Security updates",
       "Monthly performance report",
-      "Bug fixes within 48h",
+      "Up to 5 support hours per month",
+      "48-hour turnaround on small fixes",
     ],
     popular: false,
   },
   {
+    id: "growth",
     name: "Growth",
+    tier: "Website + Content Support",
     price: PRICES.web.growth,
     summary:
-      "Active development for features, integrations, and optimization.",
+      "Your site gets better every month. Content, SEO, landing pages, and conversion work — handled by one team.",
     items: [
       "Everything in Starter",
-      "20 dev hours per month",
-      "A/B tests & conversion work",
-      "API & third-party integrations",
-      "Bi-weekly sync & roadmap",
+      "Up to 20 dev and design hours per month",
+      "Landing page updates",
+      "Content updates",
+      "SEO improvements",
+      "Analytics and reporting",
+      "Conversion improvements",
+      "Priority support",
     ],
     popular: true,
   },
   {
+    id: "build",
     name: "Build",
+    tier: "Product + Web Development",
     price: PRICES.web.build,
-    summary: "Dedicated capacity for apps, platforms, and complex systems.",
+    summary:
+      "For companies building real tools — custom features, integrations, and full-stack delivery every month.",
     items: [
       "Everything in Growth",
-      "40 dev hours per month",
-      "Full-stack feature delivery",
-      "Architecture & code review",
-      "Priority queue, same-day triage",
+      "Up to 40 dev and design hours per month",
+      "Full-stack web development",
+      "Custom features",
+      "Technical architecture",
+      "Integrations",
+      "Same-day triage",
+      "Priority roadmap planning",
     ],
     popular: false,
   },
+] as const;
+
+const hostingIncludes = [
+  "Website migration",
+  "Managed hosting",
+  "SSL",
+  "Backups",
+  "Uptime monitoring",
+  "Performance checks",
+  "Basic support",
 ] as const;
 
 export function Pricing() {
@@ -65,47 +91,106 @@ export function Pricing() {
           specLabel="06 / PRICING"
           titleId="pricing-heading"
           title="Monthly rates. No surprises."
+          subtitle="Pick a retainer. We handle the rest — web, hosting, and ops in one invoice."
         />
       </Reveal>
 
-      <div className="mt-10 border border-line bg-ink2 p-5 md:mt-12 md:p-6">
-        <p className="text-sm leading-relaxed text-mute">
-          <span className="text-bone">Founding rate.</span> First{" "}
-          {FOUNDING_SLOTS_TOTAL} clients get {FOUNDING_DISCOUNT_PCT}% off any
-          retainer for {FOUNDING_DISCOUNT_MONTHS} months.{" "}
-          {FOUNDING_SLOTS_REMAINING} of {FOUNDING_SLOTS_TOTAL} slots open.
-        </p>
-      </div>
+      <Reveal delay={0.04}>
+        <div className="mt-10 border border-line bg-ink2 p-5 md:mt-12 md:p-6">
+          <p className="text-sm leading-relaxed text-mute">
+            <span className="text-bone">Founding client rate.</span> Available
+            for the first {FOUNDING_SLOTS_TOTAL} qualified retainer clients —{" "}
+            {FOUNDING_DISCOUNT_PCT}% off for the first {FOUNDING_DISCOUNT_MONTHS}{" "}
+            months.
+          </p>
+          <p className="mt-3 text-sm leading-relaxed text-mute">
+            All retainers start with a 6-month initial term, then continue
+            month-to-month. No build fee, no setup fee - your site is built and
+            maintained inside the retainer.
+          </p>
+        </div>
+      </Reveal>
 
       <div className="mt-8 grid grid-cols-1 gap-px border border-line bg-line md:grid-cols-3 md:items-stretch">
-        {plans.map((plan) => (
-          <article
-            key={plan.name}
-            className={`relative flex h-full flex-col p-6 md:p-7 ${
-              plan.popular
-                ? "z-10 bg-panel md:-translate-y-3 md:shadow-[0_24px_48px_-24px_rgba(0,0,0,0.6)]"
-                : "bg-ink2"
-            }`}
-          >
-            {plan.popular ? (
-              <span className="absolute right-0 top-0 border-b border-l border-line bg-ink px-3 py-1.5 text-xs text-faint">
-                Most common
-              </span>
-            ) : null}
+        {webPlans.map((plan, index) => (
+          <Reveal key={plan.id} delay={0.06 + index * 0.04} className="h-full">
+            <article
+              className={`relative flex h-full flex-col p-6 md:p-7 ${
+                plan.popular
+                  ? "z-10 border border-signal/25 bg-panel md:-translate-y-3 md:shadow-[0_24px_48px_-24px_rgba(0,0,0,0.6)]"
+                  : "bg-ink2"
+              }`}
+            >
+              {plan.popular ? (
+                <span className="absolute right-0 top-0 border-b border-l border-line bg-ink px-3 py-1.5 font-jetbrains text-[10px] uppercase tracking-[0.14em] text-signal-dim">
+                  Most Popular
+                </span>
+              ) : null}
 
-            <h3 className="font-display text-2xl font-semibold text-bone">
-              {plan.name}
-            </h3>
-            <p className="mt-2 font-display text-3xl font-semibold tracking-tight text-bone">
-              {formatUsd(plan.price)}
-              <span className="ml-1 text-base font-normal text-mute">/mo</span>
-            </p>
-            <p className="mt-4 text-sm leading-relaxed text-mute">
-              {plan.summary}
-            </p>
+              <p className="font-jetbrains text-[11px] uppercase tracking-[0.16em] text-faint">
+                {plan.name}
+              </p>
+              <h3 className="mt-2 font-display text-xl font-semibold leading-snug text-bone md:text-2xl">
+                {plan.tier}
+              </h3>
+              <p className="mt-3 font-display text-3xl font-semibold tracking-tight text-bone">
+                {formatUsd(plan.price)}
+                <span className="ml-1 text-base font-normal text-mute">/mo</span>
+              </p>
+              <p className="mt-4 text-sm leading-relaxed text-mute">
+                {plan.summary}
+              </p>
 
-            <ul className="mt-6 flex-1 space-y-2.5">
-              {plan.items.map((item) => (
+              <ul className="mt-6 flex-1 space-y-2.5">
+                {plan.items.map((item) => (
+                  <li
+                    key={item}
+                    className="flex gap-2.5 text-sm leading-relaxed text-mute"
+                  >
+                    <span className="text-faint" aria-hidden="true">
+                      {"\u2013"}
+                    </span>
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+
+              <div className="mt-8 space-y-3">
+                <PrimaryButton href={BOOK_CALL_URL} className="w-full">
+                  Book a Call
+                </PrimaryButton>
+                <GhostButton href="/pay" className="w-full">
+                  Start With Nexraft
+                </GhostButton>
+              </div>
+            </article>
+          </Reveal>
+        ))}
+      </div>
+
+      <Reveal delay={0.1}>
+        <article className="mt-8 border border-line bg-ink2 p-6 md:p-8">
+          <div className="flex flex-col gap-8 lg:flex-row lg:items-start lg:justify-between">
+            <div className="max-w-xl">
+              <p className="font-jetbrains text-[11px] uppercase tracking-[0.16em] text-faint">
+                Hosting only
+              </p>
+              <h3 className="mt-2 font-display text-2xl font-semibold text-bone md:text-3xl">
+                Managed Hosting + Migration
+              </h3>
+              <p className="mt-3 font-display text-3xl font-semibold tracking-tight text-bone">
+                {formatUsd(PRICES.hosting.managed)}
+                <span className="ml-1 text-base font-normal text-mute">/mo</span>
+              </p>
+              <p className="mt-4 text-sm leading-relaxed text-mute">
+                Leaving Squarespace, Wix, or WordPress? We migrate your site,
+                then run it — not just a server bill. One team owns the move and
+                the stack after launch.
+              </p>
+            </div>
+
+            <ul className="grid flex-1 grid-cols-1 gap-2.5 sm:grid-cols-2 lg:max-w-md">
+              {hostingIncludes.map((item) => (
                 <li
                   key={item}
                   className="flex gap-2.5 text-sm leading-relaxed text-mute"
@@ -117,39 +202,63 @@ export function Pricing() {
                 </li>
               ))}
             </ul>
+          </div>
 
-            <div className="mt-8 space-y-3">
-              <PrimaryButton href={BOOK_CALL_URL} className="w-full">
-                Book a call
-              </PrimaryButton>
-              <GhostButton href="/pay" className="w-full">
-                Activate retainer
-              </GhostButton>
-            </div>
-          </article>
-        ))}
-      </div>
+          <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+            <PrimaryButton href={BOOK_CALL_URL} className="sm:min-w-[200px]">
+              Book a Call
+            </PrimaryButton>
+            <GhostButton href="/pay" className="sm:min-w-[200px]">
+              Start With Nexraft
+            </GhostButton>
+          </div>
+        </article>
+      </Reveal>
 
-      <div className="mt-8 flex flex-col gap-6 border border-line bg-ink2 p-6 md:flex-row md:items-center md:justify-between md:p-7">
-        <div>
-          <p className="font-display text-2xl font-semibold text-bone md:text-3xl">
-            {formatUsd(PRICES.hosting.managed)}/mo
+      <Reveal delay={0.12}>
+        <div className="mt-16 border-t border-line pt-12">
+          <h3 className="font-display text-[clamp(1.35rem,3vw,1.75rem)] font-semibold leading-snug tracking-[-0.02em] text-bone">
+            3D Configurators & Interactive Product Experiences
+          </h3>
+          <p className="mt-3 max-w-2xl text-sm leading-relaxed text-mute">
+            Browser-native 3D for products that need to be seen, configured, or
+            explored — scoped on a call, priced to the build.
           </p>
-          <p className="mt-2 max-w-xl text-sm leading-relaxed text-mute">
-            On Squarespace, Wix, or WordPress? We migrate you to managed edge
-            infrastructure and run it. Migration included.
-          </p>
+
+          <div className="mt-8 grid grid-cols-1 gap-px border border-line bg-line md:grid-cols-3">
+            {THREE_D_OFFERS.map((offer) => (
+              <article
+                key={offer.id}
+                className="flex h-full flex-col bg-ink2 p-6 md:p-7"
+              >
+                <h4 className="font-display text-lg font-semibold text-bone">
+                  {offer.name}
+                </h4>
+                <p className="mt-3 font-display text-lg font-semibold text-bone">
+                  {offer.price}
+                </p>
+                <p className="mt-4 flex-1 text-sm leading-relaxed text-mute">
+                  {offer.description}
+                </p>
+                <div className="mt-8">
+                  <PrimaryButton href={BOOK_CALL_URL} className="w-full">
+                    Book a Call
+                  </PrimaryButton>
+                </div>
+              </article>
+            ))}
+          </div>
         </div>
-        <GhostButton href={BOOK_CALL_URL} external>
-          Migrate my site
-        </GhostButton>
-      </div>
+      </Reveal>
 
-      <p className="mt-8 text-xs leading-relaxed text-faint">
+      <p className="mt-10 text-xs leading-relaxed text-faint">
         Managed hosting ({formatUsd(PRICES.hosting.managed)}/mo value) included
-        with every retainer {"\u00b7"} First-month money-back {"\u00b7"} Cancel
-        anytime, 30 days notice {"\u00b7"} All prices in USD {"\u00b7"}{" "}
-        <a href="/legal/sla" className="text-mute underline decoration-line underline-offset-2 hover:text-bone">
+        with every retainer {"\u00b7"} 6-month initial term, then month-to-month{" "}
+        {"\u00b7"} 30 days notice to cancel {"\u00b7"} All prices in USD {"\u00b7"}{" "}
+        <a
+          href="/legal/sla"
+          className="text-mute underline decoration-line underline-offset-2 hover:text-bone"
+        >
           SLA summary
         </a>
       </p>

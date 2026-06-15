@@ -100,10 +100,10 @@ export function ContactForm() {
             className={`mt-2 ${fieldClass} ${focusRing}`}
           >
             <option>Not sure yet</option>
-            <option>Starter</option>
-            <option>Growth</option>
-            <option>Build</option>
-            <option>Hosting migration</option>
+            <option>Starter — Managed Website Ops</option>
+            <option>Growth — Website + Content Support</option>
+            <option>Build — Product + Web Development</option>
+            <option>Managed Hosting + Migration</option>
             <option>3D production</option>
           </select>
         </div>

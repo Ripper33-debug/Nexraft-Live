@@ -156,8 +156,10 @@ export function PlanCheckoutConfigurator() {
         <div className="border border-line bg-panel px-4 py-3">
           <p className="text-sm leading-relaxed text-mute">
             Building a live site? Most clients add{" "}
-            <strong className="font-medium text-bone">Managed hosting</strong>{" "}
-            ($350/mo) so we deploy and monitor production for you.
+            <strong className="font-medium text-bone">
+              Managed Hosting + Migration
+            </strong>{" "}
+            ($350/mo) — migration, SSL, backups, and monitoring included.
           </p>
           <button
             type="button"
@@ -165,7 +167,7 @@ export function PlanCheckoutConfigurator() {
             className={`mt-2 text-sm text-bone underline decoration-line underline-offset-4 hover:text-mute ${focusRing}`}
             disabled={loading}
           >
-            Add managed hosting
+            Add managed hosting + migration
           </button>
         </div>
       )}

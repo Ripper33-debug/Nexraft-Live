@@ -54,16 +54,16 @@ export default function SlaPage() {
           heading: "Support response",
           items: [
             {
-              title: "Starter",
+              title: "Starter — Managed Website Ops",
               detail: "Bug fixes addressed within 48 business hours for in-scope issues.",
             },
             {
-              title: "Growth",
+              title: "Growth — Website + Content Support",
               detail:
                 "Bi-weekly syncs. Development queue prioritized within the monthly hour allocation.",
             },
             {
-              title: "Build",
+              title: "Build — Product + Web Development",
               detail:
                 "Same-day triage for production issues. Priority queue for feature work.",
             },

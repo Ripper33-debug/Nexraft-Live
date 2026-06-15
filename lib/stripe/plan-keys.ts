@@ -40,12 +40,12 @@ export function planKeyFromWebIndex(index: string): StripePlanKey | null {
 }
 
 export const STRIPE_PLAN_LABELS: Record<StripePlanKey, string> = {
-  starter: "Web Starter",
-  growth: "Web Growth",
-  build: "Web Build",
-  hosting_managed: "Hosting Managed",
-  hosting_performance: "Hosting Performance",
-  hosting_enterprise: "Hosting Enterprise",
+  starter: "Starter — Managed Website Ops",
+  growth: "Growth — Website + Content Support",
+  build: "Build — Product + Web Development",
+  hosting_managed: "Managed Hosting + Migration",
+  hosting_performance: "Performance Hosting",
+  hosting_enterprise: "Enterprise Hosting",
   three_d_asset: "3D Asset",
   three_d_scene: "3D Scene",
   three_d_studio: "3D Studio",
