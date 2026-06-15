@@ -13,6 +13,21 @@ import {
 } from "@/lib/pricing";
 import { BOOK_CALL_URL } from "@/lib/site";
 
+const focusRing =
+  "outline-none focus-visible:[outline:2px_solid_var(--color-signal)] focus-visible:[outline-offset:2px]";
+
+function StartLink({ className = "" }: { className?: string }) {
+  return (
+    <a
+      href="/pay"
+      className={`inline-flex items-center justify-center gap-1.5 text-sm text-mute underline decoration-line underline-offset-4 transition-colors duration-300 hover:text-bone ${focusRing} ${className}`}
+    >
+      Start With Nexraft
+      <span aria-hidden="true">{"\u2192"}</span>
+    </a>
+  );
+}
+
 const webPlans = [
   {
     id: "starter",
@@ -156,12 +171,16 @@ export function Pricing() {
               </ul>
 
               <div className="mt-8 space-y-3">
-                <PrimaryButton href={BOOK_CALL_URL} className="w-full">
-                  Book a Call
-                </PrimaryButton>
-                <GhostButton href="/pay" className="w-full">
-                  Start With Nexraft
-                </GhostButton>
+                {plan.popular ? (
+                  <PrimaryButton href={BOOK_CALL_URL} className="w-full">
+                    Book a Call
+                  </PrimaryButton>
+                ) : (
+                  <GhostButton href={BOOK_CALL_URL} external className="w-full">
+                    Book a Call
+                  </GhostButton>
+                )}
+                <StartLink className="w-full" />
               </div>
             </article>
           </Reveal>
@@ -204,13 +223,11 @@ export function Pricing() {
             </ul>
           </div>
 
-          <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-            <PrimaryButton href={BOOK_CALL_URL} className="sm:min-w-[200px]">
+          <div className="mt-8 flex flex-col items-start gap-4 sm:flex-row sm:items-center">
+            <GhostButton href={BOOK_CALL_URL} external className="sm:min-w-[200px]">
               Book a Call
-            </PrimaryButton>
-            <GhostButton href="/pay" className="sm:min-w-[200px]">
-              Start With Nexraft
             </GhostButton>
+            <StartLink />
           </div>
         </article>
       </Reveal>
@@ -241,9 +258,9 @@ export function Pricing() {
                   {offer.description}
                 </p>
                 <div className="mt-8">
-                  <PrimaryButton href={BOOK_CALL_URL} className="w-full">
+                  <GhostButton href={BOOK_CALL_URL} external className="w-full">
                     Book a Call
-                  </PrimaryButton>
+                  </GhostButton>
                 </div>
               </article>
             ))}

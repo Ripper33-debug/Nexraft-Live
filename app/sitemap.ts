@@ -1,8 +1,16 @@
 import type { MetadataRoute } from "next";
+import { allNotes } from "@/lib/notes";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const base = "https://nexraft.com";
   const now = new Date();
+
+  const notes: MetadataRoute.Sitemap = allNotes().map((note) => ({
+    url: `${base}/notes/${note.slug}`,
+    lastModified: new Date(`${note.date}T00:00:00Z`),
+    changeFrequency: "yearly",
+    priority: 0.6,
+  }));
 
   return [
     {
@@ -48,6 +56,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.7,
     },
     {
+      url: `${base}/notes`,
+      lastModified: now,
+      changeFrequency: "weekly",
+      priority: 0.6,
+    },
+    ...notes,
+    {
       url: `${base}/legal/privacy`,
       lastModified: now,
       changeFrequency: "yearly",
@@ -67,6 +82,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
     {
       url: `${base}/legal/sla`,
+      lastModified: now,
+      changeFrequency: "yearly",
+      priority: 0.3,
+    },
+    {
+      url: `${base}/legal/accessibility`,
       lastModified: now,
       changeFrequency: "yearly",
       priority: 0.3,

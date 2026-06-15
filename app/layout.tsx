@@ -7,6 +7,9 @@ import { Grain } from "@/components/Grain";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { ScrollProgress } from "@/components/ScrollProgress";
+import { StructuredData } from "@/components/StructuredData";
+import { CookieNotice } from "@/components/CookieNotice";
+import { LoadingScreen } from "@/components/LoadingScreen";
 import "./globals.css";
 
 const bricolage = Bricolage_Grotesque({
@@ -71,6 +74,8 @@ export default function RootLayout({
       className={`${bricolage.variable} ${spaceGrotesk.variable} ${jetbrainsMono.variable} ${GeistSans.variable} ${GeistMono.variable}`}
     >
       <body className="relative min-h-screen overflow-x-clip bg-ink font-body text-bone antialiased">
+        <LoadingScreen />
+        <StructuredData />
         <Grain />
         <ScrollProgress />
         <a
@@ -84,6 +89,7 @@ export default function RootLayout({
           <main id="main">{children}</main>
           <Footer />
         </div>
+        <CookieNotice />
         <Analytics />
       </body>
     </html>

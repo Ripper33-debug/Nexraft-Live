@@ -6,6 +6,7 @@ const focusRing =
   "outline-none focus-visible:[outline:2px_solid_var(--color-signal)] focus-visible:[outline-offset:2px]";
 
 const seoLinks = [
+  { label: "Field notes", href: "/notes" },
   { label: "Weatherhaven", href: "/work/weatherhaven" },
   { label: "Outfyre", href: "/work/outfyre" },
   { label: "Family Care Pharmacy", href: "/work/family-care-pharmacy" },
@@ -19,6 +20,7 @@ const legalLinks = [
   { label: "Terms", href: "/legal/terms" },
   { label: "Subprocessors", href: "/legal/subprocessors" },
   { label: "SLA", href: "/legal/sla" },
+  { label: "Accessibility", href: "/legal/accessibility" },
 ] as const;
 
 export function Footer() {

@@ -5,11 +5,27 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { Reveal } from "@/components/ui/Reveal";
 import { useInView, usePageVisible } from "@/lib/use-in-view";
+import type { Finish } from "@/components/ProductDemoScene";
 
 const ProductDemoScene = dynamic(() => import("@/components/ProductDemoScene"), {
   ssr: false,
   loading: () => <ProductDemoFallback />,
 });
+
+const focusRing =
+  "outline-none focus-visible:[outline:2px_solid_var(--color-signal)] focus-visible:[outline-offset:2px]";
+
+const MATERIALS = [
+  { id: "bone", name: "Bone", value: "#E8EDE9" },
+  { id: "steel", name: "Steel", value: "#7C8A82" },
+  { id: "slate", name: "Slate", value: "#566159" },
+  { id: "signal", name: "Signal", value: "#9EFF5B" },
+] as const;
+
+const FINISHES: { id: Finish; name: string }[] = [
+  { id: "matte", name: "Matte" },
+  { id: "gloss", name: "Gloss" },
+];
 
 function ProductDemoFallback() {
   return (
@@ -32,10 +48,14 @@ function ProductDemoFallback() {
 }
 
 export function ProductDemo() {
-  const [interactiveAllowed, setInteractiveAllowed] = useState(false);
+  const [allowed, setAllowed] = useState(false);
+  const [motionOk, setMotionOk] = useState(true);
+  const [color, setColor] = useState<string>(MATERIALS[0].value);
+  const [finish, setFinish] = useState<Finish>("matte");
+
   const pageVisible = usePageVisible();
   const { ref, inView } = useInView<HTMLDivElement>({
-    disabled: !interactiveAllowed,
+    disabled: !allowed,
     rootMargin: "120px",
   });
 
@@ -44,10 +64,12 @@ export function ProductDemo() {
       "(prefers-reduced-motion: reduce)",
     ).matches;
     const narrow = window.matchMedia("(max-width: 767px)").matches;
-    if (!reduced && !narrow) setInteractiveAllowed(true);
+    setAllowed(!narrow);
+    setMotionOk(!reduced);
   }, []);
 
-  const showScene = interactiveAllowed && pageVisible && inView;
+  const mountScene = allowed && pageVisible && inView;
+  const sceneActive = mountScene && motionOk;
 
   return (
     <section
@@ -63,15 +85,16 @@ export function ProductDemo() {
               id="demo-heading"
               className="mt-3 font-display text-[clamp(1.75rem,4vw,2.5rem)] font-semibold leading-[1.08] tracking-[-0.03em] text-bone"
             >
-              Spin it in the browser.
+              Configure it live.
             </h2>
             <p className="mt-4 max-w-md text-sm leading-relaxed text-mute md:text-base">
-              Product viewers, configurators, and technical walkthroughs that
-              load fast and work on phones. Drag the model to explore.
+              Pick a material and finish and the product updates in real time.
+              The same engine we use for product viewers and full configurators -
+              fast on a laptop, fast on a phone.
             </p>
             <Link
               href="/3d-product-viewer"
-              className="mt-6 inline-block text-sm text-bone underline decoration-line underline-offset-4 transition-colors hover:text-signal"
+              className={`mt-6 inline-block text-sm text-bone underline decoration-line underline-offset-4 transition-colors duration-300 hover:text-signal ${focusRing}`}
             >
               See the 3D pipeline
             </Link>
@@ -79,18 +102,75 @@ export function ProductDemo() {
         </Reveal>
 
         <Reveal delay={0.08}>
-          <div
-            ref={ref}
-            className="relative aspect-[4/3] overflow-hidden border border-line bg-ink"
-          >
-            {showScene ? (
-              <ProductDemoScene active={showScene} />
-            ) : (
-              <ProductDemoFallback />
-            )}
-            <p className="pointer-events-none absolute bottom-3 left-3 text-xs text-faint">
-              {showScene ? "Drag to rotate" : "3D preview"}
-            </p>
+          <div>
+            <div
+              ref={ref}
+              className="relative aspect-[4/3] overflow-hidden border border-line bg-ink"
+            >
+              {mountScene ? (
+                <ProductDemoScene
+                  active={sceneActive}
+                  color={color}
+                  finish={finish}
+                />
+              ) : (
+                <ProductDemoFallback />
+              )}
+              <p className="pointer-events-none absolute bottom-3 left-3 text-xs text-faint">
+                {mountScene ? "Drag to rotate" : "3D preview"}
+              </p>
+            </div>
+
+            {allowed ? (
+              <div className="mt-5 flex flex-wrap items-start gap-x-10 gap-y-5">
+                <fieldset className="border-0 p-0">
+                  <legend className="font-jetbrains text-[11px] uppercase tracking-[0.2em] text-faint">
+                    Material
+                  </legend>
+                  <div className="mt-2.5 flex gap-2">
+                    {MATERIALS.map((material) => (
+                      <button
+                        key={material.id}
+                        type="button"
+                        onClick={() => setColor(material.value)}
+                        aria-pressed={color === material.value}
+                        aria-label={material.name}
+                        title={material.name}
+                        className={`h-8 w-8 border transition-colors duration-300 ${
+                          color === material.value
+                            ? "border-signal"
+                            : "border-line hover:border-mute"
+                        } ${focusRing}`}
+                        style={{ backgroundColor: material.value }}
+                      />
+                    ))}
+                  </div>
+                </fieldset>
+
+                <fieldset className="border-0 p-0">
+                  <legend className="font-jetbrains text-[11px] uppercase tracking-[0.2em] text-faint">
+                    Finish
+                  </legend>
+                  <div className="mt-2.5 flex gap-2">
+                    {FINISHES.map((option) => (
+                      <button
+                        key={option.id}
+                        type="button"
+                        onClick={() => setFinish(option.id)}
+                        aria-pressed={finish === option.id}
+                        className={`border px-3 py-1.5 font-jetbrains text-[11px] uppercase tracking-[0.16em] transition-colors duration-300 ${
+                          finish === option.id
+                            ? "border-bone text-bone"
+                            : "border-line text-faint hover:border-mute hover:text-mute"
+                        } ${focusRing}`}
+                      >
+                        {option.name}
+                      </button>
+                    ))}
+                  </div>
+                </fieldset>
+              </div>
+            ) : null}
           </div>
         </Reveal>
       </div>

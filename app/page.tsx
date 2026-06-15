@@ -7,6 +7,7 @@ import { Work } from "@/components/Work";
 import { Testimonials } from "@/components/Testimonials";
 import { Process } from "@/components/Process";
 import { Pricing } from "@/components/Pricing";
+import { Faq } from "@/components/Faq";
 import { Contact } from "@/components/Contact";
 
 export default function HomePage() {
@@ -21,6 +22,7 @@ export default function HomePage() {
       <Testimonials />
       <Process />
       <Pricing />
+      <Faq />
       <Contact />
     </>
   );

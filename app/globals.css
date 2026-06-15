@@ -215,3 +215,129 @@
     }
   }
 }
+
+@layer components {
+  .logo-marquee-mask {
+    -webkit-mask-image: linear-gradient(
+      to right,
+      transparent,
+      #000 8%,
+      #000 92%,
+      transparent
+    );
+    mask-image: linear-gradient(
+      to right,
+      transparent,
+      #000 8%,
+      #000 92%,
+      transparent
+    );
+  }
+
+  .logo-marquee {
+    animation: logo-marquee 32s linear infinite;
+    will-change: transform;
+  }
+
+  .logo-marquee:hover {
+    animation-play-state: paused;
+  }
+
+  @keyframes logo-marquee {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-25%);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .logo-marquee {
+      animation: none;
+    }
+  }
+
+  .loader-overlay {
+    opacity: 1;
+    transition:
+      opacity 600ms cubic-bezier(0.16, 1, 0.3, 1),
+      transform 600ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .loader-overlay[data-leaving="true"] {
+    opacity: 0;
+    transform: translateY(-2%);
+    pointer-events: none;
+  }
+
+  .loader-content {
+    animation: loader-content-in 700ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+
+  @keyframes loader-content-in {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .loader-bar {
+    position: relative;
+    height: 2px;
+    width: 180px;
+    overflow: hidden;
+    background: var(--color-line);
+  }
+
+  .loader-bar-fill {
+    position: absolute;
+    inset: 0;
+    display: block;
+    background: var(--color-signal);
+    transform: translateX(-100%);
+    animation: loader-bar-fill 1100ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  @keyframes loader-bar-fill {
+    from {
+      transform: translateX(-100%);
+    }
+    to {
+      transform: translateX(0);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .loader-overlay {
+      transition: none;
+    }
+
+    .loader-content {
+      animation: none;
+    }
+
+    .loader-bar-fill {
+      animation: none;
+      transform: translateX(0);
+    }
+  }
+
+  .faq-icon {
+    transition: transform 300ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .faq-item[open] .faq-icon {
+    transform: rotate(45deg);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .faq-icon {
+      transition: none;
+    }
+  }
+}

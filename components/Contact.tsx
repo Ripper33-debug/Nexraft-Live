@@ -15,7 +15,7 @@ export function Contact() {
     <SectionShell id="contact" ariaLabelledBy="contact-heading">
       <div className="mx-auto max-w-2xl text-center">
         <Reveal>
-          <SpecLabel className="mb-4">07 / CONTACT</SpecLabel>
+          <SpecLabel className="mb-4">08 / CONTACT</SpecLabel>
           <h2
             id="contact-heading"
             className="font-display text-[clamp(2rem,5vw,3.25rem)] font-semibold leading-[1.05] tracking-[-0.03em] text-bone"

@@ -65,13 +65,6 @@ export function resolveCheckoutPlans(
   return { plans };
 }
 
-export function stripeCheckoutEnabled(): boolean {
-  return (
-    !!process.env.STRIPE_SECRET_KEY &&
-    STRIPE_PLAN_KEYS.every((plan) => !!getStripePriceId(plan))
-  );
-}
-
 export function planKeyFromPriceId(
   priceId: string | null | undefined,
 ): StripePlanKey | null {

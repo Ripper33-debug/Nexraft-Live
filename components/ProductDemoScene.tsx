@@ -5,17 +5,22 @@ import { Canvas } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
 import type { Group } from "three";
 
-function ProductModel() {
+export type Finish = "matte" | "gloss";
+
+function ProductModel({ color, finish }: { color: string; finish: Finish }) {
   const group = useRef<Group>(null);
+  const gloss = finish === "gloss";
+  const metalness = gloss ? 0.9 : 0.25;
+  const roughness = gloss ? 0.12 : 0.6;
 
   return (
     <group ref={group} position={[0, -0.15, 0]}>
       <mesh position={[0, 0.35, 0]}>
         <boxGeometry args={[1.6, 0.55, 1.05]} />
         <meshStandardMaterial
-          color="#E8EDE9"
-          metalness={0.55}
-          roughness={0.32}
+          color={color}
+          metalness={metalness}
+          roughness={roughness}
         />
       </mesh>
       <mesh position={[0, -0.05, 0]}>
@@ -30,11 +35,7 @@ function ProductModel() {
       </mesh>
       <mesh position={[0, -0.45, 0]}>
         <boxGeometry args={[1.9, 0.2, 1.35]} />
-        <meshStandardMaterial
-          color="#566159"
-          metalness={0.65}
-          roughness={0.28}
-        />
+        <meshStandardMaterial color="#566159" metalness={0.65} roughness={0.28} />
       </mesh>
     </group>
   );
@@ -42,9 +43,15 @@ function ProductModel() {
 
 type ProductDemoSceneProps = {
   active?: boolean;
+  color: string;
+  finish: Finish;
 };
 
-export default function ProductDemoScene({ active = true }: ProductDemoSceneProps) {
+export default function ProductDemoScene({
+  active = true,
+  color,
+  finish,
+}: ProductDemoSceneProps) {
   return (
     <Canvas
       className="h-full w-full touch-none"
@@ -57,7 +64,7 @@ export default function ProductDemoScene({ active = true }: ProductDemoSceneProp
     >
       <ambientLight intensity={0.55} />
       <directionalLight position={[4, 6, 3]} intensity={1.1} />
-      <ProductModel />
+      <ProductModel color={color} finish={finish} />
       <OrbitControls
         enablePan={false}
         enableZoom={false}
