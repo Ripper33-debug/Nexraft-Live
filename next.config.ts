@@ -7,6 +7,7 @@ const csp = [
   "img-src 'self' data: blob: https:",
   "font-src 'self'",
   "connect-src 'self' https://formspree.io https://va.vercel-scripts.com https://vitals.vercel-insights.com",
+  "frame-src 'self' https://weatherhavenusa.com https://weatherhaven.com",
   "frame-ancestors 'none'",
   "base-uri 'self'",
   "form-action 'self' https://formspree.io",
