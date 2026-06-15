@@ -16,6 +16,32 @@ const NAV_LINKS = [
 const focusRing =
   "outline-none focus-visible:[outline:2px_solid_var(--color-signal)] focus-visible:[outline-offset:2px]";
 
+const navLinkClass = `nav-link font-jetbrains text-[11px] uppercase tracking-[0.14em] text-mute ${focusRing}`;
+
+function NavCta({
+  className = "",
+  onClick,
+}: {
+  className?: string;
+  onClick?: () => void;
+}) {
+  return (
+    <a
+      href={BOOK_CALL_URL}
+      target="_blank"
+      rel="noopener noreferrer"
+      onClick={onClick}
+      className={`nav-cta ${focusRing} ${className}`.trim()}
+    >
+      <span className="nav-cta-dot" aria-hidden="true" />
+      Book a call
+      <span className="nav-cta-arrow" aria-hidden="true">
+        {"\u2192"}
+      </span>
+    </a>
+  );
+}
+
 export function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
@@ -63,25 +89,18 @@ export function Header() {
 
         <nav
           aria-label="Primary"
-          className="hidden items-center gap-8 min-[860px]:flex"
+          className="hidden items-center gap-7 min-[860px]:flex"
         >
           {NAV_LINKS.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className={`text-sm text-mute transition-colors duration-300 hover:text-bone ${focusRing}`}
-            >
+            <Link key={link.href} href={link.href} className={navLinkClass}>
               {link.label}
             </Link>
           ))}
-          <a
-            href={BOOK_CALL_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className={`inline-flex items-center bg-signal px-4 py-2.5 text-sm font-medium text-ink transition-colors duration-300 hover:bg-signal-dim ${focusRing}`}
-          >
-            Book a call
-          </a>
+          <span
+            className="mx-0.5 h-4 w-px shrink-0 bg-line"
+            aria-hidden="true"
+          />
+          <NavCta />
         </nav>
 
         <button
@@ -90,7 +109,7 @@ export function Header() {
           aria-expanded={open}
           aria-controls="mobile-menu"
           onClick={() => setOpen((value) => !value)}
-          className={`text-sm text-mute transition-colors duration-300 hover:text-bone min-[860px]:hidden ${focusRing}`}
+          className={`font-jetbrains text-[11px] uppercase tracking-[0.14em] text-mute transition-colors duration-300 hover:text-bone min-[860px]:hidden ${focusRing}`}
         >
           {open ? "Close" : "Menu"}
         </button>
@@ -114,20 +133,15 @@ export function Header() {
                 key={link.href}
                 href={link.href}
                 onClick={() => setOpen(false)}
-                className={`border-b border-line py-4 text-base text-mute transition-colors duration-300 hover:text-bone ${focusRing}`}
+                className={`border-b border-line py-4 font-jetbrains text-[11px] uppercase tracking-[0.14em] text-mute transition-colors duration-300 hover:text-bone ${focusRing}`}
               >
                 {link.label}
               </Link>
             ))}
-            <a
-              href={BOOK_CALL_URL}
-              target="_blank"
-              rel="noopener noreferrer"
+            <NavCta
+              className="mt-5 w-full justify-center py-3.5"
               onClick={() => setOpen(false)}
-              className={`mt-4 inline-flex w-full items-center justify-center bg-signal px-4 py-3 text-sm font-medium text-ink transition-colors duration-300 hover:bg-signal-dim ${focusRing}`}
-            >
-              Book a call
-            </a>
+            />
           </nav>
         </div>
       </div>
