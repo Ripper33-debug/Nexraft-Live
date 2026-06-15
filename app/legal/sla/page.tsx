@@ -96,6 +96,10 @@ export default function SlaPage() {
           <Link href="/legal/terms" className="text-bone hover:underline">
             Terms of service
           </Link>
+          . Live status:{" "}
+          <Link href="/status" className="text-bone hover:underline">
+            System status
+          </Link>
           . Need a signed SLA?{" "}
           <Link href="/#contact" className="text-bone hover:underline">
             Contact us

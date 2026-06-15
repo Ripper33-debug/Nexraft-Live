@@ -3,6 +3,7 @@ import Link from "next/link";
 import { BookCallButton } from "@/components/BookCallButton";
 import { ContactEmails } from "@/components/ContactEmails";
 import { SubpageShell } from "@/components/SubpageShell";
+import { BeforeAfterSlider } from "@/components/ui/BeforeAfterSlider";
 import { PRICES, formatUsd } from "@/lib/pricing";
 
 export const metadata: Metadata = {
@@ -87,6 +88,19 @@ export default function WordPressTooSlowPage() {
         }
         footerLink={null}
       />
+
+      <section className="border-t border-line bg-ink2 py-[84px] md:py-[100px]">
+        <div className="mx-auto max-w-[1180px] px-7">
+          <h2 className="font-display text-2xl font-semibold text-bone md:text-3xl">
+            Typical results after rebuild
+          </h2>
+          <p className="mt-3 max-w-xl text-sm leading-relaxed text-mute">
+            Drag the slider to compare a slow WordPress install against a
+            static-first Nexraft stack.
+          </p>
+          <BeforeAfterSlider className="mt-10" />
+        </div>
+      </section>
 
       <section className="border-t border-line bg-ink pb-[84px] md:pb-[120px]">
         <div className="mx-auto grid max-w-[1180px] gap-8 px-7 sm:grid-cols-2">

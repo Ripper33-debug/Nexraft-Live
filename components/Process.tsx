@@ -2,6 +2,7 @@
 
 import { SectionHeader, SectionShell } from "@/components/ui/SectionShell";
 import { Reveal } from "@/components/ui/Reveal";
+import { DeployTerminal } from "@/components/DeployTerminal";
 
 const steps = [
   {
@@ -34,6 +35,7 @@ export function Process() {
           specLabel="05 / PROCESS"
           titleId="process-heading"
           title="How we work."
+          subtitle="Short cycles, written specs, and production deploys you can watch land."
         />
       </Reveal>
 
@@ -49,6 +51,8 @@ export function Process() {
           </div>
         ))}
       </div>
+
+      <DeployTerminal />
     </SectionShell>
   );
 }

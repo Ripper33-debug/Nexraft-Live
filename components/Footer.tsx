@@ -7,6 +7,7 @@ const focusRing =
 
 const seoLinks = [
   { label: "Field notes", href: "/notes" },
+  { label: "System status", href: "/status" },
   { label: "Weatherhaven", href: "/work/weatherhaven" },
   { label: "Outfyre", href: "/work/outfyre" },
   { label: "Family Care Pharmacy", href: "/work/family-care-pharmacy" },

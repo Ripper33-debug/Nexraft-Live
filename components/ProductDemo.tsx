@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { Reveal } from "@/components/ui/Reveal";
 import { useInView, usePageVisible } from "@/lib/use-in-view";
-import type { Finish } from "@/components/ProductDemoScene";
+import type { Finish, ShelterLayout } from "@/components/ProductDemoScene";
 
 const ProductDemoScene = dynamic(() => import("@/components/ProductDemoScene"), {
   ssr: false,
@@ -25,6 +25,11 @@ const MATERIALS = [
 const FINISHES: { id: Finish; name: string }[] = [
   { id: "matte", name: "Matte" },
   { id: "gloss", name: "Gloss" },
+];
+
+const LAYOUTS: { id: ShelterLayout; name: string }[] = [
+  { id: "compact", name: "Compact" },
+  { id: "field", name: "Field" },
 ];
 
 function ProductDemoFallback() {
@@ -52,6 +57,7 @@ export function ProductDemo() {
   const [motionOk, setMotionOk] = useState(true);
   const [color, setColor] = useState<string>(MATERIALS[0].value);
   const [finish, setFinish] = useState<Finish>("matte");
+  const [layout, setLayout] = useState<ShelterLayout>("compact");
 
   const pageVisible = usePageVisible();
   const { ref, inView } = useInView<HTMLDivElement>({
@@ -88,9 +94,9 @@ export function ProductDemo() {
               Configure it live.
             </h2>
             <p className="mt-4 max-w-md text-sm leading-relaxed text-mute md:text-base">
-              Pick a material and finish and the product updates in real time.
-              The same engine we use for product viewers and full configurators -
-              fast on a laptop, fast on a phone.
+              A modular field shelter you can recolor, resize, and finish in
+              real time. The same engine we ship for product viewers and full
+              configurators - fast on a laptop, fast on a phone.
             </p>
             <Link
               href="/3d-product-viewer"
@@ -112,6 +118,7 @@ export function ProductDemo() {
                   active={sceneActive}
                   color={color}
                   finish={finish}
+                  layout={layout}
                 />
               ) : (
                 <ProductDemoFallback />
@@ -143,6 +150,29 @@ export function ProductDemo() {
                         } ${focusRing}`}
                         style={{ backgroundColor: material.value }}
                       />
+                    ))}
+                  </div>
+                </fieldset>
+
+                <fieldset className="border-0 p-0">
+                  <legend className="font-jetbrains text-[11px] uppercase tracking-[0.2em] text-faint">
+                    Layout
+                  </legend>
+                  <div className="mt-2.5 flex gap-2">
+                    {LAYOUTS.map((option) => (
+                      <button
+                        key={option.id}
+                        type="button"
+                        onClick={() => setLayout(option.id)}
+                        aria-pressed={layout === option.id}
+                        className={`border px-3 py-1.5 font-jetbrains text-[11px] uppercase tracking-[0.16em] transition-colors duration-300 ${
+                          layout === option.id
+                            ? "border-bone text-bone"
+                            : "border-line text-faint hover:border-mute hover:text-mute"
+                        } ${focusRing}`}
+                      >
+                        {option.name}
+                      </button>
                     ))}
                   </div>
                 </fieldset>

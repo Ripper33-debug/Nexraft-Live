@@ -63,6 +63,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
     ...notes,
     {
+      url: `${base}/status`,
+      lastModified: now,
+      changeFrequency: "weekly",
+      priority: 0.5,
+    },
+    {
       url: `${base}/legal/privacy`,
       lastModified: now,
       changeFrequency: "yearly",
