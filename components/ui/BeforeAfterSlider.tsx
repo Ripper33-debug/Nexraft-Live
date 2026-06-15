@@ -144,7 +144,7 @@ function LiveSitePanel({
 }) {
   const frameWrapRef = useRef<HTMLDivElement>(null);
   const [scale, setScale] = useState(0.5);
-  const [liveBlocked, setLiveBlocked] = useState(false);
+  const [iframeReady, setIframeReady] = useState(false);
 
   useEffect(() => {
     const node = frameWrapRef.current;
@@ -160,28 +160,6 @@ function LiveSitePanel({
     return () => observer.disconnect();
   }, []);
 
-  useEffect(() => {
-    const timer = window.setTimeout(() => {
-      const iframe = frameWrapRef.current?.querySelector("iframe");
-      if (!iframe) return;
-      try {
-        const doc = iframe.contentDocument;
-        if (!doc || !doc.body?.childElementCount) setLiveBlocked(true);
-      } catch {
-        /* cross-origin load succeeded */
-      }
-    }, 4500);
-    return () => window.clearTimeout(timer);
-  }, []);
-
-  const handleInteract = () => {
-    if (liveBlocked) {
-      window.open(shot.href, "_blank", "noopener,noreferrer");
-      return;
-    }
-    onEnableInteraction();
-  };
-
   return (
     <div className="relative h-full w-full overflow-hidden bg-ink">
       <Image
@@ -189,45 +167,52 @@ function LiveSitePanel({
         alt=""
         fill
         aria-hidden
-        className="object-cover object-top"
+        className={`object-cover object-top transition-opacity duration-500 ${
+          iframeReady ? "opacity-0" : "opacity-100"
+        }`}
         sizes="(max-width: 768px) 100vw, 1180px"
       />
 
-      {!liveBlocked ? (
-        <div ref={frameWrapRef} className="absolute inset-0">
+      <div
+        ref={frameWrapRef}
+        className="absolute inset-0 z-[1] overflow-hidden"
+        style={{ paddingTop: 46 }}
+      >
+        <div
+          className="origin-top-left"
+          style={{
+            width: LIVE_VIEWPORT.width,
+            height: LIVE_VIEWPORT.height,
+            transform: `scale(${scale})`,
+          }}
+        >
           <iframe
             src={shot.href}
             title={shot.alt}
-            className="absolute left-0 border-0 bg-ink"
+            width={LIVE_VIEWPORT.width}
+            height={LIVE_VIEWPORT.height}
+            className="block border-0 bg-ink"
             style={{
-              top: 46,
-              width: LIVE_VIEWPORT.width,
-              height: LIVE_VIEWPORT.height,
-              transform: `scale(${scale})`,
-              transformOrigin: "top left",
               pointerEvents: allowInteraction ? "auto" : "none",
             }}
-            loading="lazy"
-            sandbox="allow-scripts allow-same-origin allow-popups allow-forms"
-            onError={() => setLiveBlocked(true)}
+            loading="eager"
+            allow="autoplay; fullscreen"
+            sandbox="allow-scripts allow-same-origin allow-popups allow-forms allow-presentation"
+            onLoad={() => setIframeReady(true)}
           />
         </div>
-      ) : null}
+      </div>
 
-      <PanelChrome
-        label={label}
-        shot={shot}
-        badge={liveBlocked ? "Snapshot" : "Live"}
-      />
+      <PanelChrome label={label} shot={shot} badge="Live" />
 
       {!allowInteraction ? (
         <div className="absolute inset-x-0 bottom-0 z-20 border-t border-line bg-[rgba(10,14,12,0.92)] px-4 py-3 md:px-5">
           <button
             type="button"
-            onClick={handleInteract}
+            onClick={onEnableInteraction}
             className={`font-jetbrains text-[10px] uppercase tracking-[0.14em] text-bone underline decoration-line underline-offset-4 transition-colors hover:text-signal ${focusRing}`}
           >
-            {liveBlocked ? "Open live site in new tab" : "Interact with live site"}
+            Interact with live site
           </button>
         </div>
       ) : null}
