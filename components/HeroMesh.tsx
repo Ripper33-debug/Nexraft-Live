@@ -54,7 +54,7 @@ const fragmentShader = /* glsl */ `
   varying float vMouseDist;
 
   void main() {
-    vec3 signal = vec3(0.620, 1.000, 0.357);
+    vec3 signal = vec3(0.263, 0.816, 0.522);
     vec3 bone = vec3(0.910, 0.929, 0.914);
 
     float relief = clamp(vHeight * 0.42 + 0.5, 0.0, 1.0);

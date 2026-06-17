@@ -5,9 +5,9 @@
   --color-surface-deep: #070a09;
   --color-foreground: #e8edea;
   --color-muted: #9aa59f;
-  --color-accent: #9eff5b;
-  --color-border: rgba(158, 255, 91, 0.12);
-  --color-border-strong: rgba(158, 255, 91, 0.22);
+  --color-accent: var(--color-signal);
+  --color-border: color-mix(in srgb, var(--color-signal) 12%, transparent);
+  --color-border-strong: color-mix(in srgb, var(--color-signal) 22%, transparent);
 
   --color-ink: #0A0E0C;
   --color-ink2: #0E1310;
@@ -18,8 +18,8 @@
   --color-mute: #C4CCC8;
   --color-faint: #B4BEB8;
   --color-tag: #C8D0CC;
-  --color-signal: #9EFF5B;
-  --color-signal-dim: #6FBF3F;
+  --color-signal: #43d085;
+  --color-signal-dim: #309660;
 
   --font-display: var(--font-bricolage);
   --font-body: var(--font-geist-sans);
@@ -87,7 +87,7 @@
   }
 
   ::selection {
-    background-color: rgba(158, 255, 91, 0.25);
+    background-color: color-mix(in srgb, var(--color-signal) 25%, transparent);
     color: var(--color-bone);
   }
 

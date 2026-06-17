@@ -25,8 +25,8 @@ generated utilities, never raw hex.
 | mute | #C4CCC8 | Body secondary / descriptions | `text-mute` |
 | faint | #B4BEB8 | Captions, ticker, stats labels | `text-faint` |
 | tag | #C8D0CC | Tech stack tags | `text-tag` |
-| signal | #9EFF5B | Accent (see rule below) | `text-signal` / `bg-signal` |
-| signal-dim | #6FBF3F | Small accent text / eyebrows | `text-signal-dim` |
+| signal | #43D085 | Accent (see rule below) | `text-signal` / `bg-signal` |
+| signal-dim | #309660 | Small accent text / eyebrows | `text-signal-dim` |
 
 Use `signal` ONLY on: the primary CTA, active cursor nodes, status dots, and the
 founding-rate badge. Everything else stays in the ink/bone/mute range. Keep the

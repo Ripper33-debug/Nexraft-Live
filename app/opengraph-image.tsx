@@ -19,7 +19,7 @@ export default function OpenGraphImage() {
         }}
       >
         <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
-          <div style={{ width: 14, height: 14, background: "#9EFF5B" }} />
+          <div style={{ width: 14, height: 14, background: "#43D085" }} />
           <span style={{ color: "#E8EDE9", fontSize: 28, fontWeight: 600 }}>
             Nexraft
           </span>

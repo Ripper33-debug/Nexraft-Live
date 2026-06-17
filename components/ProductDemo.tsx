@@ -19,7 +19,7 @@ const MATERIALS = [
   { id: "bone", name: "Bone", value: "#E8EDE9" },
   { id: "steel", name: "Steel", value: "#7C8A82" },
   { id: "slate", name: "Slate", value: "#566159" },
-  { id: "signal", name: "Signal", value: "#9EFF5B" },
+  { id: "signal", name: "Signal", value: "#43D085" },
 ] as const;
 
 const FINISHES: { id: Finish; name: string }[] = [

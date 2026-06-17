@@ -4,7 +4,7 @@ import { useEffect, useRef, type RefObject } from "react";
 
 const BG = "rgb(10, 14, 12)";
 const WHITE = "rgb(232, 237, 233)";
-const GREEN = "rgb(111, 191, 63)";
+const GREEN = "rgb(67, 208, 133)";
 const LANES = 32;
 
 type Stream = {
@@ -66,7 +66,7 @@ function drawRadialGlow(
   alpha: number,
 ) {
   const g = ctx.createRadialGradient(cx, cy, 0, cx, cy, radius);
-  g.addColorStop(0, `rgba(111, 191, 63, ${alpha})`);
+  g.addColorStop(0, `rgba(67, 208, 133, ${alpha})`);
   g.addColorStop(1, "transparent");
   ctx.fillStyle = g;
   ctx.fillRect(0, 0, width, height);
