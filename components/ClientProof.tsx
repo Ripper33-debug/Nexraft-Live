@@ -36,6 +36,23 @@ export function ClientProof() {
         />
       </Reveal>
 
+      {/* TODO: replace with real, client-approved quote + attribution */}
+      <Reveal delay={0.04}>
+        <figure className="mt-10 border border-line bg-ink2 p-6 md:mt-12 md:p-8">
+          <blockquote className="font-display text-lg leading-relaxed text-bone md:text-xl">
+            &ldquo;[Client-approved quote goes here.]&rdquo;
+          </blockquote>
+          <figcaption className="mt-6 border-t border-line pt-5">
+            <p className="font-display text-sm font-semibold text-bone">
+              [Full name]
+            </p>
+            <p className="mt-1 font-jetbrains text-[11px] uppercase tracking-[0.16em] text-faint">
+              [Title] {"\u00b7"} [Company]
+            </p>
+          </figcaption>
+        </figure>
+      </Reveal>
+
       <div className="mt-12 grid grid-cols-1 gap-px border border-line bg-line md:grid-cols-2">
         {REFERENCES.map((item, index) => (
           <Reveal key={item.company} delay={index * 0.05}>

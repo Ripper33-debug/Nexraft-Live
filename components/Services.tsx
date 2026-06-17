@@ -68,6 +68,10 @@ export function Services() {
           <p className="mt-3 text-sm leading-relaxed text-mute">
             {threeD.summary}
           </p>
+          <p className="mt-3 text-sm leading-relaxed text-mute">
+            Ideal for physical products, equipment, and real estate. Optional
+            add-on - not required for web or hosting clients.
+          </p>
           <p className="mt-5 font-jetbrains text-[11px] uppercase tracking-[0.16em] text-faint">{threeD.stack}</p>
           <Link
             href={threeD.href}

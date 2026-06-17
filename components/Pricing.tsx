@@ -118,10 +118,8 @@ export function Pricing() {
             {FOUNDING_DISCOUNT_PCT}% off for the first {FOUNDING_DISCOUNT_MONTHS}{" "}
             months.
           </p>
-          <p className="mt-3 text-sm leading-relaxed text-mute">
-            All retainers start with a 6-month initial term, then continue
-            month-to-month. No build fee, no setup fee - your site is built and
-            maintained inside the retainer.
+          <p className="mt-3 text-sm leading-relaxed text-faint">
+            Month-to-month after the initial term. No build fee, no setup fee.
           </p>
         </div>
       </Reveal>
@@ -154,6 +152,11 @@ export function Pricing() {
               </p>
               <p className="mt-4 text-sm leading-relaxed text-mute">
                 {plan.summary}
+              </p>
+
+              <p className="mt-4 border-l border-line pl-3 text-xs leading-relaxed text-mute">
+                Includes a 6-month initial term - enough runway to actually
+                move your numbers, not just launch and leave.
               </p>
 
               <ul className="mt-6 flex-1 space-y-2.5">
