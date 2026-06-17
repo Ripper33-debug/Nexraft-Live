@@ -105,6 +105,7 @@ export function ContactForm() {
             <option>Build — Product + Web Development</option>
             <option>Managed Hosting + Migration</option>
             <option>3D production</option>
+            <option>Custom AI tools</option>
           </select>
         </div>
       </div>

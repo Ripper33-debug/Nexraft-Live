@@ -23,7 +23,7 @@ const steps = [
   {
     title: "Iterate",
     detail:
-      "Retainer hours for features, hosting care, and 3D as the roadmap grows.",
+      "Retainer hours for features, hosting care, 3D, and AI tools as the roadmap grows.",
   },
 ] as const;
 

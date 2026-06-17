@@ -31,7 +31,7 @@ export function Footer() {
         <Logo height={24} linkClassName={focusRing} />
 
         <p className="text-sm text-faint">
-          Web, hosting, and 3D {"\u00b7"} Est. 2024
+          Web, hosting, 3D, and AI {"\u00b7"} Est. 2024
         </p>
 
         <a

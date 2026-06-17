@@ -9,6 +9,7 @@ import {
   FOUNDING_SLOTS_TOTAL,
   PRICES,
   THREE_D_OFFERS,
+  AI_OFFERS,
   formatUsd,
 } from "@/lib/pricing";
 import { BOOK_CALL_URL } from "@/lib/site";
@@ -247,6 +248,42 @@ export function Pricing() {
 
           <div className="mt-8 grid grid-cols-1 gap-px border border-line bg-line md:grid-cols-3">
             {THREE_D_OFFERS.map((offer) => (
+              <article
+                key={offer.id}
+                className="flex h-full flex-col bg-ink2 p-6 md:p-7"
+              >
+                <h4 className="font-display text-xl font-semibold leading-snug tracking-[-0.02em] text-bone">
+                  {offer.name}
+                </h4>
+                <p className="mt-3 font-display text-3xl font-semibold tracking-tight text-bone">
+                  {offer.price}
+                </p>
+                <p className="mt-4 flex-1 text-sm leading-relaxed text-mute">
+                  {offer.description}
+                </p>
+                <div className="mt-8">
+                  <GhostButton href={BOOK_CALL_URL} external className="w-full">
+                    Book a Call
+                  </GhostButton>
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+      </Reveal>
+
+      <Reveal delay={0.14}>
+        <div className="mt-16 border-t border-line pt-12">
+          <h3 className="font-display text-xl font-semibold leading-snug tracking-[-0.02em] text-bone">
+            Custom AI Tools & Automations
+          </h3>
+          <p className="mt-3 max-w-2xl text-sm leading-relaxed text-mute">
+            Purpose-built copilots and assistants for your team or your
+            customers - scoped on a call, priced to the workflow.
+          </p>
+
+          <div className="mt-8 grid grid-cols-1 gap-px border border-line bg-line md:grid-cols-3">
+            {AI_OFFERS.map((offer) => (
               <article
                 key={offer.id}
                 className="flex h-full flex-col bg-ink2 p-6 md:p-7"

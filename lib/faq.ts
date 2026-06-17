@@ -36,4 +36,8 @@ export const FAQ_ITEMS: FaqItem[] = [
     q: "Do you work with our existing stack?",
     a: "Usually, yes. We start with a short audit, then either improve what you already run or migrate you onto a faster, managed setup. We work across common CMS platforms and modern frameworks rather than forcing one template.",
   },
+  {
+    q: "Do you build custom AI tools?",
+    a: "Yes. We scope and ship internal copilots, customer-facing assistants, and workflow automations tied to your data and systems. Every build includes guardrails, logging, and a handoff plan so you are not locked into a black-box widget.",
+  },
 ];

@@ -24,6 +24,11 @@ export const PRICES = {
     scene: 1800,
     studio: 3500,
   },
+  ai: {
+    workflow: 750,
+    customer: 1500,
+    platform: 3500,
+  },
 } as const;
 
 export const BUNDLE_GROWTH_MANAGED =
@@ -57,5 +62,30 @@ export const THREE_D_OFFERS = [
     price: "Custom quote",
     description:
       "For complex products, large models, CAD workflows, private portals, or advanced integrations.",
+  },
+] as const;
+
+/** Homepage custom AI tools section (scoped on discovery call; not self-serve checkout). */
+export const AI_OFFERS = [
+  {
+    id: "workflow",
+    name: "Workflow Copilot",
+    price: "From $2,500 setup + $750/mo",
+    description:
+      "Internal tools that automate repetitive work: document search, draft generation, CRM updates, and ops checklists wired to your stack.",
+  },
+  {
+    id: "customer",
+    name: "Customer AI Tool",
+    price: "From $5,000 setup + $1,500/mo",
+    description:
+      "A branded assistant on your site or app: product Q&A, support triage, lead qualification, and handoff to your team when it matters.",
+  },
+  {
+    id: "platform",
+    name: "Custom AI Platform",
+    price: "Custom quote",
+    description:
+      "Multi-step agents, private data pipelines, admin dashboards, and integrations with your CRM, ERP, or product APIs.",
   },
 ] as const;

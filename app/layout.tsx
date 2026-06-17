@@ -36,16 +36,16 @@ const jetbrainsMono = JetBrains_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: "Nexraft · Web, Hosting & 3D Studio",
+    default: "Nexraft · Web, Hosting, 3D & AI Studio",
     template: "%s · Nexraft",
   },
   description:
-    "Built like infrastructure. Web, hosting, and 3D. Engineering studio for spec-grade builds, managed edge infrastructure, and browser-ready 3D. Monthly retainers. Founding-client rates available.",
+    "Built like infrastructure. Web, hosting, 3D, and custom AI tools. Engineering studio for spec-grade builds, managed edge infrastructure, browser-ready 3D, and workflow automations. Monthly retainers. Founding-client rates available.",
   metadataBase: new URL("https://nexraft.com"),
   openGraph: {
-    title: "Nexraft · Web, Hosting & 3D Studio",
+    title: "Nexraft · Web, Hosting, 3D & AI Studio",
     description:
-      "Built like infrastructure. Web, hosting, and 3D production.",
+      "Built like infrastructure. Web, hosting, 3D, and custom AI tools.",
     type: "website",
     siteName: "Nexraft",
     locale: "en_US",

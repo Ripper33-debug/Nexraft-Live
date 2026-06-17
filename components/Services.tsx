@@ -20,6 +20,13 @@ const hosting = {
   stack: `Edge network ${dot} CDN ${dot} Observability`,
 };
 
+const ai = {
+  title: "AI tools",
+  summary:
+    "Custom copilots, assistants, and automations built for your workflows - not generic chat widgets pasted onto a page.",
+  stack: `TypeScript ${dot} LLM APIs ${dot} RAG ${dot} Edge deploy`,
+};
+
 const threeD = {
   title: "3D",
   summary:
@@ -35,8 +42,8 @@ export function Services() {
         <SectionHeader
           specLabel="01 / SERVICES"
           titleId="services-heading"
-          title="Web, hosting, and 3D."
-          subtitle="Three disciplines. One delivery standard."
+          title="Web, hosting, 3D, and AI."
+          subtitle="Four disciplines. One delivery standard."
         />
       </Reveal>
 
@@ -48,31 +55,53 @@ export function Services() {
           <p className="mt-4 max-w-2xl text-sm leading-relaxed text-mute md:text-base">
             {web.summary}
           </p>
-          <p className="mt-6 font-jetbrains text-[11px] uppercase leading-none tracking-[0.14em] text-tag">{web.stack}</p>
+          <p className="mt-6 font-jetbrains text-[11px] uppercase leading-none tracking-[0.14em] text-tag">
+            {web.stack}
+          </p>
         </article>
 
-        <article className="border-t border-line pt-6 md:col-span-5 md:border md:border-line md:bg-ink2 md:p-7 md:pt-7">
+        <article className="border-t border-line pt-6 md:col-span-4 md:border md:border-line md:bg-ink2 md:p-7 md:pt-7">
           <h3 className="font-display text-xl font-semibold leading-snug tracking-[-0.02em] text-bone">
             {hosting.title}
           </h3>
-          <p className="mt-3 text-sm leading-relaxed text-mute">
-            {hosting.summary}
+          <p className="mt-3 text-sm leading-relaxed text-mute">{hosting.summary}</p>
+          <p className="mt-5 font-jetbrains text-[11px] uppercase leading-none tracking-[0.14em] text-tag">
+            {hosting.stack}
           </p>
-          <p className="mt-5 font-jetbrains text-[11px] uppercase leading-none tracking-[0.14em] text-tag">{hosting.stack}</p>
         </article>
 
-        <article className="border-t border-line pt-6 md:col-span-7 md:border md:border-line md:bg-panel md:p-7 md:pt-7">
+        <article className="border-t border-line pt-6 md:col-span-4 md:border md:border-line md:bg-panel md:p-7 md:pt-7">
+          <h3 className="font-display text-xl font-semibold leading-snug tracking-[-0.02em] text-bone">
+            {ai.title}
+          </h3>
+          <p className="mt-3 text-sm leading-relaxed text-mute">{ai.summary}</p>
+          <p className="mt-3 text-sm leading-relaxed text-mute">
+            Scoped to your data, your brand voice, and your approval rules.
+            Optional add-on or standalone build.
+          </p>
+          <p className="mt-5 font-jetbrains text-[11px] uppercase leading-none tracking-[0.14em] text-tag">
+            {ai.stack}
+          </p>
+          <a
+            href="#pricing"
+            className="mt-6 inline-block text-sm text-bone underline decoration-line underline-offset-4 transition-colors hover:text-signal"
+          >
+            See AI pricing
+          </a>
+        </article>
+
+        <article className="border-t border-line pt-6 md:col-span-4 md:border md:border-line md:bg-ink2 md:p-7 md:pt-7">
           <h3 className="font-display text-xl font-semibold leading-snug tracking-[-0.02em] text-bone">
             {threeD.title}
           </h3>
-          <p className="mt-3 text-sm leading-relaxed text-mute">
-            {threeD.summary}
-          </p>
+          <p className="mt-3 text-sm leading-relaxed text-mute">{threeD.summary}</p>
           <p className="mt-3 text-sm leading-relaxed text-mute">
             Ideal for physical products, equipment, and real estate. Optional
             add-on - not required for web or hosting clients.
           </p>
-          <p className="mt-5 font-jetbrains text-[11px] uppercase leading-none tracking-[0.14em] text-tag">{threeD.stack}</p>
+          <p className="mt-5 font-jetbrains text-[11px] uppercase leading-none tracking-[0.14em] text-tag">
+            {threeD.stack}
+          </p>
           <Link
             href={threeD.href}
             className="mt-6 inline-block text-sm text-bone underline decoration-line underline-offset-4 transition-colors hover:text-signal"

@@ -11,7 +11,7 @@ const structuredData = {
       logo: `${SITE}/nexraft-logo-header.png`,
       email: "barry@nexraft.com",
       description:
-        "Engineering studio for spec-grade web builds, managed edge hosting, and browser-ready 3D. Delivered on monthly retainers.",
+        "Engineering studio for spec-grade web builds, managed edge hosting, browser-ready 3D, and custom AI tools. Delivered on monthly retainers.",
       founder: [
         { "@type": "Person", name: "Barry Castelli" },
         { "@type": "Person", name: "Alex Cridge" },
@@ -34,7 +34,7 @@ const structuredData = {
       areaServed: "Worldwide",
       priceRange: "$$$",
       description:
-        "Web, hosting, and 3D delivered as one managed retainer. Migrations, managed edge infrastructure, ongoing development, and interactive 3D product experiences.",
+        "Web, hosting, 3D, and custom AI tools delivered as one managed retainer. Migrations, managed edge infrastructure, ongoing development, interactive 3D, and workflow automations.",
       hasOfferCatalog: {
         "@type": "OfferCatalog",
         name: "Nexraft retainers",
@@ -82,6 +82,15 @@ const structuredData = {
               name: "3D configurators and interactive product experiences",
               description:
                 "Browser-native 3D viewers and configurators for products that need to be seen, configured, or explored.",
+            },
+          },
+          {
+            "@type": "Offer",
+            itemOffered: {
+              "@type": "Service",
+              name: "Custom AI tools and automations",
+              description:
+                "Internal copilots, customer-facing assistants, and workflow automations scoped to client data and systems.",
             },
           },
         ],
