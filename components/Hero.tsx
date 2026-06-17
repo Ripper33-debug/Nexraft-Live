@@ -1,91 +1,12 @@
 "use client";
 
-import dynamic from "next/dynamic";
-import { useEffect, useState } from "react";
+import { useRef } from "react";
+import { HeroCanvas } from "@/components/HeroCanvas";
 import { MagneticButton } from "@/components/ui/MagneticButton";
-import { useInView, usePageVisible } from "@/lib/use-in-view";
 import { BOOK_CALL_URL } from "@/lib/site";
 
-const VANISH_X = 600;
-const VANISH_Y = 320;
-const FLOOR_Y = 800;
-
-const FALLBACK_VERTICALS: number[] = [];
-for (let x = -600; x <= 1800; x += 90) {
-  FALLBACK_VERTICALS.push(x);
-}
-
-const FALLBACK_HORIZONTALS: number[] = [];
-for (let i = 0; i <= 15; i++) {
-  FALLBACK_HORIZONTALS.push(VANISH_Y + (FLOOR_Y - VANISH_Y) * (i / 15) ** 2.2);
-}
-
-function HeroMeshFallback() {
-  return (
-    <div className="absolute inset-0" aria-hidden="true">
-      <svg
-        viewBox="0 0 1200 800"
-        preserveAspectRatio="xMidYMid slice"
-        className="h-full w-full"
-        fill="none"
-      >
-        <defs>
-          <radialGradient id="hm-fallback-glow" cx="50%" cy="38%" r="60%">
-            <stop offset="0%" stopColor="#E8EDE9" stopOpacity="0.18" />
-            <stop offset="55%" stopColor="#E8EDE9" stopOpacity="0.06" />
-            <stop offset="100%" stopColor="#E8EDE9" stopOpacity="0" />
-          </radialGradient>
-        </defs>
-        <rect width="1200" height="800" fill="url(#hm-fallback-glow)" />
-        <g stroke="#E8EDE9" strokeWidth="1">
-          {FALLBACK_VERTICALS.map((x) => (
-            <line
-              key={`v${x}`}
-              x1={x}
-              y1={FLOOR_Y}
-              x2={VANISH_X}
-              y2={VANISH_Y}
-              strokeOpacity="0.65"
-            />
-          ))}
-          {FALLBACK_HORIZONTALS.map((y, i) => (
-            <line
-              key={`h${i}`}
-              x1="0"
-              y1={y}
-              x2="1200"
-              y2={y}
-              strokeOpacity={(0.42 + (i / 15) * 0.48).toFixed(3)}
-            />
-          ))}
-        </g>
-      </svg>
-    </div>
-  );
-}
-
-const HeroMesh = dynamic(() => import("@/components/HeroMesh"), {
-  ssr: false,
-  loading: () => null,
-});
-
 export function Hero() {
-  const [meshAllowed, setMeshAllowed] = useState(false);
-  const pageVisible = usePageVisible();
-  const { ref: sectionRef, inView } = useInView<HTMLElement>({
-    disabled: !meshAllowed,
-    rootMargin: "0px 0px 15% 0px",
-  });
-
-  useEffect(() => {
-    const reduced = window.matchMedia(
-      "(prefers-reduced-motion: reduce)",
-    ).matches;
-    const narrow = window.matchMedia("(max-width: 767px)").matches;
-    if (!reduced && !narrow) setMeshAllowed(true);
-  }, []);
-
-  const showMesh = meshAllowed && pageVisible && inView;
+  const sectionRef = useRef<HTMLElement>(null);
 
   return (
     <section
@@ -94,13 +15,8 @@ export function Hero() {
       aria-labelledby="hero-heading"
       className="relative -mt-[68px] flex min-h-[100svh] flex-col overflow-hidden border-b border-line bg-ink pt-[68px]"
     >
-      <div className="absolute inset-0 z-0">
-        <HeroMeshFallback />
-        {showMesh ? (
-          <div className="absolute inset-0">
-            <HeroMesh active={showMesh} />
-          </div>
-        ) : null}
+      <div className="absolute inset-0 z-0 hero-mesh-mask">
+        <HeroCanvas sectionRef={sectionRef} />
       </div>
 
       <div
@@ -136,7 +52,7 @@ export function Hero() {
         </h1>
 
         <p
-          className="hm-fade mt-5 max-w-[40ch] font-display text-lg text-mute md:text-xl"
+          className="hm-fade mt-5 max-w-[40ch] font-body text-lg leading-relaxed text-mute md:text-xl"
           style={{ animationDelay: "0.12s" }}
         >
           Built like infrastructure. One studio, one invoice.
@@ -151,7 +67,7 @@ export function Hero() {
           </MagneticButton>
           <a
             href="#work"
-            className="pointer-events-auto text-sm text-mute underline decoration-line underline-offset-4 transition-colors hover:text-bone focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-signal"
+            className="pointer-events-auto text-sm text-soft underline decoration-line underline-offset-4 transition-colors hover:text-bone focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-signal"
           >
             See our work
           </a>

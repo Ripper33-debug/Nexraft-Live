@@ -100,7 +100,7 @@ export function LoadingScreen() {
         <div className="loader-bar mt-8">
           <span className="loader-bar-fill" />
         </div>
-        <p className="mt-5 font-jetbrains text-[11px] uppercase tracking-[0.2em] text-faint">
+        <p className="mt-5 font-jetbrains text-[11px] uppercase leading-none tracking-[0.14em] text-faint">
           INITIALIZING // EDGE NETWORK
         </p>
       </div>

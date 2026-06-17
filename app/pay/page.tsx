@@ -49,7 +49,7 @@ export default async function PayPage({ searchParams }: PayPageProps) {
 
         <div className="mt-10 grid gap-px border border-line bg-line lg:grid-cols-2">
           <div className="bg-ink2 p-6 md:p-8">
-            <h2 className="font-display text-lg font-semibold text-bone">
+            <h2 className="font-display text-xl font-semibold leading-snug tracking-[-0.02em] text-bone">
               Start your plan
             </h2>
             <p className="mt-3 max-w-lg text-sm leading-relaxed text-mute">
@@ -61,7 +61,7 @@ export default async function PayPage({ searchParams }: PayPageProps) {
           </div>
 
           <div className="flex flex-col bg-ink2 p-6 md:p-8">
-            <h2 className="font-display text-lg font-semibold text-bone">
+            <h2 className="font-display text-xl font-semibold leading-snug tracking-[-0.02em] text-bone">
               Manage billing
             </h2>
             <p className="mt-3 max-w-lg text-sm leading-relaxed text-mute">
@@ -106,7 +106,7 @@ export default async function PayPage({ searchParams }: PayPageProps) {
         <div className="mt-8 border-t border-line pt-8">
           <Link
             href="/"
-            className="text-sm text-mute transition-colors hover:text-bone"
+            className="text-sm text-soft transition-colors hover:text-bone"
           >
             Back to home
           </Link>

@@ -46,7 +46,7 @@ export default async function StatusPage() {
             </a>{" "}
             with subject &ldquo;Incident&rdquo;.
           </p>
-          <p className="mt-4 font-jetbrains text-[11px] uppercase tracking-[0.16em] text-faint">
+          <p className="mt-4 font-jetbrains text-[11px] uppercase leading-none tracking-[0.14em] text-faint">
             Last probed: {checkedDisplay} {"\u00b7"} Overall:{" "}
             {statusLabel(aggregate)}
           </p>

@@ -39,14 +39,14 @@ export function ClientProof() {
       {/* TODO: replace with real, client-approved quote + attribution */}
       <Reveal delay={0.04}>
         <figure className="mt-10 border border-line bg-ink2 p-6 md:mt-12 md:p-8">
-          <blockquote className="font-display text-lg leading-relaxed text-bone md:text-xl">
+          <blockquote className="font-body text-lg leading-relaxed text-bone md:text-xl">
             &ldquo;[Client-approved quote goes here.]&rdquo;
           </blockquote>
           <figcaption className="mt-6 border-t border-line pt-5">
-            <p className="font-display text-sm font-semibold text-bone">
+            <p className="font-body text-sm font-semibold text-bone">
               [Full name]
             </p>
-            <p className="mt-1 font-jetbrains text-[11px] uppercase tracking-[0.16em] text-faint">
+            <p className="mt-1 font-jetbrains text-[11px] uppercase leading-none tracking-[0.14em] text-faint">
               [Title] {"\u00b7"} [Company]
             </p>
           </figcaption>
@@ -57,10 +57,10 @@ export function ClientProof() {
         {REFERENCES.map((item, index) => (
           <Reveal key={item.company} delay={index * 0.05}>
             <article className="flex h-full flex-col bg-ink2 p-6 md:p-7">
-              <p className="font-jetbrains text-[10px] uppercase tracking-[0.18em] text-faint">
+              <p className="font-jetbrains text-[10px] uppercase leading-none tracking-[0.14em] text-faint">
                 Case study
               </p>
-              <h3 className="mt-3 font-display text-xl font-semibold text-bone">
+              <h3 className="mt-3 font-display text-xl font-semibold leading-snug tracking-[-0.02em] text-bone">
                 {item.company}
               </h3>
               <p className="mt-3 flex-1 text-sm leading-relaxed text-mute">
@@ -77,7 +77,7 @@ export function ClientProof() {
                   href={item.live}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className={`text-sm text-mute underline decoration-line underline-offset-4 transition-colors hover:text-bone ${focusRing}`}
+                  className={`text-sm text-soft underline decoration-line underline-offset-4 transition-colors hover:text-bone ${focusRing}`}
                 >
                   Live site {"\u2197"}
                 </a>
@@ -89,9 +89,9 @@ export function ClientProof() {
 
       <Reveal delay={0.08}>
         <div className="mt-8 border border-line bg-ink2 p-6 md:p-7">
-          <p className="font-display text-lg font-semibold text-bone">
+          <h3 className="font-display text-xl font-semibold leading-snug tracking-[-0.02em] text-bone">
             Need a named reference?
-          </p>
+          </h3>
           <p className="mt-2 max-w-xl text-sm leading-relaxed text-mute">
             We share client contacts and approved quotes once we know your
             project scope. No anonymous placeholders on this site.

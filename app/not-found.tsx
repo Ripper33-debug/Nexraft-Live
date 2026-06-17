@@ -10,7 +10,7 @@ export default function NotFound() {
   return (
     <section className="border-t border-line bg-ink">
       <div className="mx-auto flex min-h-[62vh] max-w-[1180px] flex-col justify-center px-7 py-[84px] md:py-[120px]">
-        <p className="font-jetbrains text-[11px] uppercase tracking-[0.2em] text-signal-dim">
+        <p className="font-jetbrains text-[11px] uppercase leading-none tracking-[0.14em] text-signal-dim">
           Error 404
         </p>
         <h1 className="mt-4 font-display text-[clamp(2rem,6vw,3.5rem)] font-semibold leading-[1.02] tracking-[-0.03em] text-bone">

@@ -36,7 +36,7 @@ export function Footer() {
 
         <a
           href={`mailto:${CONTACT_EMAILS[0]}`}
-          className={`text-sm text-mute transition-colors duration-300 hover:text-bone ${focusRing}`}
+          className={`text-sm text-soft transition-colors duration-300 hover:text-bone ${focusRing}`}
         >
           {CONTACT_EMAILS[0]} {"\u2197"}
         </a>

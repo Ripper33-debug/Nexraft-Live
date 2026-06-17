@@ -8,7 +8,7 @@ type SpecLabelProps = {
 export function SpecLabel({ children, className = "" }: SpecLabelProps) {
   return (
     <p
-      className={`font-jetbrains text-[11px] uppercase tracking-[0.2em] text-signal-dim ${className}`.trim()}
+      className={`font-jetbrains text-[11px] uppercase leading-none tracking-[0.14em] text-signal-dim ${className}`.trim()}
     >
       {children}
     </p>

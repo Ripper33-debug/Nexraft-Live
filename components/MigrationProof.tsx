@@ -41,13 +41,13 @@ export function MigrationProof() {
           </Link>
           <Link
             href="/squarespace-migration"
-            className={`text-sm text-mute underline decoration-line underline-offset-4 transition-colors hover:text-bone ${focusRing}`}
+            className={`text-sm text-soft underline decoration-line underline-offset-4 transition-colors hover:text-bone ${focusRing}`}
           >
             Squarespace migration
           </Link>
           <Link
             href="/wordpress-too-slow"
-            className={`text-sm text-mute underline decoration-line underline-offset-4 transition-colors hover:text-bone ${focusRing}`}
+            className={`text-sm text-soft underline decoration-line underline-offset-4 transition-colors hover:text-bone ${focusRing}`}
           >
             Slow WordPress rebuilds
           </Link>
@@ -55,7 +55,7 @@ export function MigrationProof() {
             href={BOOK_CALL_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className={`text-sm text-mute underline decoration-line underline-offset-4 transition-colors hover:text-bone ${focusRing}`}
+            className={`text-sm text-soft underline decoration-line underline-offset-4 transition-colors hover:text-bone ${focusRing}`}
           >
             Book a migration call
           </a>

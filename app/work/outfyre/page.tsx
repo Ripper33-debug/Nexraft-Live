@@ -47,7 +47,7 @@ export default function OutfyreCaseStudy() {
   return (
     <section className="border-t border-line bg-ink py-[84px] md:py-[120px]">
       <div className="mx-auto max-w-[1180px] px-7">
-        <p className="font-jetbrains text-[11px] uppercase tracking-[0.2em] text-signal-dim">
+        <p className="font-jetbrains text-[11px] uppercase leading-none tracking-[0.14em] text-signal-dim">
           Case study
         </p>
         <h1 className="mt-3 font-display text-[clamp(1.75rem,4vw,2.75rem)] font-semibold leading-[1.05] tracking-[-0.03em] text-bone">
@@ -95,7 +95,7 @@ export default function OutfyreCaseStudy() {
                 key={item.title}
                 className="border-b border-line pb-6 last:border-b-0 last:pb-0"
               >
-                <h3 className="font-display text-base font-semibold text-bone">
+                <h3 className="font-display text-xl font-semibold leading-snug tracking-[-0.02em] text-bone">
                   {item.title}
                 </h3>
                 <p className="mt-2 text-sm leading-relaxed text-mute">
@@ -123,9 +123,9 @@ export default function OutfyreCaseStudy() {
         </div>
 
         <div className="mt-12 border border-line bg-ink2 p-6 md:p-8">
-          <p className="font-display text-lg font-semibold text-bone">
+          <h3 className="font-display text-xl font-semibold leading-snug tracking-[-0.02em] text-bone">
             Need a site that ships and stays fast?
-          </p>
+          </h3>
           <p className="mt-3 max-w-lg text-sm leading-relaxed text-mute">
             We scope growth sites and retainers on a discovery call. Fixed
             monthly rate, one invoice for web and hosting.
@@ -146,7 +146,7 @@ export default function OutfyreCaseStudy() {
         <div className="mt-10 border-t border-line pt-8">
           <Link
             href="/"
-            className="text-sm text-mute transition-colors hover:text-bone"
+            className="text-sm text-soft transition-colors hover:text-bone"
           >
             Back to home
           </Link>

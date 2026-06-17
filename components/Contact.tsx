@@ -18,21 +18,21 @@ export function Contact() {
           <SpecLabel className="mb-4">08 / CONTACT</SpecLabel>
           <h2
             id="contact-heading"
-            className="font-display text-[clamp(2rem,5vw,3.25rem)] font-semibold leading-[1.05] tracking-[-0.03em] text-bone"
+            className="font-display text-[clamp(1.75rem,4vw,2.75rem)] font-semibold leading-[1.08] tracking-[-0.03em] text-bone"
           >
             Start a project.
           </h2>
         </Reveal>
 
         <Reveal delay={0.06}>
-          <p className="mt-5 text-base leading-relaxed text-mute">
+          <p className="mt-5 font-body text-lg leading-relaxed text-mute">
             30-minute call. We scope your build and quote a fixed monthly rate
             on the spot.
           </p>
         </Reveal>
 
         <Reveal delay={0.1}>
-          <p className="mt-4 text-sm text-faint">
+          <p className="mt-4 font-body text-xs leading-normal text-faint">
             You work directly with {founderNames}. No account managers.
           </p>
         </Reveal>

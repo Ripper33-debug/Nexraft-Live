@@ -31,11 +31,11 @@ export function Founders() {
         <SpecLabel className="mb-4">02 / TEAM</SpecLabel>
         <h2
           id="founders-heading"
-          className="font-display text-[clamp(1.75rem,4vw,2.5rem)] font-semibold leading-[1.08] tracking-[-0.03em] text-bone"
+          className="font-display text-[clamp(1.75rem,4vw,2.75rem)] font-semibold leading-[1.08] tracking-[-0.03em] text-bone"
         >
           You work with us directly.
         </h2>
-        <p className="mt-4 max-w-xl text-sm leading-relaxed text-mute md:text-base">
+        <p className="mt-4 max-w-xl font-body text-lg leading-relaxed text-mute">
           Two founders. No account managers, no handoffs to junior devs.
         </p>
       </Reveal>
@@ -46,9 +46,9 @@ export function Founders() {
             <div className="flex gap-5">
               <FounderAvatar initials={founder.initials} />
               <div className="min-w-0">
-                <p className="font-display text-lg font-semibold text-bone">
+                <h3 className="font-display text-xl font-semibold leading-snug tracking-[-0.02em] text-bone">
                   {founder.name}
-                </p>
+                </h3>
                 <p className="mt-1 text-sm leading-relaxed text-mute">
                   {bios[founder.name]}
                 </p>

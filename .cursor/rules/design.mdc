@@ -21,8 +21,10 @@ generated utilities, never raw hex.
 | panel | #10160F | Hover / popular panel | `bg-panel` |
 | line | #1E2723 | Hairline borders + grid | `border-line` |
 | bone | #E8EDE9 | Primary text (never pure white) | `text-bone` |
-| mute | #7C8A82 | Secondary text | `text-mute` |
-| faint | #566159 | Labels / captions | `text-faint` |
+| soft | #D0D8D4 | Nav links, secondary CTAs | `text-soft` |
+| mute | #C4CCC8 | Body secondary / descriptions | `text-mute` |
+| faint | #B4BEB8 | Captions, ticker, stats labels | `text-faint` |
+| tag | #C8D0CC | Tech stack tags | `text-tag` |
 | signal | #9EFF5B | Accent (see rule below) | `text-signal` / `bg-signal` |
 | signal-dim | #6FBF3F | Small accent text / eyebrows | `text-signal-dim` |
 

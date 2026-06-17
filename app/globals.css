@@ -14,13 +14,16 @@
   --color-panel: #10160F;
   --color-line: #1E2723;
   --color-bone: #E8EDE9;
-  --color-mute: #7C8A82;
-  --color-faint: #566159;
+  --color-soft: #D0D8D4;
+  --color-mute: #C4CCC8;
+  --color-faint: #B4BEB8;
+  --color-tag: #C8D0CC;
   --color-signal: #9EFF5B;
   --color-signal-dim: #6FBF3F;
 
   --font-display: var(--font-bricolage);
   --font-body: var(--font-geist-sans);
+  --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
   --font-grotesk: var(--font-space-grotesk);
   --font-jetbrains: var(--font-jetbrains-mono);
@@ -344,6 +347,7 @@
   .nav-link {
     position: relative;
     padding-bottom: 3px;
+    color: var(--color-soft);
     transition: color 300ms cubic-bezier(0.16, 1, 0.3, 1);
   }
 
@@ -493,5 +497,24 @@
     .deploy-cursor {
       animation: none;
     }
+  }
+
+  .hero-mesh-mask {
+    -webkit-mask-image: linear-gradient(
+      to right,
+      transparent 0%,
+      transparent 32%,
+      rgba(0, 0, 0, 0.35) 42%,
+      black 58%,
+      black 100%
+    );
+    mask-image: linear-gradient(
+      to right,
+      transparent 0%,
+      transparent 32%,
+      rgba(0, 0, 0, 0.35) 42%,
+      black 58%,
+      black 100%
+    );
   }
 }

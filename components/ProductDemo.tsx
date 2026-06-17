@@ -86,14 +86,16 @@ export function ProductDemo() {
       <div className="mx-auto grid max-w-[1180px] grid-cols-1 items-center gap-10 px-7 lg:grid-cols-2 lg:gap-14">
         <Reveal>
           <div>
-            <p className="text-sm text-mute">Interactive 3D</p>
+            <p className="font-jetbrains text-[11px] uppercase leading-none tracking-[0.14em] text-faint">
+              Interactive 3D
+            </p>
             <h2
               id="demo-heading"
-              className="mt-3 font-display text-[clamp(1.75rem,4vw,2.5rem)] font-semibold leading-[1.08] tracking-[-0.03em] text-bone"
+              className="mt-3 font-display text-[clamp(1.75rem,4vw,2.75rem)] font-semibold leading-[1.08] tracking-[-0.03em] text-bone"
             >
               Configure it live.
             </h2>
-            <p className="mt-4 max-w-md text-sm leading-relaxed text-mute md:text-base">
+            <p className="mt-4 max-w-md font-body text-lg leading-relaxed text-mute">
               A modular field shelter you can recolor, resize, and finish in
               real time. The same engine we ship for product viewers and full
               configurators - fast on a laptop, fast on a phone.
@@ -131,7 +133,7 @@ export function ProductDemo() {
             {allowed ? (
               <div className="mt-5 flex flex-wrap items-start gap-x-10 gap-y-5">
                 <fieldset className="border-0 p-0">
-                  <legend className="font-jetbrains text-[11px] uppercase tracking-[0.2em] text-faint">
+                  <legend className="font-jetbrains text-[11px] uppercase leading-none tracking-[0.14em] text-faint">
                     Material
                   </legend>
                   <div className="mt-2.5 flex gap-2">
@@ -155,7 +157,7 @@ export function ProductDemo() {
                 </fieldset>
 
                 <fieldset className="border-0 p-0">
-                  <legend className="font-jetbrains text-[11px] uppercase tracking-[0.2em] text-faint">
+                  <legend className="font-jetbrains text-[11px] uppercase leading-none tracking-[0.14em] text-faint">
                     Layout
                   </legend>
                   <div className="mt-2.5 flex gap-2">
@@ -165,7 +167,7 @@ export function ProductDemo() {
                         type="button"
                         onClick={() => setLayout(option.id)}
                         aria-pressed={layout === option.id}
-                        className={`border px-3 py-1.5 font-jetbrains text-[11px] uppercase tracking-[0.16em] transition-colors duration-300 ${
+                        className={`border px-3 py-1.5 font-jetbrains text-[11px] uppercase leading-none tracking-[0.14em] transition-colors duration-300 ${
                           layout === option.id
                             ? "border-bone text-bone"
                             : "border-line text-faint hover:border-mute hover:text-mute"
@@ -178,7 +180,7 @@ export function ProductDemo() {
                 </fieldset>
 
                 <fieldset className="border-0 p-0">
-                  <legend className="font-jetbrains text-[11px] uppercase tracking-[0.2em] text-faint">
+                  <legend className="font-jetbrains text-[11px] uppercase leading-none tracking-[0.14em] text-faint">
                     Finish
                   </legend>
                   <div className="mt-2.5 flex gap-2">
@@ -188,7 +190,7 @@ export function ProductDemo() {
                         type="button"
                         onClick={() => setFinish(option.id)}
                         aria-pressed={finish === option.id}
-                        className={`border px-3 py-1.5 font-jetbrains text-[11px] uppercase tracking-[0.16em] transition-colors duration-300 ${
+                        className={`border px-3 py-1.5 font-jetbrains text-[11px] uppercase leading-none tracking-[0.14em] transition-colors duration-300 ${
                           finish === option.id
                             ? "border-bone text-bone"
                             : "border-line text-faint hover:border-mute hover:text-mute"

@@ -68,9 +68,9 @@ const fragmentShader = /* glsl */ `
       smoothstep(0.0, 0.05, vUv.x) * smoothstep(0.0, 0.05, 1.0 - vUv.x);
     float depth = mix(1.0, 0.72, smoothstep(0.82, 1.0, vUv.y));
 
-    float baseAlpha = 0.48 + relief * 0.32;
-    float alpha = (baseAlpha + prox * 0.55) * sideFade * depth;
-    alpha = clamp(alpha, 0.0, 0.98);
+    float baseAlpha = 0.07 + relief * 0.04;
+    float alpha = (baseAlpha + prox * 0.22) * sideFade * depth;
+    alpha = clamp(alpha, 0.0, 0.35);
 
     gl_FragColor = vec4(col, alpha);
   }

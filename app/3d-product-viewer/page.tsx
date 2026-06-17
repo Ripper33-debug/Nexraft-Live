@@ -84,7 +84,7 @@ export default function ThreeDProductViewerPage() {
         ]}
         cta={
           <>
-            <p className="font-display text-2xl font-semibold text-bone">
+            <p className="font-display text-3xl font-semibold tracking-tight text-bone">
               From {formatUsd(PRICES.threeD.asset)}/mo
             </p>
             <p className="mt-3 max-w-lg text-sm leading-relaxed text-mute">
@@ -121,7 +121,7 @@ export default function ThreeDProductViewerPage() {
         <div className="mx-auto mt-10 max-w-[1180px] border-t border-line px-7 pt-8">
           <Link
             href="/"
-            className="text-sm text-mute transition-colors hover:text-bone"
+            className="text-sm text-soft transition-colors hover:text-bone"
           >
             Back to home
           </Link>

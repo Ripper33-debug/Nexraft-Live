@@ -20,7 +20,7 @@ function StartLink({ className = "" }: { className?: string }) {
   return (
     <a
       href="/pay"
-      className={`inline-flex items-center justify-center gap-1.5 text-sm text-mute underline decoration-line underline-offset-4 transition-colors duration-300 hover:text-bone ${focusRing} ${className}`}
+      className={`inline-flex items-center justify-center gap-1.5 text-sm text-soft underline decoration-line underline-offset-4 transition-colors duration-300 hover:text-bone ${focusRing} ${className}`}
     >
       Start With Nexraft
       <span aria-hidden="true">{"\u2192"}</span>
@@ -140,10 +140,10 @@ export function Pricing() {
                 </span>
               ) : null}
 
-              <p className="font-jetbrains text-[11px] uppercase tracking-[0.16em] text-faint">
+              <p className="font-jetbrains text-[11px] uppercase leading-none tracking-[0.14em] text-faint">
                 {plan.name}
               </p>
-              <h3 className="mt-2 font-display text-xl font-semibold leading-snug text-bone md:text-2xl">
+              <h3 className="mt-2 font-display text-xl font-semibold leading-snug tracking-[-0.02em] text-bone">
                 {plan.tier}
               </h3>
               <p className="mt-3 font-display text-3xl font-semibold tracking-tight text-bone">
@@ -154,7 +154,7 @@ export function Pricing() {
                 {plan.summary}
               </p>
 
-              <p className="mt-4 border-l border-line pl-3 text-xs leading-relaxed text-mute">
+              <p className="mt-4 border-l border-line pl-3 font-body text-xs leading-normal text-mute">
                 Includes a 6-month initial term - enough runway to actually
                 move your numbers, not just launch and leave.
               </p>
@@ -194,10 +194,10 @@ export function Pricing() {
         <article className="mt-8 border border-line bg-ink2 p-6 md:p-8">
           <div className="flex flex-col gap-8 lg:flex-row lg:items-start lg:justify-between">
             <div className="max-w-xl">
-              <p className="font-jetbrains text-[11px] uppercase tracking-[0.16em] text-faint">
+              <p className="font-jetbrains text-[11px] uppercase leading-none tracking-[0.14em] text-faint">
                 Hosting only
               </p>
-              <h3 className="mt-2 font-display text-2xl font-semibold text-bone md:text-3xl">
+              <h3 className="mt-2 font-display text-xl font-semibold leading-snug tracking-[-0.02em] text-bone">
                 Managed Hosting + Migration
               </h3>
               <p className="mt-3 font-display text-3xl font-semibold tracking-tight text-bone">
@@ -237,7 +237,7 @@ export function Pricing() {
 
       <Reveal delay={0.12}>
         <div className="mt-16 border-t border-line pt-12">
-          <h3 className="font-display text-[clamp(1.35rem,3vw,1.75rem)] font-semibold leading-snug tracking-[-0.02em] text-bone">
+          <h3 className="font-display text-xl font-semibold leading-snug tracking-[-0.02em] text-bone">
             3D Configurators & Interactive Product Experiences
           </h3>
           <p className="mt-3 max-w-2xl text-sm leading-relaxed text-mute">
@@ -251,10 +251,10 @@ export function Pricing() {
                 key={offer.id}
                 className="flex h-full flex-col bg-ink2 p-6 md:p-7"
               >
-                <h4 className="font-display text-lg font-semibold text-bone">
+                <h4 className="font-display text-xl font-semibold leading-snug tracking-[-0.02em] text-bone">
                   {offer.name}
                 </h4>
-                <p className="mt-3 font-display text-lg font-semibold text-bone">
+                <p className="mt-3 font-display text-3xl font-semibold tracking-tight text-bone">
                   {offer.price}
                 </p>
                 <p className="mt-4 flex-1 text-sm leading-relaxed text-mute">
@@ -271,13 +271,13 @@ export function Pricing() {
         </div>
       </Reveal>
 
-      <p className="mt-10 text-xs leading-relaxed text-faint">
+      <p className="mt-10 font-body text-xs leading-normal text-faint">
         Managed hosting ({formatUsd(PRICES.hosting.managed)}/mo value) included
         with every retainer {"\u00b7"} 6-month initial term, then month-to-month{" "}
         {"\u00b7"} 30 days notice to cancel {"\u00b7"} All prices in USD {"\u00b7"}{" "}
         <a
           href="/legal/sla"
-          className="text-mute underline decoration-line underline-offset-2 hover:text-bone"
+          className="text-soft underline decoration-line underline-offset-2 hover:text-bone"
         >
           SLA summary
         </a>

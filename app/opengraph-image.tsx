@@ -40,7 +40,7 @@ export default function OpenGraphImage() {
           </span>
           <span
             style={{
-              color: "#7C8A82",
+              color: "#C4CCC8",
               fontSize: 26,
               marginTop: 24,
             }}
@@ -49,7 +49,7 @@ export default function OpenGraphImage() {
           </span>
         </div>
 
-        <div style={{ display: "flex", gap: 24, color: "#566159", fontSize: 20 }}>
+        <div style={{ display: "flex", gap: 24, color: "#C8D0CC", fontSize: 20 }}>
           <span>Web</span>
           <span>Hosting</span>
           <span>3D</span>

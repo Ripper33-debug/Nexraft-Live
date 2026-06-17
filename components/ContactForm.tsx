@@ -11,7 +11,7 @@ const fieldClass =
   "w-full border border-line bg-ink2 px-4 py-3 text-sm text-bone placeholder:text-faint transition-colors duration-300 focus:border-mute";
 
 const labelClass =
-  "font-jetbrains text-[11px] uppercase tracking-[0.16em] text-faint";
+  "font-jetbrains text-[11px] uppercase leading-none tracking-[0.14em] text-faint";
 
 async function contactAction(
   _prev: ContactResult | null,
@@ -29,7 +29,7 @@ export function ContactForm() {
         className="border border-signal-dim/40 bg-signal/[0.06] p-6 text-left md:p-8"
         role="status"
       >
-        <p className="font-jetbrains text-[11px] uppercase tracking-[0.2em] text-signal-dim">
+        <p className="font-jetbrains text-[11px] uppercase leading-none tracking-[0.14em] text-signal-dim">
           Brief received
         </p>
         <p className="mt-3 text-sm leading-relaxed text-mute">

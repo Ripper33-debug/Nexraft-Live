@@ -100,9 +100,9 @@ export function MetricsStrip() {
             </div>
           ))}
         </div>
-        <p className="mt-4 text-center font-jetbrains text-[10px] uppercase tracking-[0.16em] text-faint">
+        <p className="mt-4 text-center font-jetbrains text-[10px] uppercase leading-none tracking-[0.14em] text-faint">
           Managed edge infrastructure {"\u00b7"}{" "}
-          <Link href="/status" className={`text-mute hover:text-bone ${focusRing}`}>
+          <Link href="/status" className={`text-soft hover:text-bone ${focusRing}`}>
             System status
           </Link>
         </p>

@@ -19,7 +19,7 @@ export default function NotesPage() {
   return (
     <section className="border-t border-line bg-ink py-[84px] md:py-[120px]">
       <div className="mx-auto max-w-[1180px] px-7">
-        <p className="font-jetbrains text-[11px] uppercase tracking-[0.2em] text-signal-dim">
+        <p className="font-jetbrains text-[11px] uppercase leading-none tracking-[0.14em] text-signal-dim">
           FIELD NOTES
         </p>
         <h1 className="mt-4 font-display text-[clamp(1.75rem,4vw,2.75rem)] font-semibold leading-[1.05] tracking-[-0.03em] text-bone">
@@ -37,17 +37,17 @@ export default function NotesPage() {
                 href={`/notes/${note.slug}`}
                 className={`group block py-7 ${focusRing}`}
               >
-                <p className="font-jetbrains text-[11px] uppercase tracking-[0.16em] text-faint">
+                <p className="font-jetbrains text-[11px] uppercase leading-none tracking-[0.14em] text-faint">
                   {formatNoteDate(note.date)} {"\u00b7"} {note.readingMinutes} min
                   read
                 </p>
-                <h2 className="mt-2 font-display text-xl font-semibold text-bone transition-colors duration-300 group-hover:text-signal md:text-2xl">
+                <h2 className="mt-2 font-display text-xl font-semibold leading-snug tracking-[-0.02em] text-bone transition-colors duration-300 group-hover:text-signal">
                   {note.title}
                 </h2>
                 <p className="mt-2 max-w-2xl text-sm leading-relaxed text-mute md:text-base">
                   {note.description}
                 </p>
-                <span className="mt-3 inline-block font-jetbrains text-[11px] uppercase tracking-[0.16em] text-signal-dim">
+                <span className="mt-3 inline-block font-jetbrains text-[11px] uppercase leading-none tracking-[0.14em] text-signal-dim">
                   Read {"\u2192"}
                 </span>
               </Link>
@@ -58,7 +58,7 @@ export default function NotesPage() {
         <div className="mt-10 border-t border-line pt-8">
           <Link
             href="/"
-            className={`text-sm text-mute transition-colors duration-300 hover:text-bone ${focusRing}`}
+            className={`text-sm text-soft transition-colors duration-300 hover:text-bone ${focusRing}`}
           >
             Back to home
           </Link>

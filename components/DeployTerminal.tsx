@@ -51,7 +51,7 @@ export function DeployTerminal() {
       aria-label="Example production deploy log"
     >
       <div className="flex items-center justify-between border-b border-line px-4 py-3 md:px-5">
-        <p className="font-jetbrains text-[10px] uppercase tracking-[0.18em] text-faint">
+        <p className="font-jetbrains text-[10px] uppercase leading-none tracking-[0.14em] text-faint">
           DEPLOY_LOG // production
         </p>
         <span className="flex items-center gap-2 font-jetbrains text-[10px] uppercase tracking-[0.14em] text-signal-dim">

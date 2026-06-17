@@ -36,7 +36,7 @@ export function ContactEmails({
           {i > 0 && <span className="text-faint"> / </span>}
           <Link
             href={`mailto:${email}`}
-            className={`text-mute transition-colors hover:text-bone ${focusRing}`}
+            className={`text-soft transition-colors hover:text-bone ${focusRing}`}
           >
             {email}
           </Link>

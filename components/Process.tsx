@@ -42,7 +42,7 @@ export function Process() {
       <div className="mt-12 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4 lg:gap-10">
         {steps.map((step) => (
           <div key={step.title} className="border-t border-line pt-6">
-            <h3 className="font-display text-lg font-semibold text-bone">
+            <h3 className="font-display text-xl font-semibold leading-snug tracking-[-0.02em] text-bone">
               {step.title}
             </h3>
             <p className="mt-2 text-sm leading-relaxed text-mute">

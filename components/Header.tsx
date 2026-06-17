@@ -16,7 +16,7 @@ const NAV_LINKS = [
 const focusRing =
   "outline-none focus-visible:[outline:2px_solid_var(--color-signal)] focus-visible:[outline-offset:2px]";
 
-const navLinkClass = `nav-link font-jetbrains text-[11px] uppercase tracking-[0.14em] text-mute ${focusRing}`;
+const navLinkClass = `nav-link font-jetbrains text-[11px] uppercase tracking-[0.14em] ${focusRing}`;
 
 function NavCta({
   className = "",
@@ -109,7 +109,7 @@ export function Header() {
           aria-expanded={open}
           aria-controls="mobile-menu"
           onClick={() => setOpen((value) => !value)}
-          className={`font-jetbrains text-[11px] uppercase tracking-[0.14em] text-mute transition-colors duration-300 hover:text-bone min-[860px]:hidden ${focusRing}`}
+          className={`font-jetbrains text-[11px] uppercase tracking-[0.14em] text-soft transition-colors duration-300 hover:text-bone min-[860px]:hidden ${focusRing}`}
         >
           {open ? "Close" : "Menu"}
         </button>
@@ -133,7 +133,7 @@ export function Header() {
                 key={link.href}
                 href={link.href}
                 onClick={() => setOpen(false)}
-                className={`border-b border-line py-4 font-jetbrains text-[11px] uppercase tracking-[0.14em] text-mute transition-colors duration-300 hover:text-bone ${focusRing}`}
+                className={`border-b border-line py-4 font-jetbrains text-[11px] uppercase tracking-[0.14em] text-soft transition-colors duration-300 hover:text-bone ${focusRing}`}
               >
                 {link.label}
               </Link>

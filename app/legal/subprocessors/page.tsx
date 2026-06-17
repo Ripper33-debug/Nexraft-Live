@@ -85,7 +85,7 @@ export default function SubprocessorsPage() {
             requires, review providers for security posture, and contractually
             require appropriate safeguards where applicable.
           </p>
-          <p className="mt-4 font-jetbrains text-[11px] uppercase tracking-[0.16em] text-faint">
+          <p className="mt-4 font-jetbrains text-[11px] uppercase leading-none tracking-[0.14em] text-faint">
             Last updated: June 2026 {"\u00b7"} Document ID: LEG-SUB-001
           </p>
         </>

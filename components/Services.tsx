@@ -42,27 +42,27 @@ export function Services() {
 
       <div className="mt-12 grid grid-cols-1 gap-6 md:grid-cols-12 md:gap-6">
         <article className="border-t border-line pt-6 md:col-span-12 md:border md:border-line md:bg-ink2 md:p-8 md:pt-8">
-          <h3 className="font-display text-2xl font-semibold text-bone md:text-3xl">
+          <h3 className="font-display text-xl font-semibold leading-snug tracking-[-0.02em] text-bone">
             {web.title}
           </h3>
           <p className="mt-4 max-w-2xl text-sm leading-relaxed text-mute md:text-base">
             {web.summary}
           </p>
-          <p className="mt-6 font-jetbrains text-[11px] uppercase tracking-[0.16em] text-faint">{web.stack}</p>
+          <p className="mt-6 font-jetbrains text-[11px] uppercase leading-none tracking-[0.14em] text-tag">{web.stack}</p>
         </article>
 
         <article className="border-t border-line pt-6 md:col-span-5 md:border md:border-line md:bg-ink2 md:p-7 md:pt-7">
-          <h3 className="font-display text-xl font-semibold text-bone">
+          <h3 className="font-display text-xl font-semibold leading-snug tracking-[-0.02em] text-bone">
             {hosting.title}
           </h3>
           <p className="mt-3 text-sm leading-relaxed text-mute">
             {hosting.summary}
           </p>
-          <p className="mt-5 font-jetbrains text-[11px] uppercase tracking-[0.16em] text-faint">{hosting.stack}</p>
+          <p className="mt-5 font-jetbrains text-[11px] uppercase leading-none tracking-[0.14em] text-tag">{hosting.stack}</p>
         </article>
 
         <article className="border-t border-line pt-6 md:col-span-7 md:border md:border-line md:bg-panel md:p-7 md:pt-7">
-          <h3 className="font-display text-xl font-semibold text-bone">
+          <h3 className="font-display text-xl font-semibold leading-snug tracking-[-0.02em] text-bone">
             {threeD.title}
           </h3>
           <p className="mt-3 text-sm leading-relaxed text-mute">
@@ -72,7 +72,7 @@ export function Services() {
             Ideal for physical products, equipment, and real estate. Optional
             add-on - not required for web or hosting clients.
           </p>
-          <p className="mt-5 font-jetbrains text-[11px] uppercase tracking-[0.16em] text-faint">{threeD.stack}</p>
+          <p className="mt-5 font-jetbrains text-[11px] uppercase leading-none tracking-[0.14em] text-tag">{threeD.stack}</p>
           <Link
             href={threeD.href}
             className="mt-6 inline-block text-sm text-bone underline decoration-line underline-offset-4 transition-colors hover:text-signal"

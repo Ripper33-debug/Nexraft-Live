@@ -37,7 +37,7 @@ export function Faq() {
           <Reveal key={item.q} delay={index * 0.03}>
             <details className="faq-item border-b border-line">
               <summary className="flex cursor-pointer list-none items-center justify-between gap-6 py-5 [&::-webkit-details-marker]:hidden">
-                <span className="font-display text-base font-medium text-bone md:text-lg">
+                <span className="font-body text-sm font-medium text-bone md:text-base">
                   {item.q}
                 </span>
                 <span
@@ -47,7 +47,7 @@ export function Faq() {
                   +
                 </span>
               </summary>
-              <p className="max-w-2xl pb-6 text-sm leading-relaxed text-mute md:text-base">
+              <p className="max-w-2xl pb-6 font-body text-sm leading-relaxed text-mute md:text-base">
                 {item.a}
               </p>
             </details>

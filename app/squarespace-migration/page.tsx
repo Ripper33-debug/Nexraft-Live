@@ -79,7 +79,7 @@ export default function SquarespaceMigrationPage() {
         ]}
         cta={
           <>
-            <p className="font-display text-2xl font-semibold text-bone">
+            <p className="font-display text-3xl font-semibold tracking-tight text-bone">
               {formatUsd(PRICES.hosting.managed)}/mo
             </p>
             <p className="mt-3 max-w-lg text-sm leading-relaxed text-mute">
@@ -97,7 +97,7 @@ export default function SquarespaceMigrationPage() {
 
       <section className="border-t border-line bg-ink2 py-[84px] md:py-[100px]">
         <div className="mx-auto max-w-[1180px] px-7">
-          <h2 className="font-display text-2xl font-semibold text-bone md:text-3xl">
+          <h2 className="font-display text-[clamp(1.75rem,4vw,2.75rem)] font-semibold leading-[1.08] tracking-[-0.03em] text-bone">
             Typical results after migration
           </h2>
           <p className="mt-3 max-w-xl text-sm leading-relaxed text-mute">
@@ -129,7 +129,7 @@ export default function SquarespaceMigrationPage() {
         <div className="mx-auto mt-10 max-w-[1180px] border-t border-line px-7 pt-8">
           <Link
             href="/"
-            className="text-sm text-mute transition-colors hover:text-bone"
+            className="text-sm text-soft transition-colors hover:text-bone"
           >
             Back to home
           </Link>

@@ -46,7 +46,7 @@ export async function generateMetadata({
 function Block({ block }: { block: NoteBlock }) {
   if (block.type === "h2") {
     return (
-      <h2 className="mt-10 font-display text-xl font-semibold text-bone md:text-2xl">
+      <h2 className="mt-10 font-display text-xl font-semibold leading-snug tracking-[-0.02em] text-bone">
         {block.text}
       </h2>
     );
@@ -112,7 +112,7 @@ export default async function NotePage({
       <div className="mx-auto max-w-[760px] px-7">
         <Link
           href="/notes"
-          className={`font-jetbrains text-[11px] uppercase tracking-[0.16em] text-signal-dim transition-colors duration-300 hover:text-signal ${focusRing}`}
+          className={`font-jetbrains text-[11px] uppercase leading-none tracking-[0.14em] text-signal-dim transition-colors duration-300 hover:text-signal ${focusRing}`}
         >
           {"\u2190"} Field notes
         </Link>
@@ -120,7 +120,7 @@ export default async function NotePage({
         <h1 className="mt-6 font-display text-[clamp(1.75rem,4vw,2.75rem)] font-semibold leading-[1.08] tracking-[-0.03em] text-bone">
           {note.title}
         </h1>
-        <p className="mt-4 font-jetbrains text-[11px] uppercase tracking-[0.16em] text-faint">
+        <p className="mt-4 font-jetbrains text-[11px] uppercase leading-none tracking-[0.14em] text-faint">
           {formatNoteDate(note.date)} {"\u00b7"} {note.readingMinutes} min read
         </p>
 

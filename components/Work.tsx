@@ -21,7 +21,7 @@ function ProjectVisual({
   if (demo) {
     return (
       <div className="flex aspect-[16/10] w-full flex-col items-center justify-center border border-line bg-gradient-to-br from-panel via-ink2 to-ink md:aspect-auto md:h-full md:min-h-[140px]">
-        <span className="font-display text-sm font-semibold text-bone">3D</span>
+        <span className="font-jetbrains text-[11px] uppercase leading-none tracking-[0.14em] text-bone">3D</span>
         <span className="mt-1 text-xs text-faint">Live demo</span>
       </div>
     );
@@ -83,14 +83,16 @@ export function Work() {
                 aria-hidden="true"
               />
               <div className="absolute inset-0 flex flex-col justify-end p-7 md:p-12">
-                <p className="text-sm text-mute">Case study</p>
-                <p className="mt-2 font-display text-2xl font-semibold text-bone md:text-4xl">
-                  {FEATURED_PROJECT.name}
+                <p className="font-jetbrains text-[11px] uppercase leading-none tracking-[0.14em] text-mute">
+                  Case study
                 </p>
+                <h3 className="mt-2 font-display text-xl font-semibold leading-snug tracking-[-0.02em] text-bone">
+                  {FEATURED_PROJECT.name}
+                </h3>
                 <p className="mt-3 max-w-lg text-sm leading-relaxed text-bone/90 md:text-base">
                   {FEATURED_PROJECT.outcome}
                 </p>
-                <span className="mt-5 text-sm text-mute transition-colors group-hover:text-bone">
+                <span className="mt-5 text-sm text-soft transition-colors group-hover:text-bone">
                   Read the case study {"\u2192"}
                 </span>
               </div>
@@ -115,15 +117,15 @@ export function Work() {
                 demo={project.demo}
               />
               <div className="flex flex-col justify-center p-6 md:p-8">
-                <p className="font-display text-xl font-semibold text-bone">
+                <h3 className="font-display text-xl font-semibold leading-snug tracking-[-0.02em] text-bone">
                   {project.name}
-                </p>
+                </h3>
                 <p className="mt-2 text-sm leading-relaxed text-mute">
                   {project.outcome}
                 </p>
                 <span
                   aria-hidden="true"
-                  className="mt-4 text-sm text-faint transition-colors group-hover:text-mute"
+                  className="mt-4 text-sm text-faint transition-colors group-hover:text-soft"
                 >
                   {project.external ? "Visit site" : "View project"} {"\u2197"}
                 </span>

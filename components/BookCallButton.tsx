@@ -57,7 +57,7 @@ export function BookCallLink({ children, className = "" }: BookCallLinkProps) {
       href={url}
       target="_blank"
       rel="noopener noreferrer"
-      className={`link-underline text-sm text-mute transition-colors hover:text-bone ${className}`}
+      className={`link-underline text-sm text-soft transition-colors hover:text-bone ${className}`}
     >
       {children}
     </a>

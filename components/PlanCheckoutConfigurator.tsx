@@ -176,7 +176,7 @@ export function PlanCheckoutConfigurator() {
         <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <div>
             <p className="text-sm text-faint">Monthly total</p>
-            <p className="mt-1 font-display text-2xl font-semibold tabular-nums text-bone">
+            <p className="mt-1 font-display text-3xl font-semibold tracking-tight tabular-nums text-bone">
               {selectedPlans.length > 0
                 ? `$${monthlyTotal.toLocaleString()}/mo`
                 : "$0/mo"}

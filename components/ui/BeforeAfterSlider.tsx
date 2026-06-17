@@ -43,16 +43,16 @@ function MetricPanel({
         isBefore ? "bg-[#120808]" : "bg-ink2"
       }`}
     >
-      <p className="font-jetbrains text-[10px] uppercase tracking-[0.18em] text-faint">
+      <p className="font-jetbrains text-[10px] uppercase leading-none tracking-[0.14em] text-faint">
         {title}
       </p>
-      <p
-        className={`mt-3 font-display text-lg font-semibold ${
+      <h3
+        className={`mt-3 font-display text-xl font-semibold leading-snug tracking-[-0.02em] ${
           isBefore ? "text-mute" : "text-bone"
         }`}
       >
         {isBefore ? "Legacy builder stack" : "Nexraft managed stack"}
-      </p>
+      </h3>
       <ul className="mt-6 flex-1 space-y-3">
         {metrics.map((item) => (
           <li
@@ -61,7 +61,7 @@ function MetricPanel({
           >
             <span className="text-mute">{item.label}</span>
             <span
-              className={`font-jetbrains text-xs uppercase tracking-[0.12em] ${
+              className={`font-jetbrains text-[10px] uppercase leading-none tracking-[0.14em] ${
                 item.bad ? "text-[#c45c5c]" : "text-signal-dim"
               }`}
             >
@@ -86,7 +86,7 @@ function PanelChrome({
   return (
     <div className="absolute inset-x-0 top-0 z-10 flex items-center justify-between gap-3 border-b border-line/70 bg-[rgba(10,14,12,0.9)] px-4 py-3 md:px-5">
       <div className="flex min-w-0 items-center gap-3">
-        <p className="font-jetbrains text-[10px] uppercase tracking-[0.18em] text-faint">
+        <p className="font-jetbrains text-[10px] uppercase leading-none tracking-[0.14em] text-faint">
           {label}
         </p>
         {badge ? (
@@ -99,7 +99,7 @@ function PanelChrome({
         href={shot.href}
         target="_blank"
         rel="noopener noreferrer"
-        className={`shrink-0 font-jetbrains text-[10px] uppercase tracking-[0.14em] text-mute transition-colors hover:text-bone ${focusRing}`}
+        className={`shrink-0 font-jetbrains text-[10px] uppercase tracking-[0.14em] text-soft transition-colors hover:text-bone ${focusRing}`}
       >
         {shot.domain} {"\u2197"}
       </a>
@@ -364,7 +364,7 @@ export function BeforeAfterSlider({
           onPointerCancel={onPointerUp}
         />
       </div>
-      <p className="mt-3 text-center font-jetbrains text-[10px] uppercase tracking-[0.16em] text-faint">
+      <p className="mt-3 text-center font-jetbrains text-[10px] uppercase leading-none tracking-[0.14em] text-faint">
         {footerCaption}
       </p>
     </div>

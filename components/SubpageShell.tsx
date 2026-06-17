@@ -28,7 +28,7 @@ export function SubpageShell({
           {title}
         </h1>
 
-        <div className="prose-measure mt-6 text-base leading-relaxed text-mute">
+        <div className="prose-measure mt-6 font-body text-lg leading-relaxed text-mute">
           {intro}
         </div>
 
@@ -43,7 +43,7 @@ export function SubpageShell({
                   key={item.title}
                   className="border-b border-line pb-6 last:border-b-0 last:pb-0"
                 >
-                  <h3 className="font-display text-base font-semibold text-bone">
+                  <h3 className="font-display text-xl font-semibold leading-snug tracking-[-0.02em] text-bone">
                     {item.title}
                   </h3>
                   <p className="mt-2 text-sm leading-relaxed text-mute">
@@ -61,7 +61,7 @@ export function SubpageShell({
           <div className="mt-10 border-t border-line pt-8">
             <Link
               href={footerLink.href}
-              className="text-sm text-mute transition-colors hover:text-bone"
+              className="text-sm text-soft transition-colors hover:text-bone"
             >
               {footerLink.label}
             </Link>
