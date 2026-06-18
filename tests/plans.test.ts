@@ -3,31 +3,30 @@ import { resolveCheckoutPlans } from "@/lib/stripe/plans";
 
 describe("resolveCheckoutPlans", () => {
   beforeEach(() => {
-    vi.stubEnv("STRIPE_PRICE_STARTER", "price_starter");
-    vi.stubEnv("STRIPE_PRICE_GROWTH", "price_growth");
-    vi.stubEnv("STRIPE_PRICE_HOSTING_MANAGED", "price_hosting_managed");
-    vi.stubEnv("STRIPE_PRICE_THREE_D_ASSET", "price_three_d_asset");
+    vi.stubEnv("STRIPE_PRICE_CARE_275", "price_care_275");
+    vi.stubEnv("STRIPE_PRICE_GROWTH_1125", "price_growth_1125");
+    vi.stubEnv("STRIPE_PRICE_BUILD_4500", "price_build_4500");
   });
 
   afterEach(() => {
     vi.unstubAllEnvs();
   });
 
-  it("resolves a single valid plan", () => {
-    expect(resolveCheckoutPlans({ plan: "growth" })).toEqual({
-      plans: ["growth"],
+  it("resolves a single retainer plan", () => {
+    expect(resolveCheckoutPlans({ plan: "care_275" })).toEqual({
+      plans: ["care_275"],
     });
   });
 
-  it("normalizes case and resolves multiple categories", () => {
+  it("resolves retainer plus build", () => {
     expect(
-      resolveCheckoutPlans({ plans: ["GROWTH", "hosting_managed"] }),
-    ).toEqual({ plans: ["growth", "hosting_managed"] });
+      resolveCheckoutPlans({ plans: ["growth_1125", "build_4500"] }),
+    ).toEqual({ plans: ["growth_1125", "build_4500"] });
   });
 
   it("dedupes repeated plans", () => {
-    expect(resolveCheckoutPlans({ plans: ["growth", "growth"] })).toEqual({
-      plans: ["growth"],
+    expect(resolveCheckoutPlans({ plans: ["care_275", "care_275"] })).toEqual({
+      plans: ["care_275"],
     });
   });
 
@@ -36,14 +35,15 @@ describe("resolveCheckoutPlans", () => {
     expect(res).toHaveProperty("error");
   });
 
-  it("rejects two plans in the same category", () => {
-    const res = resolveCheckoutPlans({ plans: ["starter", "growth"] });
+  it("rejects two retainer plans", () => {
+    vi.stubEnv("STRIPE_PRICE_CARE_150", "price_care_150");
+    const res = resolveCheckoutPlans({ plans: ["care_150", "growth_1125"] });
     expect(res).toHaveProperty("error");
   });
 
   it("errors when the price id is not configured", () => {
-    vi.stubEnv("STRIPE_PRICE_BUILD", "");
-    const res = resolveCheckoutPlans({ plan: "build" });
+    vi.stubEnv("STRIPE_PRICE_CARE_400", "");
+    const res = resolveCheckoutPlans({ plan: "care_400" });
     expect(res).toHaveProperty("error");
   });
 });

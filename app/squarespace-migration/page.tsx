@@ -4,12 +4,12 @@ import { BookCallButton } from "@/components/BookCallButton";
 import { ContactEmails } from "@/components/ContactEmails";
 import { SubpageShell } from "@/components/SubpageShell";
 import { BeforeAfterSlider } from "@/components/ui/BeforeAfterSlider";
-import { PRICES, formatUsd } from "@/lib/pricing";
+import { PRICES, formatUsdRange } from "@/lib/pricing";
 
 export const metadata: Metadata = {
   title: "Squarespace Migration",
   description:
-    "Migrate from Squarespace or Wix to a faster, custom-built site on managed edge infrastructure. Migration included with hosting from $350/mo. Zero-downtime cutover.",
+    "Migrate from Squarespace or Wix to a faster, custom-built site on managed edge infrastructure. Care plans from $150/mo. Zero-downtime cutover.",
   openGraph: {
     title: "Squarespace migration, done by engineers",
     description:
@@ -80,12 +80,12 @@ export default function SquarespaceMigrationPage() {
         cta={
           <>
             <p className="font-display text-3xl font-semibold tracking-tight text-bone">
-              {formatUsd(PRICES.hosting.managed)}/mo
+              {formatUsdRange(PRICES.care.min, PRICES.care.max)}/mo
             </p>
             <p className="mt-3 max-w-lg text-sm leading-relaxed text-mute">
-              Managed hosting with the migration included. Site rebuilds are
-              quoted as a fixed rate on a discovery call. Web retainers include
-              managed hosting at no extra charge.
+              Care plan with migration included. Custom rebuilds from{" "}
+              {formatUsdRange(PRICES.web.buildMin, PRICES.web.buildMax)} quoted
+              on a discovery call.
             </p>
             <div className="mt-6">
               <BookCallButton label="Book a call" variant="primary" />

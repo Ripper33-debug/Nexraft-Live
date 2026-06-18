@@ -1,86 +1,92 @@
 import type { StripePlanKey } from "@/lib/stripe/plan-keys";
 
-export type PlanCategory = "web" | "hosting" | "three_d";
+export type PlanCategory = "retainer" | "build";
 
 export type PlanCatalogEntry = {
   key: StripePlanKey;
   category: PlanCategory;
   name: string;
   price: number;
+  priceLabel: string;
   summary: string;
   popular?: boolean;
 };
 
 export const PLAN_CATALOG: PlanCatalogEntry[] = [
   {
-    key: "starter",
-    category: "web",
-    name: "Starter — Managed Website Ops",
-    price: 1200,
-    summary:
-      "We run your site day to day — hosting, CMS, monitoring, and small fixes handled.",
+    key: "care_150",
+    category: "retainer",
+    name: "Care",
+    price: 150,
+    priceLabel: "$150/mo",
+    summary: "Hosting, security, uptime, and small monthly changes.",
   },
   {
-    key: "growth",
-    category: "web",
-    name: "Growth — Website + Content Support",
-    price: 2800,
-    summary:
-      "Active monthly improvements — content, SEO, landing pages, and conversion work.",
+    key: "care_275",
+    category: "retainer",
+    name: "Care",
+    price: 275,
+    priceLabel: "$275/mo",
+    summary: "Mid-tier Care for active sites with regular content updates.",
     popular: true,
   },
   {
-    key: "build",
-    category: "web",
-    name: "Build — Product + Web Development",
+    key: "care_400",
+    category: "retainer",
+    name: "Care",
+    price: 400,
+    priceLabel: "$400/mo",
+    summary: "Higher-touch Care with more monthly fix and content capacity.",
+  },
+  {
+    key: "growth_750",
+    category: "retainer",
+    name: "Growth",
+    price: 750,
+    priceLabel: "$750/mo",
+    summary: "SEO, Google profile, reviews, and light AI automation.",
+  },
+  {
+    key: "growth_1125",
+    category: "retainer",
+    name: "Growth",
+    price: 1125,
+    priceLabel: "$1,125/mo",
+    summary: "Full Growth retainer: SEO, local search, reviews, and AI workflows.",
+    popular: true,
+  },
+  {
+    key: "growth_1500",
+    category: "retainer",
+    name: "Growth",
+    price: 1500,
+    priceLabel: "$1,500/mo",
+    summary: "Maximum Growth capacity for aggressive lead-gen and automation.",
+  },
+  {
+    key: "build_3000",
+    category: "build",
+    name: "Build",
+    price: 3000,
+    priceLabel: "$3,000",
+    summary: "Custom Next.js site with CMS and production deploy.",
+  },
+  {
+    key: "build_4500",
+    category: "build",
+    name: "Build",
     price: 4500,
-    summary:
-      "Serious build capacity for features, integrations, and custom product work.",
-  },
-  {
-    key: "hosting_managed",
-    category: "hosting",
-    name: "Managed Hosting + Migration",
-    price: 350,
-    summary:
-      "Full migration plus managed hosting, SSL, backups, monitoring, and basic support.",
-  },
-  {
-    key: "hosting_performance",
-    category: "hosting",
-    name: "Performance Hosting",
-    price: 650,
-    summary: "Edge tuning, CDN config, and proactive performance optimization.",
+    priceLabel: "$4,500",
+    summary: "Mid-range custom build with richer CMS and integrations.",
     popular: true,
   },
   {
-    key: "hosting_enterprise",
-    category: "hosting",
-    name: "Enterprise Hosting",
-    price: 1200,
-    summary: "Multi-environment ops with observability and incident response.",
-  },
-  {
-    key: "three_d_asset",
-    category: "three_d",
-    name: "3D Asset",
-    price: 800,
-    summary: "Steady output of models and renders for catalog and marketing.",
-  },
-  {
-    key: "three_d_scene",
-    category: "three_d",
-    name: "3D Scene",
-    price: 1800,
-    summary: "Interactive scenes and walkthroughs delivered on a rolling basis.",
-    popular: true,
-  },
-  {
-    key: "three_d_studio",
-    category: "three_d",
-    name: "3D Studio",
-    price: 3500,
-    summary: "Full 3D pipeline capacity for product lines and real-time assets.",
+    key: "build_6000",
+    category: "build",
+    name: "Build",
+    price: 6000,
+    priceLabel: "$6,000",
+    summary: "Complex build with 3D, configurators, or deep custom work.",
   },
 ];
 
@@ -90,19 +96,14 @@ export const PLAN_CATEGORIES: {
   hint?: string;
 }[] = [
   {
-    id: "web",
-    label: "Web",
-    hint: "Monthly retainer — we operate and improve your site.",
+    id: "retainer",
+    label: "Monthly retainer",
+    hint: "Pick Care for hosting and upkeep, or Growth for SEO and AI automation.",
   },
   {
-    id: "hosting",
-    label: "Hosting",
-    hint: "Migration and managed infrastructure. Included with every web retainer.",
-  },
-  {
-    id: "three_d",
-    label: "3D",
-    hint: "Legacy self-serve 3D retainers. New configurators are scoped on a call.",
+    id: "build",
+    label: "Build (one-time)",
+    hint: "Optional. Custom site build billed once at checkout. Most clients add Care after launch.",
   },
 ];
 
@@ -115,5 +116,17 @@ export function catalogEntry(key: StripePlanKey): PlanCatalogEntry | undefined {
 }
 
 export function totalMonthlyPrice(keys: StripePlanKey[]): number {
-  return keys.reduce((sum, key) => sum + (catalogEntry(key)?.price ?? 0), 0);
+  return keys.reduce((sum, key) => {
+    const entry = catalogEntry(key);
+    if (!entry || entry.category !== "retainer") return sum;
+    return sum + entry.price;
+  }, 0);
+}
+
+export function totalBuildPrice(keys: StripePlanKey[]): number {
+  return keys.reduce((sum, key) => {
+    const entry = catalogEntry(key);
+    if (!entry || entry.category !== "build") return sum;
+    return sum + entry.price;
+  }, 0);
 }

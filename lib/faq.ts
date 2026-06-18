@@ -18,7 +18,7 @@ export const FAQ_ITEMS: FaqItem[] = [
   },
   {
     q: "How fast do you respond, and is there an SLA?",
-    a: "We target 99.9% monthly uptime on infrastructure we manage. Small fixes are turned around within 48 business hours on Starter, and Build gets same-day triage for production issues. Signed SLAs are available for enterprise engagements.",
+    a: "We target 99.9% monthly uptime on infrastructure we manage. Care clients get small fixes within 48 business hours. Growth clients get priority triage for production issues. Signed SLAs are available for enterprise engagements.",
   },
   {
     q: "How does onboarding work after a discovery call?",
@@ -29,8 +29,8 @@ export const FAQ_ITEMS: FaqItem[] = [
     a: "Sites run on managed edge infrastructure with SSL, automated backups, and monitoring. We use least-privilege access, keep credentials out of source control, and list the third parties we rely on in our subprocessors page.",
   },
   {
-    q: "What does managed hosting included actually mean?",
-    a: "Every retainer includes hosting, SSL, backups, uptime monitoring, and performance checks - a 350 dollar per month value - rolled into one invoice. You do not get a separate server bill or have to manage infrastructure yourself.",
+    q: "What does the Care plan include?",
+    a: "Care is managed hosting plus upkeep: SSL, backups, uptime monitoring, security updates, and small monthly content or fix requests from 150 to 400 dollars per month depending on scope. You do not get a separate server bill or have to manage infrastructure yourself.",
   },
   {
     q: "Do you work with our existing stack?",

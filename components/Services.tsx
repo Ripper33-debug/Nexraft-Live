@@ -86,7 +86,7 @@ export function Services() {
             href="#pricing"
             className="mt-6 inline-block text-sm text-bone underline decoration-line underline-offset-4 transition-colors hover:text-signal"
           >
-            See AI pricing
+            See pricing
           </a>
         </article>
 

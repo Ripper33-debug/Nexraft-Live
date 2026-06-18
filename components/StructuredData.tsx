@@ -43,36 +43,27 @@ const structuredData = {
             "@type": "Offer",
             itemOffered: {
               "@type": "Service",
-              name: "Managed website operations",
+              name: "Custom website build",
               description:
-                "Managed hosting, CMS support, monitoring, backups, security updates, and ongoing fixes.",
+                "Custom Next.js sites with CMS, production deploy, and optional 3D from three to six thousand dollars.",
             },
           },
           {
             "@type": "Offer",
             itemOffered: {
               "@type": "Service",
-              name: "Website and content support",
+              name: "Care plan",
               description:
-                "Ongoing development, landing pages, SEO, analytics, and conversion work delivered every month.",
+                "Managed hosting, security, uptime monitoring, and small monthly changes from one hundred fifty to four hundred dollars per month.",
             },
           },
           {
             "@type": "Offer",
             itemOffered: {
               "@type": "Service",
-              name: "Product and web development",
+              name: "Growth retainer",
               description:
-                "Full-stack development, custom features, integrations, and technical architecture.",
-            },
-          },
-          {
-            "@type": "Offer",
-            itemOffered: {
-              "@type": "Service",
-              name: "Managed hosting and migration",
-              description:
-                "Migration off Squarespace, Wix, or WordPress onto managed edge infrastructure with SSL, backups, and monitoring.",
+                "SEO, Google Business Profile, reviews, and AI automation from seven hundred fifty to fifteen hundred dollars per month.",
             },
           },
           {

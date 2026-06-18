@@ -2,8 +2,9 @@
 
 import { useMemo, useState } from "react";
 import {
+  PLAN_CATALOG,
   PLAN_CATEGORIES,
-  plansForCategory,
+  totalBuildPrice,
   totalMonthlyPrice,
   type PlanCategory,
 } from "@/lib/plans/catalog";
@@ -13,9 +14,8 @@ import { validatePlanSelection } from "@/lib/stripe/plan-keys";
 type Selection = Record<PlanCategory, StripePlanKey | null>;
 
 const EMPTY_SELECTION: Selection = {
-  web: null,
-  hosting: null,
-  three_d: null,
+  retainer: null,
+  build: null,
 };
 
 const focusRing =
@@ -32,16 +32,10 @@ export function PlanCheckoutConfigurator() {
   );
 
   const monthlyTotal = totalMonthlyPrice(selectedPlans);
-  const webWithoutHosting =
-    selection.web !== null && selection.hosting === null;
+  const buildTotal = totalBuildPrice(selectedPlans);
 
   const setCategory = (category: PlanCategory, key: StripePlanKey | null) => {
     setSelection((prev) => ({ ...prev, [category]: key }));
-    setError("");
-  };
-
-  const addManagedHosting = () => {
-    setSelection((prev) => ({ ...prev, hosting: "hosting_managed" }));
     setError("");
   };
 
@@ -80,7 +74,7 @@ export function PlanCheckoutConfigurator() {
   return (
     <div className="space-y-6">
       {PLAN_CATEGORIES.map((category) => {
-        const options = plansForCategory(category.id);
+        const options = PLAN_CATALOG.filter((p) => p.category === category.id);
 
         return (
           <fieldset
@@ -90,11 +84,11 @@ export function PlanCheckoutConfigurator() {
             <legend className="px-1 text-sm font-medium text-bone">
               {category.label}
             </legend>
-            {category.hint && (
+            {category.hint ? (
               <p className="mt-2 text-sm leading-relaxed text-mute">
                 {category.hint}
               </p>
-            )}
+            ) : null}
 
             <div className="mt-4 space-y-2">
               <label className="flex cursor-pointer items-start gap-3 border border-line px-4 py-3 transition-colors has-[:checked]:border-mute has-[:checked]:bg-panel">
@@ -109,7 +103,9 @@ export function PlanCheckoutConfigurator() {
                 <span className="min-w-0">
                   <span className="text-sm font-medium text-bone">None</span>
                   <span className="mt-0.5 block text-xs text-faint">
-                    Skip this category
+                    {category.id === "retainer"
+                      ? "Skip monthly retainer"
+                      : "No build package at checkout"}
                   </span>
                 </span>
               </label>
@@ -130,16 +126,13 @@ export function PlanCheckoutConfigurator() {
                   <span className="min-w-0 flex-1">
                     <span className="flex flex-wrap items-center gap-2">
                       <span className="text-sm font-medium text-bone">
-                        {plan.name}
+                        {plan.name} {plan.priceLabel}
                       </span>
-                      {plan.popular && (
+                      {plan.popular ? (
                         <span className="rounded-sm border border-line px-1.5 py-0.5 text-xs text-faint">
                           Popular
                         </span>
-                      )}
-                      <span className="text-sm font-semibold tabular-nums text-bone">
-                        ${plan.price.toLocaleString()}/mo
-                      </span>
+                      ) : null}
                     </span>
                     <span className="mt-1 block text-xs leading-relaxed text-mute">
                       {plan.summary}
@@ -152,37 +145,31 @@ export function PlanCheckoutConfigurator() {
         );
       })}
 
-      {webWithoutHosting && (
-        <div className="border border-line bg-panel px-4 py-3">
-          <p className="text-sm leading-relaxed text-mute">
-            Building a live site? Most clients add{" "}
-            <strong className="font-medium text-bone">
-              Managed Hosting + Migration
-            </strong>{" "}
-            ($350/mo) — migration, SSL, backups, and monitoring included.
-          </p>
-          <button
-            type="button"
-            onClick={addManagedHosting}
-            className={`mt-2 text-sm text-bone underline decoration-line underline-offset-4 hover:text-mute ${focusRing}`}
-            disabled={loading}
-          >
-            Add managed hosting + migration
-          </button>
-        </div>
-      )}
-
       <div className="border border-line bg-ink p-5 sm:p-6">
         <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <div>
-            <p className="text-sm text-faint">Monthly total</p>
-            <p className="mt-1 font-display text-3xl font-semibold tracking-tight tabular-nums text-bone">
-              {selectedPlans.length > 0
-                ? `$${monthlyTotal.toLocaleString()}/mo`
-                : "$0/mo"}
-            </p>
+            <p className="text-sm text-faint">Checkout total</p>
+            {monthlyTotal > 0 ? (
+              <p className="mt-1 font-display text-3xl font-semibold tracking-tight tabular-nums text-bone">
+                ${monthlyTotal.toLocaleString()}/mo
+              </p>
+            ) : null}
+            {buildTotal > 0 ? (
+              <p
+                className={`font-display text-3xl font-semibold tracking-tight tabular-nums text-bone ${
+                  monthlyTotal > 0 ? "mt-1 text-xl" : "mt-1"
+                }`}
+              >
+                + ${buildTotal.toLocaleString()} build
+              </p>
+            ) : null}
+            {monthlyTotal === 0 && buildTotal === 0 ? (
+              <p className="mt-1 font-display text-3xl font-semibold tracking-tight tabular-nums text-bone">
+                $0
+              </p>
+            ) : null}
             <p className="mt-1 text-xs text-faint">
-              One subscription, combined on a single Stripe invoice.
+              Build is one-time. Retainers bill monthly on one Stripe invoice.
             </p>
           </div>
 
@@ -193,15 +180,15 @@ export function PlanCheckoutConfigurator() {
             className={`inline-flex shrink-0 items-center justify-center bg-signal px-5 py-3 text-sm font-medium text-ink transition-colors duration-300 hover:bg-signal-dim disabled:cursor-not-allowed disabled:opacity-50 ${focusRing}`}
             aria-busy={loading}
           >
-            {loading ? "Redirecting..." : "Subscribe"}
+            {loading ? "Redirecting..." : "Continue to Stripe"}
           </button>
         </div>
 
-        {error && (
+        {error ? (
           <p className="mt-4 text-sm text-mute" role="alert">
             {error}
           </p>
-        )}
+        ) : null}
       </div>
     </div>
   );

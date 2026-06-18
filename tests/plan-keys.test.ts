@@ -3,27 +3,28 @@ import {
   isStripePlanKey,
   planKeyFromWebIndex,
   validatePlanSelection,
+  partitionPlansByBilling,
 } from "@/lib/stripe/plan-keys";
 
 describe("isStripePlanKey", () => {
   it("accepts known keys", () => {
-    expect(isStripePlanKey("growth")).toBe(true);
-    expect(isStripePlanKey("hosting_managed")).toBe(true);
-    expect(isStripePlanKey("three_d_studio")).toBe(true);
+    expect(isStripePlanKey("care_275")).toBe(true);
+    expect(isStripePlanKey("growth_1125")).toBe(true);
+    expect(isStripePlanKey("build_4500")).toBe(true);
   });
 
   it("rejects unknown keys", () => {
-    expect(isStripePlanKey("nope")).toBe(false);
+    expect(isStripePlanKey("starter")).toBe(false);
     expect(isStripePlanKey("")).toBe(false);
     expect(isStripePlanKey("GROWTH")).toBe(false);
   });
 });
 
 describe("planKeyFromWebIndex", () => {
-  it("maps the three web indexes", () => {
-    expect(planKeyFromWebIndex("01")).toBe("starter");
-    expect(planKeyFromWebIndex("02")).toBe("growth");
-    expect(planKeyFromWebIndex("03")).toBe("build");
+  it("maps proposal indexes to default tiers", () => {
+    expect(planKeyFromWebIndex("01")).toBe("care_275");
+    expect(planKeyFromWebIndex("02")).toBe("growth_1125");
+    expect(planKeyFromWebIndex("03")).toBe("build_4500");
   });
 
   it("returns null for anything else", () => {
@@ -35,22 +36,33 @@ describe("planKeyFromWebIndex", () => {
 
 describe("validatePlanSelection", () => {
   it("requires at least one plan", () => {
-    expect(validatePlanSelection([])).toMatch(/at least one/i);
+    expect(validatePlanSelection([])).toMatch(/select/i);
   });
 
-  it("allows one plan per category", () => {
-    expect(validatePlanSelection(["growth"])).toBeNull();
-    expect(
-      validatePlanSelection(["growth", "hosting_managed", "three_d_asset"]),
-    ).toBeNull();
+  it("allows retainer plus build", () => {
+    expect(validatePlanSelection(["care_275", "build_4500"])).toBeNull();
   });
 
-  it("rejects two plans in the same category", () => {
-    expect(validatePlanSelection(["starter", "growth"])).toMatch(
-      /one plan per category/i,
+  it("rejects two retainer plans", () => {
+    expect(validatePlanSelection(["care_150", "growth_750"])).toMatch(
+      /one monthly retainer/i,
     );
+  });
+
+  it("rejects two build plans", () => {
+    expect(validatePlanSelection(["build_3000", "build_6000"])).toMatch(
+      /one build package/i,
+    );
+  });
+});
+
+describe("partitionPlansByBilling", () => {
+  it("splits subscription and one-time plans", () => {
     expect(
-      validatePlanSelection(["hosting_managed", "hosting_enterprise"]),
-    ).toMatch(/one plan per category/i);
+      partitionPlansByBilling(["care_275", "build_4500"]),
+    ).toEqual({
+      subscription: ["care_275"],
+      payment: ["build_4500"],
+    });
   });
 });

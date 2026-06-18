@@ -99,11 +99,9 @@ export function ContactForm() {
             defaultValue="Not sure yet"
             className={`mt-2 ${fieldClass} ${focusRing}`}
           >
-            <option>Not sure yet</option>
-            <option>Starter — Managed Website Ops</option>
-            <option>Growth — Website + Content Support</option>
-            <option>Build — Product + Web Development</option>
-            <option>Managed Hosting + Migration</option>
+            <option>Build — custom website</option>
+            <option>Care — hosting and upkeep</option>
+            <option>Growth — SEO and AI automation</option>
             <option>3D production</option>
             <option>Custom AI tools</option>
           </select>

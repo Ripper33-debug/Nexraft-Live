@@ -15,15 +15,15 @@ Add these to `.env.local` (development) and your hosting provider (Vercel):
 | `STRIPE_SECRET_KEY` | Server only | Stripe API secret (`sk_test_...` in test mode) |
 | `NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY` | Browser | Publishable key (`pk_test_...`) |
 | `STRIPE_WEBHOOK_SECRET` | Server only | Webhook signing secret (`whsec_...`) |
-| `STRIPE_PRICE_STARTER` | Server only | Price ID for Web Starter retainer |
-| `STRIPE_PRICE_GROWTH` | Server only | Price ID for Web Growth retainer |
-| `STRIPE_PRICE_BUILD` | Server only | Price ID for Web Build retainer |
-| `STRIPE_PRICE_HOSTING_MANAGED` | Server only | Price ID for Hosting Managed |
-| `STRIPE_PRICE_HOSTING_PERFORMANCE` | Server only | Price ID for Hosting Performance |
-| `STRIPE_PRICE_HOSTING_ENTERPRISE` | Server only | Price ID for Hosting Enterprise |
-| `STRIPE_PRICE_THREE_D_ASSET` | Server only | Price ID for 3D Asset retainer |
-| `STRIPE_PRICE_THREE_D_SCENE` | Server only | Price ID for 3D Scene retainer |
-| `STRIPE_PRICE_THREE_D_STUDIO` | Server only | Price ID for 3D Studio retainer |
+| `STRIPE_PRICE_CARE_150` | Server only | Care retainer $150/mo |
+| `STRIPE_PRICE_CARE_275` | Server only | Care retainer $275/mo |
+| `STRIPE_PRICE_CARE_400` | Server only | Care retainer $400/mo |
+| `STRIPE_PRICE_GROWTH_750` | Server only | Growth retainer $750/mo |
+| `STRIPE_PRICE_GROWTH_1125` | Server only | Growth retainer $1,125/mo |
+| `STRIPE_PRICE_GROWTH_1500` | Server only | Growth retainer $1,500/mo |
+| `STRIPE_PRICE_BUILD_3000` | Server only | Build one-time $3,000 |
+| `STRIPE_PRICE_BUILD_4500` | Server only | Build one-time $4,500 |
+| `STRIPE_PRICE_BUILD_6000` | Server only | Build one-time $6,000 |
 | `NEXT_PUBLIC_SUPABASE_URL` | Browser + server | Supabase project URL |
 | `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Browser | Supabase publishable key (`sb_publishable_...` or `eyJ...` anon key) |
 | `SUPABASE_SECRET_KEY` | Server only | Supabase secret key (`sb_secret_...` or service role) � bypasses RLS for webhooks |
@@ -58,6 +58,16 @@ Run in the Supabase SQL editor (or via CLI):
 
 1. `supabase/migrations/002_subscriptions.sql` � **required** (`subscriptions` table)
 2. `supabase/migrations/001_stripe_billing.sql` � optional legacy tables (not used by current code)
+
+### Stripe products (test mode)
+
+Create all products and prices in one step:
+
+```bash
+STRIPE_SECRET_KEY=sk_test_... npm run stripe:sync
+```
+
+Copy the printed `STRIPE_PRICE_*` lines into `.env.local` and Vercel, then restart the dev server.
 
 ### Local webhook testing
 

@@ -261,11 +261,24 @@ export function BeforeAfterSlider({
 }: BeforeAfterSliderProps) {
   const trackRef = useRef<HTMLDivElement>(null);
   const [pct, setPct] = useState(afterLive ? 38 : 50);
+  const [trackWidth, setTrackWidth] = useState(0);
   const [allowInteraction, setAllowInteraction] = useState(false);
   const dragging = useRef(false);
 
   const beforeShot = before ?? WEATHERHAVEN_COMPARISON.before;
   const afterShot = after ?? WEATHERHAVEN_COMPARISON.after;
+
+  useEffect(() => {
+    const track = trackRef.current;
+    if (!track) return;
+
+    const update = () => setTrackWidth(track.clientWidth);
+    update();
+
+    const observer = new ResizeObserver(update);
+    observer.observe(track);
+    return () => observer.disconnect();
+  }, []);
 
   const setFromClientX = useCallback((clientX: number) => {
     const track = trackRef.current;
@@ -323,24 +336,47 @@ export function BeforeAfterSlider({
       <MetricPanel variant="after" title={afterLabel} metrics={AFTER_METRICS} />
     );
 
+  const beforePanel =
+    mode === "screenshots" ? (
+      <ScreenshotPanel side="before" label={beforeLabel} shot={beforeShot} />
+    ) : (
+      <MetricPanel variant="before" title={beforeLabel} metrics={BEFORE_METRICS} />
+    );
+
+  const panelWidth = trackWidth > 0 ? trackWidth : undefined;
+  const afterOffset = trackWidth > 0 ? -(pct / 100) * trackWidth : undefined;
+
   return (
     <div className={className}>
       <div
         ref={trackRef}
         className="before-after-track relative aspect-[16/10] overflow-hidden border border-line select-none touch-none"
       >
-        <div className="absolute inset-0">{afterPanel}</div>
+        <div className="absolute inset-0 flex">
+          <div
+            className="relative isolate h-full shrink-0 overflow-hidden"
+            style={{ width: `${pct}%` }}
+          >
+            <div
+              className="absolute inset-y-0 left-0 h-full"
+              style={panelWidth ? { width: panelWidth } : { width: "100%" }}
+            >
+              {beforePanel}
+            </div>
+          </div>
 
-        <div
-          className="absolute inset-0 overflow-hidden"
-          style={{ clipPath: `inset(0 ${100 - pct}% 0 0)` }}
-          aria-hidden="true"
-        >
-          {mode === "screenshots" ? (
-            <ScreenshotPanel side="before" label={beforeLabel} shot={beforeShot} />
-          ) : (
-            <MetricPanel variant="before" title={beforeLabel} metrics={BEFORE_METRICS} />
-          )}
+          <div className="relative isolate h-full min-w-0 flex-1 overflow-hidden">
+            <div
+              className="absolute inset-y-0 h-full"
+              style={
+                panelWidth
+                  ? { width: panelWidth, left: afterOffset }
+                  : { width: "100%", left: `-${pct}%` }
+              }
+            >
+              {afterPanel}
+            </div>
+          </div>
         </div>
 
         <div

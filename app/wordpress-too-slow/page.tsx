@@ -4,12 +4,12 @@ import { BookCallButton } from "@/components/BookCallButton";
 import { ContactEmails } from "@/components/ContactEmails";
 import { SubpageShell } from "@/components/SubpageShell";
 import { BeforeAfterSlider } from "@/components/ui/BeforeAfterSlider";
-import { PRICES, formatUsd } from "@/lib/pricing";
+import { PRICES, formatUsdRange } from "@/lib/pricing";
 
 export const metadata: Metadata = {
   title: "WordPress Too Slow",
   description:
-    "WordPress site too slow? We rebuild slow WordPress sites as static-first builds on managed edge infrastructure. Migration included with hosting from $350/mo.",
+    "WordPress site too slow? We rebuild slow WordPress sites as static-first builds on managed edge infrastructure. Care plans from $150/mo.",
   openGraph: {
     title: "WordPress too slow? It is not your content.",
     description:
@@ -74,12 +74,13 @@ export default function WordPressTooSlowPage() {
         cta={
           <>
             <p className="font-display text-3xl font-semibold tracking-tight text-bone">
-              {formatUsd(PRICES.hosting.managed)}/mo
+              {formatUsdRange(PRICES.care.min, PRICES.care.max)}/mo
             </p>
             <p className="mt-3 max-w-lg text-sm leading-relaxed text-mute">
-              Managed hosting with the migration included. Rebuild scope is
-              quoted as a fixed rate on a discovery call. Send us your URL and
-              we will run the numbers on it first.
+              Care plan with migration included. Rebuild scope from{" "}
+              {formatUsdRange(PRICES.web.buildMin, PRICES.web.buildMax)} quoted
+              on a discovery call. Send us your URL and we will run the numbers
+              first.
             </p>
             <div className="mt-6">
               <BookCallButton label="Book a call" variant="primary" />

@@ -4,6 +4,7 @@ import { getSiteUrl, getStripe } from "@/lib/stripe/client";
 import {
   getPlanLabel,
   getStripePriceId,
+  partitionPlansByBilling,
   resolveCheckoutPlans,
 } from "@/lib/stripe/plans";
 
@@ -29,31 +30,44 @@ export async function POST(request: NextRequest) {
     }
 
     const { plans } = resolved;
+    const { subscription, payment } = partitionPlansByBilling(plans);
     const stripe = getStripe();
     const siteUrl = getSiteUrl();
     const planKeys = plans.join(",");
     const planNames = plans.map((p) => getPlanLabel(p)).join(", ");
 
-    const session = await stripe.checkout.sessions.create({
-      mode: "subscription",
-      line_items: plans.map((plan) => ({
+    const line_items = [
+      ...subscription.map((plan) => ({
         price: getStripePriceId(plan)!,
         quantity: 1,
       })),
+      ...payment.map((plan) => ({
+        price: getStripePriceId(plan)!,
+        quantity: 1,
+      })),
+    ];
+
+    const session = await stripe.checkout.sessions.create({
+      mode: subscription.length > 0 ? "subscription" : "payment",
+      line_items,
       success_url: `${siteUrl}/pay?status=success`,
-      cancel_url: `${siteUrl}/pricing`,
+      cancel_url: `${siteUrl}/pay`,
       allow_promotion_codes: true,
       billing_address_collection: "auto",
       metadata: {
         plan_keys: planKeys,
         plan_names: planNames,
       },
-      subscription_data: {
-        metadata: {
-          plan_keys: planKeys,
-          plan_names: planNames,
-        },
-      },
+      ...(subscription.length > 0
+        ? {
+            subscription_data: {
+              metadata: {
+                plan_keys: planKeys,
+                plan_names: planNames,
+              },
+            },
+          }
+        : {}),
     });
 
     if (!session.url) {
