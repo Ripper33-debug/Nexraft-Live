@@ -26,8 +26,9 @@ export function Contact() {
 
         <Reveal delay={0.06}>
           <p className="mt-5 font-body text-lg leading-relaxed text-mute">
-            30-minute call. We scope your build and quote a fixed monthly rate
-            on the spot.
+            30-minute call. We scope your build, migration, or retainer and quote
+            Build, Care, or Growth on the spot - fixed price, no surprise
+            invoices.
           </p>
         </Reveal>
 

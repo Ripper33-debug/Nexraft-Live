@@ -33,6 +33,14 @@ export const FAQ_ITEMS: FaqItem[] = [
     a: "Care is managed hosting plus upkeep: SSL, backups, uptime monitoring, security updates, and small monthly content or fix requests from 150 to 400 dollars per month depending on scope. You do not get a separate server bill or have to manage infrastructure yourself.",
   },
   {
+    q: "What does the Growth plan include?",
+    a: "Growth is for teams that want the site to drive leads, not just stay online. It covers SEO, Google Business Profile work, review and reputation workflows, landing pages, conversion tweaks each month, and light AI automation for follow-up and routing. Plans run from 750 to 1,500 dollars per month depending on scope. Pick Care or Growth - not both.",
+  },
+  {
+    q: "Can you migrate our WordPress or Squarespace site?",
+    a: "Yes. Slow WordPress and outgrown Squarespace sites are a common starting point. We rebuild static-first on managed edge infrastructure, move your content and DNS, and can attach Care or Growth after launch. See our WordPress and Squarespace migration pages for detail.",
+  },
+  {
     q: "Do you work with our existing stack?",
     a: "Usually, yes. We start with a short audit, then either improve what you already run or migrate you onto a faster, managed setup. We work across common CMS platforms and modern frameworks rather than forcing one template.",
   },

@@ -41,30 +41,37 @@ export function Hero() {
 
         <h1
           id="hero-heading"
-          className="hm-fade mt-4 max-w-[18ch] font-display font-semibold tracking-[-0.03em] text-bone"
+          className="hm-fade mt-4 max-w-[20ch] font-display font-semibold tracking-[-0.03em] text-bone"
           style={{
             animationDelay: "0.06s",
             fontSize: "clamp(2.25rem, 6.5vw, 4.5rem)",
             lineHeight: 1.08,
           }}
         >
-          We build your website, run the servers under it, and make the 3D.
+          We build fast websites, run the stack, and grow your leads.
         </h1>
 
         <p
-          className="hm-fade mt-5 max-w-[40ch] font-body text-lg leading-relaxed text-mute md:text-xl"
+          className="hm-fade mt-5 max-w-[46ch] font-body text-lg leading-relaxed text-mute md:text-xl"
           style={{ animationDelay: "0.12s" }}
         >
-          Built like infrastructure. One studio, one invoice.
+          Custom builds, WordPress and Squarespace migrations, managed hosting,
+          SEO, and AI automation. Build once, then Care or Growth every month.
         </p>
 
         <div
-          className="hm-fade pointer-events-auto mt-8 flex flex-col gap-3 sm:flex-row sm:items-center"
+          className="hm-fade pointer-events-auto mt-8 flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-5"
           style={{ animationDelay: "0.18s" }}
         >
           <MagneticButton href={BOOK_CALL_URL} magnetic={false}>
             Book a call
           </MagneticButton>
+          <a
+            href="#pricing"
+            className="pointer-events-auto text-sm text-soft underline decoration-line underline-offset-4 transition-colors hover:text-bone focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-signal"
+          >
+            View pricing
+          </a>
           <a
             href="#work"
             className="pointer-events-auto text-sm text-soft underline decoration-line underline-offset-4 transition-colors hover:text-bone focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-signal"
@@ -77,8 +84,8 @@ export function Hero() {
           className="hm-fade mt-12 max-w-xl text-sm text-faint"
           style={{ animationDelay: "0.24s" }}
         >
-          99.9% uptime on stacks we operate. Weatherhaven, Outfyre, and more
-          since 2024.
+          99.9% uptime on stacks we operate. Migrations, 3D, and custom AI tools
+          when you need them. Weatherhaven, Outfyre, and more since 2024.
         </p>
       </div>
     </section>

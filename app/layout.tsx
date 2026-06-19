@@ -40,12 +40,12 @@ export const metadata: Metadata = {
     template: "%s · Nexraft",
   },
   description:
-    "Built like infrastructure. Web, hosting, 3D, and custom AI tools. Engineering studio for spec-grade builds, managed edge infrastructure, browser-ready 3D, and workflow automations. Monthly retainers. Founding-client rates available.",
+    "Custom website builds, WordPress and Squarespace migrations, managed hosting, SEO, and growth retainers. Care from $150/mo, Growth from $750/mo, builds from $3k. 3D and custom AI tools. Founding-client rates available.",
   metadataBase: new URL("https://nexraft.com"),
   openGraph: {
     title: "Nexraft · Web, Hosting, 3D & AI Studio",
     description:
-      "Built like infrastructure. Web, hosting, 3D, and custom AI tools.",
+      "Custom websites, migrations, managed hosting, SEO, and growth retainers. Build once, Care or Growth every month.",
     type: "website",
     siteName: "Nexraft",
     locale: "en_US",

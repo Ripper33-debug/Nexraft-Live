@@ -16,7 +16,7 @@ export function Pricing() {
         <SectionHeader
           specLabel="06 / PRICING"
           titleId="pricing-heading"
-          title="Build once. Grow every month."
+          title="Build once. Care or Growth every month."
           subtitle="Three ways to work with us. Exact quote on a discovery call - no surprise invoices."
         />
       </Reveal>
