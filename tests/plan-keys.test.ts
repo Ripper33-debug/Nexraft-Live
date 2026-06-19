@@ -43,9 +43,9 @@ describe("validatePlanSelection", () => {
     expect(validatePlanSelection(["care_275", "build_4500"])).toBeNull();
   });
 
-  it("rejects two retainer plans", () => {
+  it("rejects care and growth together", () => {
     expect(validatePlanSelection(["care_150", "growth_750"])).toMatch(
-      /one monthly retainer/i,
+      /not both/i,
     );
   });
 

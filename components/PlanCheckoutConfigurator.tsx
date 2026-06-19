@@ -14,8 +14,15 @@ import { validatePlanSelection } from "@/lib/stripe/plan-keys";
 type Selection = Record<PlanCategory, StripePlanKey | null>;
 
 const EMPTY_SELECTION: Selection = {
-  retainer: null,
+  care: null,
+  growth: null,
   build: null,
+};
+
+const NONE_HINT: Record<PlanCategory, string> = {
+  care: "Skip Care",
+  growth: "Skip Growth",
+  build: "No build package at checkout",
 };
 
 const focusRing =
@@ -35,7 +42,12 @@ export function PlanCheckoutConfigurator() {
   const buildTotal = totalBuildPrice(selectedPlans);
 
   const setCategory = (category: PlanCategory, key: StripePlanKey | null) => {
-    setSelection((prev) => ({ ...prev, [category]: key }));
+    setSelection((prev) => {
+      const next = { ...prev, [category]: key };
+      if (category === "care" && key !== null) next.growth = null;
+      if (category === "growth" && key !== null) next.care = null;
+      return next;
+    });
     setError("");
   };
 
@@ -103,9 +115,7 @@ export function PlanCheckoutConfigurator() {
                 <span className="min-w-0">
                   <span className="text-sm font-medium text-bone">None</span>
                   <span className="mt-0.5 block text-xs text-faint">
-                    {category.id === "retainer"
-                      ? "Skip monthly retainer"
-                      : "No build package at checkout"}
+                    {NONE_HINT[category.id]}
                   </span>
                 </span>
               </label>

@@ -48,7 +48,7 @@ export const PUBLIC_PLANS = [
     summary:
       "Where recurring revenue actually lives. SEO, Google Business Profile, reviews, and AI automation wired into how you sell and support customers.",
     items: [
-      "Everything in Care",
+      "Managed hosting and SSL",
       "SEO and local search (GBP)",
       "Review and reputation workflows",
       "AI chat, follow-up, and lead routing",

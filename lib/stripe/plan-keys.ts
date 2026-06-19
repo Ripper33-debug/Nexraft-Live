@@ -12,17 +12,17 @@ export const STRIPE_PLAN_KEYS = [
 
 export type StripePlanKey = (typeof STRIPE_PLAN_KEYS)[number];
 
-export type PlanCategory = "retainer" | "build";
+export type PlanCategory = "care" | "growth" | "build";
 
 export type RetainerFamily = "care" | "growth";
 
 export const PLAN_CATEGORY_BY_KEY: Record<StripePlanKey, PlanCategory> = {
-  care_150: "retainer",
-  care_275: "retainer",
-  care_400: "retainer",
-  growth_750: "retainer",
-  growth_1125: "retainer",
-  growth_1500: "retainer",
+  care_150: "care",
+  care_275: "care",
+  care_400: "care",
+  growth_750: "growth",
+  growth_1125: "growth",
+  growth_1500: "growth",
   build_3000: "build",
   build_4500: "build",
   build_6000: "build",
@@ -86,14 +86,23 @@ export const STRIPE_PLAN_LABELS: Record<StripePlanKey, string> = {
 
 export function validatePlanSelection(plans: StripePlanKey[]): string | null {
   if (plans.length === 0) {
-    return "Select a Care or Growth retainer, or a Build package.";
+    return "Select Care, Growth, or a Build package.";
   }
 
-  const retainers = plans.filter((p) => PLAN_CATEGORY_BY_KEY[p] === "retainer");
+  const care = plans.filter((p) => PLAN_CATEGORY_BY_KEY[p] === "care");
+  const growth = plans.filter((p) => PLAN_CATEGORY_BY_KEY[p] === "growth");
   const builds = plans.filter((p) => PLAN_CATEGORY_BY_KEY[p] === "build");
 
-  if (retainers.length > 1) {
-    return "Pick one monthly retainer: Care or Growth.";
+  if (care.length > 1) {
+    return "Pick one Care tier.";
+  }
+
+  if (growth.length > 1) {
+    return "Pick one Growth tier.";
+  }
+
+  if (care.length > 0 && growth.length > 0) {
+    return "Pick Care or Growth, not both.";
   }
 
   if (builds.length > 1) {

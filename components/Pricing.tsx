@@ -25,8 +25,9 @@ export function Pricing() {
         <div className="mt-10 border border-line bg-ink2 p-5 md:mt-12 md:p-6">
           <p className="text-sm leading-relaxed text-mute">
             <span className="text-bone">How it stacks.</span> Most clients start
-            with a Build, attach Care for hosting and upkeep, then move to Growth
-            when they want SEO, reviews, and AI automation driving leads.
+            with a Build, then attach Care for hosting and upkeep or Growth for
+            SEO, reviews, and AI automation. Care and Growth are separate monthly
+            plans - pick one, not both.
           </p>
           <p className="mt-3 font-body text-xs leading-normal text-faint">
             {FOUNDING_RATE_LINE}

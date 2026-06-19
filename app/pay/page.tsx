@@ -42,8 +42,8 @@ export default async function PayPage({ searchParams }: PayPageProps) {
           </div>
         ) : (
           <p className="mt-6 max-w-2xl text-base leading-relaxed text-mute">
-            Configured on your discovery call? Pick your Care or Growth retainer,
-            optional Build package, and checkout through Stripe.
+            Configured on your discovery call? Pick Care or Growth (one monthly
+            plan), optional Build package, and checkout through Stripe.
           </p>
         )}
 
@@ -53,7 +53,8 @@ export default async function PayPage({ searchParams }: PayPageProps) {
               Start your plan
             </h2>
             <p className="mt-3 max-w-lg text-sm leading-relaxed text-mute">
-              Care or Growth retainer plus optional Build. One Stripe checkout.
+              Care and Growth are separate. Pick one monthly plan plus optional
+              Build. One Stripe checkout.
             </p>
             <div className="mt-6">
               <PlanCheckoutConfigurator />

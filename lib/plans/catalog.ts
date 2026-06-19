@@ -1,6 +1,6 @@
-import type { StripePlanKey } from "@/lib/stripe/plan-keys";
+import type { PlanCategory, StripePlanKey } from "@/lib/stripe/plan-keys";
 
-export type PlanCategory = "retainer" | "build";
+export type { PlanCategory };
 
 export type PlanCatalogEntry = {
   key: StripePlanKey;
@@ -15,7 +15,7 @@ export type PlanCatalogEntry = {
 export const PLAN_CATALOG: PlanCatalogEntry[] = [
   {
     key: "care_150",
-    category: "retainer",
+    category: "care",
     name: "Care",
     price: 150,
     priceLabel: "$150/mo",
@@ -23,7 +23,7 @@ export const PLAN_CATALOG: PlanCatalogEntry[] = [
   },
   {
     key: "care_275",
-    category: "retainer",
+    category: "care",
     name: "Care",
     price: 275,
     priceLabel: "$275/mo",
@@ -32,7 +32,7 @@ export const PLAN_CATALOG: PlanCatalogEntry[] = [
   },
   {
     key: "care_400",
-    category: "retainer",
+    category: "care",
     name: "Care",
     price: 400,
     priceLabel: "$400/mo",
@@ -40,7 +40,7 @@ export const PLAN_CATALOG: PlanCatalogEntry[] = [
   },
   {
     key: "growth_750",
-    category: "retainer",
+    category: "growth",
     name: "Growth",
     price: 750,
     priceLabel: "$750/mo",
@@ -48,7 +48,7 @@ export const PLAN_CATALOG: PlanCatalogEntry[] = [
   },
   {
     key: "growth_1125",
-    category: "retainer",
+    category: "growth",
     name: "Growth",
     price: 1125,
     priceLabel: "$1,125/mo",
@@ -57,7 +57,7 @@ export const PLAN_CATALOG: PlanCatalogEntry[] = [
   },
   {
     key: "growth_1500",
-    category: "retainer",
+    category: "growth",
     name: "Growth",
     price: 1500,
     priceLabel: "$1,500/mo",
@@ -96,14 +96,19 @@ export const PLAN_CATEGORIES: {
   hint?: string;
 }[] = [
   {
-    id: "retainer",
-    label: "Monthly retainer",
-    hint: "Pick Care for hosting and upkeep, or Growth for SEO and AI automation.",
+    id: "care",
+    label: "Care",
+    hint: "Hosting, security, uptime, and small monthly changes after launch.",
+  },
+  {
+    id: "growth",
+    label: "Growth",
+    hint: "SEO, Google Business Profile, reviews, and AI automation. Pick one monthly plan.",
   },
   {
     id: "build",
     label: "Build (one-time)",
-    hint: "Optional. Custom site build billed once at checkout. Most clients add Care after launch.",
+    hint: "Optional. Custom site build billed once at checkout.",
   },
 ];
 
@@ -118,7 +123,7 @@ export function catalogEntry(key: StripePlanKey): PlanCatalogEntry | undefined {
 export function totalMonthlyPrice(keys: StripePlanKey[]): number {
   return keys.reduce((sum, key) => {
     const entry = catalogEntry(key);
-    if (!entry || entry.category !== "retainer") return sum;
+    if (!entry || entry.category === "build") return sum;
     return sum + entry.price;
   }, 0);
 }

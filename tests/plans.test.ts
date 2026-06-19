@@ -35,7 +35,7 @@ describe("resolveCheckoutPlans", () => {
     expect(res).toHaveProperty("error");
   });
 
-  it("rejects two retainer plans", () => {
+  it("rejects care and growth together", () => {
     vi.stubEnv("STRIPE_PRICE_CARE_150", "price_care_150");
     const res = resolveCheckoutPlans({ plans: ["care_150", "growth_1125"] });
     expect(res).toHaveProperty("error");
