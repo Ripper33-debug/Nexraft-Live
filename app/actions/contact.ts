@@ -24,7 +24,7 @@ export async function submitContact(formData: FormData): Promise<ContactResult> 
 
   const headerList = await headers();
   const ip = clientIpFromHeaders(headerList.get("x-forwarded-for"));
-  const limit = checkRateLimit(`contact:${ip}`, 5, 15 * 60 * 1000);
+  const limit = await checkRateLimit(`contact:${ip}`, 5, 15 * 60 * 1000);
 
   if (!limit.ok) {
     return {

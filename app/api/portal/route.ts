@@ -1,6 +1,8 @@
 import { NextResponse, type NextRequest } from "next/server";
+import { sendPortalMagicLink, emailConfigured } from "@/lib/email";
 import { checkRateLimit, clientIpFromHeaders } from "@/lib/rate-limit";
-import { getSiteUrl, getStripe } from "@/lib/stripe/client";
+import { createPortalToken, redisConfigured } from "@/lib/redis";
+import { getSiteUrl } from "@/lib/stripe/client";
 import { findStripeCustomerIdByEmail } from "@/lib/supabase/billing";
 import { supabaseConfigured } from "@/lib/supabase/admin";
 
@@ -14,7 +16,7 @@ const PORTAL_ERROR =
 export async function POST(request: NextRequest) {
   try {
     const ip = clientIpFromHeaders(request.headers.get("x-forwarded-for"));
-    const limit = checkRateLimit(`portal:${ip}`, 5, 15 * 60 * 1000);
+    const limit = await checkRateLimit(`portal:${ip}`, 5, 15 * 60 * 1000);
 
     if (!limit.ok) {
       return NextResponse.json(
@@ -34,21 +36,54 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: PORTAL_ERROR }, { status: 503 });
     }
 
+    if (!redisConfigured()) {
+      return NextResponse.json(
+        {
+          error:
+            "Billing portal verification is temporarily unavailable. Email barry@nexraft.com for help.",
+        },
+        { status: 503 },
+      );
+    }
+
+    if (!emailConfigured()) {
+      return NextResponse.json(
+        {
+          error:
+            "Billing portal verification is temporarily unavailable. Email barry@nexraft.com for help.",
+        },
+        { status: 503 },
+      );
+    }
+
     const stripeCustomerId = await findStripeCustomerIdByEmail(email);
 
     if (!stripeCustomerId) {
       return NextResponse.json({ error: PORTAL_ERROR }, { status: 400 });
     }
 
-    const stripe = getStripe();
-    const siteUrl = getSiteUrl();
-
-    const session = await stripe.billingPortal.sessions.create({
-      customer: stripeCustomerId,
-      return_url: `${siteUrl}/pay`,
+    const token = await createPortalToken({
+      stripeCustomerId,
+      email,
     });
 
-    return NextResponse.json({ url: session.url });
+    if (!token) {
+      return NextResponse.json({ error: PORTAL_ERROR }, { status: 500 });
+    }
+
+    const siteUrl = getSiteUrl();
+    const verifyUrl = `${siteUrl}/api/portal/verify?token=${encodeURIComponent(token)}`;
+    const sent = await sendPortalMagicLink(email, verifyUrl);
+
+    if (!sent.ok) {
+      return NextResponse.json({ error: PORTAL_ERROR }, { status: 500 });
+    }
+
+    return NextResponse.json({
+      ok: true,
+      message:
+        "Check your inbox for a secure billing link. It expires in 15 minutes.",
+    });
   } catch {
     return NextResponse.json({ error: PORTAL_ERROR }, { status: 500 });
   }

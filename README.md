@@ -30,6 +30,10 @@ Add these to `.env.local` (development) and your hosting provider (Vercel):
 | `NEXT_PUBLIC_SITE_URL` | Browser + server | Canonical site URL (e.g. `http://localhost:3000` or `https://nexraft.com`) |
 | `NEXT_PUBLIC_BOOKING_URL` | Browser | Cal.com or Calendly link for pricing and hero "Book a call" CTAs |
 | `FORMSPREE_FORM_ID` | Server only | Formspree form ID for homepage contact inquiries |
+| `UPSTASH_REDIS_REST_URL` | Server only | Upstash Redis REST URL (rate limits + portal tokens). Vercel KV uses `KV_REST_API_URL` as an alias. |
+| `UPSTASH_REDIS_REST_TOKEN` | Server only | Upstash Redis REST token. Vercel KV uses `KV_REST_API_TOKEN` as an alias. |
+| `RESEND_API_KEY` | Server only | Resend API key for billing portal magic links |
+| `RESEND_FROM_EMAIL` | Server only | Verified sender, e.g. `Nexraft <barry@nexraft.com>` |
 
 `SUPABASE_SERVICE_ROLE_KEY` is still accepted as a fallback for `SUPABASE_SECRET_KEY`.
 
@@ -56,8 +60,19 @@ If `FORMSPREE_FORM_ID` is missing, the form shows an error and visitors can emai
 
 Run in the Supabase SQL editor (or via CLI):
 
-1. `supabase/migrations/002_subscriptions.sql` � **required** (`subscriptions` table)
-2. `supabase/migrations/001_stripe_billing.sql` � optional legacy tables (not used by current code)
+1. `supabase/migrations/002_subscriptions.sql` - **required** (`subscriptions` table)
+2. `supabase/migrations/003_subscriptions_rls.sql` - **required** (deny public access; service role only)
+3. `supabase/migrations/001_stripe_billing.sql` - optional legacy tables (not used by current code)
+
+### Billing portal security
+
+The `/pay` billing portal uses a **magic link** flow:
+
+1. Client enters their checkout email.
+2. Server stores a one-time token in Redis and emails a link via Resend.
+3. The link opens Stripe Customer Portal and expires in 15 minutes.
+
+Requires `UPSTASH_REDIS_REST_*` (or Vercel KV) and `RESEND_API_KEY` in production.
 
 ### Stripe products (test mode)
 

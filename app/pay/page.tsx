@@ -13,11 +13,11 @@ export const metadata: Metadata = {
 };
 
 type PayPageProps = {
-  searchParams: Promise<{ status?: string }>;
+  searchParams: Promise<{ status?: string; portal?: string }>;
 };
 
 export default async function PayPage({ searchParams }: PayPageProps) {
-  const { status } = await searchParams;
+  const { status, portal } = await searchParams;
   const success = status === "success";
 
   return (
@@ -66,11 +66,11 @@ export default async function PayPage({ searchParams }: PayPageProps) {
               Manage billing
             </h2>
             <p className="mt-3 max-w-lg text-sm leading-relaxed text-mute">
-              Already a client? Update payment method, view invoices, or cancel
-              through the Stripe customer portal.
+              Already a client? Enter your checkout email and we will send a
+              secure one-time link to the Stripe billing portal.
             </p>
             <div className="mt-6 flex-1">
-              <ManageBilling />
+              <ManageBilling portalStatus={portal ?? null} />
             </div>
 
             <div className="mt-10 border-t border-line pt-8">

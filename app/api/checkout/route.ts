@@ -13,7 +13,7 @@ export const runtime = "nodejs";
 export async function POST(request: NextRequest) {
   try {
     const ip = clientIpFromHeaders(request.headers.get("x-forwarded-for"));
-    const limit = checkRateLimit(`checkout:${ip}`, 10, 10 * 60 * 1000);
+    const limit = await checkRateLimit(`checkout:${ip}`, 10, 10 * 60 * 1000);
 
     if (!limit.ok) {
       return NextResponse.json(
