@@ -11,6 +11,7 @@ import { StructuredData } from "@/components/StructuredData";
 import { CookieNotice } from "@/components/CookieNotice";
 import { LoadingScreen } from "@/components/LoadingScreen";
 import { StickyBookCall } from "@/components/StickyBookCall";
+import { InstantlyPixel } from "@/components/InstantlyPixel";
 import "./globals.css";
 
 const bricolage = Bricolage_Grotesque({
@@ -93,6 +94,7 @@ export default function RootLayout({
         <CookieNotice />
         <StickyBookCall />
         <Analytics />
+        <InstantlyPixel />
       </body>
     </html>
   );

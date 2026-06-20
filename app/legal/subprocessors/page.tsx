@@ -44,6 +44,14 @@ const subprocessors = [
     region: "United States",
   },
   {
+    name: "Instantly (Instantly.ai)",
+    category: "Sales intelligence",
+    purpose:
+      "Website Visitors pixel: identifies U.S. visitors, enriches firmographic and contact data, and routes leads into Instantly for follow-up.",
+    data: "Page views, referrer, IP-derived company match, and U.S. contact signals where Instantly has a match. Powered by Apollo tracking infrastructure.",
+    region: "United States (visitor identification limited to U.S. traffic per Instantly)",
+  },
+  {
     name: "Formspree, Inc.",
     category: "Communications",
     purpose:

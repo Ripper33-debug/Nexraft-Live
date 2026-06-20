@@ -37,8 +37,9 @@ export function CookieNotice() {
     >
       <div className="mx-auto flex max-w-[1180px] flex-col gap-3 px-7 py-4 sm:flex-row sm:items-center sm:justify-between">
         <p className="text-xs leading-relaxed text-mute">
-          We use privacy-friendly analytics to understand traffic. No ad
-          tracking, no third-party profiling.{" "}
+          We use privacy-friendly analytics and Instantly Website Visitors to
+          identify U.S. business visitors so we can follow up on relevant inbound
+          interest.{" "}
           <a
             href="/legal/privacy"
             className={`text-bone underline decoration-line underline-offset-2 hover:text-signal ${focusRing}`}

@@ -4,6 +4,7 @@ import Link from "next/link";
 import { SectionHeader, SectionShell } from "@/components/ui/SectionShell";
 import { Reveal } from "@/components/ui/Reveal";
 import { BOOK_CALL_URL } from "@/lib/site";
+import { FEATURED_TESTIMONIAL } from "@/lib/testimonials";
 
 const focusRing =
   "outline-none focus-visible:[outline:2px_solid_var(--color-signal)] focus-visible:[outline-offset:2px]";
@@ -32,22 +33,21 @@ export function ClientProof() {
           specLabel="04 / PROOF"
           titleId="proof-heading"
           title="Client delivery."
-          subtitle="Named references and attributed quotes are available on a discovery call. Published work speaks for itself."
+          subtitle="Named references, live rebuilds, and results from clients on retainer."
         />
       </Reveal>
 
-      {/* TODO: replace with real, client-approved quote + attribution */}
       <Reveal delay={0.04}>
         <figure className="mt-10 border border-line bg-ink2 p-6 md:mt-12 md:p-8">
           <blockquote className="font-body text-lg leading-relaxed text-bone md:text-xl">
-            &ldquo;[Client-approved quote goes here.]&rdquo;
+            &ldquo;{FEATURED_TESTIMONIAL.quote}&rdquo;
           </blockquote>
           <figcaption className="mt-6 border-t border-line pt-5">
             <p className="font-body text-sm font-semibold text-bone">
-              [Full name]
+              {FEATURED_TESTIMONIAL.name}
             </p>
             <p className="mt-1 font-jetbrains text-[11px] uppercase leading-none tracking-[0.14em] text-faint">
-              [Title] {"\u00b7"} [Company]
+              {FEATURED_TESTIMONIAL.role} {"\u00b7"} {FEATURED_TESTIMONIAL.company}
             </p>
           </figcaption>
         </figure>
@@ -93,8 +93,8 @@ export function ClientProof() {
             Need a named reference?
           </h3>
           <p className="mt-2 max-w-xl text-sm leading-relaxed text-mute">
-            We share client contacts and approved quotes once we know your
-            project scope. No anonymous placeholders on this site.
+            We share additional client contacts and approved quotes once we know
+            your project scope.
           </p>
           <a
             href={BOOK_CALL_URL}

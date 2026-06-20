@@ -2,11 +2,11 @@ import type { NextConfig } from "next";
 
 const csp = [
   "default-src 'self'",
-  "script-src 'self' 'unsafe-inline' https://va.vercel-scripts.com",
+  "script-src 'self' 'unsafe-inline' https://va.vercel-scripts.com https://assets.apollo.io",
   "style-src 'self' 'unsafe-inline'",
   "img-src 'self' data: blob: https:",
   "font-src 'self'",
-  "connect-src 'self' https://formspree.io https://va.vercel-scripts.com https://vitals.vercel-insights.com",
+  "connect-src 'self' https://formspree.io https://va.vercel-scripts.com https://vitals.vercel-insights.com https://apollo.io https://*.apollo.io",
   "frame-src 'self' https://weatherhavenusa.com https://weatherhaven.com",
   "frame-ancestors 'none'",
   "base-uri 'self'",

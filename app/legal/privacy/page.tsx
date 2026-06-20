@@ -45,7 +45,7 @@ export default function PrivacyPage() {
             {
               title: "Site analytics",
               detail:
-                "First-party, aggregated usage metrics (page views, Core Web Vitals). No advertising identifiers and no cross-site tracking.",
+                "First-party, aggregated usage metrics (page views, Core Web Vitals) and Instantly Website Visitors tracking to identify U.S. business visitors for sales follow-up.",
             },
             {
               title: "Technical logs",
