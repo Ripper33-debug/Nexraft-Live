@@ -92,7 +92,7 @@ export function Services() {
           </div>
         </SpotlightCard>
 
-        <SpotlightCard className="border-t border-line pt-6 md:col-span-4 md:border md:border-line md:bg-ink2 md:p-7 md:pt-7">
+        <SpotlightCard tilt className="border-t border-line pt-6 md:col-span-4 md:border md:border-line md:bg-ink2 md:p-7 md:pt-7">
           <div className="flex flex-wrap items-center gap-3">
             <h3 className="font-display text-xl font-semibold leading-snug tracking-[-0.02em] text-bone">
               {hosting.title}
@@ -107,7 +107,7 @@ export function Services() {
           </p>
         </SpotlightCard>
 
-        <SpotlightCard className="border-t border-line pt-6 md:col-span-4 md:border md:border-line md:bg-panel md:p-7 md:pt-7">
+        <SpotlightCard tilt className="border-t border-line pt-6 md:col-span-4 md:border md:border-line md:bg-panel md:p-7 md:pt-7">
           <div className="flex flex-wrap items-center gap-3">
             <h3 className="font-display text-xl font-semibold leading-snug tracking-[-0.02em] text-bone">
               {growth.title}
@@ -128,7 +128,7 @@ export function Services() {
           </a>
         </SpotlightCard>
 
-        <SpotlightCard className="border-t border-line pt-6 md:col-span-4 md:border md:border-line md:bg-ink2 md:p-7 md:pt-7">
+        <SpotlightCard tilt className="border-t border-line pt-6 md:col-span-4 md:border md:border-line md:bg-ink2 md:p-7 md:pt-7">
           <div className="flex flex-wrap items-center gap-3">
             <h3 className="font-display text-xl font-semibold leading-snug tracking-[-0.02em] text-bone">
               {ai.title}

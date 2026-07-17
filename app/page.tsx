@@ -4,6 +4,8 @@ import { ProductDemo } from "@/components/ProductDemo";
 import { ClientLogos } from "@/components/ClientLogos";
 import { Services } from "@/components/Services";
 import { Founders } from "@/components/Founders";
+import { Manifesto } from "@/components/Manifesto";
+import { Marquee } from "@/components/Marquee";
 import { Work } from "@/components/Work";
 import { MigrationProof } from "@/components/MigrationProof";
 import { ClientProof } from "@/components/ClientProof";
@@ -18,9 +20,11 @@ export default function HomePage() {
       <Hero />
       <MetricsStrip />
       <ClientLogos />
+      <Manifesto />
       <ProductDemo />
       <Services />
       <Founders />
+      <Marquee />
       <Work />
       <MigrationProof />
       <ClientProof />

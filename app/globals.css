@@ -204,6 +204,28 @@ html.lenis body {
     }
   }
 
+  /* Kinetic word-by-word headline reveal */
+  .word-rise {
+    display: inline-block;
+    opacity: 1;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .word-rise {
+      opacity: 0;
+      transform: translateY(0.5em);
+      animation: word-rise-in 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      will-change: transform, opacity;
+    }
+  }
+
+  @keyframes word-rise-in {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
   .reveal {
     opacity: 1;
     transform: none;

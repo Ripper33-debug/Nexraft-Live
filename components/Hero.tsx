@@ -5,6 +5,9 @@ import { HeroCanvas } from "@/components/HeroCanvas";
 import { MagneticButton } from "@/components/ui/MagneticButton";
 import { BOOK_CALL_URL } from "@/lib/site";
 
+const HEADLINE =
+  "We build fast websites, run the stack, and grow your leads.".split(" ");
+
 export function Hero() {
   const sectionRef = useRef<HTMLElement>(null);
   const [scrollY, setScrollY] = useState(0);
@@ -36,6 +39,8 @@ export function Hero() {
 
   const contentY = scrollY * 0.28;
   const contentOpacity = Math.max(0, 1 - scrollY / 520);
+  const meshY = scrollY * 0.12;
+  const meshScale = 1 + Math.min(scrollY, 900) / 4200;
 
   return (
     <section
@@ -44,7 +49,12 @@ export function Hero() {
       aria-labelledby="hero-heading"
       className="relative -mt-[68px] flex min-h-[100svh] flex-col overflow-hidden border-b border-line bg-ink pt-[68px]"
     >
-      <div className="absolute inset-0 z-0 hero-mesh-mask">
+      <div
+        className="absolute inset-0 z-0 hero-mesh-mask will-change-transform"
+        style={{
+          transform: `translate3d(0, ${meshY}px, 0) scale(${meshScale})`,
+        }}
+      >
         <HeroCanvas sectionRef={sectionRef} />
       </div>
 
@@ -76,15 +86,22 @@ export function Hero() {
 
         <h1
           id="hero-heading"
-          className="hm-fade text-sheen relative isolate mt-5 max-w-[20ch] font-display font-semibold tracking-[-0.035em] text-bone"
+          className="relative isolate mt-5 max-w-[20ch] font-display font-semibold tracking-[-0.035em] text-bone"
           style={{
-            animationDelay: "0.06s",
             fontSize: "clamp(2.5rem, 7vw, 5rem)",
             lineHeight: 1.04,
           }}
         >
           <span aria-hidden="true" className="headline-glow" />
-          We build fast websites, run the stack, and grow your leads.
+          {HEADLINE.map((word, i) => (
+            <span
+              key={`${word}-${i}`}
+              className="word-rise text-sheen mr-[0.26em]"
+              style={{ animationDelay: `${0.08 + i * 0.05}s` }}
+            >
+              {word}
+            </span>
+          ))}
         </h1>
 
         <p
