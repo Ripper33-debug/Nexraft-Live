@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { SectionHeader, SectionShell } from "@/components/ui/SectionShell";
 import { Reveal } from "@/components/ui/Reveal";
+import { SpotlightCard } from "@/components/ui/SpotlightCard";
 
 const dot = "\u00b7";
 
@@ -60,7 +61,7 @@ export function Services() {
       </Reveal>
 
       <div className="mt-12 grid grid-cols-1 gap-6 md:grid-cols-12 md:gap-6">
-        <article className="border-t border-line pt-6 md:col-span-12 md:border md:border-line md:bg-ink2 md:p-8 md:pt-8">
+        <SpotlightCard className="border-t border-line pt-6 md:col-span-12 md:border md:border-line md:bg-ink2 md:p-8 md:pt-8">
           <div className="flex flex-wrap items-center gap-3">
             <h3 className="font-display text-xl font-semibold leading-snug tracking-[-0.02em] text-bone">
               {web.title}
@@ -89,9 +90,9 @@ export function Services() {
               Squarespace migration
             </Link>
           </div>
-        </article>
+        </SpotlightCard>
 
-        <article className="border-t border-line pt-6 md:col-span-4 md:border md:border-line md:bg-ink2 md:p-7 md:pt-7">
+        <SpotlightCard className="border-t border-line pt-6 md:col-span-4 md:border md:border-line md:bg-ink2 md:p-7 md:pt-7">
           <div className="flex flex-wrap items-center gap-3">
             <h3 className="font-display text-xl font-semibold leading-snug tracking-[-0.02em] text-bone">
               {hosting.title}
@@ -104,9 +105,9 @@ export function Services() {
           <p className="mt-5 font-jetbrains text-[11px] uppercase leading-none tracking-[0.14em] text-tag">
             {hosting.stack}
           </p>
-        </article>
+        </SpotlightCard>
 
-        <article className="border-t border-line pt-6 md:col-span-4 md:border md:border-line md:bg-panel md:p-7 md:pt-7">
+        <SpotlightCard className="border-t border-line pt-6 md:col-span-4 md:border md:border-line md:bg-panel md:p-7 md:pt-7">
           <div className="flex flex-wrap items-center gap-3">
             <h3 className="font-display text-xl font-semibold leading-snug tracking-[-0.02em] text-bone">
               {growth.title}
@@ -125,9 +126,9 @@ export function Services() {
           >
             See Growth pricing
           </a>
-        </article>
+        </SpotlightCard>
 
-        <article className="border-t border-line pt-6 md:col-span-4 md:border md:border-line md:bg-ink2 md:p-7 md:pt-7">
+        <SpotlightCard className="border-t border-line pt-6 md:col-span-4 md:border md:border-line md:bg-ink2 md:p-7 md:pt-7">
           <div className="flex flex-wrap items-center gap-3">
             <h3 className="font-display text-xl font-semibold leading-snug tracking-[-0.02em] text-bone">
               {ai.title}
@@ -143,9 +144,9 @@ export function Services() {
           <p className="mt-5 font-jetbrains text-[11px] uppercase leading-none tracking-[0.14em] text-tag">
             {ai.stack}
           </p>
-        </article>
+        </SpotlightCard>
 
-        <article className="border-t border-line pt-6 md:col-span-12 md:border md:border-line md:bg-ink2 md:p-7 md:pt-7">
+        <SpotlightCard className="border-t border-line pt-6 md:col-span-12 md:border md:border-line md:bg-ink2 md:p-7 md:pt-7">
           <div className="flex flex-wrap items-center gap-3">
             <h3 className="font-display text-xl font-semibold leading-snug tracking-[-0.02em] text-bone">
               {threeD.title}
@@ -168,7 +169,7 @@ export function Services() {
           >
             See the live demo
           </Link>
-        </article>
+        </SpotlightCard>
       </div>
     </SectionShell>
   );

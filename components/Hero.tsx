@@ -1,12 +1,41 @@
 "use client";
 
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { HeroCanvas } from "@/components/HeroCanvas";
 import { MagneticButton } from "@/components/ui/MagneticButton";
 import { BOOK_CALL_URL } from "@/lib/site";
 
 export function Hero() {
   const sectionRef = useRef<HTMLElement>(null);
+  const [scrollY, setScrollY] = useState(0);
+
+  useEffect(() => {
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)");
+    if (reduce.matches) return;
+
+    let rafId = 0;
+    const update = () => {
+      rafId = 0;
+      const section = sectionRef.current;
+      if (!section) return;
+      const top = section.getBoundingClientRect().top;
+      // Only drift while the hero is on its way out (top <= 0).
+      setScrollY(Math.max(0, -top));
+    };
+    const onScroll = () => {
+      if (!rafId) rafId = requestAnimationFrame(update);
+    };
+
+    update();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      if (rafId) cancelAnimationFrame(rafId);
+    };
+  }, []);
+
+  const contentY = scrollY * 0.28;
+  const contentOpacity = Math.max(0, 1 - scrollY / 520);
 
   return (
     <section
@@ -36,18 +65,25 @@ export function Hero() {
         }}
       />
 
-      <div className="pointer-events-none relative z-10 mx-auto flex w-full max-w-[1180px] flex-1 flex-col justify-center px-7 py-16 md:py-20">
+      <div
+        className="pointer-events-none relative z-10 mx-auto flex w-full max-w-[1180px] flex-1 flex-col justify-center px-7 py-16 will-change-transform md:py-20"
+        style={{
+          transform: `translate3d(0, ${contentY}px, 0)`,
+          opacity: contentOpacity,
+        }}
+      >
         <p className="hm-fade text-sm text-mute">Est. 2024</p>
 
         <h1
           id="hero-heading"
-          className="hm-fade mt-4 max-w-[20ch] font-display font-semibold tracking-[-0.03em] text-bone"
+          className="hm-fade text-sheen relative isolate mt-5 max-w-[20ch] font-display font-semibold tracking-[-0.035em] text-bone"
           style={{
             animationDelay: "0.06s",
-            fontSize: "clamp(2.25rem, 6.5vw, 4.5rem)",
-            lineHeight: 1.08,
+            fontSize: "clamp(2.5rem, 7vw, 5rem)",
+            lineHeight: 1.04,
           }}
         >
+          <span aria-hidden="true" className="headline-glow" />
           We build fast websites, run the stack, and grow your leads.
         </h1>
 

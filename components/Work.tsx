@@ -4,50 +4,11 @@ import Image from "next/image";
 import Link from "next/link";
 import { SectionHeader, SectionShell } from "@/components/ui/SectionShell";
 import { Reveal } from "@/components/ui/Reveal";
+import { WorkTrack } from "@/components/WorkTrack";
 import { FEATURED_PROJECT, WORK_GRID } from "@/lib/work";
 
 const focusRing =
   "outline-none focus-visible:[outline:2px_solid_var(--color-signal)] focus-visible:[outline-offset:2px]";
-
-function ProjectVisual({
-  name,
-  image,
-  demo,
-}: {
-  name: string;
-  image?: string;
-  demo?: boolean;
-}) {
-  if (demo) {
-    return (
-      <div className="flex aspect-[16/10] w-full flex-col items-center justify-center border border-line bg-gradient-to-br from-panel via-ink2 to-ink md:aspect-auto md:h-full md:min-h-[140px]">
-        <span className="font-jetbrains text-[11px] uppercase leading-none tracking-[0.14em] text-bone">3D</span>
-        <span className="mt-1 text-xs text-faint">Live demo</span>
-      </div>
-    );
-  }
-  if (image) {
-    return (
-      <div className="relative aspect-[16/10] w-full overflow-hidden border border-line bg-ink md:aspect-auto md:h-full md:min-h-[140px]">
-        <Image
-          src={image}
-          alt={`${name} project preview`}
-          fill
-          className="object-cover object-top transition-transform duration-500 group-hover:scale-[1.02]"
-          sizes="(max-width: 768px) 100vw, 400px"
-        />
-      </div>
-    );
-  }
-
-  return (
-    <div className="flex aspect-[16/10] w-full items-center justify-center border border-line bg-gradient-to-br from-panel to-ink md:aspect-auto md:h-full md:min-h-[140px]">
-      <span className="font-display text-4xl font-semibold text-line">
-        {name.charAt(0)}
-      </span>
-    </div>
-  );
-}
 
 export function Work() {
   return (
@@ -101,39 +62,7 @@ export function Work() {
         </Reveal>
       ) : null}
 
-      <div className="mx-auto mt-12 max-w-[1180px] px-7">
-        <div className="grid grid-cols-1 gap-px border border-line bg-line md:grid-cols-2">
-          {WORK_GRID.map((project) => (
-            <Link
-              key={project.id}
-              href={project.href}
-              target={project.external ? "_blank" : undefined}
-              rel={project.external ? "noopener noreferrer" : undefined}
-              className={`group grid grid-cols-1 bg-ink2 transition-colors hover:bg-panel sm:grid-cols-[minmax(0,42%)_1fr] ${focusRing}`}
-            >
-              <ProjectVisual
-                name={project.name}
-                image={project.image}
-                demo={project.demo}
-              />
-              <div className="flex flex-col justify-center p-6 md:p-8">
-                <h3 className="font-display text-xl font-semibold leading-snug tracking-[-0.02em] text-bone">
-                  {project.name}
-                </h3>
-                <p className="mt-2 text-sm leading-relaxed text-mute">
-                  {project.outcome}
-                </p>
-                <span
-                  aria-hidden="true"
-                  className="mt-4 text-sm text-faint transition-colors group-hover:text-soft"
-                >
-                  {project.external ? "Visit site" : "View project"} {"\u2197"}
-                </span>
-              </div>
-            </Link>
-          ))}
-        </div>
-      </div>
+      <WorkTrack projects={WORK_GRID} />
     </SectionShell>
   );
 }

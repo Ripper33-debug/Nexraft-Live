@@ -21,7 +21,7 @@ export function SectionShell({
     <section
       id={id}
       aria-labelledby={ariaLabelledBy}
-      className={`scroll-mt-[68px] border-t border-line bg-ink py-[84px] md:py-[120px] ${className}`.trim()}
+      className={`scroll-mt-[68px] border-t border-line bg-ink py-[104px] md:py-[152px] ${className}`.trim()}
     >
       <div
         className={
@@ -52,7 +52,7 @@ export function SectionHeader({
       {specLabel ? <SpecLabel className="mb-4">{specLabel}</SpecLabel> : null}
       <h2
         id={titleId}
-        className="font-display text-[clamp(1.75rem,4vw,2.75rem)] font-semibold leading-[1.08] tracking-[-0.03em] text-bone"
+        className="text-sheen font-display text-[clamp(1.75rem,4vw,2.75rem)] font-semibold leading-[1.08] tracking-[-0.03em] text-bone"
       >
         {title}
       </h2>

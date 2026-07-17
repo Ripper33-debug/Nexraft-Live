@@ -2,6 +2,7 @@
 
 import { SectionHeader, SectionShell } from "@/components/ui/SectionShell";
 import { Reveal } from "@/components/ui/Reveal";
+import { SpotlightCard } from "@/components/ui/SpotlightCard";
 import { PrimaryButton, GhostButton } from "@/components/ui/PrimaryButton";
 import { FOUNDING_RATE_LINE, PUBLIC_PLANS } from "@/lib/pricing";
 import { BOOK_CALL_URL } from "@/lib/site";
@@ -38,12 +39,13 @@ export function Pricing() {
       <div className="mt-8 grid grid-cols-1 gap-px border border-line bg-line md:grid-cols-3 md:items-stretch">
         {PUBLIC_PLANS.map((plan, index) => (
           <Reveal key={plan.id} delay={0.06 + index * 0.04} className="h-full">
-            <article
-              className={`relative flex h-full flex-col p-6 md:p-7 ${
+            <SpotlightCard
+              className={`h-full ${
                 plan.popular
                   ? "z-10 border border-signal/25 bg-panel md:-translate-y-3 md:shadow-[0_24px_48px_-24px_rgba(0,0,0,0.6)]"
                   : "bg-ink2"
               }`}
+              contentClassName="flex h-full flex-col p-6 md:p-7"
             >
               {plan.popular ? (
                 <span className="absolute right-0 top-0 border-b border-l border-line bg-ink px-3 py-1.5 font-jetbrains text-[10px] uppercase tracking-[0.14em] text-signal-dim">
@@ -89,7 +91,7 @@ export function Pricing() {
                   </GhostButton>
                 )}
               </div>
-            </article>
+            </SpotlightCard>
           </Reveal>
         ))}
       </div>

@@ -10,6 +10,7 @@ import { ScrollProgress } from "@/components/ScrollProgress";
 import { StructuredData } from "@/components/StructuredData";
 import { CookieNotice } from "@/components/CookieNotice";
 import { LoadingScreen } from "@/components/LoadingScreen";
+import { SmoothScroll } from "@/components/SmoothScroll";
 import { StickyBookCall } from "@/components/StickyBookCall";
 import { InstantlyPixel } from "@/components/InstantlyPixel";
 import "./globals.css";
@@ -77,6 +78,7 @@ export default function RootLayout({
     >
       <body className="relative min-h-screen overflow-x-clip bg-ink font-body text-bone antialiased">
         <LoadingScreen />
+        <SmoothScroll />
         <StructuredData />
         <Grain />
         <ScrollProgress />
