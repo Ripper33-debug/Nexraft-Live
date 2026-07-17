@@ -226,6 +226,65 @@ html.lenis body {
     }
   }
 
+  /* Scrollytelling caption crossfade (remounted per step via React key) */
+  .scrolly-caption {
+    opacity: 1;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .scrolly-caption {
+      animation: scrolly-caption-in 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+    }
+  }
+
+  @keyframes scrolly-caption-in {
+    from {
+      opacity: 0;
+      transform: translateY(0.4em);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Choreographed seam between sections: a signal sweep wipes across on enter */
+  .section-seam {
+    position: relative;
+    height: 3px;
+    overflow: hidden;
+    background: var(--color-line);
+  }
+
+  .section-seam::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      var(--color-signal),
+      transparent
+    );
+    transform: translateX(-100%);
+  }
+
+  .section-seam.is-in::after {
+    animation: seam-sweep 1.15s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .section-seam::after {
+      display: none;
+    }
+  }
+
+  @keyframes seam-sweep {
+    to {
+      transform: translateX(100%);
+    }
+  }
+
   .reveal {
     opacity: 1;
     transform: none;

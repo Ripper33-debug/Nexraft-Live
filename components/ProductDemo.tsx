@@ -2,7 +2,7 @@
 
 import dynamic from "next/dynamic";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Reveal } from "@/components/ui/Reveal";
 import { useInView, usePageVisible } from "@/lib/use-in-view";
 import type { Finish, ShelterLayout } from "@/components/ProductDemoScene";
@@ -32,6 +32,43 @@ const LAYOUTS: { id: ShelterLayout; name: string }[] = [
   { id: "field", name: "Field" },
 ];
 
+/**
+ * Scroll-driven story: as the visitor scrolls past the pinned demo, the model
+ * auto-advances through these presets so the configurator sells itself before
+ * anyone touches a control. Manual controls still override within a step.
+ */
+const SCROLLY_STEPS: {
+  color: string;
+  finish: Finish;
+  layout: ShelterLayout;
+  caption: string;
+}[] = [
+  {
+    color: MATERIALS[0].value,
+    finish: "matte",
+    layout: "compact",
+    caption: "Recolor in real time — every material updates instantly.",
+  },
+  {
+    color: MATERIALS[3].value,
+    finish: "matte",
+    layout: "compact",
+    caption: "Signal green, or any brand color you throw at it.",
+  },
+  {
+    color: MATERIALS[3].value,
+    finish: "matte",
+    layout: "field",
+    caption: "Resize and reconfigure the layout on the fly.",
+  },
+  {
+    color: MATERIALS[1].value,
+    finish: "gloss",
+    layout: "field",
+    caption: "Switch finishes — matte to gloss — in a single click.",
+  },
+];
+
 function ProductDemoFallback() {
   return (
     <div
@@ -59,6 +96,9 @@ export function ProductDemo() {
   const [finish, setFinish] = useState<Finish>("matte");
   const [layout, setLayout] = useState<ShelterLayout>("compact");
 
+  const outerRef = useRef<HTMLDivElement>(null);
+  const [progress, setProgress] = useState(0);
+
   const pageVisible = usePageVisible();
   const { ref, inView } = useInView<HTMLDivElement>({
     disabled: !allowed,
@@ -77,11 +117,61 @@ export function ProductDemo() {
   const mountScene = allowed && pageVisible && inView;
   const sceneActive = mountScene && motionOk;
 
-  return (
+  // Pinned scrollytelling is desktop + motion only; mobile/reduced keeps the
+  // plain interactive layout.
+  const scrolly = allowed && motionOk;
+  const activeStep = Math.min(
+    Math.floor(progress * SCROLLY_STEPS.length),
+    SCROLLY_STEPS.length - 1,
+  );
+
+  useEffect(() => {
+    if (!scrolly) return;
+    let rafId = 0;
+    const update = () => {
+      rafId = 0;
+      const outer = outerRef.current;
+      if (!outer) return;
+      const rect = outer.getBoundingClientRect();
+      const distance = rect.height - window.innerHeight;
+      if (distance <= 0) {
+        setProgress(1);
+        return;
+      }
+      const scrolled = Math.min(Math.max(-rect.top, 0), distance);
+      setProgress(scrolled / distance);
+    };
+    const onScroll = () => {
+      if (!rafId) rafId = requestAnimationFrame(update);
+    };
+    update();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+      if (rafId) cancelAnimationFrame(rafId);
+    };
+  }, [scrolly]);
+
+  // Drive the model presets from the current scroll step.
+  useEffect(() => {
+    if (!scrolly) return;
+    const step = SCROLLY_STEPS[activeStep];
+    setColor(step.color);
+    setFinish(step.finish);
+    setLayout(step.layout);
+  }, [scrolly, activeStep]);
+
+  const section = (
     <section
-      id="demo"
+      id={scrolly ? undefined : "demo"}
       aria-labelledby="demo-heading"
-      className="scroll-mt-[68px] border-b border-line bg-ink2 py-16 md:py-20"
+      className={`border-b border-line bg-ink2 ${
+        scrolly
+          ? "flex min-h-screen items-center py-12"
+          : "scroll-mt-[68px] py-16 md:py-20"
+      }`}
     >
       <div className="mx-auto grid max-w-[1180px] grid-cols-1 items-center gap-10 px-7 lg:grid-cols-2 lg:gap-14">
         <Reveal>
@@ -100,6 +190,26 @@ export function ProductDemo() {
               real time. The same engine we ship for product viewers and full
               configurators - fast on a laptop, fast on a phone.
             </p>
+            {scrolly ? (
+              <div className="mt-6 min-h-[3.5rem]">
+                <p
+                  key={activeStep}
+                  className="scrolly-caption max-w-md font-body text-base leading-relaxed text-bone"
+                >
+                  {SCROLLY_STEPS[activeStep].caption}
+                </p>
+                <div className="mt-4 flex gap-2" aria-hidden="true">
+                  {SCROLLY_STEPS.map((_, i) => (
+                    <span
+                      key={i}
+                      className={`h-1 w-8 transition-colors duration-300 ${
+                        i === activeStep ? "bg-signal" : "bg-line"
+                      }`}
+                    />
+                  ))}
+                </div>
+              </div>
+            ) : null}
             <Link
               href="/3d-product-viewer"
               className={`mt-6 inline-block text-sm text-bone underline decoration-line underline-offset-4 transition-colors duration-300 hover:text-signal ${focusRing}`}
@@ -207,5 +317,19 @@ export function ProductDemo() {
         </Reveal>
       </div>
     </section>
+  );
+
+  if (!scrolly) return section;
+
+  return (
+    <div
+      ref={outerRef}
+      id="demo"
+      aria-label="Interactive 3D product demo"
+      className="relative scroll-mt-[68px] bg-ink2"
+      style={{ height: "300vh" }}
+    >
+      <div className="sticky top-0 overflow-hidden">{section}</div>
+    </div>
   );
 }

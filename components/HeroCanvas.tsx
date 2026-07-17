@@ -77,12 +77,18 @@ function drawStream(
   stream: Stream,
   y: number,
   width: number,
+  warp: number,
 ) {
   const { x, length, opacity, color, headRadius } = stream;
   const [r, g, b] = parseRgb(color);
-  const head = `rgba(${r}, ${g}, ${b}, ${opacity})`;
+  // Warp stretches the streaks and brightens their heads so the field reads
+  // like a rush through space when the visitor scrolls.
+  const warpedLength = length * (1 + warp * 2.6);
+  const op = Math.min(opacity * (1 + warp * 0.9), 0.9);
+  const hr = headRadius * (1 + warp * 0.55);
+  const head = `rgba(${r}, ${g}, ${b}, ${op})`;
 
-  const streak = ctx.createLinearGradient(x - length, y, x, y);
+  const streak = ctx.createLinearGradient(x - warpedLength, y, x, y);
   streak.addColorStop(0, `rgba(${r}, ${g}, ${b}, 0)`);
   streak.addColorStop(1, head);
 
@@ -90,17 +96,17 @@ function drawStream(
   ctx.lineWidth = 1.5;
   ctx.lineCap = "round";
   ctx.beginPath();
-  ctx.moveTo(x - length, y);
+  ctx.moveTo(x - warpedLength, y);
   ctx.lineTo(x, y);
   ctx.stroke();
 
-  const headGlow = ctx.createRadialGradient(x, y, 0, x, y, headRadius);
+  const headGlow = ctx.createRadialGradient(x, y, 0, x, y, hr);
   headGlow.addColorStop(0, head);
-  headGlow.addColorStop(0.45, `rgba(${r}, ${g}, ${b}, ${opacity * 0.45})`);
+  headGlow.addColorStop(0.45, `rgba(${r}, ${g}, ${b}, ${op * 0.45})`);
   headGlow.addColorStop(1, `rgba(${r}, ${g}, ${b}, 0)`);
   ctx.fillStyle = headGlow;
   ctx.beginPath();
-  ctx.arc(x, y, headRadius, 0, Math.PI * 2);
+  ctx.arc(x, y, hr, 0, Math.PI * 2);
   ctx.fill();
 }
 
@@ -111,6 +117,8 @@ export function HeroCanvas({ sectionRef }: HeroCanvasProps) {
   const sizeRef = useRef({ width: 0, height: 0 });
   const rafRef = useRef(0);
   const reducedRef = useRef(false);
+  const velRef = useRef(0);
+  const lastScrollRef = useRef(0);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -123,6 +131,7 @@ export function HeroCanvas({ sectionRef }: HeroCanvasProps) {
     reducedRef.current = window.matchMedia(
       "(prefers-reduced-motion: reduce)",
     ).matches;
+    lastScrollRef.current = window.scrollY;
 
     const resize = () => {
       const rect = parent.getBoundingClientRect();
@@ -144,14 +153,22 @@ export function HeroCanvas({ sectionRef }: HeroCanvasProps) {
       }
     };
 
-    const draw = () => {
+    const draw = (warp = 0) => {
       const { width, height } = sizeRef.current;
       if (width === 0 || height === 0) return;
 
       ctx.fillStyle = BG;
       ctx.fillRect(0, 0, width, height);
 
-      drawRadialGlow(ctx, width, height, width * 0.65, height * 0.4, 320, 0.08);
+      drawRadialGlow(
+        ctx,
+        width,
+        height,
+        width * 0.65,
+        height * 0.4,
+        320 + warp * 260,
+        0.08 + warp * 0.08,
+      );
       drawRadialGlow(ctx, width, height, width * 0.9, height * 0.7, 200, 0.04);
       drawRadialGlow(
         ctx,
@@ -186,12 +203,15 @@ export function HeroCanvas({ sectionRef }: HeroCanvasProps) {
       }
 
       const animate = !reducedRef.current;
+      const centerY = height * 0.45;
       for (const stream of streamsRef.current) {
-        const y = stream.laneIndex * laneHeight + laneHeight / 2;
-        drawStream(ctx, stream, y, width);
+        const baseY = stream.laneIndex * laneHeight + laneHeight / 2;
+        // Pull lanes toward the vanishing center as warp rises.
+        const y = baseY + (centerY - baseY) * warp * 0.3;
+        drawStream(ctx, stream, y, width, warp);
         if (animate) {
-          stream.x += stream.speed;
-          if (stream.x - stream.length > width) {
+          stream.x += stream.speed * (1 + warp * 7);
+          if (stream.x - stream.length * (1 + warp * 2.6) > width) {
             stream.x = -stream.gap;
           }
         }
@@ -199,7 +219,14 @@ export function HeroCanvas({ sectionRef }: HeroCanvasProps) {
     };
 
     const loop = () => {
-      draw();
+      const sc = window.scrollY;
+      const delta = sc - lastScrollRef.current;
+      lastScrollRef.current = sc;
+      velRef.current += (delta - velRef.current) * 0.12;
+      const warp = reducedRef.current
+        ? 0
+        : Math.min(Math.abs(velRef.current) / 45, 1);
+      draw(warp);
       rafRef.current = requestAnimationFrame(loop);
     };
 
