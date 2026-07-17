@@ -1,37 +1,49 @@
 @import "tailwindcss";
 
 @theme {
-  --color-surface: #0a0e0c;
-  --color-surface-deep: #070a09;
-  --color-foreground: #e8edea;
-  --color-muted: #9aa59f;
-  --color-accent: var(--color-signal);
-  --color-border: color-mix(in srgb, var(--color-signal) 12%, transparent);
-  --color-border-strong: color-mix(in srgb, var(--color-signal) 22%, transparent);
+  /* New engineering-document color system */
+  --color-bg-primary: #0d1117;
+  --color-bg-secondary: #161b22;
+  --color-bg-tertiary: #21262d;
+  --color-border: #30363d;
+  --color-border-light: #484f58;
+  
+  --color-text-primary: #f0f6fc;
+  --color-text-secondary: #c9d1d9;
+  --color-text-tertiary: #8b949e;
+  --color-text-muted: #6e7681;
+  
+  --color-accent: #58a6ff;
+  --color-accent-dim: #1f6feb;
+  --color-success: #3fb950;
+  --color-success-dim: #238636;
+  --color-warning: #d29922;
+  --color-error: #f85149;
+  
+  /* Legacy color aliases for compatibility */
+  --color-ink: #0d1117;
+  --color-ink2: #161b22;
+  --color-panel: #21262d;
+  --color-line: #30363d;
+  --color-bone: #f0f6fc;
+  --color-soft: #c9d1d9;
+  --color-mute: #8b949e;
+  --color-faint: #6e7681;
+  --color-tag: #8b949e;
+  --color-signal: #3fb950;
+  --color-signal-dim: #238636;
 
-  --color-ink: #0A0E0C;
-  --color-ink2: #0E1310;
-  --color-panel: #10160F;
-  --color-line: #1E2723;
-  --color-bone: #E8EDE9;
-  --color-soft: #D0D8D4;
-  --color-mute: #C4CCC8;
-  --color-faint: #B4BEB8;
-  --color-tag: #C8D0CC;
-  --color-signal: #43d085;
-  --color-signal-dim: #309660;
-
-  --font-display: var(--font-bricolage);
+  /* Typography */
+  --font-display: var(--font-geist-sans);
   --font-body: var(--font-geist-sans);
   --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-  --font-grotesk: var(--font-space-grotesk);
+  --font-mono: var(--font-jetbrains-mono);
   --font-jetbrains: var(--font-jetbrains-mono);
 
-  --space-section: clamp(3.5rem, 5.5vw, 5rem);
-  --space-section-tight: clamp(2.5rem, 4vw, 3.75rem);
-  --motion-duration: 300ms;
-  --motion-ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --space-section: clamp(4rem, 6vw, 6rem);
+  --space-section-tight: clamp(3rem, 5vw, 4rem);
+  --motion-duration: 200ms;
+  --motion-ease: cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 @layer base {
@@ -46,8 +58,8 @@
   }
 
   body {
-    background-color: var(--color-ink);
-    color: var(--color-bone);
+    background-color: var(--color-bg-primary);
+    color: var(--color-text-primary);
     font-family: var(--font-body), sans-serif;
     font-size: 1rem;
     line-height: 1.6;

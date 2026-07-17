@@ -17,7 +17,7 @@ function clean(value: FormDataEntryValue | null, max = 5000): string {
 }
 
 export async function submitContact(formData: FormData): Promise<ContactResult> {
-  const honeypot = clean(formData.get("website"), 200);
+  const honeypot = clean(formData.get("_hp_field"), 200);
   if (honeypot) {
     return { ok: true };
   }
@@ -36,8 +36,12 @@ export async function submitContact(formData: FormData): Promise<ContactResult> 
   const name = clean(formData.get("name"), 120);
   const email = clean(formData.get("email"), 254);
   const company = clean(formData.get("company"), 120);
-  const plan = clean(formData.get("plan"), 80) || "Not specified";
-  const project = clean(formData.get("project"), 5000);
+  const siteUrl = clean(formData.get("site_url"), 500);
+  const toolNeeded = clean(formData.get("tool_needed"), 5000);
+  const assets = clean(formData.get("assets"), 2000);
+  const integrations = clean(formData.get("integrations"), 500);
+  const budget = clean(formData.get("budget"), 80) || "Not specified";
+  const timeline = clean(formData.get("timeline"), 80) || "Not specified";
 
   if (!name) {
     return { ok: false, error: "Name is required." };
@@ -47,8 +51,8 @@ export async function submitContact(formData: FormData): Promise<ContactResult> 
     return { ok: false, error: "A valid email address is required." };
   }
 
-  if (!project) {
-    return { ok: false, error: "Tell us what you are building." };
+  if (!toolNeeded) {
+    return { ok: false, error: "Tell us what tool you need." };
   }
 
   const formId = process.env.FORMSPREE_FORM_ID?.trim();
@@ -70,10 +74,14 @@ export async function submitContact(formData: FormData): Promise<ContactResult> 
       name,
       email,
       company: company || "n/a",
-      plan,
-      project,
+      site_url: siteUrl || "n/a",
+      tool_needed: toolNeeded,
+      assets: assets || "n/a",
+      integrations: integrations || "n/a",
+      budget,
+      timeline,
       _replyto: email,
-      _subject: `Project inquiry - Nexraft (${plan})`,
+      _subject: `Tool inquiry - Nexraft (${budget})`,
     }),
   });
 

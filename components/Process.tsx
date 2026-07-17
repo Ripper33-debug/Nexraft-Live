@@ -8,7 +8,7 @@ const steps = [
   {
     title: "Scope",
     detail:
-      "Discovery call, a fixed monthly rate, and a written spec before anyone builds.",
+      "Discovery call, written spec, and fixed quote before anyone builds.",
   },
   {
     title: "Build in sprints",
@@ -18,12 +18,12 @@ const steps = [
   {
     title: "Ship",
     detail:
-      "Production deploy, DNS, monitoring, handoff docs. Zero-downtime cutover.",
+      "Production deploy, integrations live, handoff docs. Zero-downtime cutover when needed.",
   },
   {
     title: "Iterate",
     detail:
-      "Retainer hours for features, hosting care, 3D, and AI tools as the roadmap grows.",
+      "Managed partner hours for new tool features, integrations, and site updates as the roadmap grows.",
   },
 ] as const;
 
@@ -32,7 +32,7 @@ export function Process() {
     <SectionShell id="process" ariaLabelledBy="process-heading">
       <Reveal>
         <SectionHeader
-          specLabel="05 / PROCESS"
+          specLabel="06 / PROCESS"
           titleId="process-heading"
           title="How we work."
           subtitle="Short cycles, written specs, and production deploys you can watch land."

@@ -28,7 +28,7 @@ export const CLIENT_LOGOS: ClientLogo[] = [
   {
     id: "family-care-pharmacy",
     name: "Family Care Pharmacy",
-    href: "https://familycarepharm.vercel.app",
+    href: "https://familycarepharmacy.com",
     src: "/brand/family-care-pharmacy.png",
     width: 823,
     height: 163,

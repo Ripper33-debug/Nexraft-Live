@@ -9,43 +9,43 @@ export type FaqItem = {
  */
 export const FAQ_ITEMS: FaqItem[] = [
   {
-    q: "Who owns the code and the site?",
+    q: "Who owns the code and the tools we build?",
     a: "You do. Everything we build is yours - the code, the repository, the design files, and the content. We hand over full access, and there is no proprietary lock-in. You can take it elsewhere at any time.",
   },
   {
+    q: "What kinds of tools do you build?",
+    a: "3D product viewers and configurators, quote and sales flows, customer portals, upload and approval tools, payment handoffs, and integrations with QuickBooks, CRMs, Stripe, email, and internal systems. We also build modern sites when you need a foundation or add-on layer.",
+  },
+  {
+    q: "We already have a website. Can you still help?",
+    a: "Yes. That is often the best fit. We build custom add-ons, portals, and integrations on top of your existing site instead of replacing everything unless a rebuild is actually needed.",
+  },
+  {
+    q: "How does pricing work?",
+    a: "We quote after a discovery call based on scope. Public ranges start around three to seven thousand five hundred dollars for a site plus one custom feature, seven thousand five hundred to twenty-five thousand plus for a 3D or quote tool build, and seven hundred fifty to two thousand five hundred dollars per month for a managed partner plan. Exact price depends on integrations, assets, and timeline.",
+  },
+  {
     q: "What happens if we cancel or leave?",
-    a: "Retainers run on a 6-month initial term, then continue month-to-month with 30 days notice to cancel. When you leave we hand over the code, assets, hosting configuration, and DNS, and we help your next team take over cleanly.",
+    a: "Managed partner plans run on a 6-month initial term, then continue month-to-month with 30 days notice to cancel. When you leave we hand over the code, assets, hosting configuration, and DNS, and we help your next team take over cleanly.",
   },
   {
     q: "How fast do you respond, and is there an SLA?",
-    a: "We target 99.9% monthly uptime on infrastructure we manage. Care clients get small fixes within 48 business hours. Growth clients get priority triage for production issues. Signed SLAs are available for enterprise engagements.",
+    a: "We target 99.9% monthly uptime on infrastructure we manage. Managed partner clients get small fixes within 48 business hours. Signed SLAs are available for enterprise engagements.",
+  },
+  {
+    q: "Do you work with CAD files and product data?",
+    a: "Yes. We turn CAD exports, GLTF assets, spec sheets, and option logic into web-ready viewers and configurators. Tell us what files you have and we will scope the pipeline on a call.",
+  },
+  {
+    q: "Can you connect to QuickBooks, our CRM, or internal tools?",
+    a: "Usually, yes. We scope API integrations, webhooks, and automation so form submissions, quotes, and approvals land in the systems your team already uses instead of stuck in inboxes.",
+  },
+  {
+    q: "Do you migrate WordPress or Squarespace sites?",
+    a: "Yes, when a rebuild is the right move. Slow WordPress and outgrown builder sites are a common starting point for a new foundation plus custom tools. See our WordPress and Squarespace migration pages for detail.",
   },
   {
     q: "How does onboarding work after a discovery call?",
-    a: "After the call we scope the work and send a short plan and price. Once you approve, we collect access, set up the managed environment, and ship a first visible change quickly so you can see how we work before committing to a large build.",
-  },
-  {
-    q: "How do you handle data and security?",
-    a: "Sites run on managed edge infrastructure with SSL, automated backups, and monitoring. We use least-privilege access, keep credentials out of source control, and list the third parties we rely on in our subprocessors page.",
-  },
-  {
-    q: "What does the Care plan include?",
-    a: "Care is managed hosting plus upkeep: SSL, backups, uptime monitoring, security updates, and small monthly content or fix requests from 150 to 400 dollars per month depending on scope. You do not get a separate server bill or have to manage infrastructure yourself.",
-  },
-  {
-    q: "What does the Growth plan include?",
-    a: "Growth is for teams that want the site to drive leads, not just stay online. It covers SEO, Google Business Profile work, review and reputation workflows, landing pages, conversion tweaks each month, and light AI automation for follow-up and routing. Plans run from 750 to 1,500 dollars per month depending on scope. Pick Care or Growth - not both.",
-  },
-  {
-    q: "Can you migrate our WordPress or Squarespace site?",
-    a: "Yes. Slow WordPress and outgrown Squarespace sites are a common starting point. We rebuild static-first on managed edge infrastructure, move your content and DNS, and can attach Care or Growth after launch. See our WordPress and Squarespace migration pages for detail.",
-  },
-  {
-    q: "Do you work with our existing stack?",
-    a: "Usually, yes. We start with a short audit, then either improve what you already run or migrate you onto a faster, managed setup. We work across common CMS platforms and modern frameworks rather than forcing one template.",
-  },
-  {
-    q: "Do you build custom AI tools?",
-    a: "Yes. We scope and ship internal copilots, customer-facing assistants, and workflow automations tied to your data and systems. Every build includes guardrails, logging, and a handoff plan so you are not locked into a black-box widget.",
+    a: "After the call we scope the tool, send a short plan and fixed price, then collect access and ship a first visible demo quickly so you can see how we work before committing to the full build.",
   },
 ];

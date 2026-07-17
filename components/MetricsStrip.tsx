@@ -8,7 +8,7 @@ import { useCountUp } from "@/lib/use-count-up";
 import { useInView } from "@/lib/use-in-view";
 
 const focusRing =
-  "outline-none focus-visible:[outline:2px_solid_var(--color-signal)] focus-visible:[outline-offset:2px]";
+  "outline-none focus-visible:[outline:2px_solid_var(--color-accent)] focus-visible:[outline-offset:2px]";
 
 function MetricValue({
   end,
@@ -34,7 +34,7 @@ function MetricValue({
   });
 
   return (
-    <span className="font-display text-2xl font-semibold tracking-tight text-bone md:text-3xl">
+    <span className="font-display text-2xl font-semibold tracking-tight text-text-primary md:text-3xl">
       {prefix}
       {display}
       {suffix}
@@ -76,12 +76,12 @@ export function MetricsStrip() {
     <section
       ref={ref}
       aria-label="Operational metrics"
-      className="border-b border-line bg-ink2"
+      className="border-b border-border bg-bg-secondary"
     >
       <div className="mx-auto max-w-[1180px] px-7 py-8 md:py-10">
-        <div className="grid grid-cols-2 gap-px border border-line bg-line md:grid-cols-4">
+        <div className="grid grid-cols-2 gap-px border border-border bg-border md:grid-cols-4">
           {SITE_METRICS.map((metric) => (
-            <div key={metric.id} className="bg-ink2 px-5 py-5 md:px-6 md:py-6">
+            <div key={metric.id} className="bg-bg-primary px-5 py-5 md:px-6 md:py-6">
               {metric.kind === "logos" ? (
                 <ClientLogoCell />
               ) : (
@@ -94,15 +94,15 @@ export function MetricsStrip() {
                   active={inView}
                 />
               )}
-              <p className="mt-2 font-jetbrains text-[10px] uppercase leading-relaxed tracking-[0.14em] text-faint">
+              <p className="mt-2 font-jetbrains text-[10px] uppercase leading-relaxed tracking-[0.14em] text-text-muted">
                 {metric.label}
               </p>
             </div>
           ))}
         </div>
-        <p className="mt-4 text-center font-jetbrains text-[10px] uppercase leading-none tracking-[0.14em] text-faint">
-          Managed edge infrastructure {"\u00b7"}{" "}
-          <Link href="/status" className={`text-soft hover:text-bone ${focusRing}`}>
+        <p className="mt-4 text-center font-jetbrains text-[10px] uppercase leading-none tracking-[0.14em] text-text-muted">
+          Managed edge infrastructure ·{" "}
+          <Link href="/status" className={`text-text-tertiary hover:text-text-primary ${focusRing}`}>
             System status
           </Link>
         </p>

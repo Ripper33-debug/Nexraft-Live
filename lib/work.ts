@@ -14,17 +14,11 @@ export const WORK_PROJECTS: WorkProject[] = [
   {
     id: "weatherhaven",
     name: "Weatherhaven",
-    outcome: "Deploy map and product catalog covering 95 countries.",
+    outcome:
+      "We helped turn a complex physical product into a web-based sales and product experience.",
     href: "/work/weatherhaven",
     image: "/case-studies/weatherhaven.png",
     featureBand: true,
-  },
-  {
-    id: "outfyre",
-    name: "Outfyre",
-    outcome: "Retainer funnel and growth site for an AI studio.",
-    href: "/work/outfyre",
-    image: "/case-studies/outfyre.png",
   },
   {
     id: "product-viewer",
@@ -32,6 +26,20 @@ export const WORK_PROJECTS: WorkProject[] = [
     outcome: "Browser-native spins and configurators, no app download.",
     href: "/3d-product-viewer",
     demo: true,
+  },
+  {
+    id: "outfyre",
+    name: "Outfyre",
+    outcome: "Custom site and funnel for an AI studio product launch.",
+    href: "/work/outfyre",
+    image: "/case-studies/outfyre.png",
+  },
+  {
+    id: "family-care-pharmacy",
+    name: "Family Care Pharmacy",
+    outcome: "Community pharmacy site with prescriptions, services, and click-to-call.",
+    href: "/work/family-care-pharmacy",
+    image: "/case-studies/family-care-pharmacy.png",
   },
   {
     id: "builder-migration",
@@ -44,13 +52,6 @@ export const WORK_PROJECTS: WorkProject[] = [
     name: "WordPress rebuild",
     outcome: "Static-first rebuilds that cut load time from seconds to milliseconds.",
     href: "/wordpress-too-slow",
-  },
-  {
-    id: "family-care-pharmacy",
-    name: "Family Care Pharmacy",
-    outcome: "Community pharmacy site with prescriptions, services, and click-to-call.",
-    href: "/work/family-care-pharmacy",
-    image: "/case-studies/family-care-pharmacy.png",
   },
 ];
 

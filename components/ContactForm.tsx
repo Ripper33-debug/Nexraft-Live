@@ -42,9 +42,18 @@ export function ContactForm() {
 
   return (
     <form action={formAction} className="space-y-5 text-left">
-      <div className="absolute -left-[9999px] h-px w-px overflow-hidden" aria-hidden="true">
-        <label htmlFor="contact-website">Website</label>
-        <input id="contact-website" name="website" type="text" tabIndex={-1} autoComplete="off" />
+      <div
+        className="absolute -left-[9999px] h-px w-px overflow-hidden"
+        aria-hidden="true"
+      >
+        <label htmlFor="contact-hp">Leave blank</label>
+        <input
+          id="contact-hp"
+          name="_hp_field"
+          type="text"
+          tabIndex={-1}
+          autoComplete="off"
+        />
       </div>
 
       <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
@@ -90,36 +99,94 @@ export function ContactForm() {
           />
         </div>
         <div>
-          <label htmlFor="contact-plan" className={labelClass}>
-            Plan interest
+          <label htmlFor="contact-site" className={labelClass}>
+            Website
           </label>
-          <select
-            id="contact-plan"
-            name="plan"
-            defaultValue="Not sure yet"
+          <input
+            id="contact-site"
+            name="site_url"
+            type="url"
+            placeholder="https://"
+            autoComplete="url"
             className={`mt-2 ${fieldClass} ${focusRing}`}
-          >
-            <option>Build — custom website</option>
-            <option>Care — hosting and upkeep</option>
-            <option>Growth — SEO and AI automation</option>
-            <option>3D production</option>
-            <option>Custom AI tools</option>
-          </select>
+          />
         </div>
       </div>
 
       <div>
-        <label htmlFor="contact-project" className={labelClass}>
-          Project brief
+        <label htmlFor="contact-tool" className={labelClass}>
+          What tool do you need?
         </label>
         <textarea
-          id="contact-project"
-          name="project"
+          id="contact-tool"
+          name="tool_needed"
           required
-          rows={5}
-          placeholder="What are you building? Timeline, stack, constraints."
+          rows={3}
+          placeholder="3D viewer, quote flow, customer portal, integration, or something else."
           className={`mt-2 resize-y ${fieldClass} ${focusRing}`}
         />
+      </div>
+
+      <div>
+        <label htmlFor="contact-assets" className={labelClass}>
+          CAD, product files, or workflow docs?
+        </label>
+        <textarea
+          id="contact-assets"
+          name="assets"
+          rows={2}
+          placeholder="What files or documentation do you already have?"
+          className={`mt-2 resize-y ${fieldClass} ${focusRing}`}
+        />
+      </div>
+
+      <div>
+        <label htmlFor="contact-integrations" className={labelClass}>
+          What system should this connect to?
+        </label>
+        <input
+          id="contact-integrations"
+          name="integrations"
+          type="text"
+          placeholder="QuickBooks, CRM, Stripe, internal database, etc."
+          className={`mt-2 ${fieldClass} ${focusRing}`}
+        />
+      </div>
+
+      <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
+        <div>
+          <label htmlFor="contact-budget" className={labelClass}>
+            Budget range
+          </label>
+          <select
+            id="contact-budget"
+            name="budget"
+            defaultValue="Not sure yet"
+            className={`mt-2 ${fieldClass} ${focusRing}`}
+          >
+            <option>Under $5,000</option>
+            <option>$5,000 - $10,000</option>
+            <option>$10,000 - $25,000</option>
+            <option>$25,000+</option>
+            <option>Not sure yet</option>
+          </select>
+        </div>
+        <div>
+          <label htmlFor="contact-timeline" className={labelClass}>
+            Timeline
+          </label>
+          <select
+            id="contact-timeline"
+            name="timeline"
+            defaultValue="Flexible"
+            className={`mt-2 ${fieldClass} ${focusRing}`}
+          >
+            <option>ASAP</option>
+            <option>1-2 months</option>
+            <option>3-6 months</option>
+            <option>Flexible</option>
+          </select>
+        </div>
       </div>
 
       {state && !state.ok ? (

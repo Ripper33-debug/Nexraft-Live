@@ -32,22 +32,22 @@ export function Faq() {
         />
       </Reveal>
 
-      <div className="mt-12 border-t border-line">
+      <div className="mt-12 border-t border-border">
         {FAQ_ITEMS.map((item, index) => (
           <Reveal key={item.q} delay={index * 0.03}>
-            <details className="faq-item border-b border-line">
+            <details className="faq-item border-b border-border">
               <summary className="flex cursor-pointer list-none items-center justify-between gap-6 py-5 [&::-webkit-details-marker]:hidden">
-                <span className="font-body text-sm font-medium text-bone md:text-base">
+                <span className="font-body text-sm font-medium text-text-primary md:text-base">
                   {item.q}
                 </span>
                 <span
-                  className="faq-icon font-jetbrains text-lg leading-none text-signal-dim"
+                  className="faq-icon font-jetbrains text-lg leading-none text-accent"
                   aria-hidden="true"
                 >
                   +
                 </span>
               </summary>
-              <p className="max-w-2xl pb-6 font-body text-sm leading-relaxed text-mute md:text-base">
+              <p className="max-w-2xl pb-6 font-body text-sm leading-relaxed text-text-secondary md:text-base">
                 {item.a}
               </p>
             </details>

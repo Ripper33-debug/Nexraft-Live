@@ -14,13 +14,12 @@ export const PUBLIC_PLANS = [
     kind: "one-time" as const,
     priceLabel: "$3,000–$6,000",
     summary:
-      "Custom Next.js site with CMS, performance baseline, and production deploy. Complex builds with 3D or deep integrations land at the top of the range.",
+      "One-time custom Next.js sites for businesses that need a modern foundation.",
     items: [
-      "Custom design and build",
-      "CMS tailored to your content",
-      "Managed edge deploy and DNS cutover",
-      "Mobile-first, Core Web Vitals tuned",
-      "Optional 3D or product viewer add-on",
+      "Custom site or add-on to your existing stack",
+      "One focused tool: quote form, portal slice, or simple 3D viewer",
+      "Production deploy, hosting setup, and handoff docs",
+      "Scope call locks exact price before build starts",
     ],
     popular: false,
   },
@@ -30,13 +29,12 @@ export const PUBLIC_PLANS = [
     kind: "monthly" as const,
     priceLabel: "$150–$400/mo",
     summary:
-      "The easy attach after every build. We run hosting, security, uptime, and small monthly changes so the site stays fast without you touching servers.",
+      "Managed hosting and upkeep for your site. We handle security, updates, and monitoring.",
     items: [
-      "Managed hosting and SSL",
-      "Uptime and performance monitoring",
-      "Security updates and backups",
-      "Small content and fix requests",
-      "One invoice, no separate server bill",
+      "Managed hosting, monitoring, and security updates",
+      "Bug fixes and small feature changes",
+      "Performance optimization and Core Web Vitals monitoring",
+      "Direct access to founders for support",
     ],
     popular: false,
   },
@@ -46,23 +44,35 @@ export const PUBLIC_PLANS = [
     kind: "monthly" as const,
     priceLabel: "$750–$1,500/mo",
     summary:
-      "Where recurring revenue actually lives. SEO, Google Business Profile, reviews, and AI automation wired into how you sell and support customers.",
+      "SEO, Google Business Profile, reviews, and AI automation to grow your revenue.",
     items: [
-      "Managed hosting and SSL",
-      "SEO and local search (GBP)",
-      "Review and reputation workflows",
-      "AI chat, follow-up, and lead routing",
-      "Landing pages and conversion work each month",
+      "SEO optimization and content strategy",
+      "Google Business Profile management",
+      "Review generation and reputation management",
+      "Custom AI tools: copilots, automations, RAG",
     ],
     popular: true,
   },
 ] as const;
 
-/** Legacy reference rates for Stripe catalog and SEO landing pages. */
+/** Reference rates for SEO landing pages, Stripe catalog, and internal estimates. */
 export const PRICES = {
+  foundation: {
+    min: 3000,
+    max: 7500,
+  },
+  toolBuild: {
+    min: 7500,
+    max: 25000,
+  },
+  partner: {
+    min: 750,
+    max: 2500,
+  },
+  /** Legacy keys used by migration and SEO landing pages. */
   web: {
     buildMin: 3000,
-    buildMax: 6000,
+    buildMax: 7500,
   },
   care: {
     min: 150,
@@ -87,4 +97,4 @@ export function formatUsdRange(min: number, max: number): string {
   return `${formatUsd(min)}–${formatUsd(max)}`;
 }
 
-export const FOUNDING_RATE_LINE = `Founding client rate available for the first ${FOUNDING_SLOTS_TOTAL} qualified retainer clients — ${FOUNDING_DISCOUNT_PCT}% off for the first ${FOUNDING_DISCOUNT_MONTHS} months.`;
+export const FOUNDING_RATE_LINE = `Founding client rate available for the first ${FOUNDING_SLOTS_TOTAL} qualified tool builds — ${FOUNDING_DISCOUNT_PCT}% off the first ${FOUNDING_DISCOUNT_MONTHS} months of a managed partner plan.`;

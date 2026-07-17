@@ -1,6 +1,6 @@
 import { ImageResponse } from "next/og";
 
-export const alt = "Nexraft - Web, hosting, and 3D studio";
+export const alt = "Nexraft - Custom web tools studio";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -36,7 +36,7 @@ export default function OpenGraphImage() {
               maxWidth: 900,
             }}
           >
-            We build your website, run the servers under it, and make the 3D.
+            Custom web tools for complex products and workflows.
           </span>
           <span
             style={{
@@ -45,14 +45,14 @@ export default function OpenGraphImage() {
               marginTop: 24,
             }}
           >
-            Built like infrastructure. One studio, one invoice.
+            3D viewers, quote systems, portals, and integrations.
           </span>
         </div>
 
         <div style={{ display: "flex", gap: 24, color: "#C8D0CC", fontSize: 20 }}>
-          <span>Web</span>
-          <span>Hosting</span>
-          <span>3D</span>
+          <span>3D tools</span>
+          <span>Quote flows</span>
+          <span>Portals</span>
         </div>
       </div>
     ),

@@ -37,16 +37,16 @@ const jetbrainsMono = JetBrains_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: "Nexraft · Web, Hosting, 3D & AI Studio",
+    default: "Nexraft · Custom Web Tools Studio",
     template: "%s · Nexraft",
   },
   description:
-    "Custom website builds, WordPress and Squarespace migrations, managed hosting, SEO, and growth retainers. Care from $150/mo, Growth from $750/mo, builds from $3k. 3D and custom AI tools. Founding-client rates available.",
+    "Custom web tools for companies with complex products and workflows. 3D viewers, quote systems, customer portals, and integrations from $3k. Managed partner plans from $750/mo.",
   metadataBase: new URL("https://nexraft.com"),
   openGraph: {
-    title: "Nexraft · Web, Hosting, 3D & AI Studio",
+    title: "Nexraft · Custom Web Tools Studio",
     description:
-      "Custom websites, migrations, managed hosting, SEO, and growth retainers. Build once, Care or Growth every month.",
+      "We build the custom tools your website is missing. 3D product experiences, quote flows, portals, and integrations.",
     type: "website",
     siteName: "Nexraft",
     locale: "en_US",
@@ -55,7 +55,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Nexraft",
     description:
-      "Built like infrastructure. Web, hosting, and 3D production.",
+      "Custom web tools for complex products and workflows. 3D, quotes, portals, integrations.",
   },
   robots: { index: true, follow: true },
 };

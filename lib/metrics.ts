@@ -39,13 +39,13 @@ export const SITE_METRICS: SiteMetric[] = [
     countFrom: 0.85,
     suffix: "s",
     decimals: 1,
-    label: "Typical edge TTFB after migration",
+    label: "Typical edge TTFB on managed stacks",
   },
   {
     id: "sla",
     value: 48,
     countFrom: 44,
     suffix: "h",
-    label: "Small-fix turnaround on Starter",
+    label: "Small-fix turnaround (business hours)",
   },
 ];

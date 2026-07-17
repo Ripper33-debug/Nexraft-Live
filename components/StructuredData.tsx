@@ -11,7 +11,7 @@ const structuredData = {
       logo: `${SITE}/nexraft-logo-header.png`,
       email: "barry@nexraft.com",
       description:
-        "Engineering studio for custom website builds, WordPress and Squarespace migrations, managed hosting, SEO, growth retainers, browser-ready 3D, and custom AI tools.",
+        "Engineering studio for custom web tools: 3D product viewers, quote systems, customer portals, workflow add-ons, and integrations for companies with complex products.",
       founder: [
         { "@type": "Person", name: "Barry Castelli" },
         { "@type": "Person", name: "Alex Cridge" },
@@ -34,54 +34,45 @@ const structuredData = {
       areaServed: "Worldwide",
       priceRange: "$$$",
       description:
-        "Custom website builds, migrations, Care hosting plans, and Growth SEO retainers. Managed edge infrastructure, 3D product viewers, and custom AI workflow automations.",
+        "Custom web tools for complex products and workflows. 3D viewers, configurators, quote systems, customer portals, and QuickBooks, CRM, and payment integrations.",
       hasOfferCatalog: {
         "@type": "OfferCatalog",
-        name: "Nexraft retainers",
+        name: "Nexraft tool builds",
         itemListElement: [
           {
             "@type": "Offer",
             itemOffered: {
               "@type": "Service",
-              name: "Custom website build",
+              name: "Custom website and tool foundation",
               description:
-                "Custom Next.js sites with CMS, production deploy, and optional 3D from three to six thousand dollars.",
+                "Modern website plus one focused custom feature from three to seven thousand five hundred dollars.",
             },
           },
           {
             "@type": "Offer",
             itemOffered: {
               "@type": "Service",
-              name: "Care plan",
+              name: "3D and quote tool build",
               description:
-                "Managed hosting, security, uptime monitoring, and small monthly changes from one hundred fifty to four hundred dollars per month.",
+                "Product viewers, configurators, quote flows, and sales tools from seven thousand five hundred to twenty-five thousand dollars plus.",
             },
           },
           {
             "@type": "Offer",
             itemOffered: {
               "@type": "Service",
-              name: "Growth retainer",
+              name: "Managed tool partner",
               description:
-                "SEO, Google Business Profile, reviews, and AI automation from seven hundred fifty to fifteen hundred dollars per month.",
+                "Hosting, support, updates, integrations, and ongoing tool improvements from seven hundred fifty to two thousand five hundred dollars per month.",
             },
           },
           {
             "@type": "Offer",
             itemOffered: {
               "@type": "Service",
-              name: "3D configurators and interactive product experiences",
+              name: "Integrations and automation",
               description:
-                "Browser-native 3D viewers and configurators for products that need to be seen, configured, or explored.",
-            },
-          },
-          {
-            "@type": "Offer",
-            itemOffered: {
-              "@type": "Service",
-              name: "Custom AI tools and automations",
-              description:
-                "Internal copilots, customer-facing assistants, and workflow automations scoped to client data and systems.",
+                "Connect websites to QuickBooks, CRMs, Stripe, email, and internal databases.",
             },
           },
         ],

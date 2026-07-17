@@ -11,13 +11,13 @@ const bios: Record<string, string> = {
 };
 
 const focusRing =
-  "outline-none focus-visible:[outline:2px_solid_var(--color-signal)] focus-visible:[outline-offset:2px]";
+  "outline-none focus-visible:[outline:2px_solid_var(--color-accent)] focus-visible:[outline-offset:2px]";
 
 function FounderAvatar({ initials }: { initials: string }) {
   return (
     <div
       aria-hidden="true"
-      className="flex h-16 w-16 shrink-0 items-center justify-center border border-line bg-ink2 font-display text-lg font-semibold tracking-[-0.02em] text-bone"
+      className="flex h-16 w-16 shrink-0 items-center justify-center border border-border bg-bg-secondary font-display text-lg font-semibold tracking-tight text-text-primary"
     >
       {initials}
     </div>
@@ -31,12 +31,12 @@ export function Founders() {
         <SpecLabel className="mb-4">02 / TEAM</SpecLabel>
         <h2
           id="founders-heading"
-          className="font-display text-[clamp(1.75rem,4vw,2.75rem)] font-semibold leading-[1.08] tracking-[-0.03em] text-bone"
+          className="font-display text-[clamp(1.75rem,4vw,2.75rem)] font-semibold leading-[1.08] tracking-tight text-text-primary"
         >
           You work with us directly.
         </h2>
-        <p className="mt-4 max-w-xl font-body text-lg leading-relaxed text-mute">
-          Two founders. No account managers, no handoffs to junior devs.
+        <p className="mt-4 max-w-xl font-body text-lg leading-relaxed text-text-secondary">
+          Founder-led team of 5–10. You work directly with Barry and Alex. No account managers, no handoffs.
         </p>
       </Reveal>
 
@@ -46,15 +46,15 @@ export function Founders() {
             <div className="flex gap-5">
               <FounderAvatar initials={founder.initials} />
               <div className="min-w-0">
-                <h3 className="font-display text-xl font-semibold leading-snug tracking-[-0.02em] text-bone">
+                <h3 className="font-display text-xl font-semibold leading-snug tracking-tight text-text-primary">
                   {founder.name}
                 </h3>
-                <p className="mt-1 text-sm leading-relaxed text-mute">
+                <p className="mt-1 text-sm leading-relaxed text-text-secondary">
                   {bios[founder.name]}
                 </p>
                 <a
                   href={`mailto:${founder.email}`}
-                  className={`mt-3 inline-block text-sm text-faint transition-colors hover:text-bone ${focusRing}`}
+                  className={`mt-3 inline-block text-sm text-text-muted transition-colors hover:text-text-primary ${focusRing}`}
                 >
                   {founder.email}
                 </a>
