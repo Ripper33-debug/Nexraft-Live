@@ -4,7 +4,7 @@ import { SectionHeader, SectionShell } from "@/components/ui/SectionShell";
 import { Reveal } from "@/components/ui/Reveal";
 import { SpotlightCard } from "@/components/ui/SpotlightCard";
 import { PrimaryButton, GhostButton } from "@/components/ui/PrimaryButton";
-import { FOUNDING_RATE_LINE, PUBLIC_PLANS } from "@/lib/pricing";
+import { FOUNDING_RATE_LINE, GROWTH_ADDON, PUBLIC_PLANS } from "@/lib/pricing";
 import { BOOK_CALL_URL } from "@/lib/site";
 
 const focusRing =
@@ -17,18 +17,19 @@ export function Pricing() {
         <SectionHeader
           specLabel="06 / PRICING"
           titleId="pricing-heading"
-          title="Build once. Care or Growth every month."
-          subtitle="Three ways to work with us. Exact quote on a discovery call - no surprise invoices."
+          title="One build. One managed plan. One invoice."
+          subtitle="Three plans sized to your business. Exact scope confirmed on a short discovery call - no surprise invoices."
         />
       </Reveal>
 
       <Reveal delay={0.04}>
         <div className="mt-10 border border-line bg-ink2 p-5 md:mt-12 md:p-6">
           <p className="text-sm leading-relaxed text-mute">
-            <span className="text-bone">How it stacks.</span> Most clients start
-            with a Build, then attach Care for hosting and upkeep or Growth for
-            SEO, reviews, and AI automation. Care and Growth are separate monthly
-            plans - pick one, not both.
+            <span className="text-bone">How it works.</span> Every plan is a
+            one-time build plus a managed monthly plan that keeps the site fast,
+            secure, and updated - required for the first 12 months, then
+            month-to-month. Want the site actively bringing in leads? Add Growth
+            for SEO and automation.
           </p>
           <p className="mt-3 font-body text-xs leading-normal text-faint">
             {FOUNDING_RATE_LINE}
@@ -49,18 +50,27 @@ export function Pricing() {
             >
               {plan.popular ? (
                 <span className="absolute right-0 top-0 border-b border-l border-line bg-ink px-3 py-1.5 font-jetbrains text-[10px] uppercase tracking-[0.14em] text-signal-dim">
-                  Primary MRR
+                  Most popular
                 </span>
               ) : null}
 
-              <p className="font-jetbrains text-[11px] uppercase leading-none tracking-[0.14em] text-faint">
-                {plan.kind === "one-time" ? "One-time" : "Monthly"}
-              </p>
-              <h3 className="mt-2 font-display text-xl font-semibold leading-snug tracking-[-0.02em] text-bone">
+              <h3 className="font-display text-xl font-semibold leading-snug tracking-[-0.02em] text-bone">
                 {plan.name}
               </h3>
               <p className="mt-3 font-display text-3xl font-semibold tracking-tight text-bone">
-                {plan.priceLabel}
+                {plan.buildLabel}
+                <span className="ml-1 align-middle font-jetbrains text-[11px] uppercase tracking-[0.14em] text-faint">
+                  build
+                </span>
+              </p>
+              <p className="mt-1 font-display text-lg font-semibold tracking-tight text-signal-dim">
+                + {plan.monthlyLabel}
+                <span className="ml-1 align-middle font-jetbrains text-[11px] uppercase tracking-[0.14em] text-faint">
+                  managed
+                </span>
+              </p>
+              <p className="mt-2 font-jetbrains text-[10px] uppercase tracking-[0.14em] text-faint">
+                {plan.firstYearLabel}
               </p>
               <p className="mt-4 text-sm leading-relaxed text-mute">
                 {plan.summary}
@@ -96,10 +106,33 @@ export function Pricing() {
         ))}
       </div>
 
+      <Reveal delay={0.06}>
+        <div className="mt-8 flex flex-col gap-4 border border-line bg-ink2 p-6 md:flex-row md:items-center md:justify-between md:p-7">
+          <div className="max-w-2xl">
+            <div className="flex flex-wrap items-center gap-3">
+              <h3 className="font-display text-lg font-semibold leading-snug tracking-[-0.02em] text-bone">
+                {GROWTH_ADDON.name}
+              </h3>
+              <span className="font-jetbrains text-[10px] uppercase tracking-[0.14em] text-signal-dim">
+                Add-on {"\u00b7"} {GROWTH_ADDON.priceLabel}
+              </span>
+            </div>
+            <p className="mt-3 text-sm leading-relaxed text-mute">
+              {GROWTH_ADDON.summary}
+            </p>
+          </div>
+          <div className="shrink-0">
+            <GhostButton href={BOOK_CALL_URL} external>
+              Add Growth
+            </GhostButton>
+          </div>
+        </div>
+      </Reveal>
+
       <p className="mt-10 font-body text-xs leading-normal text-faint">
         3D configurators and enterprise AI platforms scoped separately on a call{" "}
-        {"\u00b7"} Care and Growth retainers run month-to-month after an initial
-        term {"\u00b7"} 30 days notice to cancel {"\u00b7"} All prices in USD{" "}
+        {"\u00b7"} Managed plans run month-to-month after a 12-month initial term{" "}
+        {"\u00b7"} 30 days notice to cancel {"\u00b7"} All prices in USD{" "}
         {"\u00b7"}{" "}
         <a
           href="/legal/sla"

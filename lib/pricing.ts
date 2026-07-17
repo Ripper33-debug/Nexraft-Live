@@ -9,64 +9,75 @@ export const FOUNDING_DISCOUNT_MONTHS = 3;
 
 export const PUBLIC_PLANS = [
   {
-    id: "build",
-    name: "Build",
-    kind: "one-time" as const,
-    priceLabel: "$3,000–$6,000",
+    id: "starter",
+    name: "Starter",
+    buildLabel: "$1,500",
+    monthlyLabel: "$299/mo",
+    firstYearLabel: "First year $5,088",
     summary:
-      "Custom Next.js site with CMS, performance baseline, and production deploy. Complex builds with 3D or deep integrations land at the top of the range.",
+      "A fast, credible site for a simple local business — built, launched, and fully managed.",
     items: [
-      "Custom design and build",
-      "CMS tailored to your content",
-      "Managed edge deploy and DNS cutover",
-      "Mobile-first, Core Web Vitals tuned",
-      "Optional 3D or product viewer add-on",
+      "Up to 5 core pages",
+      "Custom mobile-first design",
+      "Contact / quote form + gallery",
+      "Managed hosting, SSL, security & backups",
+      "1 hour of edits each month",
     ],
     popular: false,
   },
   {
-    id: "care",
-    name: "Care",
-    kind: "monthly" as const,
-    priceLabel: "$150–$400/mo",
+    id: "business",
+    name: "Business",
+    buildLabel: "$2,500",
+    monthlyLabel: "$399/mo",
+    firstYearLabel: "First year $7,288",
     summary:
-      "The easy attach after every build. We run hosting, security, uptime, and small monthly changes so the site stays fast without you touching servers.",
+      "Our default. Room for established companies with several services or products to sell.",
     items: [
-      "Managed hosting and SSL",
-      "Uptime and performance monitoring",
-      "Security updates and backups",
-      "Small content and fix requests",
-      "One invoice, no separate server bill",
-    ],
-    popular: false,
-  },
-  {
-    id: "growth",
-    name: "Growth",
-    kind: "monthly" as const,
-    priceLabel: "$750–$1,500/mo",
-    summary:
-      "Where recurring revenue actually lives. SEO, Google Business Profile, reviews, and AI automation wired into how you sell and support customers.",
-    items: [
-      "Managed hosting and SSL",
-      "SEO and local search (GBP)",
-      "Review and reputation workflows",
-      "AI chat, follow-up, and lead routing",
-      "Landing pages and conversion work each month",
+      "Up to 10 pages",
+      "Product / service pages + case studies",
+      "Contact and quote forms",
+      "Managed hosting, monitoring & priority support",
+      "2 hours of edits each month",
     ],
     popular: true,
   },
+  {
+    id: "pro",
+    name: "Pro",
+    buildLabel: "$4,000+",
+    monthlyLabel: "$599/mo",
+    firstYearLabel: "First year $11,188+",
+    summary:
+      "For premium brands, manufacturers, and larger, more complex sites that need more room.",
+    items: [
+      "Up to 15 pages, premium design",
+      "Multiple product / service sections",
+      "Advanced lead forms + case studies",
+      "Premium hosting, priority backups & support",
+      "4 hours of edits + conversion tweaks / month",
+    ],
+    popular: false,
+  },
 ] as const;
+
+/** Separate monthly add-on — never bundled into the managed plan fee. */
+export const GROWTH_ADDON = {
+  name: "Growth",
+  priceLabel: "From $750/mo",
+  summary:
+    "A separate monthly add-on that makes the site actually bring in leads: SEO, Google Business Profile, reviews, landing pages, and lead-follow-up automation with monthly reporting.",
+} as const;
 
 /** Legacy reference rates for Stripe catalog and SEO landing pages. */
 export const PRICES = {
   web: {
-    buildMin: 3000,
-    buildMax: 6000,
+    buildMin: 1500,
+    buildMax: 4000,
   },
   care: {
-    min: 150,
-    max: 400,
+    min: 299,
+    max: 599,
   },
   growth: {
     min: 750,

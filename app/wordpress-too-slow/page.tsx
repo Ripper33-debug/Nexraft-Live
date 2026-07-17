@@ -9,7 +9,7 @@ import { PRICES, formatUsdRange } from "@/lib/pricing";
 export const metadata: Metadata = {
   title: "WordPress Too Slow",
   description:
-    "WordPress site too slow? We rebuild slow WordPress sites as static-first builds on managed edge infrastructure. Care plans from $150/mo.",
+    "WordPress site too slow? We rebuild slow WordPress sites as static-first builds on managed edge infrastructure. Managed plans from $299/mo.",
   openGraph: {
     title: "WordPress too slow? It is not your content.",
     description:

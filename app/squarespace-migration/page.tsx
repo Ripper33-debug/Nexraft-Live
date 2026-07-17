@@ -9,7 +9,7 @@ import { PRICES, formatUsdRange } from "@/lib/pricing";
 export const metadata: Metadata = {
   title: "Squarespace Migration",
   description:
-    "Migrate from Squarespace or Wix to a faster, custom-built site on managed edge infrastructure. Care plans from $150/mo. Zero-downtime cutover.",
+    "Migrate from Squarespace or Wix to a faster, custom-built site on managed edge infrastructure. Managed plans from $299/mo. Zero-downtime cutover.",
   openGraph: {
     title: "Squarespace migration, done by engineers",
     description:
