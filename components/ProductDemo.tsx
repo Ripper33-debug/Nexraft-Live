@@ -97,7 +97,7 @@ export function ProductDemo() {
   const [layout, setLayout] = useState<ShelterLayout>("compact");
 
   const outerRef = useRef<HTMLDivElement>(null);
-  const [progress, setProgress] = useState(0);
+  const [activeStep, setActiveStep] = useState(0);
 
   const pageVisible = usePageVisible();
   const { ref, inView } = useInView<HTMLDivElement>({
@@ -120,26 +120,27 @@ export function ProductDemo() {
   // Pinned scrollytelling is desktop + motion only; mobile/reduced keeps the
   // plain interactive layout.
   const scrolly = allowed && motionOk;
-  const activeStep = Math.min(
-    Math.floor(progress * SCROLLY_STEPS.length),
-    SCROLLY_STEPS.length - 1,
-  );
 
   useEffect(() => {
     if (!scrolly) return;
     let rafId = 0;
+    // Only flip React state when the step actually changes (4 renders total),
+    // not on every scroll frame — keeps the pin buttery.
     const update = () => {
       rafId = 0;
       const outer = outerRef.current;
       if (!outer) return;
       const rect = outer.getBoundingClientRect();
       const distance = rect.height - window.innerHeight;
-      if (distance <= 0) {
-        setProgress(1);
-        return;
-      }
-      const scrolled = Math.min(Math.max(-rect.top, 0), distance);
-      setProgress(scrolled / distance);
+      const progress =
+        distance <= 0
+          ? 1
+          : Math.min(Math.max(-rect.top, 0), distance) / distance;
+      const step = Math.min(
+        Math.floor(progress * SCROLLY_STEPS.length),
+        SCROLLY_STEPS.length - 1,
+      );
+      setActiveStep((prev) => (prev === step ? prev : step));
     };
     const onScroll = () => {
       if (!rafId) rafId = requestAnimationFrame(update);

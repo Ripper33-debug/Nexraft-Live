@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { HeroCanvas } from "@/components/HeroCanvas";
 import { MagneticButton } from "@/components/ui/MagneticButton";
 import { BOOK_CALL_URL } from "@/lib/site";
@@ -10,37 +10,46 @@ const HEADLINE =
 
 export function Hero() {
   const sectionRef = useRef<HTMLElement>(null);
-  const [scrollY, setScrollY] = useState(0);
+  const contentRef = useRef<HTMLDivElement>(null);
+  const meshRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)");
     if (reduce.matches) return;
 
     let rafId = 0;
-    const update = () => {
-      rafId = 0;
+    let shown = 0;
+    // Continuous eased loop: drive the parallax by writing styles straight to
+    // the DOM (no React re-renders) and lerp toward the target for smoothness.
+    const loop = () => {
       const section = sectionRef.current;
-      if (!section) return;
-      const top = section.getBoundingClientRect().top;
-      // Only drift while the hero is on its way out (top <= 0).
-      setScrollY(Math.max(0, -top));
-    };
-    const onScroll = () => {
-      if (!rafId) rafId = requestAnimationFrame(update);
-    };
+      let targetScroll = shown;
+      if (section) {
+        const top = section.getBoundingClientRect().top;
+        // Only drift while the hero is on its way out (top <= 0).
+        targetScroll = Math.max(0, -top);
+      }
+      shown += (targetScroll - shown) * 0.12;
+      if (Math.abs(targetScroll - shown) < 0.05) shown = targetScroll;
 
-    update();
-    window.addEventListener("scroll", onScroll, { passive: true });
+      const content = contentRef.current;
+      if (content) {
+        content.style.transform = `translate3d(0, ${shown * 0.28}px, 0)`;
+        content.style.opacity = String(Math.max(0, 1 - shown / 520));
+      }
+      const mesh = meshRef.current;
+      if (mesh) {
+        const meshScale = 1 + Math.min(shown, 900) / 4200;
+        mesh.style.transform = `translate3d(0, ${shown * 0.12}px, 0) scale(${meshScale})`;
+      }
+      rafId = requestAnimationFrame(loop);
+    };
+    rafId = requestAnimationFrame(loop);
+
     return () => {
-      window.removeEventListener("scroll", onScroll);
       if (rafId) cancelAnimationFrame(rafId);
     };
   }, []);
-
-  const contentY = scrollY * 0.28;
-  const contentOpacity = Math.max(0, 1 - scrollY / 520);
-  const meshY = scrollY * 0.12;
-  const meshScale = 1 + Math.min(scrollY, 900) / 4200;
 
   return (
     <section
@@ -50,10 +59,8 @@ export function Hero() {
       className="relative -mt-[68px] flex min-h-[100svh] flex-col overflow-hidden border-b border-line bg-ink pt-[68px]"
     >
       <div
+        ref={meshRef}
         className="absolute inset-0 z-0 hero-mesh-mask will-change-transform"
-        style={{
-          transform: `translate3d(0, ${meshY}px, 0) scale(${meshScale})`,
-        }}
       >
         <HeroCanvas sectionRef={sectionRef} />
       </div>
@@ -76,11 +83,8 @@ export function Hero() {
       />
 
       <div
+        ref={contentRef}
         className="pointer-events-none relative z-10 mx-auto flex w-full max-w-[1180px] flex-1 flex-col justify-center px-7 py-16 will-change-transform md:py-20"
-        style={{
-          transform: `translate3d(0, ${contentY}px, 0)`,
-          opacity: contentOpacity,
-        }}
       >
         <p className="hm-fade text-sm text-mute">Est. 2024</p>
 
