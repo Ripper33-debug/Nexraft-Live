@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { BookCallButton } from "@/components/BookCallButton";
 import { ContactEmails } from "@/components/ContactEmails";
+import { ShoeConfigurator } from "@/components/ShoeConfigurator";
 import { SubpageShell } from "@/components/SubpageShell";
 import { PRICES, formatUsd } from "@/lib/pricing";
 
@@ -25,12 +26,12 @@ export default function ThreeDProductViewerPage() {
           <p>
             Browser-native WebGL. No app download, no plugin, no third-party
             iframe. Your customers spin, zoom, and configure the product
-            directly on the page. There is a live demo on{" "}
+            directly on the page. Try the live shoe configurator below —{" "}
             <Link
-              href="/#demo"
+              href="#configurator"
               className="text-bone underline decoration-line underline-offset-4 hover:text-mute"
             >
-              our homepage
+              build your colorway
             </Link>
             .
           </p>
@@ -100,15 +101,37 @@ export default function ThreeDProductViewerPage() {
         footerLink={null}
       />
 
-      <section className="border-t border-line bg-ink pb-[84px] md:pb-[120px]">
+      <section
+        id="configurator"
+        className="border-t border-line bg-ink py-[84px] md:py-[120px]"
+      >
+        <div className="mx-auto max-w-[1180px] px-7">
+          <p className="font-mono text-[11px] uppercase tracking-widest text-signal">
+            Live demo
+          </p>
+          <h2 className="mt-3 font-display text-[clamp(1.5rem,3vw,2.25rem)] font-semibold tracking-[-0.02em] text-bone">
+            Build your colorway.
+          </h2>
+          <p className="mt-4 max-w-xl text-sm leading-relaxed text-mute">
+            A working configurator, running right here in your browser. Pick
+            colors per part, drag to inspect. This is the same pipeline we
+            ship for real product catalogs — swap the shoe for your SKU.
+          </p>
+          <div className="mt-8">
+            <ShoeConfigurator />
+          </div>
+        </div>
+      </section>
+
+      <section className="border-t border-line bg-ink pb-[84px] md:pb-[120px] pt-[84px]">
         <div className="mx-auto grid max-w-[1180px] gap-8 px-7 sm:grid-cols-2">
           <div>
             <p className="text-sm text-faint">See it live</p>
             <Link
-              href="/#demo"
+              href="#configurator"
               className="mt-2 inline-block text-sm text-bone underline decoration-line underline-offset-4 hover:text-mute"
             >
-              Homepage 3D demo
+              The shoe configurator above
             </Link>
           </div>
           <div>
