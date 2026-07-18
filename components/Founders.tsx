@@ -3,17 +3,12 @@
 import { SectionShell } from "@/components/ui/SectionShell";
 import { Reveal } from "@/components/ui/Reveal";
 import { SpecLabel } from "@/components/ui/SpecLabel";
-import { FOUNDERS } from "@/lib/site";
-
-const bios: Record<string, string> = {
-  "Barry Castelli": "Full-stack builds, hosting, and client delivery.",
-  "Alex Cridge": "3D production, WebGL pipelines, and visual systems.",
-};
+import { TEAM } from "@/lib/site";
 
 const focusRing =
   "outline-none focus-visible:[outline:2px_solid_var(--color-signal)] focus-visible:[outline-offset:2px]";
 
-function FounderAvatar({ initials }: { initials: string }) {
+function TeamAvatar({ initials }: { initials: string }) {
   return (
     <div
       aria-hidden="true"
@@ -36,27 +31,28 @@ export function Founders() {
           You work with us directly.
         </h2>
         <p className="mt-4 max-w-xl font-body text-lg leading-relaxed text-mute">
-          Two founders. No account managers, no handoffs to junior devs.
+          Founder-led, with a dedicated account manager who actually answers.
+          No handoffs to junior devs.
         </p>
       </Reveal>
 
-      <div className="mt-10 grid grid-cols-1 gap-8 sm:grid-cols-2 md:gap-12">
-        {FOUNDERS.map((founder) => (
-          <Reveal key={founder.email} delay={0.06}>
+      <div className="mt-10 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3 md:gap-x-12 md:gap-y-10">
+        {TEAM.map((member) => (
+          <Reveal key={member.email} delay={0.06}>
             <div className="flex gap-5">
-              <FounderAvatar initials={founder.initials} />
+              <TeamAvatar initials={member.initials} />
               <div className="min-w-0">
                 <h3 className="font-display text-xl font-semibold leading-snug tracking-[-0.02em] text-bone">
-                  {founder.name}
+                  {member.name}
                 </h3>
-                <p className="mt-1 text-sm leading-relaxed text-mute">
-                  {bios[founder.name]}
+                <p className="mt-1 font-jetbrains text-[11px] uppercase leading-none tracking-[0.14em] text-signal-dim">
+                  {member.role}
                 </p>
                 <a
-                  href={`mailto:${founder.email}`}
-                  className={`mt-3 inline-block text-sm text-faint transition-colors hover:text-bone ${focusRing}`}
+                  href={`mailto:${member.email}`}
+                  className={`mt-3 inline-block break-all text-sm text-faint transition-colors hover:text-bone ${focusRing}`}
                 >
-                  {founder.email}
+                  {member.email}
                 </a>
               </div>
             </div>

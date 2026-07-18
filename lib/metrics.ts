@@ -44,8 +44,7 @@ export const SITE_METRICS: SiteMetric[] = [
   {
     id: "sla",
     value: 48,
-    countFrom: 44,
-    suffix: "h",
+    suffix: "hr",
     label: "Small-fix turnaround on Starter",
   },
 ];

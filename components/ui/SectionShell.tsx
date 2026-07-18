@@ -1,6 +1,5 @@
 import type { ReactNode } from "react";
 import { SpecLabel } from "@/components/ui/SpecLabel";
-import { CharTitle } from "@/components/ui/CharTitle";
 
 type SectionShellProps = {
   id: string;
@@ -51,13 +50,11 @@ export function SectionHeader({
   return (
     <div className="max-w-2xl">
       {specLabel ? <SpecLabel className="mb-4">{specLabel}</SpecLabel> : null}
-      {/* No text-sheen here: background-clip:text breaks once children get
-          per-char transforms, so section titles animate chars instead. */}
       <h2
         id={titleId}
-        className="font-display text-[clamp(1.75rem,4vw,2.75rem)] font-semibold leading-[1.08] tracking-[-0.03em] text-bone"
+        className="text-sheen font-display text-[clamp(1.75rem,4vw,2.75rem)] font-semibold leading-[1.08] tracking-[-0.03em] text-bone"
       >
-        <CharTitle text={title} />
+        {title}
       </h2>
       {subtitle ? (
         <p className="mt-4 font-body text-lg leading-relaxed text-mute">{subtitle}</p>

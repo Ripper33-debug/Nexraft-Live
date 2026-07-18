@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useState } from "react";
 import Image from "next/image";
 
 const FLAG = "nexraft-intro-shown";
@@ -39,31 +39,6 @@ export function LoadingScreen() {
 
     setShow(true);
   }, []);
-
-  const pctRef = useRef<HTMLSpanElement>(null);
-
-  // 000 → 100 counter, eased so it sprints early and settles at the end.
-  useEffect(() => {
-    if (!show) return;
-    const t0 =
-      typeof performance !== "undefined" ? performance.now() : Date.now();
-    let raf = 0;
-    const tick = () => {
-      const now =
-        typeof performance !== "undefined" ? performance.now() : Date.now();
-      const p = Math.min((now - t0) / MIN_DISPLAY, 1);
-      const eased = 1 - Math.pow(1 - p, 3);
-      if (pctRef.current) {
-        pctRef.current.textContent = String(Math.round(eased * 100)).padStart(
-          3,
-          "0",
-        );
-      }
-      if (p < 1) raf = requestAnimationFrame(tick);
-    };
-    raf = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(raf);
-  }, [show]);
 
   useEffect(() => {
     if (!show) return;
@@ -125,11 +100,8 @@ export function LoadingScreen() {
         <div className="loader-bar mt-8">
           <span className="loader-bar-fill" />
         </div>
-        <p className="mt-5 flex items-baseline gap-4 font-jetbrains text-[11px] uppercase leading-none tracking-[0.14em] text-faint">
-          <span>INITIALIZING // EDGE NETWORK</span>
-          <span ref={pctRef} className="loader-pct text-signal">
-            000
-          </span>
+        <p className="mt-5 font-jetbrains text-[11px] uppercase leading-none tracking-[0.14em] text-faint">
+          INITIALIZING // EDGE NETWORK
         </p>
       </div>
     </div>

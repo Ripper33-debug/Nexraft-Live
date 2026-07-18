@@ -13,8 +13,22 @@ const structuredData = {
       description:
         "Engineering studio for custom website builds, WordPress and Squarespace migrations, managed hosting, SEO, growth retainers, browser-ready 3D, and custom AI tools.",
       founder: [
-        { "@type": "Person", name: "Barry Castelli" },
-        { "@type": "Person", name: "Alex Cridge" },
+        { "@type": "Person", name: "Barry Castelli", jobTitle: "Founder & CEO" },
+      ],
+      employee: [
+        { "@type": "Person", name: "Michael Farina", jobTitle: "Developer" },
+        { "@type": "Person", name: "Ryan Gersz", jobTitle: "Account Manager" },
+        {
+          "@type": "Person",
+          name: "Jason Pierre-Louis",
+          jobTitle: "Account Manager",
+        },
+        { "@type": "Person", name: "Barry Birch", jobTitle: "Account Manager" },
+        {
+          "@type": "Person",
+          name: "Ayden Sackrider",
+          jobTitle: "Account Manager",
+        },
       ],
     },
     {

@@ -3,12 +3,10 @@ import { Reveal } from "@/components/ui/Reveal";
 import { SpecLabel } from "@/components/ui/SpecLabel";
 import { MagneticButton } from "@/components/ui/MagneticButton";
 import { ContactForm } from "@/components/ContactForm";
-import { BOOK_CALL_URL, FOUNDERS } from "@/lib/site";
+import { BOOK_CALL_URL } from "@/lib/site";
 
 const focusRing =
   "outline-none focus-visible:[outline:2px_solid_var(--color-signal)] focus-visible:[outline-offset:2px]";
-
-const founderNames = FOUNDERS.map((f) => f.name).join(" and ");
 
 export function Contact() {
   return (
@@ -34,7 +32,8 @@ export function Contact() {
 
         <Reveal delay={0.1}>
           <p className="mt-4 font-body text-xs leading-normal text-faint">
-            You work directly with {founderNames}. No account managers.
+            You work directly with Barry and the Nexraft team - your account
+            manager is one email away.
           </p>
         </Reveal>
 
