@@ -6,9 +6,11 @@ import { HeroCanvas } from "@/components/HeroCanvas";
 import { MagneticButton } from "@/components/ui/MagneticButton";
 import { BOOK_CALL_URL } from "@/lib/site";
 
-// Interactive 3D wireframe terrain — desktop + motion only. Loaded lazily so
+// Refractive 3D crystal centerpiece — desktop + motion only. Loaded lazily so
 // the three.js bundle never ships to phones (which use the 2D HeroCanvas).
-const HeroMesh = dynamic(() => import("@/components/HeroMesh"), { ssr: false });
+const HeroCrystal = dynamic(() => import("@/components/HeroCrystal"), {
+  ssr: false,
+});
 
 const HEADLINE =
   "We build fast websites, run the stack, and grow your leads.".split(" ");
@@ -90,7 +92,19 @@ export function Hero() {
         className="absolute inset-0 z-0 hero-mesh-mask will-change-transform"
       >
         {use3D ? (
-          <HeroMesh active={heroActive} />
+          <>
+            {/* Soft halo behind the crystal — fakes bloom without postprocessing. */}
+            <div
+              aria-hidden="true"
+              className="pointer-events-none absolute left-[72%] top-1/2 h-[58vh] w-[58vh] -translate-x-1/2 -translate-y-1/2 rounded-full"
+              style={{
+                background:
+                  "radial-gradient(circle, rgba(67,208,133,0.28), rgba(67,208,133,0.06) 45%, transparent 70%)",
+                filter: "blur(30px)",
+              }}
+            />
+            <HeroCrystal active={heroActive} sectionRef={sectionRef} />
+          </>
         ) : (
           <HeroCanvas sectionRef={sectionRef} />
         )}
