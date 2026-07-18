@@ -1,9 +1,14 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import dynamic from "next/dynamic";
+import { useEffect, useRef, useState } from "react";
 import { HeroCanvas } from "@/components/HeroCanvas";
 import { MagneticButton } from "@/components/ui/MagneticButton";
 import { BOOK_CALL_URL } from "@/lib/site";
+
+// Interactive 3D wireframe terrain — desktop + motion only. Loaded lazily so
+// the three.js bundle never ships to phones (which use the 2D HeroCanvas).
+const HeroMesh = dynamic(() => import("@/components/HeroMesh"), { ssr: false });
 
 const HEADLINE =
   "We build fast websites, run the stack, and grow your leads.".split(" ");
@@ -12,6 +17,28 @@ export function Hero() {
   const sectionRef = useRef<HTMLElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
   const meshRef = useRef<HTMLDivElement>(null);
+  // Whether to render the heavy 3D terrain (desktop + fine pointer + motion).
+  const [use3D, setUse3D] = useState(false);
+  // Pause the render loop once the hero scrolls out of view.
+  const [heroActive, setHeroActive] = useState(true);
+
+  useEffect(() => {
+    const desktop = window.matchMedia("(min-width: 768px)").matches;
+    const finePointer = window.matchMedia("(pointer: fine)").matches;
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    setUse3D(desktop && finePointer && !reduce);
+  }, []);
+
+  useEffect(() => {
+    const section = sectionRef.current;
+    if (!section || !use3D) return;
+    const io = new IntersectionObserver(
+      ([entry]) => setHeroActive(entry?.isIntersecting ?? false),
+      { rootMargin: "0px" },
+    );
+    io.observe(section);
+    return () => io.disconnect();
+  }, [use3D]);
 
   useEffect(() => {
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -62,7 +89,11 @@ export function Hero() {
         ref={meshRef}
         className="absolute inset-0 z-0 hero-mesh-mask will-change-transform"
       >
-        <HeroCanvas sectionRef={sectionRef} />
+        {use3D ? (
+          <HeroMesh active={heroActive} />
+        ) : (
+          <HeroCanvas sectionRef={sectionRef} />
+        )}
       </div>
 
       <div

@@ -41,6 +41,7 @@ export function Pricing() {
         {PUBLIC_PLANS.map((plan, index) => (
           <Reveal key={plan.id} delay={0.06 + index * 0.04} className="h-full">
             <SpotlightCard
+              tilt={!plan.popular}
               className={`h-full ${
                 plan.popular
                   ? "z-10 border border-signal/25 bg-panel md:-translate-y-3 md:shadow-[0_24px_48px_-24px_rgba(0,0,0,0.6)]"

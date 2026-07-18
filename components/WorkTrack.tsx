@@ -42,12 +42,34 @@ function CardVisual({ project }: { project: WorkProject }) {
 }
 
 function ProjectCard({ project }: { project: WorkProject }) {
+  const ref = useRef<HTMLAnchorElement>(null);
+
+  const handleMove = (event: React.PointerEvent<HTMLAnchorElement>) => {
+    const el = ref.current;
+    if (!el) return;
+    const rect = el.getBoundingClientRect();
+    el.style.setProperty("--mx", `${event.clientX - rect.left}px`);
+    el.style.setProperty("--my", `${event.clientY - rect.top}px`);
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const px = (event.clientX - rect.left) / rect.width - 0.5;
+    const py = (event.clientY - rect.top) / rect.height - 0.5;
+    el.style.transform = `perspective(900px) rotateX(${(-py * 4).toFixed(2)}deg) rotateY(${(px * 4).toFixed(2)}deg)`;
+  };
+
+  const handleLeave = () => {
+    const el = ref.current;
+    if (el) el.style.transform = "";
+  };
+
   return (
     <Link
+      ref={ref}
       href={project.href}
       target={project.external ? "_blank" : undefined}
       rel={project.external ? "noopener noreferrer" : undefined}
-      className={`spotlight-card group flex w-[78vw] max-w-[440px] shrink-0 flex-col border border-line bg-ink2 transition-colors hover:bg-panel ${focusRing}`}
+      onPointerMove={handleMove}
+      onPointerLeave={handleLeave}
+      className={`spotlight-card group flex w-[78vw] max-w-[440px] shrink-0 flex-col border border-line bg-ink2 transition-[transform,background-color] duration-300 [transform-style:preserve-3d] hover:bg-panel ${focusRing}`}
     >
       <span aria-hidden="true" className="spotlight-card-fill" />
       <span aria-hidden="true" className="spotlight-card-edge" />
