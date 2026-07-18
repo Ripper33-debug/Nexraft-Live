@@ -6,12 +6,19 @@ type UseInViewOptions = {
   disabled?: boolean;
   rootMargin?: string;
   threshold?: number;
+  /** Latch: stay true after the first intersection (for one-shot animations). */
+  once?: boolean;
 };
 
 export function useInView<T extends Element>(
   options: UseInViewOptions = {},
 ): { ref: RefObject<T | null>; inView: boolean } {
-  const { disabled = false, rootMargin = "80px", threshold = 0 } = options;
+  const {
+    disabled = false,
+    rootMargin = "80px",
+    threshold = 0,
+    once = false,
+  } = options;
   const ref = useRef<T | null>(null);
   const [inView, setInView] = useState(false);
 
@@ -25,13 +32,23 @@ export function useInView<T extends Element>(
     if (!node) return;
 
     const observer = new IntersectionObserver(
-      ([entry]) => setInView(entry?.isIntersecting ?? false),
+      ([entry]) => {
+        const intersecting = entry?.isIntersecting ?? false;
+        if (once) {
+          if (intersecting) {
+            setInView(true);
+            observer.disconnect();
+          }
+          return;
+        }
+        setInView(intersecting);
+      },
       { threshold, rootMargin },
     );
 
     observer.observe(node);
     return () => observer.disconnect();
-  }, [disabled, rootMargin, threshold]);
+  }, [disabled, rootMargin, threshold, once]);
 
   return { ref, inView };
 }

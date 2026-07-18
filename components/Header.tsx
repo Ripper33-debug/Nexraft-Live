@@ -80,7 +80,7 @@ export function Header() {
     <header
       className={`sticky top-0 z-40 border-b transition-colors duration-500 ease-[cubic-bezier(.16,1,.3,1)] ${
         surface
-          ? "border-line bg-[color-mix(in_srgb,var(--color-ink)_94%,transparent)]"
+          ? "border-line bg-[color-mix(in_srgb,var(--color-ink)_92%,transparent)] backdrop-blur-md"
           : "border-transparent bg-transparent"
       }`}
     >
@@ -123,7 +123,7 @@ export function Header() {
           open ? "mobile-menu-open" : ""
         }`}
       >
-        <div className="overflow-hidden border-t border-line bg-[color-mix(in_srgb,var(--color-ink)_98%,transparent)]">
+        <div className="overflow-hidden border-t border-line bg-[color-mix(in_srgb,var(--color-ink)_96%,transparent)] backdrop-blur-md">
           <nav
             aria-label="Primary"
             className="mobile-menu-panel mx-auto flex max-w-[1180px] flex-col px-7 py-4"

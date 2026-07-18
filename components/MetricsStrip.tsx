@@ -70,7 +70,9 @@ function ClientLogoCell() {
 }
 
 export function MetricsStrip() {
-  const { ref, inView } = useInView<HTMLElement>({ threshold: 0.5 });
+  // once: latch after the first reveal so the numbers count up a single time
+  // and settle, instead of re-animating every time the strip crosses 50%.
+  const { ref, inView } = useInView<HTMLElement>({ threshold: 0.5, once: true });
 
   return (
     <section

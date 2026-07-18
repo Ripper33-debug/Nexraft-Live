@@ -9,7 +9,11 @@ const focusRing =
 const SHOW_AFTER_PX = 520;
 
 export function StickyBookCall() {
-  const [visible, setVisible] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  // Hide once the visitor reaches the contact section / footer: they already
+  // have the CTA in front of them there, and the bar would otherwise cover
+  // the footer links at the bottom of the page.
+  const [atEnd, setAtEnd] = useState(false);
 
   useEffect(() => {
     let frame = 0;
@@ -22,7 +26,7 @@ export function StickyBookCall() {
         const y = window.scrollY;
         if (Math.abs(y - lastY) < 8) return;
         lastY = y;
-        setVisible(y > SHOW_AFTER_PX);
+        setScrolled(y > SHOW_AFTER_PX);
       });
     };
 
@@ -34,6 +38,27 @@ export function StickyBookCall() {
     };
   }, []);
 
+  useEffect(() => {
+    const targets = [
+      document.getElementById("contact"),
+      document.querySelector("footer"),
+    ].filter((el): el is HTMLElement => Boolean(el));
+    if (targets.length === 0) return;
+
+    const seen = new Map<Element, boolean>();
+    const io = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) seen.set(entry.target, entry.isIntersecting);
+        setAtEnd([...seen.values()].some(Boolean));
+      },
+      { rootMargin: "0px 0px -10% 0px" },
+    );
+    targets.forEach((el) => io.observe(el));
+    return () => io.disconnect();
+  }, []);
+
+  const visible = scrolled && !atEnd;
+
   return (
     <div
       className={`sticky-cta pointer-events-none fixed inset-x-0 bottom-0 z-50 px-4 pb-4 md:px-7 ${
@@ -41,7 +66,7 @@ export function StickyBookCall() {
       }`}
       aria-hidden={!visible}
     >
-      <div className="pointer-events-auto mx-auto flex max-w-[1180px] items-center justify-between gap-4 border border-line bg-[color-mix(in_srgb,var(--color-ink)_96%,transparent)] px-4 py-3 md:px-5">
+      <div className="pointer-events-auto mx-auto flex max-w-[1180px] items-center justify-between gap-4 border border-line bg-[color-mix(in_srgb,var(--color-ink)_92%,transparent)] backdrop-blur-md px-4 py-3 md:px-5">
         <p className="hidden text-sm text-mute sm:block">
           Ready to scope your stack?
         </p>

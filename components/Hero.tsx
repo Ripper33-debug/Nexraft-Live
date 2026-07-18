@@ -119,6 +119,16 @@ export function Hero() {
             "radial-gradient(ellipse 130% 95% at 50% 42%, transparent 45%, color-mix(in srgb, var(--color-ink) 35%, transparent) 78%, color-mix(in srgb, var(--color-ink) 72%, transparent) 100%)",
         }}
       />
+      {/* Left-side scrim keeps the headline readable where it crosses the
+          bright 3D centerpiece. */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-y-0 left-0 z-[1] hidden w-[68%] md:block"
+        style={{
+          background:
+            "linear-gradient(to right, color-mix(in srgb, var(--color-ink) 78%, transparent) 0%, color-mix(in srgb, var(--color-ink) 45%, transparent) 55%, transparent 100%)",
+        }}
+      />
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-x-0 bottom-0 z-[1] h-40"

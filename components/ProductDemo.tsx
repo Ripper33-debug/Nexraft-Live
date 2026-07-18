@@ -19,7 +19,7 @@ const MATERIALS = [
   { id: "bone", name: "Bone", value: "#E8EDE9" },
   { id: "steel", name: "Steel", value: "#7C8A82" },
   { id: "slate", name: "Slate", value: "#566159" },
-  { id: "signal", name: "Signal", value: "#43D085" },
+  { id: "signal", name: "Signal", value: "#FF4D1C" },
 ] as const;
 
 const FINISHES: { id: Finish; name: string }[] = [
@@ -53,7 +53,7 @@ const SCROLLY_STEPS: {
     color: MATERIALS[3].value,
     finish: "matte",
     layout: "compact",
-    caption: "Signal green, or any brand color you throw at it.",
+    caption: "Signal orange, or any brand color you throw at it.",
   },
   {
     color: MATERIALS[3].value,

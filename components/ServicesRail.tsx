@@ -100,7 +100,11 @@ function RailDesktop() {
   const sectionRef = useScrollScene<HTMLElement>((progress, velocity) => {
     const track = trackRef.current;
     if (track) {
-      const max = track.scrollWidth - track.clientWidth;
+      // Distance = full track width minus the visible viewport (the track is
+      // w-max, so its own clientWidth equals its scrollWidth — measure the
+      // clipping parent instead).
+      const viewport = track.parentElement?.clientWidth ?? window.innerWidth;
+      const max = Math.max(0, track.scrollWidth - viewport);
       const skew = Math.max(Math.min(velocity * -120, 2.2), -2.2);
       track.style.transform = `translate3d(${-max * progress}px,0,0) skewX(${skew}deg)`;
     }

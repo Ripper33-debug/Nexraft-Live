@@ -32,10 +32,34 @@ function CardVisual({ project }: { project: WorkProject }) {
       </div>
     );
   }
+  // No screenshot: render a deliberate typographic tile instead of a bare
+  // letter, so service pages read as designed rather than missing an image.
   return (
-    <div className="flex aspect-[16/10] w-full items-center justify-center border-b border-line bg-gradient-to-br from-panel to-ink">
-      <span className="font-display text-5xl font-semibold text-line">
-        {project.name.charAt(0)}
+    <div className="relative flex aspect-[16/10] w-full flex-col justify-between overflow-hidden border-b border-line bg-gradient-to-br from-panel via-ink2 to-ink p-5">
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute -right-10 -top-14 h-56 w-56 rounded-full"
+        style={{
+          background:
+            "radial-gradient(circle, color-mix(in srgb, var(--color-signal) 14%, transparent), transparent 70%)",
+          filter: "blur(18px)",
+        }}
+      />
+      <span className="relative font-jetbrains text-[10px] uppercase leading-none tracking-[0.18em] text-signal-dim">
+        Service
+      </span>
+      <span
+        aria-hidden="true"
+        className="relative self-end font-display text-6xl font-semibold leading-none tracking-[-0.04em] text-transparent"
+        style={{
+          WebkitTextStroke:
+            "1px color-mix(in srgb, var(--color-bone) 30%, transparent)",
+        }}
+      >
+        {project.name
+          .split(" ")
+          .map((w) => w.charAt(0).toUpperCase())
+          .join("")}
       </span>
     </div>
   );
