@@ -6,9 +6,10 @@ import { HeroCanvas } from "@/components/HeroCanvas";
 import { MagneticButton } from "@/components/ui/MagneticButton";
 import { BOOK_CALL_URL } from "@/lib/site";
 
-// Refractive 3D crystal centerpiece — desktop + motion only. Loaded lazily so
-// the three.js bundle never ships to phones (which use the 2D HeroCanvas).
-const HeroCrystal = dynamic(() => import("@/components/HeroCrystal"), {
+// Particle lattice + refractive shatter monolith — desktop + motion only.
+// Loaded lazily so the three.js bundle never ships to phones (which use the
+// 2D HeroCanvas).
+const HeroLattice = dynamic(() => import("@/components/HeroLattice"), {
   ssr: false,
 });
 
@@ -93,17 +94,17 @@ export function Hero() {
       >
         {use3D ? (
           <>
-            {/* Soft halo behind the crystal — fakes bloom without postprocessing. */}
+            {/* Soft halo behind the monolith — fakes bloom without postprocessing. */}
             <div
               aria-hidden="true"
               className="pointer-events-none absolute left-[72%] top-1/2 h-[58vh] w-[58vh] -translate-x-1/2 -translate-y-1/2 rounded-full"
               style={{
                 background:
-                  "radial-gradient(circle, rgba(67,208,133,0.28), rgba(67,208,133,0.06) 45%, transparent 70%)",
+                  "radial-gradient(circle, color-mix(in srgb, var(--color-signal) 28%, transparent), color-mix(in srgb, var(--color-signal) 6%, transparent) 45%, transparent 70%)",
                 filter: "blur(30px)",
               }}
             />
-            <HeroCrystal active={heroActive} sectionRef={sectionRef} />
+            <HeroLattice active={heroActive} sectionRef={sectionRef} />
           </>
         ) : (
           <HeroCanvas sectionRef={sectionRef} />

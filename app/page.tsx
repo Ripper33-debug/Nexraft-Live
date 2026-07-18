@@ -2,7 +2,7 @@ import { Hero } from "@/components/Hero";
 import { MetricsStrip } from "@/components/MetricsStrip";
 import { ProductDemo } from "@/components/ProductDemo";
 import { ClientLogos } from "@/components/ClientLogos";
-import { Services } from "@/components/Services";
+import { ServicesRail } from "@/components/ServicesRail";
 import { Founders } from "@/components/Founders";
 import { Manifesto } from "@/components/Manifesto";
 import { KineticStatement } from "@/components/KineticStatement";
@@ -25,7 +25,7 @@ export default function HomePage() {
       <SectionTransition />
       <Manifesto />
       <ProductDemo />
-      <Services />
+      <ServicesRail />
       <Founders />
       <SectionTransition />
       <Marquee />
