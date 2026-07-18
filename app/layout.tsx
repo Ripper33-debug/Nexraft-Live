@@ -3,16 +3,6 @@ import { Analytics } from "@vercel/analytics/next";
 import { Bricolage_Grotesque, Space_Grotesk, JetBrains_Mono } from "next/font/google";
 import { GeistSans } from "geist/font/sans";
 import { GeistMono } from "geist/font/mono";
-import { Grain } from "@/components/Grain";
-import { Header } from "@/components/Header";
-import { Footer } from "@/components/Footer";
-import { ScrollProgress } from "@/components/ScrollProgress";
-import { StructuredData } from "@/components/StructuredData";
-import { CookieNotice } from "@/components/CookieNotice";
-import { LoadingScreen } from "@/components/LoadingScreen";
-import { SmoothScroll } from "@/components/SmoothScroll";
-import { CursorGlow } from "@/components/CursorGlow";
-import { StickyBookCall } from "@/components/StickyBookCall";
 import { InstantlyPixel } from "@/components/InstantlyPixel";
 import "./globals.css";
 
@@ -82,25 +72,7 @@ export default function RootLayout({
       className={`${bricolage.variable} ${spaceGrotesk.variable} ${jetbrainsMono.variable} ${GeistSans.variable} ${GeistMono.variable}`}
     >
       <body className="relative min-h-screen overflow-x-clip bg-ink font-body text-bone antialiased">
-        <LoadingScreen />
-        <SmoothScroll />
-        <CursorGlow />
-        <StructuredData />
-        <Grain />
-        <ScrollProgress />
-        <a
-          href="#main"
-          className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:bg-ink2 focus:px-4 focus:py-2 focus:font-jetbrains focus:text-sm focus:text-signal"
-        >
-          Skip to content
-        </a>
-        <div className="site-shell relative z-10">
-          <Header />
-          <main id="main">{children}</main>
-          <Footer />
-        </div>
-        <CookieNotice />
-        <StickyBookCall />
+        {children}
         <Analytics />
         <InstantlyPixel />
       </body>
