@@ -709,3 +709,105 @@ html.lenis body {
     );
   }
 }
+
+/* ---------------------------------------------------------------------------
+   Theme switch — "forest" is the default palette declared in @theme above.
+   "ember" overrides the same custom properties at runtime, so every Tailwind
+   utility (they compile to var(--color-*)) and both WebGL scenes (they read
+   the vars via getComputedStyle) flip together. Toggle via NEXT_PUBLIC_THEME.
+--------------------------------------------------------------------------- */
+html[data-theme="ember"] {
+  --color-surface: #08080b;
+  --color-surface-deep: #060608;
+  --color-foreground: #e9e5db;
+  --color-muted: #a39e93;
+  --color-ink: #08080b;
+  --color-ink2: #0e0e13;
+  --color-panel: #111117;
+  --color-line: #26262c;
+  --color-bone: #e9e5db;
+  --color-soft: #d6d1c6;
+  --color-mute: #c9c4b8;
+  --color-faint: #b5b0a5;
+  --color-tag: #cdc8bd;
+  --color-signal: #ff4d1c;
+  --color-signal-dim: #c93a12;
+}
+
+/* --- preloader counter ---------------------------------------------------- */
+.loader-pct {
+  font-variant-numeric: tabular-nums;
+  min-width: 3ch;
+  display: inline-block;
+  text-align: right;
+}
+
+/* --- char-level titles (CharTitle) ---------------------------------------- */
+.ct-word {
+  display: inline-block;
+  white-space: nowrap;
+}
+.ct-char {
+  display: inline-block;
+  will-change: transform;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .ct .ct-char {
+    opacity: 0;
+    transform: translateY(0.65em) rotate(4deg);
+  }
+  .ct[data-shown="true"] .ct-char {
+    animation: ct-rise 0.7s var(--motion-ease) forwards;
+    animation-delay: calc(var(--ci) * 22ms);
+  }
+}
+@keyframes ct-rise {
+  to {
+    opacity: 1;
+    transform: translateY(0) rotate(0deg);
+  }
+}
+
+/* --- pinned services rail ------------------------------------------------- */
+.rail-track {
+  transition: none;
+}
+.rail-card {
+  transition: border-color 0.3s ease, background-color 0.3s ease;
+}
+.rail-card:hover {
+  border-color: color-mix(in srgb, var(--color-signal) 35%, var(--color-line));
+}
+
+/* --- footer giant wordmark (FooterGiant) ---------------------------------- */
+.fg-char {
+  font-size: clamp(3.5rem, 12.5vw, 11rem);
+  color: transparent;
+  -webkit-text-stroke: 1px
+    color-mix(in srgb, var(--color-bone) 28%, transparent);
+  transition: color 0.4s ease;
+}
+.fg:hover .fg-char {
+  -webkit-text-stroke-color: color-mix(
+    in srgb,
+    var(--color-signal) 55%,
+    transparent
+  );
+}
+@media (prefers-reduced-motion: no-preference) {
+  .fg[data-wave="true"] .fg-char {
+    animation: fg-wave 0.6s var(--motion-ease);
+    animation-delay: calc(var(--fi) * 45ms);
+  }
+}
+@keyframes fg-wave {
+  0% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-0.12em);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}

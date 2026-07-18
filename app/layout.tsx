@@ -63,7 +63,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#0a0e0c",
+  themeColor: process.env.NEXT_PUBLIC_THEME === "ember" ? "#08080b" : "#0a0e0c",
   colorScheme: "dark",
 };
 
@@ -75,6 +75,10 @@ export default function RootLayout({
   return (
     <html
       lang="en"
+      // "forest" (default green) or "ember" (orange preview). Set
+      // NEXT_PUBLIC_THEME=ember in Vercel to flip the whole palette; the
+      // WebGL scenes read the same CSS variables so they recolor too.
+      data-theme={process.env.NEXT_PUBLIC_THEME === "ember" ? "ember" : "forest"}
       className={`${bricolage.variable} ${spaceGrotesk.variable} ${jetbrainsMono.variable} ${GeistSans.variable} ${GeistMono.variable}`}
     >
       <body className="relative min-h-screen overflow-x-clip bg-ink font-body text-bone antialiased">

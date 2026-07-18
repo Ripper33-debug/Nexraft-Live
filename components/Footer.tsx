@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Logo } from "@/components/Logo";
+import { FooterGiant } from "@/components/FooterGiant";
 import { BOOK_CALL_URL, CONTACT_EMAILS } from "@/lib/site";
 
 const focusRing =
@@ -27,6 +28,7 @@ const legalLinks = [
 export function Footer() {
   return (
     <footer className="border-t border-line bg-ink" role="contentinfo">
+      <FooterGiant />
       <div className="mx-auto flex max-w-[1180px] flex-col gap-6 px-7 py-8 md:flex-row md:items-center md:justify-between">
         <Logo height={24} linkClassName={focusRing} />
 
