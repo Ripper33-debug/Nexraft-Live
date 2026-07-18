@@ -50,7 +50,7 @@ export function HomeRebuild() {
     let scrollProg = 0;
     const canvas = $("#gl") as HTMLCanvasElement;
     const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.75));
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
     renderer.setSize(innerWidth, innerHeight);
     const scene = new THREE.Scene();
     scene.fog = new THREE.FogExp2(0x08080b, 0.055);
@@ -218,6 +218,16 @@ export function HomeRebuild() {
     document.addEventListener("visibilitychange", onVisibility);
 
     /* ================= GSAP scene (scoped context) ================= */
+    // Watchdog registry: every scroll reveal is tracked, and if one is on
+    // screen but not advancing (missed trigger, refresh mid-flight, stalled
+    // ticker) it gets forced to its finished state so text is never left
+    // half-revealed and blurry.
+    const watched: Array<{ el: Element; tween: gsap.core.Tween; last: number }> = [];
+    const watch = (el: Element, tween: gsap.core.Tween) => {
+      watched.push({ el, tween, last: -1 });
+      return tween;
+    };
+
     const ctx = gsap.context(() => {
       // global scroll progress drives the scene
       ScrollTrigger.create({
@@ -254,20 +264,48 @@ export function HomeRebuild() {
         .call(() => ScrollTrigger.refresh());
 
       function heroIn() {
-        gsap.to(".hero .line > span", { yPercent: 0, duration: 1.1, stagger: 0.09, ease: "power4.out" });
-        gsap.to(".hero .reveal", { opacity: 1, y: 0, duration: 1, stagger: 0.08, ease: "power3.out", delay: 0.3 });
+        gsap.to(".hero .line > span", {
+          yPercent: 0,
+          duration: 1.1,
+          stagger: 0.09,
+          ease: "power4.out",
+          onComplete() {
+            gsap.set(".hero .line > span", { clearProps: "all" });
+          },
+        });
+        gsap.to(".hero .reveal", {
+          opacity: 1,
+          y: 0,
+          duration: 1,
+          stagger: 0.08,
+          ease: "power3.out",
+          delay: 0.3,
+          onComplete() {
+            $$(".hero .reveal").forEach((el) => el.classList.add("on"));
+            gsap.set(".hero .reveal", { clearProps: "all" });
+          },
+        });
       }
       gsap.set(".hero .line > span", { yPercent: 110 });
 
       /* ================= scroll reveals ================= */
       $$("section:not(.hero) .reveal, footer .reveal").forEach((el) => {
-        gsap.to(el, {
-          opacity: 1,
-          y: 0,
-          duration: 1,
-          ease: "power3.out",
-          scrollTrigger: { trigger: el, start: "top 88%", once: true },
-        });
+        watch(
+          el,
+          gsap.to(el, {
+            opacity: 1,
+            y: 0,
+            duration: 1,
+            ease: "power3.out",
+            scrollTrigger: { trigger: el, start: "top 88%", once: true },
+            onComplete() {
+              // settle into a plain CSS state so the browser re-rasterizes
+              // the text sharp (no lingering transform/opacity layers)
+              el.classList.add("on");
+              gsap.set(el, { clearProps: "all" });
+            },
+          }),
+        );
       });
 
       /* ================= character-level typography ================= */
@@ -300,16 +338,22 @@ export function HomeRebuild() {
       $$("section:not(.hero) h2").forEach((h) => {
         if (reduced) return;
         const chars = splitChars(h);
-        gsap.from(chars, {
-          yPercent: 120,
-          opacity: 0,
-          rotationX: -50,
-          transformOrigin: "center bottom",
-          duration: 0.9,
-          stagger: 0.02,
-          ease: "power4.out",
-          scrollTrigger: { trigger: h, start: "top 85%", once: true },
-        });
+        watch(
+          h,
+          gsap.from(chars, {
+            yPercent: 120,
+            opacity: 0,
+            rotationX: -50,
+            transformOrigin: "center bottom",
+            duration: 0.9,
+            stagger: 0.02,
+            ease: "power4.out",
+            scrollTrigger: { trigger: h, start: "top 85%", once: true },
+            onComplete() {
+              gsap.set(chars, { clearProps: "all" });
+            },
+          }),
+        );
       });
 
       // kickers: terminal-style scramble decode
@@ -384,25 +428,39 @@ export function HomeRebuild() {
 
       // case studies: full-bleed wipe reveals
       $$(".work-visual").forEach((v, i) => {
-        gsap.from(v, {
-          clipPath: i % 2 ? "inset(0 0 0 100%)" : "inset(0 100% 0 0)",
-          duration: 1.2,
-          ease: "power4.inOut",
-          scrollTrigger: { trigger: v, start: "top 82%", once: true },
-        });
+        watch(
+          v,
+          gsap.from(v, {
+            clipPath: i % 2 ? "inset(0 0 0 100%)" : "inset(0 100% 0 0)",
+            duration: 1.2,
+            ease: "power4.inOut",
+            scrollTrigger: { trigger: v, start: "top 82%", once: true },
+            onComplete() {
+              gsap.set(v, { clearProps: "clipPath" });
+            },
+          }),
+        );
       });
 
       // pricing: 3D perspective fly-in
-      gsap.from(".plan", {
-        rotationX: 38,
-        z: -90,
-        transformPerspective: 900,
-        transformOrigin: "center bottom",
-        duration: 1.2,
-        stagger: 0.12,
-        ease: "power3.out",
-        scrollTrigger: { trigger: ".price-grid", start: "top 82%", once: true },
-      });
+      const grid = $(".price-grid");
+      if (grid)
+        watch(
+          grid,
+          gsap.from(".plan", {
+            rotationX: 38,
+            z: -90,
+            transformPerspective: 900,
+            transformOrigin: "center bottom",
+            duration: 1.2,
+            stagger: 0.12,
+            ease: "power3.out",
+            scrollTrigger: { trigger: grid, start: "top 82%", once: true },
+            onComplete() {
+              gsap.set(".plan", { clearProps: "transform,transformPerspective" });
+            },
+          }),
+        );
 
       /* ================= marquee ================= */
       if (!reduced) {
@@ -425,6 +483,23 @@ export function HomeRebuild() {
         );
       });
     }, root);
+
+    // Watchdog sweep: if a reveal is in the viewport but its tween hasn't
+    // advanced since the last sweep (missed trigger or stalled mid-flight),
+    // jump it straight to the finished state. Runs on a plain interval so it
+    // works even if the animation ticker itself is what stalled.
+    const watchdog = setInterval(() => {
+      const vh = window.innerHeight;
+      for (const w of watched) {
+        const p = w.tween.progress();
+        if (p >= 1) continue;
+        const r = w.el.getBoundingClientRect();
+        const inView = r.top < vh * 0.9 && r.bottom > 0;
+        if (inView && p === w.last) w.tween.progress(1);
+        w.last = w.tween.progress();
+      }
+    }, 700);
+    intervals.add(watchdog);
 
     // Archivo Expanded loads late and shifts layout; re-measure all trigger
     // positions once fonts are in so nothing fires from a stale offset.

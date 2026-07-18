@@ -179,7 +179,7 @@ body.nxr-home {
 .nxr h1 { font-size: clamp(2.6rem, 8.5vw, 7.5rem); text-transform: uppercase }
 .nxr h2 { font-size: clamp(2rem, 5.5vw, 4.5rem); text-transform: uppercase }
 .nxr .line { display: block; overflow: hidden }
-.nxr .line > span { display: inline-block; will-change: transform }
+.nxr .line > span { display: inline-block }
 .nxr .accent { color: var(--signal) }
 .nxr .outline { color: transparent; -webkit-text-stroke: 1px var(--bone) }
 .nxr .lead { max-width: 34rem; color: var(--bone-dim); font-size: clamp(1rem, 1.4vw, 1.2rem) }
@@ -240,8 +240,9 @@ body.nxr-home {
   .nxr .svc {
     display: flex; flex-direction: column; align-items: flex-start; gap: 1.3rem;
     width: 36vw; min-width: 430px; border: 1px solid var(--bone-faint); padding: 2.8rem; border-bottom: 1px solid var(--bone-faint);
-    /* solid-ish backing so the WebGL monolith can't wash out the card text */
-    background: rgba(8, 8, 11, .72); backdrop-filter: blur(6px);
+    /* solid backing so the WebGL monolith can't wash out the card text
+       (no backdrop-filter — cheaper to composite while the section is pinned) */
+    background: rgba(8, 8, 11, .88);
   }
   .nxr .svc:hover { padding: 2.8rem }
   .nxr .svc p { max-width: none; margin-top: auto }
@@ -249,7 +250,7 @@ body.nxr-home {
 }
 
 /* char-split typography */
-.nxr .char { display: inline-block; will-change: transform }
+.nxr .char { display: inline-block }
 .nxr h2 .char { backface-visibility: hidden }
 .nxr .foot-giant .char { transition: color .3s, -webkit-text-stroke-color .3s }
 
@@ -417,6 +418,8 @@ body.nxr-home {
 
 /* reveal helpers */
 .nxr .reveal { opacity: 0; transform: translateY(50px) }
+/* settled state: plain CSS, no inline transforms, so text rasterizes sharp */
+.nxr .reveal.on { opacity: 1; transform: none }
 @media (prefers-reduced-motion: reduce) {
   .nxr, .nxr * { animation: none !important; transition: none !important }
   .nxr .reveal { opacity: 1; transform: none }
