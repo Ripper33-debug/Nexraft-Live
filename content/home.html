@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nexraft — We build fast websites, run the stack, and grow your leads</title>
+<meta name="description" content="Nexraft is an engineering studio. Custom builds, managed hosting, SEO growth, 3D and AI. Build once, then Care or Growth every month. 99.9% uptime, 0.8s edge TTFB.">
+<link rel="canonical" href="https://nexraft.com/">
+<meta name="theme-color" content="#08080b">
+
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://nexraft.com/">
+<meta property="og:site_name" content="Nexraft">
+<meta property="og:title" content="Nexraft — We build fast websites, run the stack, and grow your leads">
+<meta property="og:description" content="Engineering studio. Custom builds, managed hosting, SEO growth, 3D and AI. Build once, then Care or Growth every month.">
+<meta property="og:image" content="https://nexraft.com/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Nexraft — We build fast websites, run the stack, and grow your leads">
+<meta name="twitter:description" content="Engineering studio. Custom builds, managed hosting, SEO growth, 3D and AI.">
+<meta name="twitter:image" content="https://nexraft.com/og-image.png">
+
+<!-- Icons -->
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500&family=Archivo+Expanded:wght@500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/style.css">
+
+<!-- Structured data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://nexraft.com/#org",
+      "name": "Nexraft",
+      "url": "https://nexraft.com/",
+      "logo": "https://nexraft.com/apple-touch-icon.png",
+      "foundingDate": "2024",
+      "founder": [
+        {"@type": "Person", "name": "Barry Castelli", "email": "barry@nexraft.com", "jobTitle": "Founder & CEO"}
+      ],
+      "employee": [
+        {"@type": "Person", "name": "Michael Farina", "jobTitle": "Developer"},
+        {"@type": "Person", "name": "Ryan Gersz", "jobTitle": "Account Manager"},
+        {"@type": "Person", "name": "Jason Pierre-Louis", "jobTitle": "Account Manager"},
+        {"@type": "Person", "name": "Barry Birch", "jobTitle": "Account Manager"},
+        {"@type": "Person", "name": "Ayden Sackrider", "jobTitle": "Account Manager"}
+      ],
+      "description": "Engineering studio offering custom website development, migrations, managed hosting, SEO, 3D product visualization and AI automation."
+    },
+    {
+      "@type": "Service",
+      "provider": {"@id": "https://nexraft.com/#org"},
+      "serviceType": "Web development, managed hosting, SEO growth, 3D and AI",
+      "areaServed": "Worldwide",
+      "offers": [
+        {"@type": "Offer", "name": "Starter", "price": "1500", "priceCurrency": "USD", "description": "$1,500 build + $299/month managed. Up to 5 pages."},
+        {"@type": "Offer", "name": "Business", "price": "2500", "priceCurrency": "USD", "description": "$2,500 build + $399/month managed. Up to 10 pages."},
+        {"@type": "Offer", "name": "Pro", "price": "4000", "priceCurrency": "USD", "description": "$4,000+ build + $599/month managed. Up to 15 pages."}
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {"@type": "Question", "name": "Do I own the code?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. You own everything we build for you — code, content and design. If you ever leave, it goes with you."}},
+        {"@type": "Question", "name": "What happens if I cancel?", "acceptedAnswer": {"@type": "Answer", "text": "After the 12-month initial term, plans are month-to-month with 30 days notice. We hand over the stack cleanly and help you transition."}},
+        {"@type": "Question", "name": "How fast do you respond?", "acceptedAnswer": {"@type": "Answer", "text": "Small fixes on Starter turn around in 48 hours or less. Business and Pro plans get priority response, backed by our SLA."}},
+        {"@type": "Question", "name": "Can you migrate my WordPress or Squarespace site?", "acceptedAnswer": {"@type": "Answer", "text": "Yes — migrations are core to what we do. Typical result after migration: 0.8s TTFB and 99.9% uptime."}},
+        {"@type": "Question", "name": "Can you build custom AI tools?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. We build copilots and automations scoped to your data — from lead-routing automations to internal assistants."}}
+      ]
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<a class="skip-link" href="#services">Skip to content</a>
+
+<!-- preloader -->
+<div class="loader" id="loader">
+  <div class="loader-logo"><span id="loaderWord">NEXRAFT<em style="color:var(--signal);font-style:normal">.</em></span></div>
+  <div class="loader-bar"><i id="loaderFill"></i></div>
+  <div class="loader-meta">
+    <span>EST 2024 — ENGINEERING STUDIO</span>
+    <span class="loader-pct" id="loaderPct">000</span>
+  </div>
+</div>
+
+<canvas id="gl" aria-hidden="true"></canvas>
+<div class="vignette" aria-hidden="true"></div>
+<div class="grain" aria-hidden="true"></div>
+<div class="cursor" id="cursor" aria-hidden="true"></div>
+<div class="cursor-label" id="cursorLabel" aria-hidden="true">VIEW</div>
+
+<header>
+  <a class="logo" href="#top">NEXRAFT<em>.</em></a>
+  <nav>
+    <a href="#services">Services</a>
+    <a href="#work">Work</a>
+    <a href="#process">Process</a>
+    <a href="#pricing">Pricing</a>
+    <a href="#contact">Contact</a>
+    <a class="btn" href="#contact" data-hover>Book a call</a>
+  </nav>
+</header>
+
+<main class="site" id="top">
+
+  <!-- HERO -->
+  <section class="hero wrap">
+    <h1>
+      <span class="line"><span>We build <em class="accent" style="font-style:normal">fast</em></span></span>
+      <span class="line"><span>websites, run</span></span>
+      <span class="line"><span><em class="outline" style="font-style:normal">the stack,</em> and</span></span>
+      <span class="line"><span>grow your leads.</span></span>
+    </h1>
+    <div class="hero-foot">
+      <div class="hero-stats">
+        <div class="stat reveal"><div class="v"><b>99.9</b>%</div><div class="l">Uptime on stacks we operate</div></div>
+        <div class="stat reveal"><div class="v"><b>0.8</b>s</div><div class="l">Typical edge TTFB after migration</div></div>
+        <div class="stat reveal"><div class="v"><b>48</b>h</div><div class="l">Small-fix turnaround on Starter</div></div>
+      </div>
+      <div class="scroll-hint reveal"><i></i> Scroll — build once, then care or growth every month</div>
+    </div>
+  </section>
+
+  <!-- marquee -->
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee-track" id="marquee">
+      <span>Custom builds</span><span>Managed hosting</span><span>Migrations</span><span>SEO &amp; Growth</span>
+      <span>3D product viewers</span><span>AI automation</span><span>Next.js</span><span>TypeScript</span>
+      <span>Custom builds</span><span>Managed hosting</span><span>Migrations</span><span>SEO &amp; Growth</span>
+      <span>3D product viewers</span><span>AI automation</span><span>Next.js</span><span>TypeScript</span>
+    </div>
+  </div>
+
+  <!-- SERVICES -->
+  <section id="services" class="wrap">
+    <div class="kicker reveal"><span class="num">01</span> Services — four disciplines, one stack</div>
+    <h2 class="reveal">Built to convert,<br><span class="outline">not just look good.</span></h2>
+    <div class="svc-list" style="margin-top:3.5rem">
+      <div class="svc reveal" data-hover>
+        <span class="idx">/01</span>
+        <h3>Web <small>Build</small></h3>
+        <p>Fast, custom sites and apps built to convert. Next.js, custom CMS, TypeScript. We handle WordPress and Squarespace migrations end to end.</p>
+        <span class="tag">Fixed-rate build</span>
+      </div>
+      <div class="svc reveal" data-hover>
+        <span class="idx">/02</span>
+        <h3>Hosting <small>Care</small></h3>
+        <p>Managed edge infrastructure — CDN, SSL, backups, monitoring and uptime guarantees. We run the stack so you never think about it.</p>
+        <span class="tag">Monthly</span>
+      </div>
+      <div class="svc reveal" data-hover>
+        <span class="idx">/03</span>
+        <h3>Growth <small>Add-on</small></h3>
+        <p>SEO, Google Business Profile optimization, review workflows, and AI automation aimed at one thing: more qualified leads.</p>
+        <span class="tag">From $750/mo</span>
+      </div>
+      <div class="svc reveal" data-hover>
+        <span class="idx">/04</span>
+        <h3>3D &amp; AI <small>Add-ons</small></h3>
+        <p>Browser-native 3D product viewers and custom copilots and automations scoped to your data. The same tech powering this page.</p>
+        <span class="tag">Scoped per project</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- TEAM -->
+  <section class="wrap">
+    <div class="kicker reveal"><span class="num">02</span> Team — founder-led</div>
+    <h2 class="reveal">A small team.<br><span class="accent">Direct access.</span></h2>
+    <div class="team-grid" style="margin-top:3.5rem">
+      <div class="founder reveal">
+        <div class="role">Founder — CEO</div>
+        <h3>Barry Castelli</h3>
+        <p>Every build, migration and deploy goes through the founder. You talk to the person who owns the outcome.</p>
+        <a href="mailto:barry@nexraft.com" data-hover>barry@nexraft.com</a>
+      </div>
+      <div class="founder reveal">
+        <div class="role">Engineering</div>
+        <h3>Michael Farina</h3>
+        <p>Development across builds, migrations and the managed stack.</p>
+        <a href="mailto:michael@nexraft.com" data-hover>michael@nexraft.com</a>
+      </div>
+      <div class="founder reveal">
+        <div class="role">Account Manager</div>
+        <h3>Ryan Gersz</h3>
+        <p>Your day-to-day contact from kickoff through every monthly iteration.</p>
+        <a href="mailto:ryan@nexraft.com" data-hover>ryan@nexraft.com</a>
+      </div>
+      <div class="founder reveal">
+        <div class="role">Account Manager</div>
+        <h3>Jason Pierre-Louis</h3>
+        <p>Keeps scope, timelines and requests moving — one point of contact, no ticket queues.</p>
+        <a href="mailto:jason@nexraft.com" data-hover>jason@nexraft.com</a>
+      </div>
+      <div class="founder reveal">
+        <div class="role">Account Manager</div>
+        <h3>Barry Birch</h3>
+        <p>Owns client communication and makes sure monthly edit hours turn into results.</p>
+        <a href="mailto:barrybirch@nexraft.com" data-hover>barrybirch@nexraft.com</a>
+      </div>
+      <div class="founder reveal">
+        <div class="role">Account Manager</div>
+        <h3>Ayden Sackrider</h3>
+        <p>Follow-ups, reviews and growth workflows — the person keeping your pipeline warm.</p>
+        <a href="mailto:ayden@nexraft.com" data-hover>ayden@nexraft.com</a>
+      </div>
+    </div>
+    <div class="team-note reveal">Founder-led. A dedicated account manager on every project.</div>
+  </section>
+
+  <!-- WORK -->
+  <section id="work" class="wrap">
+    <div class="kicker reveal"><span class="num">03</span> Work — shipped &amp; operated</div>
+    <h2 class="reveal">Selected<br><span class="outline">case studies.</span></h2>
+    <div style="margin-top:2rem">
+      <div class="work-item reveal" data-hover data-cursor="VIEW">
+        <div class="work-visual"><div class="fill">WH</div><div class="scan"></div></div>
+        <div class="work-meta">
+          <div class="cat">Product catalog — Global deployment</div>
+          <h3>Weatherhaven</h3>
+          <p>Deployed shelter systems across 95 countries. A full product catalog engineered for field teams on slow connections.</p>
+          <div class="stack"><span>Next.js</span><span>Custom CMS</span><span>Edge CDN</span></div>
+        </div>
+      </div>
+      <div class="work-item reveal" data-hover data-cursor="VIEW">
+        <div class="work-visual"><div class="fill">OF</div><div class="scan"></div></div>
+        <div class="work-meta">
+          <div class="cat">Growth site — AI studio</div>
+          <h3>Outfyre</h3>
+          <p>New build plus SEO and geo strategy. From $1–2k MRR to over $10k MRR in six months.</p>
+          <div class="stack"><span>Build</span><span>SEO</span><span>Growth</span></div>
+        </div>
+      </div>
+      <div class="work-item reveal" data-hover data-cursor="VIEW">
+        <div class="work-visual"><div class="fill">FCP</div><div class="scan"></div></div>
+        <div class="work-meta">
+          <div class="cat">Local business — Healthcare</div>
+          <h3>Family Care Pharmacy</h3>
+          <p>Community pharmacy with prescription services, rebuilt for speed and local search visibility.</p>
+          <div class="stack"><span>Build</span><span>Care</span><span>Local SEO</span></div>
+        </div>
+      </div>
+      <div class="work-item reveal" data-hover data-cursor="VIEW">
+        <div class="work-visual"><div class="fill">3D</div><div class="scan"></div></div>
+        <div class="work-meta">
+          <div class="cat">Interactive — WebGL</div>
+          <h3>3D Product Viewer</h3>
+          <p>Browser-native 3D product visualization — no plugins, no app installs, runs on the phone in your pocket.</p>
+          <div class="stack"><span>Three.js</span><span>WebGL</span><span>GLTF</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- QUOTE -->
+  <section class="quote wrap">
+    <div>
+      <div class="kicker reveal"><span class="num">★</span> Social proof</div>
+      <blockquote class="reveal">
+        “Before we were doing $1–2k MRR. Once we let them build us a new site and did SEO and geo, we grew to <span class="accent">over $10k MRR in 6 months</span>.”
+      </blockquote>
+      <cite class="reveal">— COO, Outfyre</cite>
+    </div>
+  </section>
+
+  <!-- PROCESS -->
+  <section id="process" class="wrap">
+    <div class="kicker reveal"><span class="num">04</span> Process — how we ship</div>
+    <h2 class="reveal">Scope. Build.<br><span class="outline">Ship. Iterate.</span></h2>
+    <div class="proc-grid reveal" style="margin-top:3.5rem">
+      <div class="step" data-hover><span class="n">/01</span><h3>Scope</h3><p>A 30-minute discovery call. You leave with a fixed rate and a clear plan — no open-ended estimates.</p></div>
+      <div class="step" data-hover><span class="n">/02</span><h3>Build in sprints</h3><p>Short cycles with working demos at every step. You see progress, not status reports.</p></div>
+      <div class="step" data-hover><span class="n">/03</span><h3>Ship</h3><p>Production deployment on managed edge infrastructure we operate — CDN, SSL, backups, monitoring.</p></div>
+      <div class="step" data-hover><span class="n">/04</span><h3>Iterate</h3><p>Ongoing retainer work. Edits, conversion tweaks and growth, month after month.</p></div>
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section id="pricing" class="wrap">
+    <div class="kicker reveal"><span class="num">06</span> Pricing — transparent, USD</div>
+    <h2 class="reveal">Build once.<br><span class="accent">Care every month.</span></h2>
+    <div class="price-grid" style="margin-top:3.5rem">
+      <div class="plan reveal" data-hover>
+        <div class="name">Starter</div>
+        <div class="amount">$1,500 <small>build</small></div>
+        <div class="per">+ $299 / month managed</div>
+        <ul>
+          <li>Up to 5 pages</li>
+          <li>Forms &amp; lead capture</li>
+          <li>1 hour of edits monthly</li>
+          <li>48h small-fix turnaround</li>
+        </ul>
+        <div class="yr">First year: $5,088</div>
+      </div>
+      <div class="plan popular reveal" data-hover>
+        <div class="flag">Most popular</div>
+        <div class="name">Business</div>
+        <div class="amount">$2,500 <small>build</small></div>
+        <div class="per">+ $399 / month managed</div>
+        <ul>
+          <li>Up to 10 pages</li>
+          <li>Forms &amp; lead capture</li>
+          <li>2 hours of edits monthly</li>
+          <li>Priority response</li>
+        </ul>
+        <div class="yr">First year: $7,288</div>
+      </div>
+      <div class="plan reveal" data-hover>
+        <div class="name">Pro</div>
+        <div class="amount">$4,000+ <small>build</small></div>
+        <div class="per">+ $599 / month managed</div>
+        <ul>
+          <li>Up to 15 pages</li>
+          <li>4 hours of edits monthly</li>
+          <li>Conversion tweaks included</li>
+          <li>Priority response</li>
+        </ul>
+        <div class="yr">First year: $11,188+</div>
+      </div>
+    </div>
+    <div class="addon reveal" data-hover>
+      <div class="t">Growth <b>add-on</b></div>
+      <p>SEO, Google Business Profile, review workflows and AI automation for lead generation.</p>
+      <div class="amount" style="font-size:1.5rem">From $750<small style="font-size:.6em">/mo</small></div>
+    </div>
+    <p class="fine reveal">All prices in USD. 12-month initial term, then month-to-month with 30 days notice.</p>
+  </section>
+
+  <!-- FAQ -->
+  <section class="wrap">
+    <div class="kicker reveal"><span class="num">07</span> FAQ</div>
+    <h2 class="reveal">Questions,<br><span class="outline">answered.</span></h2>
+    <div style="margin-top:3rem;max-width:52rem">
+      <div class="faq-item reveal"><button class="faq-q" data-hover>Do I own the code?<span class="x">+</span></button><div class="faq-a"><p>Yes. You own everything we build for you — code, content and design. If you ever leave, it goes with you.</p></div></div>
+      <div class="faq-item reveal"><button class="faq-q" data-hover>What happens if I cancel?<span class="x">+</span></button><div class="faq-a"><p>After the 12-month initial term, plans are month-to-month with 30 days notice. We hand over the stack cleanly and help you transition.</p></div></div>
+      <div class="faq-item reveal"><button class="faq-q" data-hover>How fast do you respond?<span class="x">+</span></button><div class="faq-a"><p>Small fixes on Starter turn around in 48 hours or less. Business and Pro plans get priority response, backed by our SLA.</p></div></div>
+      <div class="faq-item reveal"><button class="faq-q" data-hover>Can you migrate my WordPress or Squarespace site?<span class="x">+</span></button><div class="faq-a"><p>Yes — migrations are core to what we do. Typical result after migration to our edge stack: 0.8s TTFB and 99.9% uptime.</p></div></div>
+      <div class="faq-item reveal"><button class="faq-q" data-hover>Can you build custom AI tools?<span class="x">+</span></button><div class="faq-a"><p>Yes. We build copilots and automations scoped to your data — from lead-routing automations to internal assistants.</p></div></div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="contact wrap">
+    <div class="kicker reveal"><span class="num">08</span> Contact — start here</div>
+    <h2 class="reveal">Book a 30-minute<br><span class="accent">discovery call.</span></h2>
+    <div class="contact-grid">
+      <div class="contact-left reveal">
+        <p>Talk directly with a founder. You'll leave the call with a fixed rate and a clear plan — whether or not you work with us.</p>
+        <a class="btn solid" href="mailto:barry@nexraft.com" data-hover>Book a call →</a>
+      </div>
+      <form class="reveal" id="contactForm" novalidate>
+        <div class="field"><input id="f-name" name="name" type="text" placeholder=" " required autocomplete="name"><label for="f-name">Name</label></div>
+        <div class="field"><input id="f-email" name="email" type="email" placeholder=" " required autocomplete="email"><label for="f-email">Email</label></div>
+        <div class="field"><input id="f-website" name="website" type="url" placeholder=" " autocomplete="url"><label for="f-website">Website</label></div>
+        <div class="field"><input id="f-company" name="company" type="text" placeholder=" " autocomplete="organization"><label for="f-company">Company</label></div>
+        <div class="field full">
+          <select id="f-plan" name="plan">
+            <option value="" selected disabled hidden></option>
+            <option>Starter — $1,500 + $299/mo</option>
+            <option>Business — $2,500 + $399/mo</option>
+            <option>Pro — $4,000+ + $599/mo</option>
+            <option>Growth add-on — from $750/mo</option>
+            <option>Not sure yet</option>
+          </select><label for="f-plan">Plan interest</label>
+        </div>
+        <div class="field full"><textarea id="f-brief" name="brief" placeholder=" "></textarea><label for="f-brief">Project brief</label></div>
+        <button class="btn" type="submit" data-hover>Send inquiry</button>
+        <p class="form-note" role="status" aria-live="polite"></p>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-giant" data-hover>NEXRAFT<span style="color:var(--signal);-webkit-text-stroke-color:var(--signal)">.</span></div>
+    <div class="foot-cols">
+      <div class="col"><h4>Studio</h4><a href="#services" data-hover>Services</a><a href="#work" data-hover>Work</a><a href="#process" data-hover>Process</a><a href="#pricing" data-hover>Pricing</a></div>
+      <div class="col"><h4>Resources</h4><a href="#" data-hover>Field notes</a><a href="#" data-hover>System status</a><a href="#contact" data-hover>Book a call</a></div>
+      <div class="col"><h4>Legal</h4><a href="#" data-hover>Privacy</a><a href="#" data-hover>Terms</a><a href="#" data-hover>Subprocessors</a><a href="#" data-hover>SLA</a><a href="#" data-hover>Accessibility</a></div>
+      <div class="col"><h4>Contact</h4><a href="mailto:barry@nexraft.com" data-hover>barry@nexraft.com</a><a href="mailto:michael@nexraft.com" data-hover>michael@nexraft.com</a></div>
+    </div>
+    <div class="foot-base">
+      <span>© 2026 Nexraft — Web, hosting, 3D and AI · Est. 2024</span>
+      <span>99.9% uptime · Edge-first · Founder-operated</span>
+    </div>
+  </div>
+</footer>
+
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script defer src="/js/main.js"></script>
+</body>
+</html>
