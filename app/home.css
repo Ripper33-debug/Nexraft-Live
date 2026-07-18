@@ -134,6 +134,40 @@ body.nxr-home {
   .nxr nav .btn { display: inline-flex }
 }
 
+/* mobile nav (fix: nav links were hidden on small screens with no menu) */
+.nxr .nav-toggle {
+  display: none; background: none; border: none;
+  width: 40px; height: 40px; padding: 9px 6px; flex: none;
+  flex-direction: column; justify-content: center; gap: 7px;
+}
+.nxr .nav-toggle span {
+  display: block; width: 100%; height: 2px; background: var(--bone);
+  transition: transform .35s cubic-bezier(.77, 0, .18, 1);
+}
+.nxr .nav-toggle.open span:first-child { transform: translateY(4.5px) rotate(45deg) }
+.nxr .nav-toggle.open span:last-child { transform: translateY(-4.5px) rotate(-45deg) }
+@media (max-width: 820px) { .nxr .nav-toggle { display: flex } }
+.nxr .mobile-menu {
+  position: fixed; inset: 0; z-index: 95; background: rgba(8, 8, 11, .97);
+  display: flex; flex-direction: column; justify-content: center; align-items: flex-start;
+  gap: .4rem; padding: 6rem clamp(1.25rem, 6vw, 3rem) 3rem;
+  opacity: 0; pointer-events: none; transition: opacity .35s;
+}
+.nxr .mobile-menu.open { opacity: 1; pointer-events: auto }
+.nxr .mobile-menu a {
+  font-family: var(--disp); font-weight: 700; font-size: clamp(2rem, 9vw, 3.2rem);
+  letter-spacing: -.03em; text-transform: uppercase; color: var(--bone);
+  padding: .35rem 0; transform: translateY(14px); opacity: 0;
+  transition: transform .5s cubic-bezier(.19, 1, .22, 1), opacity .5s, color .3s;
+}
+.nxr .mobile-menu.open a { transform: translateY(0); opacity: 1 }
+.nxr .mobile-menu.open a:nth-child(2) { transition-delay: .04s }
+.nxr .mobile-menu.open a:nth-child(3) { transition-delay: .08s }
+.nxr .mobile-menu.open a:nth-child(4) { transition-delay: .12s }
+.nxr .mobile-menu.open a:nth-child(5) { transition-delay: .16s }
+.nxr .mobile-menu a:hover { color: var(--signal) }
+@media (min-width: 821px) { .nxr .mobile-menu { display: none } }
+
 /* ---------- type ---------- */
 .nxr .kicker {
   font-family: var(--mono); font-size: 11px; letter-spacing: .18em; text-transform: uppercase;
@@ -206,6 +240,8 @@ body.nxr-home {
   .nxr .svc {
     display: flex; flex-direction: column; align-items: flex-start; gap: 1.3rem;
     width: 36vw; min-width: 430px; border: 1px solid var(--bone-faint); padding: 2.8rem; border-bottom: 1px solid var(--bone-faint);
+    /* solid-ish backing so the WebGL monolith can't wash out the card text */
+    background: rgba(8, 8, 11, .72); backdrop-filter: blur(6px);
   }
   .nxr .svc:hover { padding: 2.8rem }
   .nxr .svc p { max-width: none; margin-top: auto }
@@ -246,10 +282,14 @@ body.nxr-home {
 .nxr .work-visual .fill {
   position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
   font-family: var(--disp); font-weight: 700; font-size: clamp(2.5rem, 6vw, 5rem); letter-spacing: -.03em;
-  color: transparent; -webkit-text-stroke: 1px var(--bone-faint); text-transform: uppercase;
+  color: transparent; -webkit-text-stroke: 1px rgba(233, 229, 219, .38); text-transform: uppercase;
   transition: color .5s, -webkit-text-stroke-color .5s, transform .8s cubic-bezier(.19, 1, .22, 1);
 }
 .nxr .work-item:hover .fill { color: var(--signal); -webkit-text-stroke-color: var(--signal); transform: scale(1.06) }
+.nxr .work-visual::before {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background: radial-gradient(circle at 72% 26%, rgba(255, 77, 28, .12), transparent 58%);
+}
 .nxr .work-visual .scan { position: absolute; left: 0; right: 0; height: 1px; background: var(--signal); opacity: 0; top: 0 }
 .nxr .work-item:hover .scan { opacity: .7; animation: nxr-scan 1.6s linear infinite }
 @keyframes nxr-scan { from { top: 0 } to { top: 100% } }
@@ -337,7 +377,7 @@ body.nxr-home {
 .nxr .field { position: relative; grid-column: span 1 }
 .nxr .field.full { grid-column: span 2 }
 .nxr .field input, .nxr .field select, .nxr .field textarea {
-  width: 100%; background: transparent; border: none; border-bottom: 1px solid var(--bone-faint);
+  width: 100%; background: transparent; border: none; border-bottom: 1px solid rgba(233, 229, 219, .32);
   color: var(--bone); font-family: var(--sans); font-size: .95rem; padding: 1rem 0 .8rem; outline: none;
   transition: border-color .3s; border-radius: 0; appearance: none; cursor: none;
 }
@@ -345,14 +385,19 @@ body.nxr-home {
 .nxr .field select option { background: var(--ink); color: var(--bone) }
 .nxr .field label {
   position: absolute; left: 0; top: 1rem; font-family: var(--mono); font-size: 10px; letter-spacing: .14em;
-  text-transform: uppercase; color: var(--bone-dim); pointer-events: none; transition: transform .3s, color .3s;
+  text-transform: uppercase; color: rgba(233, 229, 219, .78); pointer-events: none; transition: transform .3s, color .3s;
   transform-origin: left;
 }
 .nxr .field input:focus, .nxr .field textarea:focus, .nxr .field select:focus { border-color: var(--signal) }
 .nxr .field input:focus + label, .nxr .field input:not(:placeholder-shown) + label,
 .nxr .field textarea:focus + label, .nxr .field textarea:not(:placeholder-shown) + label,
 .nxr .field select:focus + label, .nxr .field select.has + label { transform: translateY(-1.1rem) scale(.9); color: var(--signal) }
-.nxr form .btn { grid-column: span 2; justify-content: center; padding: 1.1rem }
+.nxr form .btn {
+  grid-column: span 2; justify-content: center; padding: 1.1rem;
+  /* high-contrast submit: this is the primary lead-capture action */
+  background: var(--signal); border-color: var(--signal); color: var(--ink); font-weight: 500;
+}
+.nxr form .btn:hover { background: var(--bone); border-color: var(--bone); color: var(--ink) }
 @media (max-width: 860px) { .nxr .contact-grid { grid-template-columns: 1fr } }
 
 /* ---------- big footer ---------- */
@@ -386,6 +431,7 @@ body.nxr-home {
 }
 .nxr .skip-link:focus { top: 1rem }
 .nxr :focus-visible { outline: 2px solid var(--signal); outline-offset: 3px }
+.nxr :focus:not(:focus-visible) { outline: none }
 .nxr .btn:focus-visible { outline-offset: 5px }
 .nxr .form-note { grid-column: span 2; font-family: var(--mono); font-size: 11px; letter-spacing: .08em; color: var(--signal); min-height: 1em }
 

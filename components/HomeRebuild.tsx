@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import * as THREE from "three";
 import { gsap } from "gsap";
@@ -20,6 +20,7 @@ const BOOKING_URL = BOOK_CALL_URL;
 
 export function HomeRebuild() {
   const rootRef = useRef<HTMLDivElement>(null);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
     const root = rootRef.current;
@@ -27,6 +28,9 @@ export function HomeRebuild() {
 
     document.body.classList.add("nxr-home");
     gsap.registerPlugin(ScrollTrigger);
+    // Mobile browsers fire resize when the URL bar collapses; refreshing
+    // mid-scroll reverts in-flight reveal tweens and leaves text half-shown.
+    ScrollTrigger.config({ ignoreMobileResize: true });
 
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const $ = <T extends Element = HTMLElement>(sel: string) =>
@@ -245,7 +249,9 @@ export function HomeRebuild() {
         )
         .to("#loader", { yPercent: -100, duration: 0.9, ease: "power4.inOut" })
         .set("#loader", { display: "none" })
-        .add(heroIn, "-=.55");
+        .add(heroIn, "-=.55")
+        // re-measure triggers once the opening scene has settled
+        .call(() => ScrollTrigger.refresh());
 
       function heroIn() {
         gsap.to(".hero .line > span", { yPercent: 0, duration: 1.1, stagger: 0.09, ease: "power4.out" });
@@ -260,7 +266,7 @@ export function HomeRebuild() {
           y: 0,
           duration: 1,
           ease: "power3.out",
-          scrollTrigger: { trigger: el, start: "top 88%" },
+          scrollTrigger: { trigger: el, start: "top 88%", once: true },
         });
       });
 
@@ -302,7 +308,7 @@ export function HomeRebuild() {
           duration: 0.9,
           stagger: 0.02,
           ease: "power4.out",
-          scrollTrigger: { trigger: h, start: "top 85%" },
+          scrollTrigger: { trigger: h, start: "top 85%", once: true },
         });
       });
 
@@ -382,7 +388,7 @@ export function HomeRebuild() {
           clipPath: i % 2 ? "inset(0 0 0 100%)" : "inset(0 100% 0 0)",
           duration: 1.2,
           ease: "power4.inOut",
-          scrollTrigger: { trigger: v, start: "top 82%" },
+          scrollTrigger: { trigger: v, start: "top 82%", once: true },
         });
       });
 
@@ -395,7 +401,7 @@ export function HomeRebuild() {
         duration: 1.2,
         stagger: 0.12,
         ease: "power3.out",
-        scrollTrigger: { trigger: ".price-grid", start: "top 82%" },
+        scrollTrigger: { trigger: ".price-grid", start: "top 82%", once: true },
       });
 
       /* ================= marquee ================= */
@@ -419,6 +425,13 @@ export function HomeRebuild() {
         );
       });
     }, root);
+
+    // Archivo Expanded loads late and shifts layout; re-measure all trigger
+    // positions once fonts are in so nothing fires from a stale offset.
+    let disposed = false;
+    document.fonts?.ready.then(() => {
+      if (!disposed) ScrollTrigger.refresh();
+    });
 
     /* ================= custom cursor ================= */
     const cursor = $("#cursor");
@@ -515,6 +528,7 @@ export function HomeRebuild() {
     });
 
     return () => {
+      disposed = true;
       document.body.classList.remove("nxr-home");
       ctx.revert();
       rafIds.forEach((id) => cancelAnimationFrame(id));
@@ -574,8 +588,39 @@ export function HomeRebuild() {
           <a className="btn" href="#contact" data-hover>
             Book a call
           </a>
+          <button
+            className={`nav-toggle${menuOpen ? " open" : ""}`}
+            type="button"
+            aria-label={menuOpen ? "Close menu" : "Open menu"}
+            aria-expanded={menuOpen}
+            aria-controls="mobileMenu"
+            onClick={() => setMenuOpen((v) => !v)}
+            data-hover
+          >
+            <span />
+            <span />
+          </button>
         </nav>
       </header>
+
+      {/* mobile nav overlay */}
+      <div className={`mobile-menu${menuOpen ? " open" : ""}`} id="mobileMenu">
+        <a href="#services" onClick={() => setMenuOpen(false)}>
+          Services
+        </a>
+        <a href="#work" onClick={() => setMenuOpen(false)}>
+          Work
+        </a>
+        <a href="#process" onClick={() => setMenuOpen(false)}>
+          Process
+        </a>
+        <a href="#pricing" onClick={() => setMenuOpen(false)}>
+          Pricing
+        </a>
+        <a href="#contact" onClick={() => setMenuOpen(false)}>
+          Contact
+        </a>
+      </div>
 
       <main className="site" id="top">
         {/* HERO */}
