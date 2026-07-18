@@ -371,3 +371,16 @@ footer{border-top:1px solid var(--bone-faint);padding:4rem 0 2rem;position:relat
 
 /* work cards are links */
 a.work-item{color:inherit;text-decoration:none}
+
+/* homepage shoe configurator tile */
+.shoe-visual canvas{position:absolute;inset:0;width:100%;height:100%;display:block;cursor:grab;touch-action:none}
+.shoe-visual canvas:active{cursor:grabbing}
+.shoe-ui{position:absolute;left:0;right:0;bottom:0;z-index:2;display:flex;flex-direction:column;gap:.55rem;padding:.9rem .9rem .8rem;background:linear-gradient(transparent,rgba(8,8,11,.88) 55%)}
+.shoe-parts{display:flex;gap:.4rem;flex-wrap:wrap}
+.shoe-parts button{font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--bone-dim);background:none;border:1px solid var(--bone-faint);border-radius:100px;padding:.28rem .65rem;cursor:pointer;transition:color .2s,border-color .2s}
+.shoe-parts button.active,.shoe-parts button:hover{color:var(--signal);border-color:var(--signal)}
+.shoe-swatches{display:flex;gap:.5rem;flex-wrap:wrap}
+.shoe-swatches button{width:16px;height:16px;border-radius:50%;border:1px solid var(--bone-faint);cursor:pointer;padding:0}
+.shoe-swatches button.active{outline:1px solid var(--signal);outline-offset:2px}
+.shoe-more{display:inline-block;margin-top:1.2rem;font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--signal);text-decoration:none;border-bottom:1px solid var(--signal)}
+.shoe-more:hover{color:var(--bone)}

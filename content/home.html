@@ -254,15 +254,23 @@
           <div class="stack"><span>Build</span><span>Care</span><span>Local SEO</span></div>
         </div>
       </a>
-      <a class="work-item reveal" href="/3d-product-viewer" data-hover data-cursor="VIEW">
-        <div class="work-visual"><div class="fill">3D</div><div class="scan"></div></div>
+      <div class="work-item reveal" data-hover>
+        <div class="work-visual shoe-visual" id="shoeDemo">
+          <canvas id="shoeCanvas" aria-label="3D shoe configurator"></canvas>
+          <div class="shoe-ui">
+            <div class="shoe-parts" id="shoeParts"></div>
+            <div class="shoe-swatches" id="shoeSwatches"></div>
+          </div>
+          <div class="scan"></div>
+        </div>
         <div class="work-meta">
           <div class="cat">Interactive — WebGL</div>
           <h3>3D Product Viewer</h3>
-          <p>Browser-native 3D product visualization — no plugins, no app installs, runs on the phone in your pocket.</p>
+          <p>Browser-native 3D product visualization — no plugins, no app installs, runs on the phone in your pocket. This one is live: pick a part, pick a color, drag to spin.</p>
           <div class="stack"><span>Three.js</span><span>WebGL</span><span>GLTF</span></div>
+          <a class="shoe-more" href="/3d-product-viewer" data-hover>Open the full configurator &rarr;</a>
         </div>
-      </a>
+      </div>
     </div>
   </section>
 
@@ -405,5 +413,6 @@
 <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <script defer src="/js/main.js"></script>
+<script defer src="/js/shoe.js"></script>
 </body>
 </html>
