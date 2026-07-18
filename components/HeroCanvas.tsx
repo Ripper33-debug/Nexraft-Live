@@ -2,10 +2,25 @@
 
 import { useEffect, useRef, type RefObject } from "react";
 
-const BG = "rgb(10, 14, 12)";
-const WHITE = "rgb(232, 237, 233)";
-const GREEN = "rgb(67, 208, 133)";
 const LANES = 32;
+
+/**
+ * Resolve a theme CSS variable (hex) to an "r, g, b" string so the canvas
+ * matches whichever palette (forest/ember) is active.
+ */
+function readThemeRgb(varName: string, fallback: string): string {
+  let hex = fallback;
+  if (typeof window !== "undefined") {
+    const v = getComputedStyle(document.documentElement)
+      .getPropertyValue(varName)
+      .trim();
+    if (v) hex = v;
+  }
+  const m = hex.match(/^#?([0-9a-f]{6})$/i);
+  if (!m) return "232, 237, 233";
+  const n = parseInt(m[1], 16);
+  return `${(n >> 16) & 255}, ${(n >> 8) & 255}, ${n & 255}`;
+}
 
 type Stream = {
   x: number;
@@ -36,7 +51,11 @@ function parseRgb(color: string): [number, number, number] {
   return [Number(match[1]), Number(match[2]), Number(match[3])];
 }
 
-function initStreams(canvasWidth: number): Stream[] {
+function initStreams(
+  canvasWidth: number,
+  boneRgb: string,
+  signalRgb: string,
+): Stream[] {
   const streams: Stream[] = [];
   for (let lane = 0; lane < LANES; lane++) {
     const count = randInt(1, 3);
@@ -46,7 +65,7 @@ function initStreams(canvasWidth: number): Stream[] {
         length: rand(40, 220),
         speed: rand(0.3, 1.7),
         opacity: rand(0.08, 0.45),
-        color: Math.random() < 0.75 ? WHITE : GREEN,
+        color: Math.random() < 0.75 ? `rgb(${boneRgb})` : `rgb(${signalRgb})`,
         gap: rand(100, 900),
         headRadius: rand(6, 10),
         laneIndex: lane,
@@ -64,9 +83,10 @@ function drawRadialGlow(
   cy: number,
   radius: number,
   alpha: number,
+  signalRgb: string,
 ) {
   const g = ctx.createRadialGradient(cx, cy, 0, cx, cy, radius);
-  g.addColorStop(0, `rgba(67, 208, 133, ${alpha})`);
+  g.addColorStop(0, `rgba(${signalRgb}, ${alpha})`);
   g.addColorStop(1, "transparent");
   ctx.fillStyle = g;
   ctx.fillRect(0, 0, width, height);
@@ -133,6 +153,12 @@ export function HeroCanvas({ sectionRef }: HeroCanvasProps) {
     ).matches;
     lastScrollRef.current = window.scrollY;
 
+    // Theme palette (forest/ember) resolved once per mount.
+    const inkRgb = readThemeRgb("--color-ink", "#0a0e0c");
+    const boneRgb = readThemeRgb("--color-bone", "#e8ede9");
+    const signalRgb = readThemeRgb("--color-signal", "#43d085");
+    const bg = `rgb(${inkRgb})`;
+
     const resize = () => {
       const rect = parent.getBoundingClientRect();
       const dpr = window.devicePixelRatio || 1;
@@ -146,7 +172,7 @@ export function HeroCanvas({ sectionRef }: HeroCanvasProps) {
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
       sizeRef.current = { width, height };
-      streamsRef.current = initStreams(width);
+      streamsRef.current = initStreams(width, boneRgb, signalRgb);
 
       if (mouseRef.current.x === 0 && mouseRef.current.y === 0) {
         mouseRef.current = { x: width * 0.65, y: height * 0.4 };
@@ -157,7 +183,7 @@ export function HeroCanvas({ sectionRef }: HeroCanvasProps) {
       const { width, height } = sizeRef.current;
       if (width === 0 || height === 0) return;
 
-      ctx.fillStyle = BG;
+      ctx.fillStyle = bg;
       ctx.fillRect(0, 0, width, height);
 
       drawRadialGlow(
@@ -168,8 +194,9 @@ export function HeroCanvas({ sectionRef }: HeroCanvasProps) {
         height * 0.4,
         320 + warp * 260,
         0.08 + warp * 0.08,
+        signalRgb,
       );
-      drawRadialGlow(ctx, width, height, width * 0.9, height * 0.7, 200, 0.04);
+      drawRadialGlow(ctx, width, height, width * 0.9, height * 0.7, 200, 0.04, signalRgb);
       drawRadialGlow(
         ctx,
         width,
@@ -178,10 +205,11 @@ export function HeroCanvas({ sectionRef }: HeroCanvasProps) {
         mouseRef.current.y,
         200,
         0.07,
+        signalRgb,
       );
 
       const vStep = width / 22;
-      ctx.strokeStyle = "rgba(232, 237, 233, 0.03)";
+      ctx.strokeStyle = `rgba(${boneRgb}, 0.03)`;
       ctx.lineWidth = 0.5;
       for (let vx = 0; vx <= width; vx += vStep) {
         ctx.beginPath();
@@ -194,7 +222,7 @@ export function HeroCanvas({ sectionRef }: HeroCanvasProps) {
 
       for (let lane = 0; lane < LANES; lane++) {
         const y = lane * laneHeight + laneHeight / 2;
-        ctx.strokeStyle = "rgba(232, 237, 233, 0.025)";
+        ctx.strokeStyle = `rgba(${boneRgb}, 0.025)`;
         ctx.lineWidth = 0.5;
         ctx.beginPath();
         ctx.moveTo(0, y);

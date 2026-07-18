@@ -41,7 +41,7 @@ export function StickyBookCall() {
       }`}
       aria-hidden={!visible}
     >
-      <div className="pointer-events-auto mx-auto flex max-w-[1180px] items-center justify-between gap-4 border border-line bg-[rgba(10,14,12,0.96)] px-4 py-3 md:px-5">
+      <div className="pointer-events-auto mx-auto flex max-w-[1180px] items-center justify-between gap-4 border border-line bg-[color-mix(in_srgb,var(--color-ink)_96%,transparent)] px-4 py-3 md:px-5">
         <p className="hidden text-sm text-mute sm:block">
           Ready to scope your stack?
         </p>

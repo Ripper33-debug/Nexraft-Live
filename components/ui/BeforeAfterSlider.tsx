@@ -84,7 +84,7 @@ function PanelChrome({
   badge?: string;
 }) {
   return (
-    <div className="absolute inset-x-0 top-0 z-10 flex items-center justify-between gap-3 border-b border-line/70 bg-[rgba(10,14,12,0.9)] px-4 py-3 md:px-5">
+    <div className="absolute inset-x-0 top-0 z-10 flex items-center justify-between gap-3 border-b border-line/70 bg-[color-mix(in_srgb,var(--color-ink)_90%,transparent)] px-4 py-3 md:px-5">
       <div className="flex min-w-0 items-center gap-3">
         <p className="font-jetbrains text-[10px] uppercase leading-none tracking-[0.14em] text-faint">
           {label}
@@ -206,7 +206,7 @@ function LiveSitePanel({
       <PanelChrome label={label} shot={shot} badge="Live" />
 
       {!allowInteraction ? (
-        <div className="absolute inset-x-0 bottom-0 z-20 border-t border-line bg-[rgba(10,14,12,0.92)] px-4 py-3 md:px-5">
+        <div className="absolute inset-x-0 bottom-0 z-20 border-t border-line bg-[color-mix(in_srgb,var(--color-ink)_92%,transparent)] px-4 py-3 md:px-5">
           <button
             type="button"
             onClick={onEnableInteraction}

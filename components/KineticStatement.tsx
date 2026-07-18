@@ -54,7 +54,7 @@ export function KineticStatement() {
           className="pointer-events-none absolute left-1/2 top-1/2 h-[70vh] w-[70vh] -translate-x-1/2 -translate-y-1/2 rounded-full"
           style={{
             background:
-              "radial-gradient(circle, rgba(67,208,133,0.18), transparent 68%)",
+              "radial-gradient(circle, color-mix(in srgb, var(--color-signal) 18%, transparent), transparent 68%)",
             filter: "blur(40px)",
             opacity: 0.25,
           }}

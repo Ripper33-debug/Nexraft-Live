@@ -14,13 +14,13 @@ export default function OpenGraphImage() {
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
-          background: "#0A0E0C",
+          background: "#08080b",
           padding: "72px",
         }}
       >
         <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
-          <div style={{ width: 14, height: 14, background: "#43D085" }} />
-          <span style={{ color: "#E8EDE9", fontSize: 28, fontWeight: 600 }}>
+          <div style={{ width: 14, height: 14, background: "#FF4D1C" }} />
+          <span style={{ color: "#E9E5DB", fontSize: 28, fontWeight: 600 }}>
             Nexraft
           </span>
         </div>
@@ -28,7 +28,7 @@ export default function OpenGraphImage() {
         <div style={{ display: "flex", flexDirection: "column" }}>
           <span
             style={{
-              color: "#E8EDE9",
+              color: "#E9E5DB",
               fontSize: 52,
               fontWeight: 600,
               lineHeight: 1.08,
@@ -40,7 +40,7 @@ export default function OpenGraphImage() {
           </span>
           <span
             style={{
-              color: "#C4CCC8",
+              color: "#C9C4B8",
               fontSize: 26,
               marginTop: 24,
             }}
@@ -49,7 +49,7 @@ export default function OpenGraphImage() {
           </span>
         </div>
 
-        <div style={{ display: "flex", gap: 24, color: "#C8D0CC", fontSize: 20 }}>
+        <div style={{ display: "flex", gap: 24, color: "#CDC8BD", fontSize: 20 }}>
           <span>Web</span>
           <span>Hosting</span>
           <span>3D</span>

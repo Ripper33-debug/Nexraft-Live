@@ -116,7 +116,7 @@ export function Hero() {
         className="pointer-events-none absolute inset-0 z-[1]"
         style={{
           background:
-            "radial-gradient(ellipse 130% 95% at 50% 42%, transparent 45%, rgba(10,14,12,0.35) 78%, rgba(10,14,12,0.72) 100%)",
+            "radial-gradient(ellipse 130% 95% at 50% 42%, transparent 45%, color-mix(in srgb, var(--color-ink) 35%, transparent) 78%, color-mix(in srgb, var(--color-ink) 72%, transparent) 100%)",
         }}
       />
       <div
@@ -124,7 +124,7 @@ export function Hero() {
         className="pointer-events-none absolute inset-x-0 bottom-0 z-[1] h-40"
         style={{
           background:
-            "linear-gradient(to bottom, transparent 0%, rgba(10,14,12,0.65) 100%)",
+            "linear-gradient(to bottom, transparent 0%, color-mix(in srgb, var(--color-ink) 65%, transparent) 100%)",
         }}
       />
 
