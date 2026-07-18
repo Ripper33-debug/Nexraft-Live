@@ -368,3 +368,6 @@ footer{border-top:1px solid var(--bone-faint);padding:4rem 0 2rem;position:relat
 
 /* team grid: 3-up on wide screens */
 @media(min-width:1100px){.team-grid{grid-template-columns:repeat(3,1fr)}}
+
+/* work cards are links */
+a.work-item{color:inherit;text-decoration:none}
