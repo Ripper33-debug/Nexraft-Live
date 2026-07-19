@@ -292,6 +292,10 @@ cite{display:block;margin-top:2.5rem;font-style:normal;font-family:var(--mono);f
   border-bottom:1px solid rgba(233,229,219,.06);
 }
 .plan li::before{content:"→";position:absolute;left:0;color:var(--signal);font-size:.8rem}
+.plan li.base{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--bone-dim)}
+.plan li.base::before{content:"↳";color:var(--bone-dim)}
+.plan li.up{color:var(--bone)}
+.plan li.up::before{content:"+";font-size:.9rem}
 .plan .yr{font-family:var(--mono);font-size:10px;letter-spacing:.1em;color:var(--bone-dim);margin-top:1rem}
 .addon{
   border:1px dashed var(--bone-faint);padding:1.6rem 2rem;display:flex;flex-wrap:wrap;gap:1.5rem;
