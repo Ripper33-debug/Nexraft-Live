@@ -1,4 +1,5 @@
-/* Nexraft — homepage shoe configurator tile (three.js r128, loaded by index) */
+/* Nexraft — homepage shoe configurator tile (three.js r128 + GLTFLoader)
+   Model: "Materials Variants Shoe" © Shopify, CC BY 4.0, via Khronos glTF-Sample-Assets */
 (function () {
   'use strict';
 
@@ -7,64 +8,113 @@
   if (!host || !canvas || typeof THREE === 'undefined') return;
   var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  var PARTS = [
-    { key: 'sole',   label: 'Sole'   },
-    { key: 'mid',    label: 'Mid'    },
-    { key: 'upper',  label: 'Upper'  },
-    { key: 'laces',  label: 'Laces'  },
-    { key: 'accent', label: 'Accent' }
-  ];
-  var DEFAULTS = { sole: '#ff4d1c', mid: '#f2efe6', upper: '#e9e5db', laces: '#0b0b0e', accent: '#0b0b0e' };
-  var PALETTE = ['#e9e5db', '#f2efe6', '#0b0b0e', '#ff4d1c', '#43d085', '#2b5bd7', '#d7263d', '#c9a86a', '#5a6b5f', '#7d8491'];
-
   /* ---------- scene ---------- */
   var renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true, alpha: true });
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
+  if (THREE.sRGBEncoding !== undefined) renderer.outputEncoding = THREE.sRGBEncoding;
   var scene = new THREE.Scene();
   var camera = new THREE.PerspectiveCamera(30, 16 / 10, 0.1, 50);
-  camera.position.set(0, 1.4, 5.6);
+  camera.position.set(0, 1.2, 5.4);
   camera.lookAt(0, 0, 0);
 
-  scene.add(new THREE.AmbientLight(0xffffff, 0.55));
-  var key = new THREE.DirectionalLight(0xffffff, 1.4); key.position.set(4, 6, 4); scene.add(key);
-  var rim = new THREE.DirectionalLight(0xffffff, 0.5); rim.position.set(-5, 3, -4); scene.add(rim);
+  scene.add(new THREE.AmbientLight(0xffffff, 0.85));
+  var hemi = new THREE.HemisphereLight(0xfff4ec, 0x1a1a20, 0.6); scene.add(hemi);
+  var key = new THREE.DirectionalLight(0xffffff, 1.6); key.position.set(4, 6, 4); scene.add(key);
+  var rim = new THREE.DirectionalLight(0xffe0d0, 0.7); rim.position.set(-5, 3, -4); scene.add(rim);
 
-  var mats = {};
-  PARTS.forEach(function (p) {
-    mats[p.key] = new THREE.MeshStandardMaterial({ color: new THREE.Color(DEFAULTS[p.key]), roughness: 0.85 });
-  });
+  var pivot = new THREE.Group();
+  scene.add(pivot);
 
-  var shoe = new THREE.Group();
+  /* ---------- load the real shoe ---------- */
+  var uiBox = host.querySelector('.shoe-ui');
+  var chipBox = document.getElementById('shoeParts');
+  var swatchBox = document.getElementById('shoeSwatches');
+  if (swatchBox) swatchBox.style.display = 'none';
 
-  function add(geo, mat, x, y, z, sx, sy, sz, rx, ry, rz) {
-    var m = new THREE.Mesh(geo, mat);
-    m.position.set(x, y, z);
-    if (sx) m.scale.set(sx, sy, sz);
-    if (rx || ry || rz) m.rotation.set(rx || 0, ry || 0, rz || 0);
-    shoe.add(m);
-    return m;
+  function fit(obj, targetSize) {
+    var box = new THREE.Box3().setFromObject(obj);
+    var size = box.getSize(new THREE.Vector3());
+    var center = box.getCenter(new THREE.Vector3());
+    var s = targetSize / Math.max(size.x, size.y, size.z);
+    obj.scale.setScalar(s);
+    obj.position.sub(center.multiplyScalar(s));
   }
 
-  var sphere = new THREE.SphereGeometry(1, 48, 32);
-  add(new THREE.BoxGeometry(3.4, 0.3, 1.35), mats.sole, 0, 0.15, 0);            // outsole
-  add(new THREE.BoxGeometry(3.5, 0.36, 1.42), mats.mid, 0, 0.46, 0);            // midsole
-  add(sphere, mats.upper, -0.28, 0.98, 0, 1.6, 0.62, 0.67);                     // upper body
-  add(sphere, mats.accent, 1.08, 0.8, 0, 0.72, 0.42, 0.6);                      // toe cap
-  add(sphere, mats.accent, -1.4, 1.0, 0, 0.48, 0.58, 0.6);                      // heel counter
-  [0.66, -0.66].forEach(function (z) {                                          // side stripes
-    add(new THREE.BoxGeometry(1.5, 0.16, 0.06), mats.accent, -0.35, 0.92, z, 0, 0, 0, 0, 0, -0.12);
-  });
-  add(new THREE.TorusGeometry(0.42, 0.14, 20, 40), mats.upper, -0.82, 1.42, 0, 0, 0, 0, Math.PI / 2, 0, 0); // collar
-  add(new THREE.BoxGeometry(1.0, 0.16, 0.5), mats.upper, 0.42, 1.28, 0, 0, 0, 0, 0, 0, 0.55);               // tongue
-  for (var i = 0; i < 4; i++) {                                                 // laces
-    add(new THREE.CylinderGeometry(0.04, 0.04, 0.74, 16), mats.laces,
-      0.78 - i * 0.34, 1.06 + i * 0.13, 0, 0, 0, 0, Math.PI / 2, 0, 0.1);
+  function buildFallback() {
+    if (uiBox) uiBox.style.display = 'none';
+    var mat = function (hex, rough) {
+      return new THREE.MeshStandardMaterial({ color: new THREE.Color(hex), roughness: rough || 0.85 });
+    };
+    var sole = mat('#ff4d1c'), mid = mat('#f2efe6'), upper = mat('#e9e5db'), dark = mat('#0b0b0e', 0.6);
+    var g = new THREE.Group();
+    var sphere = new THREE.SphereGeometry(1, 48, 32);
+    function add(geo, m, x, y, z, sx, sy, sz, rx, ry, rz) {
+      var mesh = new THREE.Mesh(geo, m);
+      mesh.position.set(x, y, z);
+      if (sx) mesh.scale.set(sx, sy, sz);
+      if (rx || ry || rz) mesh.rotation.set(rx || 0, ry || 0, rz || 0);
+      g.add(mesh);
+    }
+    add(new THREE.BoxGeometry(3.4, 0.3, 1.35), sole, 0, 0.15, 0);
+    add(new THREE.BoxGeometry(3.5, 0.36, 1.42), mid, 0, 0.46, 0);
+    add(sphere, upper, -0.28, 0.98, 0, 1.6, 0.62, 0.67);
+    add(sphere, dark, 1.08, 0.8, 0, 0.72, 0.42, 0.6);
+    add(sphere, dark, -1.4, 1.0, 0, 0.48, 0.58, 0.6);
+    g.position.y = -0.75;
+    pivot.add(g);
   }
-  shoe.position.y = -0.75;
-  scene.add(shoe);
 
-  /* ---------- interaction ---------- */
-  var rotY = -0.6, rotX = 0, targetY = -0.6, targetX = 0, dragging = false, px = 0, py = 0;
+  if (THREE.GLTFLoader) {
+    new THREE.GLTFLoader().load(
+      '/models/shoe.glb',
+      function (gltf) {
+        var parser = gltf.parser;
+        var json = parser.json;
+        var mesh = null;
+        gltf.scene.traverse(function (o) { if (o.isMesh && !mesh) mesh = o; });
+        fit(gltf.scene, 3.1);
+        gltf.scene.rotation.y = 0.4;
+        pivot.add(gltf.scene);
+
+        /* colorway chips from KHR_materials_variants */
+        try {
+          var variants = json.extensions.KHR_materials_variants.variants;
+          var mappings = json.meshes[0].primitives[0].extensions.KHR_materials_variants.mappings;
+          var setVariant = function (idx) {
+            for (var i = 0; i < mappings.length; i++) {
+              if (mappings[i].variants.indexOf(idx) !== -1) {
+                parser.getDependency('material', mappings[i].material).then(function (m) {
+                  mesh.material = m;
+                  m.needsUpdate = true;
+                });
+                break;
+              }
+            }
+          };
+          variants.forEach(function (v, idx) {
+            var b = document.createElement('button');
+            b.type = 'button';
+            b.textContent = v.name;
+            if (idx === 0) b.className = 'active';
+            b.addEventListener('click', function () {
+              Array.prototype.forEach.call(chipBox.children, function (c) { c.classList.remove('active'); });
+              b.classList.add('active');
+              setVariant(idx);
+            });
+            chipBox.appendChild(b);
+          });
+          setVariant(0);
+        } catch (e) { if (uiBox) uiBox.style.display = 'none'; }
+      },
+      undefined,
+      function () { buildFallback(); }
+    );
+  } else {
+    buildFallback();
+  }
+
+  /* ---------- drag + auto-rotate ---------- */
+  var rotY = 0, rotX = 0, targetY = 0, targetX = 0, dragging = false, px = 0, py = 0;
   canvas.addEventListener('pointerdown', function (e) {
     dragging = true; px = e.clientX; py = e.clientY;
     canvas.setPointerCapture(e.pointerId);
@@ -79,46 +129,6 @@
   ['pointerup', 'pointercancel', 'pointerleave'].forEach(function (ev) {
     canvas.addEventListener(ev, function () { dragging = false; });
   });
-
-  /* ---------- ui ---------- */
-  var active = 'upper';
-  var partsBox = document.getElementById('shoeParts');
-  var swatchBox = document.getElementById('shoeSwatches');
-
-  PARTS.forEach(function (p) {
-    var b = document.createElement('button');
-    b.type = 'button';
-    b.textContent = p.label;
-    b.className = p.key === active ? 'active' : '';
-    b.addEventListener('click', function () {
-      active = p.key;
-      Array.prototype.forEach.call(partsBox.children, function (c) { c.classList.remove('active'); });
-      b.classList.add('active');
-      markSwatches();
-    });
-    partsBox.appendChild(b);
-  });
-
-  PALETTE.forEach(function (hex) {
-    var b = document.createElement('button');
-    b.type = 'button';
-    b.style.backgroundColor = hex;
-    b.setAttribute('aria-label', 'Color ' + hex);
-    b.dataset.hex = hex;
-    b.addEventListener('click', function () {
-      mats[active].color.set(hex);
-      markSwatches();
-    });
-    swatchBox.appendChild(b);
-  });
-
-  function markSwatches() {
-    var current = '#' + mats[active].color.getHexString();
-    Array.prototype.forEach.call(swatchBox.children, function (c) {
-      c.classList.toggle('active', c.dataset.hex === current);
-    });
-  }
-  markSwatches();
 
   /* ---------- render loop (only while visible) ---------- */
   var visible = false, rafId = 0;
@@ -138,8 +148,8 @@
     if (!dragging && !reduced) targetY += 0.004;
     rotY += (targetY - rotY) * 0.08;
     rotX += (targetX - rotX) * 0.08;
-    shoe.rotation.y = rotY;
-    shoe.rotation.x = rotX;
+    pivot.rotation.y = rotY;
+    pivot.rotation.x = rotX;
     renderer.render(scene, camera);
     rafId = requestAnimationFrame(tick);
   }

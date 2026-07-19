@@ -1,151 +1,103 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+/* Model: "Materials Variants Shoe" © Shopify, CC BY 4.0,
+   via the Khronos glTF-Sample-Assets library. */
+
+import { useEffect, useRef, useState } from "react";
 import { Canvas } from "@react-three/fiber";
-import { ContactShadows, OrbitControls, RoundedBox } from "@react-three/drei";
+import { ContactShadows, OrbitControls, useGLTF } from "@react-three/drei";
+import type { Group, Mesh } from "three";
 
-type PartKey = "sole" | "midsole" | "upper" | "laces" | "accent";
+const MODEL = "/models/shoe.glb";
 
-const PART_LABELS: Record<PartKey, string> = {
-  sole: "Sole",
-  midsole: "Midsole",
-  upper: "Upper",
-  laces: "Laces",
-  accent: "Accent",
-};
+type VariantDef = { name: string };
 
-const DEFAULTS: Record<PartKey, string> = {
-  sole: "#FF4D1C",
-  midsole: "#F2EFE6",
-  upper: "#E8EDE9",
-  laces: "#0B0B0E",
-  accent: "#0B0B0E",
-};
+/* eslint-disable @typescript-eslint/no-explicit-any */
+function getVariants(gltf: any): VariantDef[] {
+  try {
+    return gltf.parser.json.extensions.KHR_materials_variants.variants;
+  } catch {
+    return [];
+  }
+}
 
-const PALETTE = [
-  "#E8EDE9", // bone
-  "#F2EFE6", // sail
-  "#0B0B0E", // ink
-  "#FF4D1C", // signal orange
-  "#43D085", // mint
-  "#2B5BD7", // royal
-  "#D7263D", // red
-  "#C9A86A", // tan
-  "#5A6B5F", // olive
-  "#7D8491", // steel
-];
+function ShoeModel({ variant }: { variant: number }) {
+  const gltf = useGLTF(MODEL) as any;
+  const meshRef = useRef<Mesh | null>(null);
+  const groupRef = useRef<Group>(null);
 
-function Shoe({ colors }: { colors: Record<PartKey, string> }) {
+  useEffect(() => {
+    let found: Mesh | null = null;
+    gltf.scene.traverse((o: any) => {
+      if (o.isMesh && !found) found = o;
+    });
+    meshRef.current = found;
+  }, [gltf]);
+
+  useEffect(() => {
+    const parser = gltf.parser;
+    try {
+      const mappings =
+        parser.json.meshes[0].primitives[0].extensions.KHR_materials_variants
+          .mappings;
+      const m = mappings.find((mm: any) => mm.variants.includes(variant));
+      if (m && meshRef.current) {
+        parser.getDependency("material", m.material).then((mat: any) => {
+          if (meshRef.current) {
+            meshRef.current.material = mat;
+            mat.needsUpdate = true;
+          }
+        });
+      }
+    } catch {
+      /* variants unavailable — keep default material */
+    }
+  }, [variant, gltf]);
+
   return (
-    <group rotation={[0, -0.6, 0]} position={[0, -0.55, 0]}>
-      {/* outsole */}
-      <RoundedBox args={[3.4, 0.3, 1.35]} radius={0.13} position={[0, 0.15, 0]}>
-        <meshStandardMaterial color={colors.sole} roughness={0.9} />
-      </RoundedBox>
-      {/* midsole foam */}
-      <RoundedBox args={[3.5, 0.36, 1.42]} radius={0.16} position={[0, 0.46, 0]}>
-        <meshStandardMaterial color={colors.midsole} roughness={0.75} />
-      </RoundedBox>
-      {/* upper body */}
-      <mesh position={[-0.28, 0.98, 0]} scale={[1.6, 0.62, 0.67]}>
-        <sphereGeometry args={[1, 48, 32]} />
-        <meshStandardMaterial color={colors.upper} roughness={0.85} />
-      </mesh>
-      {/* toe cap */}
-      <mesh position={[1.08, 0.8, 0]} scale={[0.72, 0.42, 0.6]}>
-        <sphereGeometry args={[1, 48, 32]} />
-        <meshStandardMaterial color={colors.accent} roughness={0.6} />
-      </mesh>
-      {/* heel counter */}
-      <mesh position={[-1.4, 1.0, 0]} scale={[0.48, 0.58, 0.6]}>
-        <sphereGeometry args={[1, 48, 32]} />
-        <meshStandardMaterial color={colors.accent} roughness={0.6} />
-      </mesh>
-      {/* side stripes */}
-      {[0.62, -0.62].map((z) => (
-        <RoundedBox
-          key={z}
-          args={[1.5, 0.16, 0.06]}
-          radius={0.03}
-          position={[-0.35, 0.92, z]}
-          rotation={[0, 0, -0.12]}
-        >
-          <meshStandardMaterial color={colors.accent} roughness={0.5} />
-        </RoundedBox>
-      ))}
-      {/* ankle collar */}
-      <mesh position={[-0.82, 1.42, 0]} rotation={[Math.PI / 2, 0, 0]}>
-        <torusGeometry args={[0.42, 0.14, 20, 40]} />
-        <meshStandardMaterial color={colors.upper} roughness={0.9} />
-      </mesh>
-      {/* tongue */}
-      <RoundedBox
-        args={[1.0, 0.16, 0.5]}
-        radius={0.07}
-        position={[0.42, 1.28, 0]}
-        rotation={[0, 0, 0.55]}
-      >
-        <meshStandardMaterial color={colors.upper} roughness={0.9} />
-      </RoundedBox>
-      {/* laces */}
-      {[0, 1, 2, 3].map((i) => (
-        <mesh
-          key={i}
-          position={[0.78 - i * 0.34, 1.06 + i * 0.13, 0]}
-          rotation={[Math.PI / 2, 0, 0.1]}
-        >
-          <cylinderGeometry args={[0.04, 0.04, 0.74, 16]} />
-          <meshStandardMaterial color={colors.laces} roughness={0.7} />
-        </mesh>
-      ))}
+    <group ref={groupRef}>
+      <primitive object={gltf.scene} scale={1.55} rotation={[0, 0.5, 0]} />
     </group>
   );
 }
 
+useGLTF.preload(MODEL);
+
 export function ShoeConfigurator() {
   const [mounted, setMounted] = useState(false);
-  const [colors, setColors] = useState<Record<PartKey, string>>(DEFAULTS);
+  const [variant, setVariant] = useState(0);
+  const [variants, setVariants] = useState<VariantDef[]>([]);
 
   useEffect(() => setMounted(true), []);
 
-  const parts = useMemo(() => Object.keys(PART_LABELS) as PartKey[], []);
-
-  const shuffle = () => {
-    const pick = () => PALETTE[Math.floor(Math.random() * PALETTE.length)];
-    setColors({
-      sole: pick(),
-      midsole: pick(),
-      upper: pick(),
-      laces: pick(),
-      accent: pick(),
-    });
-  };
-
   return (
     <div className="border border-line bg-ink2">
-      <div className="relative h-[380px] md:h-[460px]">
+      <div className="relative h-[380px] md:h-[480px]">
         {mounted ? (
           <Canvas
-            camera={{ position: [0.4, 1.7, 5.4], fov: 34 }}
+            camera={{ position: [0.3, 0.9, 4.4], fov: 32 }}
             dpr={[1, 1.75]}
+            onCreated={({ gl }) => void gl}
           >
-            <ambientLight intensity={0.55} />
-            <directionalLight position={[4, 6, 4]} intensity={1.4} />
-            <directionalLight position={[-5, 3, -4]} intensity={0.5} />
-            <Shoe colors={colors} />
+            <ambientLight intensity={0.9} />
+            <hemisphereLight intensity={0.5} color="#fff4ec" groundColor="#1a1a20" />
+            <directionalLight position={[4, 6, 4]} intensity={1.7} />
+            <directionalLight position={[-5, 3, -4]} intensity={0.7} color="#ffe0d0" />
+            <VariantProbe onVariants={setVariants} />
+            <ShoeModel variant={variant} />
             <ContactShadows
-              position={[0, -0.56, 0]}
-              opacity={0.5}
-              scale={9}
-              blur={2.4}
-              far={2.5}
+              position={[0, -0.82, 0]}
+              opacity={0.55}
+              scale={8}
+              blur={2.2}
+              far={2.2}
             />
             <OrbitControls
               autoRotate
               autoRotateSpeed={1.1}
               enablePan={false}
-              minDistance={3.4}
-              maxDistance={8}
+              minDistance={2.6}
+              maxDistance={7}
               minPolarAngle={0.6}
               maxPolarAngle={1.7}
             />
@@ -161,57 +113,50 @@ export function ShoeConfigurator() {
       </div>
 
       <div className="border-t border-line p-5 md:p-6">
-        <div className="flex flex-col gap-4">
-          {parts.map((part) => (
-            <div
-              key={part}
-              className="flex flex-wrap items-center gap-3 border-b border-line pb-4 last:border-b-0 last:pb-0"
-            >
-              <span className="w-20 font-mono text-[11px] uppercase tracking-widest text-mute">
-                {PART_LABELS[part]}
-              </span>
-              <div className="flex flex-wrap gap-2">
-                {PALETTE.map((hex) => {
-                  const active = colors[part] === hex;
-                  return (
-                    <button
-                      key={hex}
-                      type="button"
-                      aria-label={`${PART_LABELS[part]} color ${hex}`}
-                      aria-pressed={active}
-                      onClick={() =>
-                        setColors((c) => ({ ...c, [part]: hex }))
-                      }
-                      className={`h-6 w-6 rounded-full border transition-transform ${
-                        active
-                          ? "scale-110 border-bone outline outline-1 outline-offset-2 outline-signal"
-                          : "border-line hover:scale-110"
-                      }`}
-                      style={{ backgroundColor: hex }}
-                    />
-                  );
-                })}
-              </div>
-            </div>
-          ))}
+        <div className="flex flex-wrap items-center gap-3">
+          <span className="font-mono text-[11px] uppercase tracking-widest text-mute">
+            Colorway
+          </span>
+          <div className="flex flex-wrap gap-2">
+            {(variants.length
+              ? variants
+              : [{ name: "midnight" }, { name: "beach" }, { name: "street" }]
+            ).map((v, idx) => {
+              const active = variant === idx;
+              return (
+                <button
+                  key={v.name}
+                  type="button"
+                  aria-pressed={active}
+                  onClick={() => setVariant(idx)}
+                  className={`border px-4 py-2 font-mono text-[11px] uppercase tracking-widest transition-colors ${
+                    active
+                      ? "border-signal text-signal"
+                      : "border-line text-mute hover:border-bone hover:text-bone"
+                  }`}
+                >
+                  {v.name}
+                </button>
+              );
+            })}
+          </div>
         </div>
-        <div className="mt-5 flex gap-3">
-          <button
-            type="button"
-            onClick={shuffle}
-            className="border border-line px-4 py-2 font-mono text-[11px] uppercase tracking-widest text-bone transition-colors hover:border-signal hover:text-signal"
-          >
-            Shuffle colorway
-          </button>
-          <button
-            type="button"
-            onClick={() => setColors(DEFAULTS)}
-            className="border border-line px-4 py-2 font-mono text-[11px] uppercase tracking-widest text-mute transition-colors hover:text-bone"
-          >
-            Reset
-          </button>
-        </div>
+        <p className="mt-4 font-mono text-[10px] uppercase tracking-widest text-faint">
+          Model: Shopify · CC BY 4.0 · Khronos glTF samples
+        </p>
       </div>
     </div>
   );
+}
+
+function VariantProbe({
+  onVariants,
+}: {
+  onVariants: (v: VariantDef[]) => void;
+}) {
+  const gltf = useGLTF(MODEL);
+  useEffect(() => {
+    onVariants(getVariants(gltf));
+  }, [gltf, onVariants]);
+  return null;
 }

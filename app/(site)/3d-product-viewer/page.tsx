@@ -31,7 +31,7 @@ export default function ThreeDProductViewerPage() {
               href="#configurator"
               className="text-bone underline decoration-line underline-offset-4 hover:text-mute"
             >
-              build your colorway
+              try the colorways
             </Link>
             .
           </p>
@@ -110,12 +110,13 @@ export default function ThreeDProductViewerPage() {
             Live demo
           </p>
           <h2 className="mt-3 font-display text-[clamp(1.5rem,3vw,2.25rem)] font-semibold tracking-[-0.02em] text-bone">
-            Build your colorway.
+            Pick your colorway.
           </h2>
           <p className="mt-4 max-w-xl text-sm leading-relaxed text-mute">
-            A working configurator, running right here in your browser. Pick
-            colors per part, drag to inspect. This is the same pipeline we
-            ship for real product catalogs — swap the shoe for your SKU.
+            A real product model, running right here in your browser. Switch
+            colorways, drag to inspect, zoom into the stitching. This is the
+            same pipeline we ship for real product catalogs — swap the shoe
+            for your SKU.
           </p>
           <div className="mt-8">
             <ShoeConfigurator />
