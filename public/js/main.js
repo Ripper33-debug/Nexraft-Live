@@ -378,3 +378,13 @@ document.querySelectorAll('a[href^="#"]').forEach(a=>{
   onScroll();
   window.addEventListener('scroll', onScroll, { passive: true });
 })();
+
+/* ================= cursor: solid ink over light sections ================= */
+(() => {
+  const c = document.getElementById('cursor');
+  if (!c) return;
+  document.querySelectorAll('section.light').forEach(s => {
+    s.addEventListener('mouseenter', () => c.classList.add('on-light'));
+    s.addEventListener('mouseleave', () => c.classList.remove('on-light'));
+  });
+})();

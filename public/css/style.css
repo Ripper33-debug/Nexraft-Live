@@ -402,3 +402,42 @@ a.work-item{color:inherit;text-decoration:none}
 .work-visual .shot{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center top;filter:saturate(.85);transition:transform .8s cubic-bezier(.19,1,.22,1),filter .5s}
 .work-item:hover .shot{transform:scale(1.05);filter:saturate(1.1)}
 .work-visual .shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,8,6,0) 60%,rgba(10,8,6,.4));pointer-events:none}
+
+/* ---------- availability line ---------- */
+.avail{
+  display:flex;align-items:center;gap:.7rem;margin-top:2.2rem;
+  font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--bone-dim);
+}
+.avail i{
+  width:7px;height:7px;border-radius:50%;background:var(--signal);flex:none;
+  animation:availPulse 2.2s ease-in-out infinite;
+}
+@keyframes availPulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.45;transform:scale(.8)}}
+@media(prefers-reduced-motion:reduce){.avail i{animation:none}}
+
+/* ---------- light proof section ---------- */
+section.light{
+  background:var(--bone);color:var(--ink);
+  padding:clamp(6rem,14vh,11rem) 0;
+}
+section.light .wrap-inner{max-width:1440px;margin:0 auto;padding:0 clamp(1.25rem,4vw,4rem)}
+section.light .kicker{color:rgba(8,8,11,.55)}
+section.light .kicker::after{background:rgba(8,8,11,.16)}
+section.light blockquote{color:var(--ink)}
+section.light cite{color:rgba(8,8,11,.55)}
+section.light ::selection{background:var(--ink);color:var(--bone)}
+.proof-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:1px;
+  background:rgba(8,8,11,.16);border:1px solid rgba(8,8,11,.16);
+  margin-top:4.5rem;
+}
+.proof{
+  display:block;background:var(--bone);padding:2rem 1.8rem;
+  transition:background .35s;
+}
+.proof:hover{background:#dfdacd}
+.proof .pv{font-family:var(--disp);font-weight:700;font-size:clamp(2rem,3.6vw,2.9rem);letter-spacing:-.03em}
+.proof .pl{margin-top:.6rem;font-size:.88rem;line-height:1.5;color:rgba(8,8,11,.62)}
+@media(max-width:860px){.proof-grid{grid-template-columns:1fr}}
+.cursor.on-light{mix-blend-mode:normal;background:var(--ink)}
+.cursor.on-light.is-hover{background:var(--ink)}

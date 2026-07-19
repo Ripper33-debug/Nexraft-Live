@@ -14,7 +14,7 @@ const HeroLattice = dynamic(() => import("@/components/HeroLattice"), {
 });
 
 const HEADLINE =
-  "We build fast websites, run the stack, and grow your leads.".split(" ");
+  "We build fast websites, keep them running, and grow your leads.".split(" ");
 
 export function Hero() {
   const sectionRef = useRef<HTMLElement>(null);
