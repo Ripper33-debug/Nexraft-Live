@@ -3,199 +3,387 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Loopline — Ship changelogs your users actually read</title>
+<title>Loopline — Changelogs your users actually read</title>
 <meta name="description" content="Concept build by Nexraft. Loopline — a SaaS product landing page. Fictional brand, production code.">
 <meta name="robots" content="noindex">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#07070d;--bg2:#0c0c15;--fg:#eef0ff;--dim:rgba(238,240,255,.6);--faint:rgba(238,240,255,.1);--vi:#7c5cff;--cy:#37e6c3;
---disp:'Space Grotesk',sans-serif;--sans:'Inter',sans-serif}
+:root{--bg:#05050b;--bg2:#0b0b16;--card:#0d0d1a;--fg:#eef0ff;--dim:rgba(238,240,255,.62);--faint:rgba(238,240,255,.09);
+--vi:#7c5cff;--cy:#37e6c3;--pk:#ff5ca8;
+--disp:'Space Grotesk',sans-serif;--sans:'Inter',sans-serif;--mono:'JetBrains Mono',monospace}
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{background:var(--bg);color:var(--fg);font-family:var(--sans);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
 ::selection{background:var(--vi);color:#fff}
-.badge{position:fixed;bottom:1.1rem;right:1.1rem;z-index:99;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--dim);background:rgba(7,7,13,.85);border:1px solid var(--faint);padding:.5rem .9rem;text-decoration:none;backdrop-filter:blur(6px)}
-.badge b{color:var(--cy);font-weight:600}
-.badge:hover{color:var(--fg)}
-nav{position:fixed;top:0;left:0;right:0;z-index:90;display:flex;justify-content:space-between;align-items:center;padding:1.1rem clamp(1.2rem,4vw,3rem);background:rgba(7,7,13,.7);backdrop-filter:blur(12px);border-bottom:1px solid var(--faint)}
-.logo{font-family:var(--disp);font-weight:700;font-size:1.2rem;color:var(--fg);text-decoration:none;display:flex;align-items:center;gap:.5rem}
-.logo .dot{width:10px;height:10px;border-radius:3px;background:linear-gradient(135deg,var(--vi),var(--cy));display:inline-block}
-nav .links{display:flex;gap:1.8rem}
-nav .links a{color:var(--dim);text-decoration:none;font-size:13px;transition:color .25s}
-nav .links a:hover{color:var(--fg)}
-.cta-s{background:linear-gradient(135deg,var(--vi),#5a3ee6);color:#fff;text-decoration:none;font-size:13px;font-weight:600;padding:.6rem 1.2rem;border-radius:8px;transition:.3s;box-shadow:0 0 24px rgba(124,92,255,.35)}
-.cta-s:hover{box-shadow:0 0 40px rgba(124,92,255,.6);transform:translateY(-1px)}
-@media(max-width:760px){nav .links{display:none}}
-header{position:relative;padding:11rem 1.5rem 6rem;text-align:center;overflow:hidden}
-.blob{position:absolute;width:640px;height:640px;border-radius:50%;filter:blur(110px);opacity:.32;pointer-events:none}
-.b1{background:var(--vi);top:-260px;left:12%;animation:fl1 14s ease-in-out infinite alternate}
-.b2{background:var(--cy);top:-140px;right:8%;opacity:.16;animation:fl1 18s ease-in-out infinite alternate-reverse}
-@keyframes fl1{from{transform:translate(0,0) scale(1)}to{transform:translate(70px,50px) scale(1.15)}}
-.pill{display:inline-flex;align-items:center;gap:.5rem;border:1px solid var(--faint);border-radius:100px;padding:.4rem 1rem;font-size:12px;color:var(--dim);margin-bottom:1.6rem;background:rgba(255,255,255,.02)}
-.pill .new{background:linear-gradient(135deg,var(--vi),var(--cy));-webkit-background-clip:text;background-clip:text;color:transparent;font-weight:600}
-h1{font-family:var(--disp);font-weight:700;font-size:clamp(2.6rem,6.5vw,4.8rem);line-height:1.04;letter-spacing:-.03em;max-width:19ch;margin:0 auto}
-h1 .grad{background:linear-gradient(100deg,var(--vi),var(--cy));-webkit-background-clip:text;background-clip:text;color:transparent}
-header .lead{margin:1.6rem auto 0;max-width:36rem;color:var(--dim);font-size:1.1rem}
-.hero-cta{margin-top:2.4rem;display:flex;gap:.9rem;justify-content:center;flex-wrap:wrap}
-.btn{font-family:var(--sans);font-weight:600;font-size:14px;padding:.9rem 1.7rem;border-radius:10px;text-decoration:none;transition:.3s;cursor:pointer;border:none}
-.btn.p{background:linear-gradient(135deg,var(--vi),#5a3ee6);color:#fff;box-shadow:0 0 30px rgba(124,92,255,.4)}
-.btn.p:hover{box-shadow:0 0 50px rgba(124,92,255,.65);transform:translateY(-2px)}
-.btn.g{border:1px solid var(--faint);color:var(--fg);background:rgba(255,255,255,.02)}
-.btn.g:hover{border-color:var(--vi)}
-.mock{max-width:920px;margin:4.5rem auto 0;border:1px solid var(--faint);border-radius:14px;background:linear-gradient(180deg,var(--bg2),#0a0a12);box-shadow:0 40px 80px rgba(0,0,0,.5),0 0 60px rgba(124,92,255,.12);overflow:hidden;text-align:left}
-.mock .bar{display:flex;gap:.45rem;padding:.9rem 1.1rem;border-bottom:1px solid var(--faint)}
-.mock .bar i{width:10px;height:10px;border-radius:50%;background:var(--faint);display:block}
-.mock .body{display:grid;grid-template-columns:200px 1fr;min-height:340px}
-.mock .side{border-right:1px solid var(--faint);padding:1.1rem;display:flex;flex-direction:column;gap:.6rem}
-.mock .side span{display:block;height:10px;border-radius:5px;background:var(--faint);width:70%}
-.mock .side span.on{background:linear-gradient(90deg,var(--vi),var(--cy));width:85%}
-.mock .main{padding:1.4rem;display:flex;flex-direction:column;gap:1rem}
-.rel{border:1px solid var(--faint);border-radius:10px;padding:1rem 1.2rem;display:flex;gap:1rem;align-items:flex-start;background:rgba(255,255,255,.015)}
-.rel .v{font-family:var(--disp);font-weight:700;font-size:12px;color:var(--cy);border:1px solid rgba(55,230,195,.3);border-radius:6px;padding:.25rem .55rem;white-space:nowrap}
-.rel h4{font-size:14px;font-weight:600}
-.rel p{font-size:12.5px;color:var(--dim);margin-top:.25rem}
-.rel .rd{margin-left:auto;font-size:11px;color:var(--cy);white-space:nowrap}
-@media(max-width:700px){.mock .body{grid-template-columns:1fr}.mock .side{display:none}}
-.logos{padding:3.5rem 1.5rem;text-align:center;border-top:1px solid var(--faint);border-bottom:1px solid var(--faint)}
-.logos p{font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--dim);margin-bottom:1.6rem}
-.logos .row{display:flex;gap:clamp(1.5rem,5vw,3.5rem);justify-content:center;flex-wrap:wrap;font-family:var(--disp);font-weight:700;font-size:1.05rem;color:rgba(238,240,255,.34)}
-section{padding:clamp(5rem,11vh,8rem) clamp(1.2rem,6vw,4rem);max-width:1180px;margin:0 auto}
-.k{font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:var(--cy);margin-bottom:1rem}
-h2{font-family:var(--disp);font-weight:700;font-size:clamp(1.9rem,4.4vw,3rem);letter-spacing:-.02em;line-height:1.1;max-width:24ch}
-.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem;margin-top:3rem}
-.feat{border:1px solid var(--faint);border-radius:14px;padding:1.8rem;background:var(--bg2);transition:.35s;position:relative;overflow:hidden}
-.feat:hover{border-color:rgba(124,92,255,.5);transform:translateY(-4px)}
-.feat .ic{width:38px;height:38px;border-radius:10px;background:linear-gradient(135deg,rgba(124,92,255,.25),rgba(55,230,195,.2));display:flex;align-items:center;justify-content:center;font-family:var(--disp);font-weight:700;color:var(--cy);margin-bottom:1.1rem}
-.feat h3{font-family:var(--disp);font-size:1.1rem;font-weight:600;margin-bottom:.5rem}
-.feat p{font-size:.9rem;color:var(--dim)}
-.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem;margin-top:3rem;text-align:center}
-.stat{border:1px solid var(--faint);border-radius:14px;padding:2.2rem 1rem;background:var(--bg2)}
-.stat .num{font-family:var(--disp);font-weight:700;font-size:clamp(2.2rem,5vw,3.4rem);background:linear-gradient(120deg,var(--vi),var(--cy));-webkit-background-clip:text;background-clip:text;color:transparent}
-.stat .lbl{font-size:12px;color:var(--dim);letter-spacing:.14em;text-transform:uppercase;margin-top:.5rem}
-.plans{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem;margin-top:3rem}
-.plan{border:1px solid var(--faint);border-radius:16px;padding:2rem;background:var(--bg2);display:flex;flex-direction:column;gap:1rem}
-.plan.hot{border-color:rgba(124,92,255,.6);box-shadow:0 0 50px rgba(124,92,255,.15);position:relative}
-.plan.hot .hotb{position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,var(--vi),var(--cy));color:#06060b;font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;border-radius:100px;padding:.3rem .9rem}
-.plan h3{font-family:var(--disp);font-size:1rem;font-weight:600;color:var(--dim);letter-spacing:.1em;text-transform:uppercase}
-.plan .pr{font-family:var(--disp);font-weight:700;font-size:2.6rem}
-.plan .pr small{font-size:.95rem;color:var(--dim);font-weight:400}
-.plan ul{list-style:none;display:grid;gap:.55rem;font-size:.9rem;color:var(--dim)}
-.plan ul li::before{content:"→ ";color:var(--cy)}
-.plan .btn{text-align:center;margin-top:auto}
-.cta-end{text-align:center;border:1px solid var(--faint);border-radius:20px;padding:clamp(3rem,7vw,5rem);background:radial-gradient(ellipse 70% 100% at 50% 0%,rgba(124,92,255,.16),transparent 70%),var(--bg2)}
-footer{border-top:1px solid var(--faint);padding:2.5rem clamp(1.2rem,6vw,4rem);display:flex;justify-content:space-between;flex-wrap:wrap;gap:1.5rem;font-size:.85rem;color:var(--dim)}
-.rv{opacity:0;transform:translateY(30px);transition:opacity .8s cubic-bezier(.19,1,.22,1),transform .8s cubic-bezier(.19,1,.22,1)}
+a{color:inherit;text-decoration:none}
+.mono{font-family:var(--mono)}
+
+/* background layers */
+.dots{position:fixed;inset:0;z-index:0;pointer-events:none;
+background-image:radial-gradient(rgba(238,240,255,.14) 1px,transparent 1px);background-size:26px 26px;
+mask-image:radial-gradient(ellipse 80% 60% at 50% 0%,#000 0%,transparent 70%)}
+.aur{position:fixed;border-radius:50%;filter:blur(90px);z-index:0;pointer-events:none;opacity:.5}
+.aur.au1{width:560px;height:560px;background:radial-gradient(circle,rgba(124,92,255,.55),transparent 65%);top:-220px;left:-120px;animation:dr1 22s ease-in-out infinite}
+.aur.au2{width:460px;height:460px;background:radial-gradient(circle,rgba(55,230,195,.35),transparent 65%);top:-140px;right:-100px;animation:dr2 26s ease-in-out infinite}
+.aur.au3{width:380px;height:380px;background:radial-gradient(circle,rgba(255,92,168,.28),transparent 65%);top:40vh;left:60vw;animation:dr1 30s ease-in-out infinite reverse}
+@keyframes dr1{0%,100%{transform:translate(0,0)}50%{transform:translate(90px,60px)}}
+@keyframes dr2{0%,100%{transform:translate(0,0)}50%{transform:translate(-70px,80px)}}
+@media(prefers-reduced-motion:reduce){.aur{animation:none}}
+
+.badge{position:fixed;bottom:1.1rem;right:1.1rem;z-index:99;font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--dim);background:rgba(5,5,11,.85);border:1px solid var(--faint);padding:.5rem .9rem;backdrop-filter:blur(6px)}
+.badge b{color:var(--cy);font-weight:500}
+
+/* nav */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;transition:background .35s,border-color .35s;border-bottom:1px solid transparent}
+nav.scrolled{background:rgba(5,5,11,.8);backdrop-filter:blur(14px);border-bottom-color:var(--faint)}
+.nav-in{max-width:1180px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;padding:1.1rem 1.6rem}
+.logo{font-family:var(--disp);font-weight:700;font-size:1.2rem;letter-spacing:-.02em;display:flex;align-items:center;gap:.55rem}
+.logo .dot{width:22px;height:22px;border-radius:7px;background:conic-gradient(from 210deg,var(--vi),var(--cy),var(--pk),var(--vi));position:relative}
+.logo .dot::after{content:"";position:absolute;inset:5px;border-radius:4px;background:var(--bg)}
+nav .links{display:flex;gap:1.8rem;align-items:center;font-size:.85rem;color:var(--dim)}
+nav .links a:not(.cta):hover{color:var(--fg)}
+.cta{font-family:var(--disp);font-weight:500;font-size:.85rem;color:#06060d;background:linear-gradient(100deg,var(--cy),#8ff0dc);padding:.6rem 1.15rem;border-radius:10px;border:0;cursor:pointer;position:relative;transition:transform .2s,box-shadow .3s}
+.cta:hover{transform:translateY(-1px);box-shadow:0 8px 30px rgba(55,230,195,.35)}
+@media(max-width:720px){nav .links a:not(.cta){display:none}}
+
+/* hero */
+.hero{position:relative;z-index:1;padding:9.5rem 1.6rem 4rem;text-align:center}
+.pill{display:inline-flex;align-items:center;gap:.6rem;font-family:var(--mono);font-size:11px;letter-spacing:.08em;color:var(--dim);border:1px solid var(--faint);border-radius:999px;padding:.45rem 1rem;background:rgba(13,13,26,.6)}
+.pill .pulse{width:7px;height:7px;border-radius:50%;background:var(--cy);box-shadow:0 0 0 0 rgba(55,230,195,.6);animation:pulse 2.2s infinite}
+@keyframes pulse{70%{box-shadow:0 0 0 9px rgba(55,230,195,0)}100%{box-shadow:0 0 0 0 rgba(55,230,195,0)}}
+h1{font-family:var(--disp);font-weight:700;font-size:clamp(2.6rem,7vw,5.2rem);line-height:1.02;letter-spacing:-.035em;margin:1.6rem auto 1.2rem;max-width:15ch}
+h1 .grad{background:linear-gradient(92deg,var(--vi) 0%,var(--cy) 55%,var(--pk) 110%);-webkit-background-clip:text;background-clip:text;color:transparent;background-size:200% 100%;animation:sheen 6s ease-in-out infinite}
+@keyframes sheen{0%,100%{background-position:0% 0}50%{background-position:100% 0}}
+.sub{color:var(--dim);max-width:52ch;margin:0 auto;font-size:1.05rem}
+.hero-cta{display:flex;gap:.9rem;justify-content:center;margin-top:2.2rem;flex-wrap:wrap}
+.ghost{font-family:var(--disp);font-weight:500;font-size:.9rem;color:var(--fg);border:1px solid var(--faint);border-radius:10px;padding:.75rem 1.3rem;background:rgba(13,13,26,.5);transition:border-color .3s,background .3s}
+.ghost:hover{border-color:rgba(124,92,255,.6);background:rgba(124,92,255,.08)}
+.cta.big{padding:.78rem 1.5rem;font-size:.9rem}
+.hero .note{font-family:var(--mono);font-size:10px;color:var(--dim);margin-top:1rem;letter-spacing:.06em}
+
+/* dashboard mock — tilt stage */
+.stage{perspective:1400px;max-width:1020px;margin:4rem auto 0;padding:0 1.6rem;position:relative;z-index:1}
+.mock{background:linear-gradient(180deg,#101024,#0b0b18);border:1px solid rgba(238,240,255,.14);border-radius:18px;overflow:hidden;
+box-shadow:0 40px 120px rgba(0,0,0,.6),0 0 0 1px rgba(124,92,255,.1),0 0 90px rgba(124,92,255,.12);
+transform:rotateX(9deg);transform-style:preserve-3d;transition:transform .18s ease-out;will-change:transform}
+.mock .bar{display:flex;align-items:center;gap:.5rem;padding:.85rem 1.1rem;border-bottom:1px solid var(--faint);background:rgba(238,240,255,.02)}
+.mock .bar i{width:10px;height:10px;border-radius:50%;background:rgba(238,240,255,.14)}
+.mock .bar i:first-child{background:#ff5f57}.mock .bar i:nth-child(2){background:#febc2e}.mock .bar i:nth-child(3){background:#28c840}
+.mock .bar .url{margin-left:1rem;font-family:var(--mono);font-size:10px;color:var(--dim);background:rgba(238,240,255,.05);padding:.3rem .9rem;border-radius:6px}
+.mock-body{display:grid;grid-template-columns:200px 1fr;min-height:420px}
+@media(max-width:760px){.mock-body{grid-template-columns:1fr}.mock-side{display:none}}
+.mock-side{border-right:1px solid var(--faint);padding:1.2rem .9rem;display:flex;flex-direction:column;gap:.35rem}
+.mock-side .it{display:flex;align-items:center;gap:.6rem;font-size:.78rem;color:var(--dim);padding:.5rem .7rem;border-radius:8px}
+.mock-side .it.on{background:rgba(124,92,255,.14);color:var(--fg)}
+.mock-side .sq{width:14px;height:14px;border-radius:4px;background:rgba(238,240,255,.12)}
+.mock-side .it.on .sq{background:var(--vi)}
+.mock-main{padding:1.4rem 1.6rem}
+.mock-main .mh{display:flex;justify-content:space-between;align-items:center;margin-bottom:1.1rem}
+.mock-main .mh b{font-family:var(--disp);font-size:1.05rem;font-weight:500}
+.mock-main .mh .chip{font-family:var(--mono);font-size:9px;color:var(--cy);border:1px solid rgba(55,230,195,.35);border-radius:999px;padding:.25rem .7rem}
+.rel{border:1px solid var(--faint);border-radius:12px;padding:1rem 1.2rem;margin-bottom:.9rem;background:rgba(238,240,255,.02);position:relative;overflow:hidden}
+.rel .rh{display:flex;gap:.7rem;align-items:center;margin-bottom:.45rem}
+.rel .v{font-family:var(--mono);font-size:11px;color:var(--vi);font-weight:500}
+.rel .t{font-size:.86rem;font-weight:600}
+.rel .tag{font-family:var(--mono);font-size:8px;letter-spacing:.1em;text-transform:uppercase;padding:.2rem .5rem;border-radius:4px}
+.rel .tag.f{color:var(--cy);background:rgba(55,230,195,.1)}
+.rel .tag.x{color:var(--pk);background:rgba(255,92,168,.1)}
+.rel p{font-size:.78rem;color:var(--dim)}
+.rel .rd{display:flex;align-items:center;gap:.6rem;margin-top:.6rem}
+.rel .track{flex:1;height:4px;border-radius:2px;background:rgba(238,240,255,.07);overflow:hidden}
+.rel .fill{height:100%;width:0;border-radius:2px;background:linear-gradient(90deg,var(--vi),var(--cy));transition:width 1.4s cubic-bezier(.22,1,.36,1)}
+.rel .pct{font-family:var(--mono);font-size:10px;color:var(--dim);min-width:72px;text-align:right}
+.type-caret{display:inline-block;width:7px;height:.95em;background:var(--cy);vertical-align:-.15em;margin-left:2px;animation:blink 1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+
+/* logos marquee */
+.logos{position:relative;z-index:1;margin:4.5rem auto 0;max-width:1180px;padding:0 1.6rem;text-align:center}
+.logos .cap{font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--dim)}
+.lg-mask{overflow:hidden;margin-top:1.4rem;mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent)}
+.lg-track{display:flex;gap:3.6rem;width:max-content;animation:lg 26s linear infinite;align-items:center}
+.lg-track span{font-family:var(--disp);font-weight:500;font-size:1.05rem;color:rgba(238,240,255,.34);white-space:nowrap}
+@keyframes lg{to{transform:translateX(-50%)}}
+@media(prefers-reduced-motion:reduce){.lg-track{animation:none}}
+
+/* bento */
+.bento-wrap{position:relative;z-index:1;max-width:1180px;margin:6.5rem auto 0;padding:0 1.6rem}
+.sec-kick{font-family:var(--mono);font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--cy)}
+h2{font-family:var(--disp);font-weight:700;font-size:clamp(1.9rem,4.5vw,3rem);letter-spacing:-.03em;line-height:1.05;margin-top:.9rem}
+.bento{display:grid;grid-template-columns:repeat(6,1fr);gap:1rem;margin-top:2.6rem}
+.b{grid-column:span 2;border:1px solid var(--faint);border-radius:16px;background:linear-gradient(180deg,rgba(238,240,255,.03),rgba(238,240,255,.005));padding:1.6rem;position:relative;overflow:hidden;transition:border-color .35s,transform .35s}
+.b:hover{border-color:rgba(124,92,255,.5);transform:translateY(-3px)}
+.b.w3{grid-column:span 3}.b.w4{grid-column:span 4}
+@media(max-width:880px){.b,.b.w3,.b.w4{grid-column:span 6}}
+.b h3{font-family:var(--disp);font-weight:500;font-size:1.08rem;margin-bottom:.5rem}
+.b p{font-size:.86rem;color:var(--dim);max-width:44ch}
+.b .glowline{position:absolute;top:0;left:1.6rem;right:1.6rem;height:1px;background:linear-gradient(90deg,transparent,var(--vi),transparent);opacity:0;transition:opacity .4s}
+.b:hover .glowline{opacity:1}
+.b .ico{width:34px;height:34px;border-radius:9px;display:flex;align-items:center;justify-content:center;margin-bottom:1rem;font-size:.95rem;background:rgba(124,92,255,.12);color:var(--vi);font-family:var(--mono)}
+.b.cyan .ico{background:rgba(55,230,195,.1);color:var(--cy)}
+.b.pink .ico{background:rgba(255,92,168,.1);color:var(--pk)}
+/* terminal cell */
+.term{font-family:var(--mono);font-size:11.5px;line-height:1.9;background:#07070f;border:1px solid var(--faint);border-radius:10px;padding:1rem 1.1rem;margin-top:1.1rem;color:var(--dim)}
+.term .c{color:var(--cy)} .term .v{color:var(--vi)} .term .p{color:var(--pk)} .term .g{color:#8f8fa8}
+/* mini chart cell */
+.spark{display:flex;align-items:flex-end;gap:5px;height:70px;margin-top:1.2rem}
+.spark i{flex:1;border-radius:3px 3px 0 0;background:linear-gradient(180deg,var(--vi),rgba(124,92,255,.15));transform:scaleY(0);transform-origin:bottom;transition:transform .8s cubic-bezier(.22,1,.36,1)}
+.on .spark i{transform:scaleY(1)}
+
+/* stats */
+.stats{position:relative;z-index:1;max-width:1180px;margin:6.5rem auto 0;padding:0 1.6rem;display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
+@media(max-width:760px){.stats{grid-template-columns:1fr}}
+.stat{border:1px solid var(--faint);border-radius:16px;padding:2rem 1.8rem;background:rgba(238,240,255,.02)}
+.stat b{font-family:var(--disp);font-weight:700;font-size:clamp(2.4rem,4.5vw,3.4rem);letter-spacing:-.03em;display:block;background:linear-gradient(120deg,var(--fg),rgba(238,240,255,.55));-webkit-background-clip:text;background-clip:text;color:transparent}
+.stat span{font-size:.85rem;color:var(--dim)}
+
+/* pricing */
+.pricing{position:relative;z-index:1;max-width:1180px;margin:6.5rem auto 0;padding:0 1.6rem}
+.tiers{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:2.6rem;align-items:stretch}
+@media(max-width:880px){.tiers{grid-template-columns:1fr}}
+.tier{border:1px solid var(--faint);border-radius:18px;padding:2rem 1.8rem;background:rgba(238,240,255,.02);display:flex;flex-direction:column;transition:transform .35s,border-color .35s}
+.tier:hover{transform:translateY(-4px)}
+.tier.hot{border-color:rgba(124,92,255,.55);background:linear-gradient(180deg,rgba(124,92,255,.1),rgba(124,92,255,.02));position:relative}
+.tier.hot::before{content:"Most teams";position:absolute;top:-11px;left:50%;transform:translateX(-50%);font-family:var(--mono);font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:#06060d;background:linear-gradient(90deg,var(--vi),var(--cy));padding:.3rem .8rem;border-radius:999px;white-space:nowrap}
+.tier h3{font-family:var(--disp);font-weight:500;font-size:1rem}
+.tier .pr{font-family:var(--disp);font-weight:700;font-size:2.6rem;letter-spacing:-.03em;margin:.7rem 0 .1rem}
+.tier .pr i{font-style:normal;font-size:.85rem;color:var(--dim);font-weight:400}
+.tier ul{list-style:none;margin:1.3rem 0 1.8rem;display:grid;gap:.55rem;flex:1}
+.tier li{font-size:.85rem;color:var(--dim);padding-left:1.4rem;position:relative}
+.tier li::before{content:"→";position:absolute;left:0;color:var(--cy);font-family:var(--mono);font-size:.8rem}
+.tier .cta,.tier .ghost{text-align:center}
+
+/* footer cta */
+.fin{position:relative;z-index:1;max-width:1180px;margin:7rem auto 0;padding:0 1.6rem}
+.fin-in{border:1px solid var(--faint);border-radius:22px;padding:4.5rem 2rem;text-align:center;position:relative;overflow:hidden;background:radial-gradient(ellipse 70% 90% at 50% 120%,rgba(124,92,255,.22),transparent 70%)}
+.fin-in h2{max-width:20ch;margin:0 auto .8rem}
+.fin-in p{color:var(--dim);max-width:44ch;margin:0 auto 2rem}
+footer{position:relative;z-index:1;border-top:1px solid var(--faint);margin-top:5.5rem;padding:3rem 1.6rem 6rem}
+.foot{max-width:1180px;margin:0 auto;display:flex;justify-content:space-between;gap:2rem;flex-wrap:wrap;color:var(--dim);font-size:.82rem}
+.foot .fic{max-width:44ch;font-size:.76rem;opacity:.8;line-height:1.7}
+.foot a{border-bottom:1px solid var(--faint)}
+.foot a:hover{color:var(--cy);border-color:var(--cy)}
+
+/* reveal */
+.rv{opacity:0;transform:translateY(30px);transition:opacity .8s ease,transform .8s cubic-bezier(.22,1,.36,1)}
 .rv.on{opacity:1;transform:none}
-@media(max-width:900px){.grid3,.stats,.plans{grid-template-columns:1fr}}
-@media(prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}.b1,.b2{animation:none}}
+@media(prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}.mock{transform:none!important}}
 </style>
 </head>
 <body>
+
+<div class="dots" aria-hidden="true"></div>
+<div class="aur au1" aria-hidden="true"></div>
+<div class="aur au2" aria-hidden="true"></div>
+<div class="aur au3" aria-hidden="true"></div>
 <a class="badge" href="https://nexraft.com" target="_blank" rel="noopener">Concept build — <b>NEXRAFT</b></a>
 
-<nav>
-  <a class="logo" href="#top"><span class="dot"></span>Loopline</a>
-  <div class="links"><a href="#features">Features</a><a href="#pricing">Pricing</a><a href="#docs">Docs</a><a href="#changelog">Changelog</a></div>
-  <a class="cta-s" href="#pricing">Start free</a>
+<nav id="nav">
+  <div class="nav-in">
+    <a class="logo" href="#top"><span class="dot"></span>loopline</a>
+    <div class="links">
+      <a href="#features">Features</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#" onclick="return false">Docs</a>
+      <a class="cta" href="#pricing">Start free</a>
+    </div>
+  </div>
 </nav>
 
-<header id="top">
-  <div class="blob b1"></div><div class="blob b2"></div>
-  <div class="pill rv"><span class="new">New</span> Loopline 2.0 — AI release notes are here</div>
-  <h1 class="rv">Ship changelogs your users <span class="grad">actually read.</span></h1>
-  <p class="lead rv">Loopline turns your merged PRs into beautiful, human release notes — written, categorized, and published to your users automatically.</p>
-  <div class="hero-cta rv">
-    <a class="btn p" href="#pricing">Start free — no card</a>
-    <a class="btn g" href="#features">See how it works</a>
+<header class="hero" id="top">
+  <div class="pill"><span class="pulse"></span>Loopline 2.0 — release notes, on autopilot</div>
+  <h1>Ship changelogs your users <span class="grad">actually read.</span></h1>
+  <p class="sub">Loopline turns your merged PRs into beautiful, human release notes — written, categorized, and delivered to every user who touched the feature. Automatically.</p>
+  <div class="hero-cta">
+    <a class="cta big" href="#pricing">Start free — no card</a>
+    <a class="ghost" href="#features">See how it works ↓</a>
   </div>
+  <p class="note mono">npm i @loopline/cli · 90 seconds to first changelog</p>
 
-  <div class="mock rv">
-    <div class="bar"><i></i><i></i><i></i></div>
-    <div class="body">
-      <div class="side"><span class="on"></span><span></span><span></span><span></span><span style="width:50%"></span><span style="width:60%"></span></div>
-      <div class="main">
-        <div class="rel"><span class="v">v2.4.0</span><div><h4>Dark mode across every surface</h4><p>Requested 214 times. Shipped once. Toggle in settings → appearance.</p></div><span class="rd">92% read</span></div>
-        <div class="rel"><span class="v">v2.3.2</span><div><h4>Exports are now 6× faster</h4><p>Rewrote the pipeline in Rust. A 40k-row export now takes 1.8s.</p></div><span class="rd">87% read</span></div>
-        <div class="rel"><span class="v">v2.3.0</span><div><h4>Slack digests for your team</h4><p>A weekly summary of what shipped, delivered where your team lives.</p></div><span class="rd">84% read</span></div>
+  <div class="stage" id="stage">
+    <div class="mock" id="mock">
+      <div class="bar"><i></i><i></i><i></i><span class="url">app.loopline.dev/releases</span></div>
+      <div class="mock-body">
+        <aside class="mock-side">
+          <div class="it on"><span class="sq"></span>Releases</div>
+          <div class="it"><span class="sq"></span>Drafts</div>
+          <div class="it"><span class="sq"></span>Audiences</div>
+          <div class="it"><span class="sq"></span>Widgets</div>
+          <div class="it"><span class="sq"></span>Analytics</div>
+          <div class="it"><span class="sq"></span>Settings</div>
+        </aside>
+        <div class="mock-main">
+          <div class="mh"><b>Releases</b><span class="chip">● publishing live</span></div>
+          <div class="rel">
+            <div class="rh"><span class="v">v2.4.0</span><span class="t" id="typeTarget"></span><span class="type-caret" id="caret"></span><span class="tag f">Feature</span></div>
+            <p>Auto-drafted from 14 merged PRs · reviewed by @mara · sent to 8,412 users</p>
+            <div class="rd"><div class="track"><div class="fill" data-w="86%"></div></div><span class="pct">86% read</span></div>
+          </div>
+          <div class="rel">
+            <div class="rh"><span class="v">v2.3.2</span><span class="t">Fix: webhook retries now exponential</span><span class="tag x">Fix</span></div>
+            <p>Auto-drafted from 3 merged PRs · sent to 1,204 affected users only</p>
+            <div class="rd"><div class="track"><div class="fill" data-w="91%"></div></div><span class="pct">91% read</span></div>
+          </div>
+          <div class="rel">
+            <div class="rh"><span class="v">v2.3.0</span><span class="t">Slack digests &amp; audience filters</span><span class="tag f">Feature</span></div>
+            <p>Auto-drafted from 22 merged PRs · top reaction: 🎉 ×214</p>
+            <div class="rd"><div class="track"><div class="fill" data-w="78%"></div></div><span class="pct">78% read</span></div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </header>
 
-<div class="logos">
-  <p>Trusted by teams that ship daily</p>
-  <div class="row"><span>vantry</span><span>Northbeam*</span><span>pylon.dev</span><span>OSSUARY</span><span>brightloop</span><span>kelvin&amp;co</span></div>
-</div>
+<section class="logos rv">
+  <p class="cap">Powering release notes at fictional companies everywhere</p>
+  <div class="lg-mask"><div class="lg-track" id="lgTrack">
+    <span>vantry</span><span>NORTHBEAM*</span><span>pylon.dev</span><span>OSSUARY</span><span>brightloop</span><span>kelvin&amp;co</span><span>ferrite</span><span>QUILLSTACK</span>
+  </div></div>
+</section>
 
-<section id="features">
-  <p class="k rv">Why Loopline</p>
-  <h2 class="rv">From merged PR to published note in 90 seconds.</h2>
-  <div class="grid3">
-    <div class="feat rv"><div class="ic">01</div><h3>AI release notes</h3><p>Loopline reads your diffs and PR descriptions and drafts human-sounding notes — in your product's voice, not commit-speak.</p></div>
-    <div class="feat rv"><div class="ic">02</div><h3>Publish everywhere</h3><p>In-app widget, hosted changelog page, email digest, Slack, RSS. Write once, land everywhere your users are.</p></div>
-    <div class="feat rv"><div class="ic">03</div><h3>Read analytics</h3><p>See exactly which releases get read, clicked, and reacted to. Know what your users actually care about.</p></div>
-    <div class="feat rv"><div class="ic">04</div><h3>Segmented releases</h3><p>Ship enterprise notes to enterprise users. Beta notes to beta users. Everyone sees the changelog that's theirs.</p></div>
-    <div class="feat rv"><div class="ic">05</div><h3>Approval flows</h3><p>Draft → review → publish. Loop in product and marketing without leaving the tool.</p></div>
-    <div class="feat rv"><div class="ic">06</div><h3>API &amp; webhooks</h3><p>Everything in Loopline is scriptable. Trigger releases from CI, pull notes into your docs, build your own widget.</p></div>
+<section class="bento-wrap" id="features">
+  <div class="rv">
+    <span class="sec-kick">How it works</span>
+    <h2>From merge to “oh nice, they fixed that.”</h2>
+  </div>
+  <div class="bento">
+    <div class="b w4 rv"><span class="glowline"></span><span class="ico">⌘</span>
+      <h3>Reads your PRs so you don’t have to</h3>
+      <p>Loopline watches your default branch, groups merged work by feature area, and drafts human-sounding notes — in your product’s voice, not commit-speak.</p>
+      <div class="term"><span class="g">$</span> loopline publish --version 2.4.0<br><span class="c">✓</span> 14 PRs analyzed · 3 features, 2 fixes, 1 breaking<br><span class="c">✓</span> draft written in <span class="v">“confident, playful”</span> voice<br><span class="c">✓</span> audiences resolved: <span class="p">8,412 users</span> touched these features<br><span class="c">✓</span> published to widget, email, Slack · <span class="g">1.9s</span></div>
+    </div>
+    <div class="b rv cyan"><span class="glowline"></span><span class="ico">◎</span>
+      <h3>Audience targeting</h3>
+      <p>Only the users who actually use a feature hear about its update. No more “Dear everyone.”</p>
+      <div class="spark" aria-hidden="true"><i style="height:34%"></i><i style="height:52%"></i><i style="height:41%"></i><i style="height:66%"></i><i style="height:58%"></i><i style="height:82%"></i><i style="height:74%"></i><i style="height:96%"></i></div>
+    </div>
+    <div class="b rv pink"><span class="glowline"></span><span class="ico">✦</span>
+      <h3>In-app widget</h3>
+      <p>A “What’s new” surface your designers won’t veto. Two lines of script, themes to match your product.</p>
+    </div>
+    <div class="b rv"><span class="glowline"></span><span class="ico">▲</span>
+      <h3>Read-rate analytics</h3>
+      <p>See who read, clicked, and reacted per release — and which features quietly ship to silence.</p>
+    </div>
+    <div class="b rv cyan"><span class="glowline"></span><span class="ico">↺</span>
+      <h3>Human in the loop</h3>
+      <p>Every draft waits for a one-click review. Edit anything; Loopline learns your red pen.</p>
+    </div>
   </div>
 </section>
 
-<section id="changelog">
-  <p class="k rv">The numbers</p>
-  <h2 class="rv">Changelogs that move metrics.</h2>
-  <div class="stats">
-    <div class="stat rv"><p class="num" data-count="74">0</p><p class="lbl">% average read rate</p></div>
-    <div class="stat rv"><p class="num" data-count="12000">0</p><p class="lbl">releases published / mo</p></div>
-    <div class="stat rv"><p class="num" data-count="31">0</p><p class="lbl">% lift in feature adoption</p></div>
+<section class="stats">
+  <div class="stat rv"><b data-count="74" data-suffix="%">0%</b><span>average read rate across Loopline changelogs (industry average: 8%)</span></div>
+  <div class="stat rv"><b data-count="12" data-suffix="k">0</b><span>releases published last month by fictional teams who love us</span></div>
+  <div class="stat rv"><b data-count="31" data-suffix="s">0</b><span>median time from merged PR to published, targeted release note</span></div>
+</section>
+
+<section class="pricing" id="pricing">
+  <div class="rv">
+    <span class="sec-kick">Pricing</span>
+    <h2>Free until your users notice.</h2>
+  </div>
+  <div class="tiers">
+    <div class="tier rv">
+      <h3>Solo</h3><div class="pr">$0<i>/mo</i></div>
+      <ul><li>1 project, unlimited releases</li><li>In-app widget</li><li>Loopline branding</li><li>Community support</li></ul>
+      <a class="ghost" href="#" onclick="return fakeSignup(this)">Start free</a>
+    </div>
+    <div class="tier hot rv">
+      <h3>Team</h3><div class="pr">$49<i>/mo</i></div>
+      <ul><li>5 projects, unlimited seats</li><li>Audience targeting &amp; email</li><li>Slack &amp; Discord digests</li><li>Read-rate analytics</li><li>Your brand, your domain</li></ul>
+      <a class="cta" href="#" onclick="return fakeSignup(this)">Start 14-day trial</a>
+    </div>
+    <div class="tier rv">
+      <h3>Scale</h3><div class="pr">$199<i>/mo</i></div>
+      <ul><li>Unlimited projects</li><li>SSO &amp; audit log</li><li>API + webhooks</li><li>Priority support, real humans</li></ul>
+      <a class="ghost" href="#" onclick="return fakeSignup(this)">Talk to us</a>
+    </div>
   </div>
 </section>
 
-<section id="pricing">
-  <p class="k rv">Pricing</p>
-  <h2 class="rv">Start free. Scale when you ship.</h2>
-  <div class="plans">
-    <div class="plan rv"><h3>Hobby</h3><p class="pr">$0<small>/mo</small></p>
-      <ul><li>1 project</li><li>Hosted changelog page</li><li>Manual releases</li><li>Loopline badge</li></ul>
-      <a class="btn g" href="#top">Start free</a></div>
-    <div class="plan hot rv"><span class="hotb">Most popular</span><h3>Team</h3><p class="pr">$49<small>/mo</small></p>
-      <ul><li>Unlimited projects</li><li>AI release notes</li><li>In-app widget + email</li><li>Read analytics</li><li>Remove badge</li></ul>
-      <a class="btn p" href="#top">Start 14-day trial</a></div>
-    <div class="plan rv"><h3>Scale</h3><p class="pr">$199<small>/mo</small></p>
-      <ul><li>Everything in Team</li><li>Segmented releases</li><li>Approval flows</li><li>SSO / SAML</li><li>Priority support</li></ul>
-      <a class="btn g" href="#top">Talk to us</a></div>
-  </div>
-</section>
-
-<section id="docs">
-  <div class="cta-end rv">
-    <h2 style="max-width:none">Your next release deserves better<br>than a commit list.</h2>
-    <div class="hero-cta"><a class="btn p" href="#top">Start shipping notes</a></div>
+<section class="fin rv">
+  <div class="fin-in">
+    <h2>Your users deserve to know you shipped.</h2>
+    <p>Connect a repo, pick a voice, publish your first release note before your coffee cools.</p>
+    <a class="cta big" href="#" onclick="return fakeSignup(this)">Start free — no card</a>
   </div>
 </section>
 
 <footer>
-  <div><strong style="font-family:var(--disp)">Loopline</strong> — a fictional product.</div>
-  <div>Concept build by <a href="https://nexraft.com" target="_blank" rel="noopener" style="color:var(--cy)">Nexraft</a>. Demonstration only.</div>
+  <div class="foot">
+    <div><b style="font-family:var(--disp)">loopline</b><p style="margin-top:.4rem">Release notes, on autopilot.</p></div>
+    <p class="fic">Loopline is a fictional product. This page is a concept build by <a href="https://nexraft.com" target="_blank" rel="noopener">Nexraft</a> — demonstration only. The read rates are invented, but honestly, so is most SaaS social proof.</p>
+  </div>
 </footer>
 
 <script>
 (function(){
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  var nav = document.getElementById('nav');
+  addEventListener('scroll', function(){ nav.classList.toggle('scrolled', scrollY > 30); }, {passive:true});
+
+  var lg = document.getElementById('lgTrack'); lg.innerHTML += lg.innerHTML;
+
+  /* tilt */
+  var stage = document.getElementById('stage'), mock = document.getElementById('mock');
+  if (!reduce && matchMedia('(pointer:fine)').matches) {
+    stage.addEventListener('mousemove', function(e){
+      var r = stage.getBoundingClientRect();
+      var x = (e.clientX - r.left)/r.width - .5, y = (e.clientY - r.top)/r.height - .5;
+      mock.style.transform = 'rotateX(' + (9 - y*7) + 'deg) rotateY(' + (x*7) + 'deg)';
+    });
+    stage.addEventListener('mouseleave', function(){ mock.style.transform = 'rotateX(9deg)'; });
+  }
+
+  /* typing */
+  var text = 'Dark mode, at last — plus 3 things you asked for';
+  var tt = document.getElementById('typeTarget'), ci = 0;
+  function type(){
+    if (reduce){ tt.textContent = text; document.getElementById('caret').remove(); return; }
+    if (ci <= text.length){ tt.textContent = text.slice(0, ci++); setTimeout(type, 34 + Math.random()*46); }
+  }
+  setTimeout(type, 600);
+
+  /* reveals + bars + counters */
   var io = new IntersectionObserver(function(es){
-    es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('on'); io.unobserve(e.target); } });
-  },{threshold:.12});
-  document.querySelectorAll('.rv').forEach(function(el,i){ el.style.transitionDelay=(i%3*80)+'ms'; io.observe(el); });
-  var co = new IntersectionObserver(function(es){
     es.forEach(function(e){
       if(!e.isIntersecting) return;
-      var el=e.target, end=+el.dataset.count, t0=null;
-      function step(t){ if(!t0)t0=t; var p=Math.min((t-t0)/1400,1); p=1-Math.pow(1-p,3);
-        el.textContent=Math.round(end*p).toLocaleString(); if(p<1)requestAnimationFrame(step); }
-      requestAnimationFrame(step); co.unobserve(el);
+      e.target.style.transitionDelay = (e.target.dataset.d||0)+'ms';
+      e.target.classList.add('on');
+      io.unobserve(e.target);
     });
-  },{threshold:.5});
-  document.querySelectorAll('[data-count]').forEach(function(el){ co.observe(el); });
+  },{threshold:.15});
+  document.querySelectorAll('.rv').forEach(function(el,i){ el.dataset.d = (i%3)*100; io.observe(el); });
+
+  var bars = new IntersectionObserver(function(es){
+    es.forEach(function(e){ if(e.isIntersecting){ e.target.style.width = e.target.dataset.w; bars.unobserve(e.target);} });
+  },{threshold:.4});
+  document.querySelectorAll('.fill').forEach(function(el){ bars.observe(el); });
+
+  var cio = new IntersectionObserver(function(es){
+    es.forEach(function(e){
+      if(!e.isIntersecting) return;
+      var el = e.target, target = +el.dataset.count, suf = el.dataset.suffix||'', t0 = null;
+      function step(ts){
+        if(!t0) t0 = ts;
+        var p = Math.min((ts-t0)/1400, 1); p = 1-Math.pow(1-p,3);
+        el.textContent = Math.round(target*p) + suf;
+        if(p<1) requestAnimationFrame(step);
+      }
+      reduce ? el.textContent = target+suf : requestAnimationFrame(step);
+      cio.unobserve(el);
+    });
+  },{threshold:.6});
+  document.querySelectorAll('[data-count]').forEach(function(el){ cio.observe(el); });
+
+  window.fakeSignup = function(a){
+    a.textContent = 'Concept build — nothing was signed up ✓';
+    return false;
+  };
 })();
 </script>
 </body>

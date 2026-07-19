@@ -20,10 +20,11 @@ type Demo = {
   blurb: string;
   href: string;
   stack: string[];
-  /** inline gradient thumbnail matching each demo's palette */
+  /** screenshot of the live demo */
+  shot: string;
+  /** fallback gradient behind the image while it loads */
   thumb: string;
   accent: string;
-  mark: string;
 };
 
 const DEMOS: Demo[] = [
@@ -33,11 +34,11 @@ const DEMOS: Demo[] = [
     blurb:
       "A wood-fired dining room with a seven-course tasting menu, private cellar bookings, and a reservation flow. Warm grain textures, flame-glow hero, editorial serif.",
     href: "/demos/ember-oak.html",
-    stack: ["Single-file", "CSS animation", "Forms"],
+    stack: ["Ember particles", "Editorial serif", "Reservations"],
+    shot: "/img/shots/ember-oak.jpg",
     thumb:
       "linear-gradient(135deg, #131110 0%, #1d1713 45%, #2a1a10 70%, #3a2312 100%)",
     accent: "#c8963e",
-    mark: "E&O",
   },
   {
     vertical: "SaaS — Product",
@@ -45,11 +46,11 @@ const DEMOS: Demo[] = [
     blurb:
       "A changelog-automation product with a live dashboard mockup, animated metrics, feature grid, and three-tier pricing. Dark violet, glassy, startup-fast.",
     href: "/demos/loopline.html",
-    stack: ["Dashboard UI", "Animated counters", "Pricing"],
+    stack: ["3D tilt dashboard", "Bento grid", "Live typing"],
+    shot: "/img/shots/loopline.jpg",
     thumb:
       "linear-gradient(135deg, #07070d 0%, #12102a 50%, #1d1440 80%, #241a52 100%)",
     accent: "#7c5cff",
-    mark: "LL",
   },
   {
     vertical: "Real Estate — Luxury",
@@ -57,11 +58,11 @@ const DEMOS: Demo[] = [
     blurb:
       "A boutique brokerage with a sunset-skyline hero, four featured listings, and a private-client approach. Ivory and gold, Cormorant Garamond, quiet money.",
     href: "/demos/meridian.html",
-    stack: ["Editorial layout", "SVG art", "Listings"],
+    stack: ["Generative sunset", "Drawn elevations", "Listings"],
+    shot: "/img/shots/meridian.jpg",
     thumb:
       "linear-gradient(135deg, #f4f1ea 0%, #e8ddc9 40%, #d9b98a 75%, #b98a52 100%)",
     accent: "#9a7b3f",
-    mark: "M",
   },
   {
     vertical: "Law — Professional Services",
@@ -69,11 +70,11 @@ const DEMOS: Demo[] = [
     blurb:
       "A litigation firm with partner profiles, practice areas, illustrative results, and a consultation intake. Navy, parchment, oxblood — built to feel forty years old.",
     href: "/demos/ashford-vale.html",
-    stack: ["Trust design", "Typography", "Intake form"],
+    stack: ["Drawn crest", "Letterpress", "Intake form"],
+    shot: "/img/shots/ashford-vale.jpg",
     thumb:
       "linear-gradient(135deg, #0e1b2c 0%, #14243a 55%, #2a2030 85%, #8a2f2b 130%)",
     accent: "#b08d4f",
-    mark: "§",
   },
 ];
 
@@ -109,16 +110,23 @@ export default function ShowcasePage() {
               className="group block border border-line bg-ink2 transition-colors hover:border-soft"
             >
               <div
-                className="relative flex h-52 items-center justify-center overflow-hidden md:h-60"
+                className="relative h-52 overflow-hidden md:h-64"
                 style={{ background: demo.thumb }}
               >
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={demo.shot}
+                  alt={`${demo.brand} — live demo screenshot`}
+                  loading="lazy"
+                  className="absolute inset-0 h-full w-full object-cover object-top transition-transform duration-700 ease-out group-hover:scale-[1.04]"
+                />
                 <span
-                  className="font-display text-6xl font-semibold tracking-tight opacity-80 transition-transform duration-500 group-hover:scale-110"
-                  style={{ color: demo.accent }}
+                  className="absolute bottom-3 right-3 border px-2 py-1 font-mono text-[10px] uppercase tracking-widest text-bone"
+                  style={{
+                    background: "rgba(10,14,12,.75)",
+                    borderColor: demo.accent,
+                  }}
                 >
-                  {demo.mark}
-                </span>
-                <span className="absolute bottom-3 right-3 font-mono text-[10px] uppercase tracking-widest text-bone/60">
                   Live demo ↗
                 </span>
               </div>
