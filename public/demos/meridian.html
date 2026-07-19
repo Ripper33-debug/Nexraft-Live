@@ -74,6 +74,10 @@ h2 em{font-style:italic}
 .listing:nth-child(even) .l-art{order:2}
 @media(max-width:880px){.listing,.listing:nth-child(even){grid-template-columns:1fr}.listing:nth-child(even) .l-art{order:0}}
 .l-art{position:relative;aspect-ratio:4/3;border:1px solid var(--hair);background:var(--ivory2);overflow:hidden}
+.l-art img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform:scale(1.08);transition:transform 2.2s cubic-bezier(.22,1,.36,1),filter .6s;filter:saturate(.92)}
+.rv.on .l-art img{transform:scale(1)}
+.l-art:hover img{transform:scale(1.045);filter:saturate(1.05)}
+.l-art::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(23,21,18,.18),transparent 35%,transparent 70%,rgba(23,21,18,.28));pointer-events:none}
 .l-art svg{position:absolute;inset:0;width:100%;height:100%}
 .l-art svg path,.l-art svg line,.l-art svg rect,.l-art svg circle{fill:none;stroke:var(--ink);stroke-width:1.1;vector-effect:non-scaling-stroke}
 .l-art svg .g{stroke:var(--gold)}
@@ -82,8 +86,8 @@ h2 em{font-style:italic}
 .draw.on path,.draw.on line,.draw.on rect,.draw.on circle{animation:draw 2.4s cubic-bezier(.4,0,.2,1) forwards}
 @keyframes draw{to{stroke-dashoffset:0}}
 @media(prefers-reduced-motion:reduce){.draw path,.draw line,.draw rect,.draw circle{stroke-dashoffset:0!important;animation:none}}
-.l-art .no{position:absolute;top:1.1rem;left:1.2rem;font-family:var(--serif);font-style:italic;font-size:1.1rem;color:var(--dim)}
-.l-art .status{position:absolute;bottom:1.1rem;right:1.2rem;font-family:var(--mono);font-size:8px;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);border:1px solid rgba(150,119,47,.4);padding:.35rem .7rem;background:rgba(245,242,234,.7)}
+.l-art .no{position:absolute;top:1.1rem;left:1.2rem;font-family:var(--serif);font-style:italic;font-size:1.1rem;color:var(--ivory);text-shadow:0 1px 8px rgba(0,0,0,.5);z-index:2}
+.l-art .status{position:absolute;bottom:1.1rem;right:1.2rem;font-family:var(--mono);font-size:8px;letter-spacing:.24em;text-transform:uppercase;color:#e9c87e;border:1px solid rgba(233,200,126,.45);padding:.35rem .7rem;background:rgba(23,21,18,.55);backdrop-filter:blur(4px);z-index:2}
 .l-copy h3{font-family:var(--serif);font-weight:400;font-size:clamp(1.9rem,3.6vw,2.9rem);line-height:1.08;letter-spacing:-.01em}
 .l-copy .where{margin:.5rem 0 1.3rem;color:var(--dim);font-size:.92rem}
 .l-copy p.desc{color:var(--dim);font-size:.95rem;max-width:50ch}
@@ -171,24 +175,12 @@ footer{border-top:1px solid var(--hair);padding:3rem 2rem 6rem;background:var(--
       <div class="kick mono">Selected portfolio</div>
       <h2>Four houses.<br>Four <em>arguments</em> for staying home.</h2>
     </div>
-    <p style="color:var(--dim);max-width:34ch;font-size:.92rem">Each rendered here as an architect’s elevation — because the photographs are shared privately, after introduction.</p>
+    <p style="color:var(--dim);max-width:34ch;font-size:.92rem">A glimpse only. Floor plans, provenance, and the rest of the photography are shared privately, after introduction.</p>
   </div>
 
   <article class="listing rv">
     <div class="l-art">
-      <svg class="draw" viewBox="0 0 400 300" preserveAspectRatio="xMidYMid meet" aria-label="Line elevation of a modernist cliff house">
-        <line x1="20" y1="250" x2="380" y2="250"/>
-        <rect x="60" y="150" width="200" height="100"/>
-        <rect x="140" y="100" width="180" height="60"/>
-        <line x1="140" y1="130" x2="320" y2="130" class="thin"/>
-        <line x1="80" y1="150" x2="80" y2="250" class="thin"/>
-        <line x1="110" y1="150" x2="110" y2="250" class="thin"/>
-        <rect x="170" y="180" width="60" height="70" class="thin"/>
-        <line x1="260" y1="160" x2="340" y2="160" class="g"/>
-        <circle cx="345" cy="70" r="14" class="g"/>
-        <line x1="20" y1="262" x2="380" y2="262" class="thin"/>
-        <path d="M20 274 q 30 -8 60 0 t 60 0 t 60 0 t 60 0 t 60 0 t 60 0" class="thin"/>
-      </svg>
+      <img src="/img/demos/mer-hillside.jpg" alt="The Meridian Line House — modernist glass house at dusk with infinity pool" loading="lazy">
       <span class="no">No. I</span><span class="status">Private sale · agreed</span>
     </div>
     <div class="l-copy">
@@ -206,22 +198,7 @@ footer{border-top:1px solid var(--hair);padding:3rem 2rem 6rem;background:var(--
 
   <article class="listing rv">
     <div class="l-art">
-      <svg class="draw" viewBox="0 0 400 300" preserveAspectRatio="xMidYMid meet" aria-label="Line elevation of a Georgian townhouse">
-        <line x1="30" y1="260" x2="370" y2="260"/>
-        <rect x="120" y="70" width="160" height="190"/>
-        <path d="M120 70 L200 30 L280 70"/>
-        <rect x="150" y="100" width="30" height="45" class="thin"/>
-        <rect x="220" y="100" width="30" height="45" class="thin"/>
-        <rect x="150" y="165" width="30" height="45" class="thin"/>
-        <rect x="220" y="165" width="30" height="45" class="thin"/>
-        <rect x="186" y="215" width="28" height="45"/>
-        <path d="M186 215 a 14 14 0 0 1 28 0" class="g"/>
-        <line x1="120" y1="90" x2="280" y2="90" class="thin"/>
-        <line x1="95" y1="260" x2="95" y2="200" class="thin"/>
-        <line x1="305" y1="260" x2="305" y2="200" class="thin"/>
-        <circle cx="95" cy="192" r="9" class="thin"/>
-        <circle cx="305" cy="192" r="9" class="thin"/>
-      </svg>
+      <img src="/img/demos/mer-georgian.jpg" alt="No. 14 Halcyon Square — Georgian townhouse facade at blue hour" loading="lazy">
       <span class="no">No. II</span><span class="status">Available · by appointment</span>
     </div>
     <div class="l-copy">
@@ -239,20 +216,7 @@ footer{border-top:1px solid var(--hair);padding:3rem 2rem 6rem;background:var(--
 
   <article class="listing rv">
     <div class="l-art">
-      <svg class="draw" viewBox="0 0 400 300" preserveAspectRatio="xMidYMid meet" aria-label="Line elevation of a lakeside pavilion">
-        <line x1="20" y1="230" x2="380" y2="230"/>
-        <rect x="90" y="150" width="240" height="80"/>
-        <line x1="70" y1="150" x2="350" y2="150"/>
-        <line x1="70" y1="144" x2="350" y2="144" class="thin"/>
-        <line x1="120" y1="150" x2="120" y2="230" class="thin"/>
-        <line x1="200" y1="150" x2="200" y2="230" class="thin"/>
-        <line x1="280" y1="150" x2="280" y2="230" class="thin"/>
-        <path d="M20 244 q 40 -7 80 0 t 80 0 t 80 0 t 80 0 t 60 0" class="g thin"/>
-        <path d="M20 256 q 40 -7 80 0 t 80 0 t 80 0 t 80 0 t 60 0" class="thin"/>
-        <circle cx="60" cy="60" r="16" class="g"/>
-        <line x1="330" y1="230" x2="330" y2="120" class="thin"/>
-        <path d="M330 120 q 18 10 0 22 q -18 -10 0 -22" class="thin"/>
-      </svg>
+      <img src="/img/demos/mer-lake.jpg" alt="Stillwater Pavilion — lakeside glass pavilion reflected in still water" loading="lazy">
       <span class="no">No. III</span><span class="status">Available · autumn viewing</span>
     </div>
     <div class="l-copy">
@@ -270,20 +234,7 @@ footer{border-top:1px solid var(--hair);padding:3rem 2rem 6rem;background:var(--
 
   <article class="listing rv">
     <div class="l-art">
-      <svg class="draw" viewBox="0 0 400 300" preserveAspectRatio="xMidYMid meet" aria-label="Line elevation of a penthouse tower">
-        <line x1="40" y1="270" x2="360" y2="270"/>
-        <rect x="150" y="40" width="100" height="230"/>
-        <line x1="150" y1="70" x2="250" y2="70" class="thin"/>
-        <line x1="150" y1="100" x2="250" y2="100" class="thin"/>
-        <line x1="150" y1="130" x2="250" y2="130" class="thin"/>
-        <line x1="150" y1="160" x2="250" y2="160" class="thin"/>
-        <line x1="150" y1="190" x2="250" y2="190" class="thin"/>
-        <line x1="150" y1="220" x2="250" y2="220" class="thin"/>
-        <rect x="150" y="40" width="100" height="30" class="g"/>
-        <rect x="100" y="170" width="50" height="100" class="thin"/>
-        <rect x="250" y="140" width="60" height="130" class="thin"/>
-        <line x1="200" y1="40" x2="200" y2="18" class="g"/>
-      </svg>
+      <img src="/img/demos/mer-penthouse.jpg" alt="The Observatory Penthouse — living room over the city skyline at sunset" loading="lazy">
       <span class="no">No. IV</span><span class="status">Off market · enquire</span>
     </div>
     <div class="l-copy">
@@ -339,7 +290,7 @@ footer{border-top:1px solid var(--hair);padding:3rem 2rem 6rem;background:var(--
       <span class="wordmark" style="font-size:1rem;color:var(--ink)">Meridian<i style="color:var(--gold)">·</i>Estates</span>
       <p style="margin-top:.5rem">Exceptional homes, privately sold.</p>
     </div>
-    <p class="fic">Meridian Estates is a fictional brokerage. Properties, figures, and Evelyn herself are invented. This page is a concept build by <a href="https://nexraft.com" target="_blank" rel="noopener">Nexraft</a> — demonstration only.</p>
+    <p class="fic">Meridian Estates is a fictional brokerage. Properties, figures, and Evelyn herself are invented; photography is AI-generated for demonstration. This page is a concept build by <a href="https://nexraft.com" target="_blank" rel="noopener">Nexraft</a> — demonstration only.</p>
   </div>
 </footer>
 

@@ -110,6 +110,22 @@ transform:rotateX(9deg);transform-style:preserve-3d;transition:transform .18s ea
 /* bento */
 .bento-wrap{position:relative;z-index:1;max-width:1180px;margin:6.5rem auto 0;padding:0 1.6rem}
 .sec-kick{font-family:var(--mono);font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--cy)}
+/* social proof */
+.social{position:relative;z-index:1;max-width:1180px;margin:6.5rem auto 0;padding:0 1.6rem}
+.soc-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:1rem;margin-top:2.6rem}
+@media(max-width:900px){.soc-grid{grid-template-columns:1fr}}
+.office{border:1px solid var(--faint);border-radius:16px;overflow:hidden;background:var(--card);position:relative;margin:0}
+.office img{display:block;width:100%;height:100%;min-height:320px;object-fit:cover;filter:saturate(1.05);transition:transform 1.2s cubic-bezier(.22,1,.36,1)}
+.office:hover img{transform:scale(1.03)}
+.office figcaption{position:absolute;left:0;right:0;bottom:0;padding:2.2rem 1.6rem 1.4rem;font-size:.85rem;color:var(--dim);background:linear-gradient(180deg,transparent,rgba(5,5,11,.92))}
+.office figcaption b{color:var(--fg);font-weight:600}
+.quotes{display:grid;gap:1rem}
+.q{border:1px solid var(--faint);border-radius:16px;background:linear-gradient(180deg,rgba(238,240,255,.03),rgba(238,240,255,.005));padding:1.5rem 1.6rem;margin:0;transition:border-color .35s,transform .35s}
+.q:hover{border-color:rgba(124,92,255,.45);transform:translateY(-2px)}
+.q p{font-size:.95rem;color:var(--fg);line-height:1.55}
+.q footer{margin-top:.9rem;display:flex;align-items:baseline;gap:.7rem}
+.q footer b{font-family:var(--disp);font-size:.9rem}
+.q footer span{font-family:var(--mono);font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim)}
 h2{font-family:var(--disp);font-weight:700;font-size:clamp(1.9rem,4.5vw,3rem);letter-spacing:-.03em;line-height:1.05;margin-top:.9rem}
 .bento{display:grid;grid-template-columns:repeat(6,1fr);gap:1rem;margin-top:2.6rem}
 .b{grid-column:span 2;border:1px solid var(--faint);border-radius:16px;background:linear-gradient(180deg,rgba(238,240,255,.03),rgba(238,240,255,.005));padding:1.6rem;position:relative;overflow:hidden;transition:border-color .35s,transform .35s}
@@ -280,6 +296,24 @@ footer{position:relative;z-index:1;border-top:1px solid var(--faint);margin-top:
   <div class="stat rv"><b data-count="31" data-suffix="s">0</b><span>median time from merged PR to published, targeted release note</span></div>
 </section>
 
+<section class="social" id="customers">
+  <div class="rv">
+    <span class="sec-kick" style="color:var(--pk)">Loved by shippers</span>
+    <h2>Teams that ship loudly.</h2>
+  </div>
+  <div class="soc-grid">
+    <figure class="office rv">
+      <img src="/img/demos/ll-office.jpg" alt="The Loopline team reviewing a release in their studio" loading="lazy">
+      <figcaption><b>The Loopline studio, 11:48 PM</b> — four people, one keyboard shortcut, and a release note that writes itself. HQ is fictional; the vibe is accurate.</figcaption>
+    </figure>
+    <div class="quotes">
+      <blockquote class="q rv"><p>“Our changelog went from a graveyard to our second-highest-converting page. I don't fully understand it either.”</p><footer><b>Priya N.</b><span>Head of Product · vantry</span></footer></blockquote>
+      <blockquote class="q rv"><p>“I used to write release notes on Fridays. Now I read them like everyone else, on Loopline, with coffee.”</p><footer><b>Dane K.</b><span>CTO · brightloop</span></footer></blockquote>
+      <blockquote class="q rv"><p>“The audience targeting is rude, honestly. It knows our users better than our roadmap does.”</p><footer><b>Mo A.</b><span>Founder · pylon.dev</span></footer></blockquote>
+    </div>
+  </div>
+</section>
+
 <section class="pricing" id="pricing">
   <div class="rv">
     <span class="sec-kick">Pricing</span>
@@ -315,7 +349,7 @@ footer{position:relative;z-index:1;border-top:1px solid var(--faint);margin-top:
 <footer>
   <div class="foot">
     <div><b style="font-family:var(--disp)">loopline</b><p style="margin-top:.4rem">Release notes, on autopilot.</p></div>
-    <p class="fic">Loopline is a fictional product. This page is a concept build by <a href="https://nexraft.com" target="_blank" rel="noopener">Nexraft</a> — demonstration only. The read rates are invented, but honestly, so is most SaaS social proof.</p>
+    <p class="fic">Loopline is a fictional product. This page is a concept build by <a href="https://nexraft.com" target="_blank" rel="noopener">Nexraft</a> — demonstration only. The read rates, customers, and office photo (AI-generated) are invented — but honestly, so is most SaaS social proof.</p>
   </div>
 </footer>
 

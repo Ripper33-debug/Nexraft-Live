@@ -63,6 +63,9 @@ nav .links a.btn::after{display:none}
 
 /* hero */
 .hero{position:relative;min-height:100svh;display:flex;flex-direction:column;justify-content:flex-end;padding:0 2.2rem 0;overflow:hidden}
+.hero-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;opacity:.42;filter:saturate(.9) contrast(1.05);transform:scale(1.06);transition:transform 8s ease-out}
+body.ready .hero-bg{transform:scale(1)}
+.hero-scrim{position:absolute;inset:0;background:linear-gradient(180deg,rgba(14,12,10,.55) 0%,rgba(14,12,10,.25) 45%,rgba(14,12,10,.92) 100%)}
 #embers{position:absolute;inset:0;width:100%;height:100%}
 .hero-glow{position:absolute;left:50%;bottom:-30%;width:120vw;height:80vh;transform:translateX(-50%);background:radial-gradient(ellipse at 50% 100%,rgba(224,90,38,.28) 0%,rgba(138,47,16,.12) 40%,transparent 70%);pointer-events:none;animation:breathe 5s ease-in-out infinite}
 @keyframes breathe{0%,100%{opacity:.85}50%{opacity:1.25;filter:brightness(1.15)}}
@@ -122,18 +125,21 @@ h2 em{font-style:italic;color:var(--flame)}
 .room{margin-top:7rem;background:var(--char2);border-top:1px solid var(--faint);border-bottom:1px solid var(--faint)}
 .room-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:4rem;padding:6rem 0;align-items:center}
 @media(max-width:860px){.room-grid{grid-template-columns:1fr}}
-.hearth{position:relative;aspect-ratio:4/3;overflow:hidden;border:1px solid var(--faint);
-background:
- radial-gradient(ellipse 60% 45% at 50% 88%,rgba(224,90,38,.75) 0%,rgba(200,80,30,.35) 35%,transparent 70%),
- radial-gradient(ellipse 30% 20% at 50% 92%,#ffb648 0%,rgba(255,182,72,.4) 40%,transparent 75%),
- linear-gradient(180deg,#0a0908 0%,#141008 60%,#1d1206 100%)}
-.hearth::before{content:"";position:absolute;inset:0;
-background:repeating-linear-gradient(90deg,transparent 0 84px,rgba(240,232,216,.05) 84px 85px),
-repeating-linear-gradient(0deg,transparent 0 120px,rgba(0,0,0,.35) 120px 122px)}
-.hearth::after{content:"";position:absolute;left:0;right:0;bottom:0;height:55%;
-background:radial-gradient(ellipse 55% 60% at 50% 100%,rgba(255,150,50,.5),transparent 70%);
-filter:blur(6px);animation:flick 3.2s ease-in-out infinite}
-@keyframes flick{0%,100%{opacity:.75;transform:scaleY(1)}30%{opacity:1;transform:scaleY(1.08)}60%{opacity:.82;transform:scaleY(.96)}}
+.hearth{position:relative;aspect-ratio:4/3;overflow:hidden;border:1px solid var(--faint);background:var(--char2)}
+.hearth .ph{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform 1.2s cubic-bezier(.22,1,.36,1)}
+.hearth:hover .ph{transform:scale(1.045)}
+.hearth::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(14,12,10,.15),transparent 40%,rgba(14,12,10,.25));pointer-events:none}
+/* chef */
+.chef{margin-top:7rem;border-top:1px solid var(--faint)}
+.chef-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:4rem;padding:6rem 0;align-items:center}
+@media(max-width:860px){.chef-grid{grid-template-columns:1fr}}
+.chef-art{position:relative;aspect-ratio:4/3;overflow:hidden;border:1px solid var(--faint)}
+.chef-art img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform 1.2s cubic-bezier(.22,1,.36,1)}
+.chef-art:hover img{transform:scale(1.045)}
+.chef-copy .kick{color:var(--brass);margin-bottom:1.4rem;display:block}
+.chef-copy p{color:var(--dim);margin-top:1.4rem;max-width:50ch}
+.chef-copy .sig{margin-top:2rem;font-family:var(--serif);font-style:italic;font-size:1.35rem;color:var(--cream)}
+.chef-copy .sig span{display:block;font-family:var(--mono);font-style:normal;font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:var(--dim);margin-top:.4rem}
 .hearth .tag{position:absolute;top:1rem;left:1rem;font-family:var(--mono);font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:var(--dim);border:1px solid var(--faint);padding:.4rem .7rem;background:rgba(14,12,10,.6)}
 .room-copy .kick{color:var(--brass);margin-bottom:1.4rem;display:block}
 .room-copy p{color:var(--dim);margin-top:1.4rem;max-width:46ch}
@@ -201,12 +207,15 @@ footer{border-top:1px solid var(--faint);padding:3.4rem 2.2rem 5.5rem;background
   <div class="links">
     <a href="#menu">Menu</a>
     <a href="#room">The Room</a>
+    <a href="#chef">Kitchen</a>
     <a href="#private">Private</a>
     <a class="btn" href="#reserve"><span>Reserve</span></a>
   </div>
 </nav>
 
 <header class="hero" id="top">
+  <img class="hero-bg" src="/img/demos/eo-hearth.jpg" alt="" aria-hidden="true">
+  <div class="hero-scrim" aria-hidden="true"></div>
   <canvas id="embers" aria-hidden="true"></canvas>
   <div class="hero-glow" aria-hidden="true"></div>
   <div class="hero-inner wrap" style="max-width:1200px;width:100%;margin:0 auto;padding:0">
@@ -261,8 +270,9 @@ footer{border-top:1px solid var(--faint);padding:3.4rem 2.2rem 5.5rem;background
 
 <section class="room" id="room">
   <div class="wrap room-grid">
-    <div class="hearth rv" aria-label="Stylized illustration of the open hearth">
-      <span class="tag">The hearth · live fire</span>
+    <div class="hearth rv">
+      <img class="ph" src="/img/demos/eo-dining.jpg" alt="The Ember &amp; Oak dining room by candlelight" loading="lazy">
+      <span class="tag">The room · twenty-two chairs</span>
     </div>
     <div class="room-copy rv">
       <span class="kick mono">The room</span>
@@ -274,6 +284,21 @@ footer{border-top:1px solid var(--faint);padding:3.4rem 2.2rem 5.5rem;background
         <div><b>1</b><span>Seating</span></div>
         <div><b>0</b><span>Gas lines</span></div>
       </div>
+    </div>
+  </div>
+</section>
+
+<section class="chef" id="chef">
+  <div class="wrap chef-grid">
+    <div class="chef-art rv">
+      <img src="/img/demos/eo-dish.jpg" alt="Fire-roasted dry-aged ribeye with charred leeks on dark ceramic" loading="lazy">
+    </div>
+    <div class="chef-copy rv">
+      <span class="kick mono">The kitchen</span>
+      <h2>Cooking is just <em>listening</em> to heat.</h2>
+      <p>Chef-patron Marta Ilić spent nine years at fire-led kitchens on three continents before finding the old blacksmith's shop on Coal Lane. She cooks with two woods, one hearth, and no thermometers — the fire tells her when it's done, and it has not been wrong yet.</p>
+      <p>The brigade is six. Everyone butchers, everyone bakes, everyone splits wood. The menu changes when the market or the weather insists, which is often.</p>
+      <div class="sig">Marta Ilić<span>Chef-patron · Ember &amp; Oak</span></div>
     </div>
   </div>
 </section>
@@ -336,9 +361,15 @@ footer{border-top:1px solid var(--faint);padding:3.4rem 2.2rem 5.5rem;background
   <div class="foot-grid">
     <div>
       <div class="wm">Ember <em>&amp;</em> Oak</div>
-      <p style="margin-top:.6rem">14 Coal Lane, Old Mill District<br>A fictional address for a fictional restaurant.</p>
+      <p style="margin-top:.6rem">14 Coal Lane, Old Mill District<br>(555) 014-2214 · <a href="#reserve">table@emberandoak.example</a><br>@emberandoak — mostly photos of fire</p>
     </div>
-    <p class="fic">Ember &amp; Oak is a fictional brand. This page is a concept build by <a href="https://nexraft.com" target="_blank" rel="noopener">Nexraft</a> — demonstration only. No tables, no ovens, no duck were involved.</p>
+    <div style="font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;line-height:2.4">
+      <a href="#menu">Tonight's menu</a><br>
+      <a href="#private">Private dining</a><br>
+      <a href="#reserve">Gift the fire</a><br>
+      <a href="#chef">Join the brigade</a>
+    </div>
+    <p class="fic">Ember &amp; Oak is a fictional brand. This page is a concept build by <a href="https://nexraft.com" target="_blank" rel="noopener">Nexraft</a> — demonstration only. No tables, no ovens, no duck were involved. Photography is AI-generated for demonstration.</p>
   </div>
 </footer>
 
