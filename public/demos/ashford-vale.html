@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ashford &amp; Vale LLP — Counsel for Consequential Matters</title>
+<meta name="description" content="Concept build by Nexraft. Ashford & Vale LLP — a law firm website. Fictional firm, production code.">
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#0e1b2c;--navy2:#122237;--parch:#f6f2e9;--parch-dim:rgba(246,242,233,.66);--parch-faint:rgba(246,242,233,.13);--ox:#8a2f2b;--brass:#b08d4f;
+--serif:'EB Garamond',serif;--sans:'Inter',sans-serif}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--navy);color:var(--parch);font-family:var(--sans);line-height:1.65;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+::selection{background:var(--brass);color:var(--navy)}
+.badge{position:fixed;bottom:1.1rem;right:1.1rem;z-index:99;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--parch-dim);background:rgba(14,27,44,.88);border:1px solid var(--parch-faint);padding:.5rem .9rem;text-decoration:none;backdrop-filter:blur(6px)}
+.badge b{color:var(--brass);font-weight:500}
+.badge:hover{color:var(--parch)}
+.rule{height:3px;background:linear-gradient(90deg,var(--brass),var(--ox));position:fixed;top:0;left:0;right:0;z-index:95}
+nav{position:fixed;top:3px;left:0;right:0;z-index:90;display:flex;justify-content:space-between;align-items:center;padding:1.3rem clamp(1.2rem,4vw,3.2rem);background:rgba(14,27,44,.9);backdrop-filter:blur(10px);border-bottom:1px solid var(--parch-faint)}
+.logo{font-family:var(--serif);font-size:1.3rem;font-weight:600;letter-spacing:.04em;color:var(--parch);text-decoration:none}
+.logo span{color:var(--brass)}
+.logo small{display:block;font-family:var(--sans);font-size:8.5px;letter-spacing:.34em;text-transform:uppercase;color:var(--parch-dim);font-weight:500}
+nav .links{display:flex;gap:2rem}
+nav .links a{color:var(--parch-dim);text-decoration:none;font-size:11px;letter-spacing:.2em;text-transform:uppercase;transition:color .3s}
+nav .links a:hover{color:var(--brass)}
+.consult{border:1px solid var(--brass);color:var(--brass);text-decoration:none;font-size:11px;letter-spacing:.18em;text-transform:uppercase;padding:.6rem 1.3rem;transition:.3s}
+.consult:hover{background:var(--brass);color:var(--navy)}
+@media(max-width:820px){nav .links{display:none}}
+header{min-height:92vh;display:flex;flex-direction:column;justify-content:center;padding:9rem clamp(1.2rem,5vw,4rem) 5rem;max-width:1240px;margin:0 auto;position:relative}
+.crest{position:absolute;right:clamp(1rem,6vw,5rem);top:50%;transform:translateY(-50%);font-family:var(--serif);font-size:clamp(14rem,30vw,26rem);color:rgba(176,141,79,.07);line-height:1;user-select:none;pointer-events:none}
+.k{font-size:11px;letter-spacing:.32em;text-transform:uppercase;color:var(--brass);margin-bottom:1.4rem}
+h1{font-family:var(--serif);font-weight:500;font-size:clamp(2.8rem,7vw,5.6rem);line-height:1.04;letter-spacing:.005em;max-width:16ch}
+h1 em{font-style:italic;color:var(--brass)}
+header .lead{margin-top:1.8rem;max-width:34rem;color:var(--parch-dim);font-size:1.05rem}
+.hero-cta{margin-top:2.4rem;display:flex;gap:1rem;flex-wrap:wrap}
+.btn{display:inline-block;font-size:11px;letter-spacing:.22em;text-transform:uppercase;text-decoration:none;padding:1rem 2.2rem;transition:.3s;cursor:pointer;border:none;font-family:var(--sans)}
+.btn.brass{background:var(--brass);color:var(--navy);font-weight:600}
+.btn.brass:hover{background:var(--parch)}
+.btn.line{border:1px solid var(--parch-faint);color:var(--parch)}
+.btn.line:hover{border-color:var(--brass);color:var(--brass)}
+.bar-stats{border-top:1px solid var(--parch-faint);border-bottom:1px solid var(--parch-faint);background:var(--navy2)}
+.bar-in{max-width:1240px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:1px}
+.bs{padding:2rem 1.4rem;border-left:1px solid var(--parch-faint)}
+.bs:first-child{border-left:none}
+.bs .n{font-family:var(--serif);font-size:2.2rem;color:var(--brass)}
+.bs .l{font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--parch-dim);margin-top:.3rem}
+section{padding:clamp(5rem,12vh,8.5rem) clamp(1.2rem,5vw,4rem);max-width:1240px;margin:0 auto}
+h2{font-family:var(--serif);font-weight:500;font-size:clamp(2rem,4.8vw,3.4rem);line-height:1.08;max-width:22ch}
+h2 em{font-style:italic;color:var(--brass)}
+.practices{display:grid;grid-template-columns:repeat(2,1fr);gap:1.2rem;margin-top:3rem}
+.pr-card{border:1px solid var(--parch-faint);padding:2.2rem;background:var(--navy2);transition:.35s;position:relative}
+.pr-card::before{content:"";position:absolute;left:0;top:0;bottom:0;width:2px;background:var(--brass);transform:scaleY(0);transform-origin:top;transition:transform .4s}
+.pr-card:hover::before{transform:scaleY(1)}
+.pr-card:hover{border-color:rgba(176,141,79,.4)}
+.pr-card .no{font-family:var(--serif);font-style:italic;color:var(--brass);font-size:1rem}
+.pr-card h3{font-family:var(--serif);font-weight:500;font-size:1.55rem;margin:.6rem 0 .7rem}
+.pr-card p{color:var(--parch-dim);font-size:.93rem;max-width:30rem}
+.parch-band{background:var(--parch);color:var(--navy)}
+.parch-in{max-width:1240px;margin:0 auto;padding:clamp(5rem,12vh,8.5rem) clamp(1.2rem,5vw,4rem)}
+.parch-band .k{color:var(--ox)}
+.parch-band h2 em{color:var(--ox)}
+.partners{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:3rem}
+.partner{border:1px solid rgba(14,27,44,.15);background:#fbf8f1;padding:0 0 1.6rem}
+.partner .mono{aspect-ratio:1/1.05;display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:4.5rem;font-style:italic;color:var(--parch);margin-bottom:1.4rem;position:relative;overflow:hidden}
+.m1{background:linear-gradient(160deg,#16283f,#0e1b2c)}
+.m2{background:linear-gradient(160deg,#3c2422,#1d1210)}
+.m3{background:linear-gradient(160deg,#37402c,#171d12)}
+.partner .mono::after{content:"";position:absolute;inset:0;background:radial-gradient(circle at 30% 20%,rgba(176,141,79,.25),transparent 55%)}
+.partner h3{font-family:var(--serif);font-weight:600;font-size:1.35rem;padding:0 1.4rem}
+.partner .role{font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--ox);padding:0 1.4rem;margin:.3rem 0 .7rem}
+.partner p{font-size:.88rem;color:rgba(14,27,44,.68);padding:0 1.4rem}
+.results{display:grid;gap:0;margin-top:3rem;border-top:1px solid var(--parch-faint)}
+.result{display:grid;grid-template-columns:auto 1fr auto;gap:1.6rem;align-items:baseline;padding:1.7rem 0;border-bottom:1px solid var(--parch-faint)}
+.result .amt{font-family:var(--serif);font-size:clamp(1.5rem,3.4vw,2.2rem);color:var(--brass);white-space:nowrap}
+.result h3{font-size:1.02rem;font-weight:600}
+.result p{grid-column:2;color:var(--parch-dim);font-size:.9rem;max-width:38rem}
+.result .yr{font-size:11px;letter-spacing:.18em;color:var(--parch-dim)}
+.note{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--parch-dim);margin-top:1.4rem}
+.cta-wrap{border:1px solid var(--parch-faint);background:var(--navy2);padding:clamp(2.5rem,6vw,4.5rem);display:grid;grid-template-columns:1.2fr .8fr;gap:clamp(2rem,5vw,4rem);align-items:center}
+form{display:grid;gap:1rem}
+label{font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--parch-dim);display:block;margin-bottom:.4rem}
+input,select,textarea{width:100%;background:transparent;border:1px solid rgba(246,242,233,.3);color:var(--parch);padding:.8rem 1rem;font-family:var(--sans);font-size:.93rem;border-radius:0;appearance:none;resize:vertical}
+input:focus,select:focus,textarea:focus{outline:1px solid var(--brass);border-color:var(--brass)}
+select option{background:var(--navy2)}
+.confirm{font-size:.85rem;color:var(--brass);min-height:1.2em}
+footer{border-top:1px solid var(--parch-faint);padding:2.6rem clamp(1.2rem,5vw,4rem);display:flex;justify-content:space-between;flex-wrap:wrap;gap:1.5rem;font-size:.82rem;color:var(--parch-dim)}
+.rv{opacity:0;transform:translateY(32px);transition:opacity .9s cubic-bezier(.19,1,.22,1),transform .9s cubic-bezier(.19,1,.22,1)}
+.rv.on{opacity:1;transform:none}
+@media(max-width:900px){.practices,.partners,.cta-wrap{grid-template-columns:1fr}.bar-in{grid-template-columns:repeat(2,1fr)}.bs{border-left:none;border-top:1px solid var(--parch-faint)}}
+@media(prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}}
+</style>
+</head>
+<body>
+<div class="rule"></div>
+<a class="badge" href="https://nexraft.com" target="_blank" rel="noopener">Concept build — <b>NEXRAFT</b></a>
+
+<nav>
+  <a class="logo" href="#top">Ashford <span>&amp;</span> Vale<small>Attorneys · LLP</small></a>
+  <div class="links"><a href="#practice">Practice</a><a href="#partners">Partners</a><a href="#results">Results</a><a href="#contact">Contact</a></div>
+  <a class="consult" href="#contact">Request counsel</a>
+</nav>
+
+<header id="top">
+  <span class="crest">&sect;</span>
+  <p class="k rv">Est. 1987 — Boutique litigation &amp; counsel</p>
+  <h1 class="rv">Counsel for<br><em>consequential</em> matters.</h1>
+  <p class="lead rv">Ashford &amp; Vale is a nine-lawyer firm retained when the outcome matters more than the invoice. We try cases. We close deals. We keep confidences.</p>
+  <div class="hero-cta rv">
+    <a class="btn brass" href="#contact">Request a consultation</a>
+    <a class="btn line" href="#practice">Our practice</a>
+  </div>
+</header>
+
+<div class="bar-stats"><div class="bar-in">
+  <div class="bs rv"><p class="n">38</p><p class="l">Years at the bar</p></div>
+  <div class="bs rv"><p class="n">9</p><p class="l">Attorneys, by design</p></div>
+  <div class="bs rv"><p class="n">120+</p><p class="l">Matters tried to verdict</p></div>
+  <div class="bs rv"><p class="n">1</p><p class="l">Standard of work</p></div>
+</div></div>
+
+<section id="practice">
+  <p class="k rv">Practice areas</p>
+  <h2 class="rv">Four disciplines.<br><em>Practiced deeply.</em></h2>
+  <div class="practices">
+    <div class="pr-card rv"><p class="no">i.</p><h3>Commercial Litigation</h3><p>Contract disputes, partnership dissolutions, and business torts — prepared from day one as if trial is certain, because settlements follow strength.</p></div>
+    <div class="pr-card rv"><p class="no">ii.</p><h3>Corporate &amp; Transactions</h3><p>Formation through exit: governance, financing rounds, acquisitions, and the quiet counsel in between.</p></div>
+    <div class="pr-card rv"><p class="no">iii.</p><h3>Estates &amp; Private Clients</h3><p>Succession, trusts, and family enterprises — structured to survive both the tax code and the family dinner.</p></div>
+    <div class="pr-card rv"><p class="no">iv.</p><h3>Employment &amp; Executive</h3><p>Executive contracts, separations, restrictive covenants, and the disputes that follow them.</p></div>
+  </div>
+</section>
+
+<div class="parch-band" id="partners">
+  <div class="parch-in">
+    <p class="k rv">The partners</p>
+    <h2 class="rv">Your matter is handled by <em>a partner.</em> Always.</h2>
+    <div class="partners">
+      <div class="partner rv"><div class="mono m1">EA</div><h3>Eleanor Ashford</h3><p class="role">Managing Partner — Litigation</p><p>Three decades of first-chair trial work. Known for the cross-examination and the settlement that follows it.</p></div>
+      <div class="partner rv"><div class="mono m2">TV</div><h3>Thomas Vale</h3><p class="role">Partner — Corporate</p><p>Counsel to founders and family enterprises from first financing to final exit. Writes the deal, then stands behind it.</p></div>
+      <div class="partner rv"><div class="mono m3">RO</div><h3>Ruth Okafor</h3><p class="role">Partner — Private Clients</p><p>Estates and succession for complex families. The lawyer in the room where the hard conversations happen.</p></div>
+    </div>
+  </div>
+</div>
+
+<section id="results">
+  <p class="k rv">Selected results</p>
+  <h2 class="rv">Outcomes, <em>not adjectives.</em></h2>
+  <div class="results">
+    <div class="result rv"><span class="amt">$21.5M</span><div><h3>Verdict — breach of partnership agreement</h3><p>For the founding partner of a logistics firm, after a three-week jury trial.</p></div><span class="yr">2024</span></div>
+    <div class="result rv"><span class="amt">$64M</span><div><h3>Acquisition closed — family manufacturing group</h3><p>Sell-side counsel through auction, diligence, and a same-week signing and close.</p></div><span class="yr">2023</span></div>
+    <div class="result rv"><span class="amt">Dismissed</span><div><h3>Complete defense — executive non-compete claim</h3><p>All claims dismissed with prejudice at the pleading stage; fees recovered.</p></div><span class="yr">2023</span></div>
+    <div class="result rv"><span class="amt">$9.8M</span><div><h3>Settlement — minority shareholder oppression</h3><p>Achieved ten days before trial, with governance reforms included.</p></div><span class="yr">2022</span></div>
+  </div>
+  <p class="note rv">Illustrative matters for a fictional firm. Prior results do not guarantee similar outcomes.</p>
+</section>
+
+<section id="contact">
+  <div class="cta-wrap rv">
+    <div>
+      <p class="k">Consultations</p>
+      <h2 style="max-width:none">Bring us the matter<br><em>that keeps you up.</em></h2>
+      <p style="color:var(--parch-dim);margin-top:1.2rem;max-width:26rem">Initial consultations are privileged, candid, and free of charge. If we are not the right firm, we will tell you who is.</p>
+    </div>
+    <form id="cForm">
+      <div><label for="cn">Name</label><input id="cn" type="text" required></div>
+      <div><label for="ce">Email</label><input id="ce" type="email" required></div>
+      <div><label for="cm">Matter type</label><select id="cm"><option>Commercial litigation</option><option>Corporate / transaction</option><option>Estates &amp; private client</option><option>Employment / executive</option></select></div>
+      <div><label for="cd">Briefly, the situation</label><textarea id="cd" rows="3"></textarea></div>
+      <button class="btn brass" type="submit">Request consultation</button>
+      <p class="confirm" id="cMsg"></p>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <div><strong style="font-family:var(--serif)">Ashford &amp; Vale LLP</strong> — a fictional firm. No attorney-client relationship is formed here.</div>
+  <div>Concept build by <a href="https://nexraft.com" target="_blank" rel="noopener" style="color:var(--brass)">Nexraft</a>. Demonstration only.</div>
+</footer>
+
+<script>
+(function(){
+  var io=new IntersectionObserver(function(es){
+    es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('on'); io.unobserve(e.target); } });
+  },{threshold:.12});
+  document.querySelectorAll('.rv').forEach(function(el,i){ el.style.transitionDelay=(i%3*80)+'ms'; io.observe(el); });
+  document.getElementById('cForm').addEventListener('submit',function(ev){
+    ev.preventDefault();
+    document.getElementById('cMsg').textContent='This is a concept build — no counsel was retained. Yet.';
+  });
+})();
+</script>
+</body>
+</html>

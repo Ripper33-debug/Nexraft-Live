@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ember &amp; Oak — Wood-Fired Dining</title>
+<meta name="description" content="Concept build by Nexraft. Ember & Oak — a wood-fired tasting room. Fictional brand, production code.">
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--char:#131110;--char2:#1b1815;--cream:#f2ebdd;--cream-dim:rgba(242,235,221,.62);--cream-faint:rgba(242,235,221,.14);--brass:#c8963e;--flame:#d4572a;
+--serif:'Fraunces',serif;--sans:'Inter',sans-serif}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--char);color:var(--cream);font-family:var(--sans);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+::selection{background:var(--flame);color:var(--cream)}
+.grain{position:fixed;inset:-50%;width:200%;height:200%;pointer-events:none;z-index:50;opacity:.05;
+background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");animation:gr 8s steps(10) infinite}
+@keyframes gr{0%{transform:translate(0,0)}50%{transform:translate(-4%,3%)}100%{transform:translate(3%,-4%)}}
+.badge{position:fixed;bottom:1.1rem;right:1.1rem;z-index:99;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--cream-dim);background:rgba(19,17,16,.85);border:1px solid var(--cream-faint);padding:.5rem .9rem;text-decoration:none;backdrop-filter:blur(6px)}
+.badge b{color:var(--brass);font-weight:500}
+.badge:hover{color:var(--cream)}
+nav{position:fixed;top:0;left:0;right:0;z-index:90;display:flex;justify-content:space-between;align-items:center;padding:1.4rem clamp(1.2rem,4vw,3rem);mix-blend-mode:difference}
+.logo{font-family:var(--serif);font-weight:600;font-size:1.25rem;letter-spacing:.02em;color:var(--cream);text-decoration:none}
+.logo em{color:var(--brass);font-style:normal}
+nav .links{display:flex;gap:2rem}
+nav .links a{color:var(--cream-dim);text-decoration:none;font-size:11px;letter-spacing:.2em;text-transform:uppercase;transition:color .3s}
+nav .links a:hover{color:var(--cream)}
+.res-btn{border:1px solid var(--cream);border-radius:100px;padding:.65rem 1.4rem;color:var(--cream);text-decoration:none;font-size:11px;letter-spacing:.18em;text-transform:uppercase;transition:.35s}
+.res-btn:hover{background:var(--cream);color:#131110}
+@media(max-width:760px){nav .links{display:none}}
+header{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;position:relative;padding:6rem 1.5rem 4rem;
+background:radial-gradient(ellipse 80% 55% at 50% 110%, rgba(212,87,42,.35), transparent 65%),radial-gradient(ellipse 60% 40% at 50% 118%, rgba(200,150,62,.28), transparent 60%),var(--char)}
+.fire{position:absolute;bottom:0;left:0;right:0;height:38vh;pointer-events:none;
+background:radial-gradient(ellipse 45% 90% at 50% 100%, rgba(212,87,42,.5), transparent 70%);filter:blur(30px);animation:flick 4.5s ease-in-out infinite alternate}
+@keyframes flick{from{opacity:.55;transform:scaleX(1)}to{opacity:.9;transform:scaleX(1.12)}}
+.kicker{font-size:11px;letter-spacing:.34em;text-transform:uppercase;color:var(--brass);margin-bottom:1.6rem}
+h1{font-family:var(--serif);font-weight:300;font-size:clamp(3.2rem,10vw,8.5rem);line-height:.98;letter-spacing:-.01em}
+h1 .it{font-style:italic;font-weight:400;color:var(--brass)}
+header p.lead{margin-top:2rem;max-width:34rem;color:var(--cream-dim);font-size:1.05rem}
+.hero-cta{margin-top:2.6rem;display:flex;gap:1rem;flex-wrap:wrap;justify-content:center}
+.btn{display:inline-block;padding:1rem 2.2rem;border-radius:100px;font-size:11px;letter-spacing:.2em;text-transform:uppercase;text-decoration:none;transition:.35s}
+.btn.solid{background:var(--cream);color:#131110}
+.btn.solid:hover{background:var(--brass)}
+.btn.ghost{border:1px solid var(--cream-faint);color:var(--cream)}
+.btn.ghost:hover{border-color:var(--brass);color:var(--brass)}
+.scroll-cue{position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:var(--cream-dim)}
+.marq{border-top:1px solid var(--cream-faint);border-bottom:1px solid var(--cream-faint);overflow:hidden;padding:1rem 0;background:var(--char2)}
+.marq-in{display:flex;gap:3rem;width:max-content;animation:mq 24s linear infinite;font-family:var(--serif);font-style:italic;font-size:1rem;color:var(--cream-dim);white-space:nowrap}
+@keyframes mq{to{transform:translateX(-50%)}}
+.marq-in span b{color:var(--brass);font-weight:400;margin-right:3rem}
+section{padding:clamp(5rem,12vh,9rem) clamp(1.2rem,6vw,4rem);max-width:1200px;margin:0 auto}
+.sec-k{font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:var(--brass);margin-bottom:1.2rem}
+h2{font-family:var(--serif);font-weight:300;font-size:clamp(2rem,5vw,3.6rem);line-height:1.08;max-width:22ch}
+h2 .it{font-style:italic;color:var(--brass)}
+.story{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(2rem,6vw,5rem);align-items:center}
+.story p{color:var(--cream-dim);margin-top:1.4rem;max-width:32rem}
+.story .visual{aspect-ratio:4/5;border:1px solid var(--cream-faint);position:relative;overflow:hidden;
+background:linear-gradient(160deg,#241d16 0%,#171310 55%),radial-gradient(circle at 30% 80%,rgba(212,87,42,.5),transparent 55%)}
+.story .visual::after{content:"";position:absolute;inset:0;background:radial-gradient(circle at 70% 25%,rgba(200,150,62,.35),transparent 45%)}
+.story .visual .glyph{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:clamp(5rem,14vw,10rem);font-style:italic;color:rgba(242,235,221,.12)}
+.menu-wrap{border-top:1px solid var(--cream-faint)}
+.course{display:grid;grid-template-columns:auto 1fr auto;gap:1.5rem;align-items:baseline;padding:1.8rem 0;border-bottom:1px solid var(--cream-faint);transition:padding .35s}
+.course:hover{padding-left:1rem}
+.course .n{font-size:10px;letter-spacing:.2em;color:var(--brass)}
+.course h3{font-family:var(--serif);font-weight:400;font-size:clamp(1.2rem,2.6vw,1.7rem)}
+.course p{grid-column:2;color:var(--cream-dim);font-size:.92rem;max-width:34rem}
+.course .price{font-family:var(--serif);font-style:italic;color:var(--brass);font-size:1.1rem}
+.duo{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem}
+.card{border:1px solid var(--cream-faint);padding:clamp(1.6rem,4vw,2.8rem);background:var(--char2);position:relative;overflow:hidden}
+.card h3{font-family:var(--serif);font-weight:400;font-size:1.6rem;margin-bottom:.8rem}
+.card p{color:var(--cream-dim);font-size:.95rem;max-width:28rem}
+.card .tag{position:absolute;top:1.4rem;right:1.4rem;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--brass);border:1px solid var(--cream-faint);border-radius:100px;padding:.3rem .8rem}
+.hours{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1.5rem;margin-top:3rem}
+.hours div{border-top:1px solid var(--cream-faint);padding-top:1.2rem}
+.hours .d{font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--brass)}
+.hours .t{font-family:var(--serif);font-size:1.3rem;margin-top:.4rem}
+.reserve{background:var(--char2);border-top:1px solid var(--cream-faint)}
+.reserve .inner{max-width:1200px;margin:0 auto;padding:clamp(5rem,12vh,8rem) clamp(1.2rem,6vw,4rem);display:grid;grid-template-columns:1fr 1fr;gap:clamp(2rem,6vw,5rem)}
+form{display:grid;gap:1.1rem}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:1.1rem}
+label{font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--cream-dim);display:block;margin-bottom:.45rem}
+input,select{width:100%;background:transparent;border:1px solid rgba(242,235,221,.3);color:var(--cream);padding:.85rem 1rem;font-family:var(--sans);font-size:.95rem;border-radius:0;appearance:none}
+input:focus,select:focus{outline:1px solid var(--brass);border-color:var(--brass)}
+select option{background:#1b1815}
+form .btn{border:none;cursor:pointer;font-family:var(--sans);justify-self:start;background:var(--cream);color:#131110}
+form .btn:hover{background:var(--brass)}
+.confirm{font-size:.85rem;color:var(--brass);min-height:1.2em}
+footer{border-top:1px solid var(--cream-faint);padding:3rem clamp(1.2rem,6vw,4rem);display:flex;justify-content:space-between;gap:2rem;flex-wrap:wrap;color:var(--cream-dim);font-size:.85rem}
+footer .fl{font-family:var(--serif);font-size:1.2rem;color:var(--cream)}
+.rv{opacity:0;transform:translateY(34px);transition:opacity .9s cubic-bezier(.19,1,.22,1),transform .9s cubic-bezier(.19,1,.22,1)}
+.rv.on{opacity:1;transform:none}
+@media(max-width:860px){.story,.duo,.reserve .inner{grid-template-columns:1fr}.row2{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}.marq-in,.fire,.grain{animation:none}}
+</style>
+</head>
+<body>
+<div class="grain"></div>
+<a class="badge" href="https://nexraft.com" target="_blank" rel="noopener">Concept build — <b>NEXRAFT</b></a>
+
+<nav>
+  <a class="logo" href="#top">Ember <em>&amp;</em> Oak</a>
+  <div class="links">
+    <a href="#story">Story</a><a href="#menu">Menu</a><a href="#private">Private Dining</a><a href="#visit">Visit</a>
+  </div>
+  <a class="res-btn" href="#reserve">Reserve</a>
+</nav>
+
+<header id="top">
+  <div class="fire"></div>
+  <p class="kicker rv">Wood-fired tasting room — Est. 2021</p>
+  <h1 class="rv">Cooked by fire.<br><span class="it">Finished by hand.</span></h1>
+  <p class="lead rv">A twelve-seat chef's counter built around a single oak-fired hearth. One menu, two seatings, no shortcuts.</p>
+  <div class="hero-cta rv">
+    <a class="btn solid" href="#reserve">Reserve a seat</a>
+    <a class="btn ghost" href="#menu">Tonight's menu</a>
+  </div>
+  <span class="scroll-cue">Scroll</span>
+</header>
+
+<div class="marq" aria-hidden="true"><div class="marq-in">
+  <span>Oak-fired hearth <b>·</b></span><span>Twelve seats <b>·</b></span><span>Two seatings nightly <b>·</b></span><span>Zero-waste kitchen <b>·</b></span><span>Natural cellar <b>·</b></span>
+  <span>Oak-fired hearth <b>·</b></span><span>Twelve seats <b>·</b></span><span>Two seatings nightly <b>·</b></span><span>Zero-waste kitchen <b>·</b></span><span>Natural cellar <b>·</b></span>
+</div></div>
+
+<section id="story">
+  <div class="story">
+    <div>
+      <p class="sec-k rv">The room</p>
+      <h2 class="rv">Everything passes <span class="it">through the flame.</span></h2>
+      <p class="rv">There is one heat source in this kitchen: a two-tonne oak-fired hearth we sweep and relight every afternoon. No induction, no gas, no sous-vide. Vegetables collapse in the embers, fish cures in the smoke path, bread proves on the mantel.</p>
+      <p class="rv">The menu is written at 3pm daily, after the market run, and printed once.</p>
+    </div>
+    <div class="visual rv"><div class="glyph">&amp;</div></div>
+  </div>
+</section>
+
+<section id="menu">
+  <p class="sec-k rv">Tonight — seven courses</p>
+  <h2 class="rv">The counter menu.</h2>
+  <div class="menu-wrap" style="margin-top:3rem">
+    <div class="course rv"><span class="n">I</span><h3>Embered leeks, cultured cream, cured yolk</h3><p>Buried in the coals until black, peeled tableside.</p><span class="price">—</span></div>
+    <div class="course rv"><span class="n">II</span><h3>Hearth-baked sourdough, smoked butter</h3><p>Twelve-year starter. Proved on the mantel through service.</p><span class="price">—</span></div>
+    <div class="course rv"><span class="n">III</span><h3>Dry-aged trout, fig leaf, brown butter</h3><p>Hung in the smoke path for four days.</p><span class="price">—</span></div>
+    <div class="course rv"><span class="n">IV</span><h3>Grilled langoustine, ember oil</h3><p>Cooked shell-on over white-hot oak.</p><span class="price">—</span></div>
+    <div class="course rv"><span class="n">V</span><h3>Retired dairy cow, three years aged</h3><p>Cut from the rib, rested over the dying fire.</p><span class="price">—</span></div>
+    <div class="course rv"><span class="n">VI</span><h3>Burnt honey tart, hearth cream</h3><p>Caramelised in the last heat of the night.</p><span class="price">—</span></div>
+    <div class="course rv"><span class="n">VII</span><h3>Oak-smoked chocolate, sea salt</h3><p>To finish, with coffee or a pour from the cellar.</p><span class="price">—</span></div>
+  </div>
+  <p class="rv" style="margin-top:2rem;color:var(--cream-dim);font-size:.9rem">Counter, seven courses — 145 per guest. Wine pairing — 85. Menus change daily.</p>
+</section>
+
+<section id="private">
+  <p class="sec-k rv">Beyond the counter</p>
+  <h2 class="rv">Private dining <span class="it">&amp; the cellar.</span></h2>
+  <div class="duo" style="margin-top:3rem">
+    <div class="card rv"><span class="tag">Up to 16</span><h3>The Cellar Room</h3><p>A vaulted brick room beneath the restaurant, lined with our natural wine library. Its own hearth, its own menu, one long oak table.</p></div>
+    <div class="card rv"><span class="tag">Full buyout</span><h3>The Whole House</h3><p>The counter, the cellar, and the kitchen — yours for the evening. We build the menu with you, from the market up.</p></div>
+  </div>
+</section>
+
+<section id="visit">
+  <p class="sec-k rv">Visit</p>
+  <h2 class="rv">14 Coalhouse Lane.</h2>
+  <div class="hours">
+    <div class="rv"><p class="d">Wed — Thu</p><p class="t">6:00 &amp; 8:45</p></div>
+    <div class="rv"><p class="d">Fri — Sat</p><p class="t">5:30 &amp; 8:30</p></div>
+    <div class="rv"><p class="d">Sun</p><p class="t">Hearth lunch, 1:00</p></div>
+    <div class="rv"><p class="d">Mon — Tue</p><p class="t">Closed — fire rests</p></div>
+  </div>
+</section>
+
+<div class="reserve" id="reserve">
+  <div class="inner">
+    <div>
+      <p class="sec-k rv">Reservations</p>
+      <h2 class="rv">Take a seat <span class="it">at the fire.</span></h2>
+      <p class="rv" style="color:var(--cream-dim);margin-top:1.4rem;max-width:26rem">Seats release on the first of each month. Counter reservations are for the full tasting only.</p>
+    </div>
+    <form class="rv" id="resForm">
+      <div class="row2">
+        <div><label for="rn">Name</label><input id="rn" type="text" required></div>
+        <div><label for="re">Email</label><input id="re" type="email" required></div>
+      </div>
+      <div class="row2">
+        <div><label for="rg">Guests</label><select id="rg"><option>2</option><option>1</option><option>3</option><option>4</option></select></div>
+        <div><label for="rs">Seating</label><select id="rs"><option>First — 6:00</option><option>Second — 8:45</option></select></div>
+      </div>
+      <button class="btn" type="submit">Request a table</button>
+      <p class="confirm" id="resMsg"></p>
+    </form>
+  </div>
+</div>
+
+<footer>
+  <div><p class="fl">Ember <em style="color:var(--brass);font-style:normal">&amp;</em> Oak</p><p>14 Coalhouse Lane — a fictional address for a fictional restaurant.</p></div>
+  <div><p>Concept build by <a href="https://nexraft.com" target="_blank" rel="noopener" style="color:var(--brass)">Nexraft</a>. Demonstration only.</p></div>
+</footer>
+
+<script>
+(function(){
+  var io = new IntersectionObserver(function(es){
+    es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('on'); io.unobserve(e.target); } });
+  },{threshold:.12});
+  document.querySelectorAll('.rv').forEach(function(el,i){ el.style.transitionDelay=(i%4*70)+'ms'; io.observe(el); });
+  document.getElementById('resForm').addEventListener('submit',function(ev){
+    ev.preventDefault();
+    document.getElementById('resMsg').textContent='This is a concept build — no table was booked. But it would have been a good one.';
+  });
+})();
+</script>
+</body>
+</html>
