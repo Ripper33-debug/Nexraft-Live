@@ -34,7 +34,7 @@ export const metadata: Metadata = {
   },
   description:
     "Custom website builds, WordPress and Squarespace migrations, managed hosting, SEO, and growth retainers. Care from $150/mo, Growth from $750/mo, builds from $3k. 3D and custom AI tools. Founding-client rates available.",
-  metadataBase: new URL("https://nexraft.com"),
+  metadataBase: new URL("https://www.nexraft.com"),
   openGraph: {
     title: "Nexraft · Web, Hosting, 3D & AI Studio",
     description:

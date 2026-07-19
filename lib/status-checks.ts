@@ -16,7 +16,7 @@ export const STATUS_PROBES: StatusProbe[] = [
   {
     id: "nexraft",
     name: "nexraft.com",
-    url: "https://nexraft.com",
+    url: "https://www.nexraft.com",
     detail: "Marketing site and primary entry point.",
   },
   {

@@ -2,7 +2,7 @@ import type { MetadataRoute } from "next";
 import { allNotes } from "@/lib/notes";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const base = "https://nexraft.com";
+  const base = "https://www.nexraft.com";
   const now = new Date();
 
   const notes: MetadataRoute.Sitemap = allNotes().map((note) => ({

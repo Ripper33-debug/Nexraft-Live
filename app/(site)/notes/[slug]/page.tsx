@@ -10,7 +10,7 @@ import {
   type NoteBlock,
 } from "@/lib/notes";
 
-const SITE = "https://nexraft.com";
+const SITE = "https://www.nexraft.com";
 
 const focusRing =
   "outline-none focus-visible:[outline:2px_solid_var(--color-signal)] focus-visible:[outline-offset:2px]";

@@ -1,4 +1,4 @@
-const SITE = "https://nexraft.com";
+const SITE = "https://www.nexraft.com";
 
 const structuredData = {
   "@context": "https://schema.org",
