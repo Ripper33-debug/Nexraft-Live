@@ -6,11 +6,11 @@ import { BookCallButton } from "@/components/BookCallButton";
 export const metadata: Metadata = {
   title: "Weatherhaven Case Study",
   description:
-    "How Nexraft rebuilt Weatherhaven's corporate web presence: a Next.js product catalog and deploy map covering operations in 95 countries, on managed edge infrastructure.",
+    "How Nexraft rebuilt Weatherhaven's web presence as two coordinated sites — weatherhaven.com and weatherhavenusa.com — with a product catalog and deploy map covering operations in 95 countries, on managed edge infrastructure.",
   openGraph: {
     title: "Case study: Weatherhaven",
     description:
-      "Enterprise marketing rebuild. A 95-country deploy catalog on a custom CMS.",
+      "Enterprise rebuild, twice over. Two coordinated sites and a 95-country deploy catalog.",
   },
 };
 
@@ -39,7 +39,7 @@ const buildItems = [
 
 const numbers = [
   { value: "95", label: "Countries on the deploy map" },
-  { value: "1", label: "Unified product catalog and CMS" },
+  { value: "2", label: "Full sites on one shared content system" },
   { value: "99.9%", label: "Uptime target on stacks we operate" },
 ] as const;
 
@@ -100,6 +100,34 @@ export default function WeatherhavenCaseStudy() {
             buyers could not navigate. The mandate: rebuild the corporate site
             as a structured catalog, make global reach visible, and put
             publishing in the hands of the internal team.
+          </p>
+        </div>
+
+        <div className="mt-12 border-t border-line pt-10">
+          <h2 className="font-display text-xl font-semibold text-bone">
+            Two sites, one system
+          </h2>
+          <p className="prose-measure mt-4 text-sm leading-relaxed text-mute">
+            Weatherhaven sells globally but contracts regionally. The US
+            entity needed its own presence — separate domain, separate
+            compliance language, its own contract vehicles — without forking
+            the brand or doubling the editorial workload. We shipped
+            weatherhavenusa.com as a second front end on the same content
+            system: shared catalog data, region-specific pages, one place to
+            publish.
+          </p>
+          <div className="relative mt-8 aspect-[16/9] w-full overflow-hidden border border-line">
+            <Image
+              src="/case-studies/weatherhavenusa-com.png"
+              alt="weatherhavenusa.com — the US-entity site built by Nexraft on the shared Weatherhaven content system"
+              fill
+              className="object-cover object-top"
+              sizes="(max-width: 768px) 100vw, 66vw"
+            />
+          </div>
+          <p className="mt-3 text-sm text-faint">
+            weatherhavenusa.com {"\u00b7"} same catalog, US-specific contract
+            and compliance content
           </p>
         </div>
 
