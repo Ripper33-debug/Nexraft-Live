@@ -369,3 +369,12 @@ document.querySelectorAll('a[href^="#"]').forEach(a=>{
     if(target){ e.preventDefault(); target.scrollIntoView({behavior: reduced ? 'auto' : 'smooth'}); }
   });
 });
+
+/* ================= header: surface on scroll ================= */
+(() => {
+  const hdr = document.querySelector('header');
+  if (!hdr) return;
+  const onScroll = () => hdr.classList.toggle('scrolled', window.scrollY > 40);
+  onScroll();
+  window.addEventListener('scroll', onScroll, { passive: true });
+})();
