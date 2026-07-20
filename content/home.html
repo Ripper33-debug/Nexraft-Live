@@ -100,8 +100,6 @@
 <canvas id="gl" aria-hidden="true"></canvas>
 <div class="vignette" aria-hidden="true"></div>
 <div class="grain" aria-hidden="true"></div>
-<div class="cursor" id="cursor" aria-hidden="true"></div>
-<div class="cursor-label" id="cursorLabel" aria-hidden="true">VIEW</div>
 
 <header>
   <a class="logo" href="#top">NEXRAFT<em>.</em></a>
@@ -228,7 +226,7 @@
     <div class="kicker reveal"><span class="num">03</span> Work — shipped &amp; operated</div>
     <h2 class="reveal">Selected<br><span class="outline">case studies.</span></h2>
     <div style="margin-top:2rem">
-      <a class="work-item reveal" href="/work/weatherhaven" data-hover data-cursor="VIEW">
+      <a class="work-item reveal" href="/work/weatherhaven" data-hover>
         <div class="work-visual"><img class="shot" src="/img/shots/weatherhaven-tall.webp" alt="Weatherhaven website — deployable shelter systems" loading="lazy"><div class="shade"></div><div class="scan"></div></div>
         <div class="work-meta">
           <div class="cat">Product catalog — Global deployment</div>
@@ -237,7 +235,7 @@
           <div class="stack"><span>Next.js</span><span>Two sites</span><span>Edge CDN</span></div>
         </div>
       </a>
-      <a class="work-item reveal" href="/work/outfyre" data-hover data-cursor="VIEW">
+      <a class="work-item reveal" href="/work/outfyre" data-hover>
         <div class="work-visual"><img class="shot" src="/img/shots/outfyre-tall.webp" alt="Outfyre website — AI growth studio" loading="lazy"><div class="shade"></div><div class="scan"></div></div>
         <div class="work-meta">
           <div class="cat">Growth site — AI studio</div>
@@ -246,7 +244,7 @@
           <div class="stack"><span>Build</span><span>SEO</span><span>Growth</span></div>
         </div>
       </a>
-      <a class="work-item reveal" href="/work/family-care-pharmacy" data-hover data-cursor="VIEW">
+      <a class="work-item reveal" href="/work/family-care-pharmacy" data-hover>
         <div class="work-visual"><img class="shot" src="/img/shots/family-care-pharmacy-tall.webp" alt="Family Care Pharmacy website" loading="lazy"><div class="shade"></div><div class="scan"></div></div>
         <div class="work-meta">
           <div class="cat">Local business — Healthcare</div>
@@ -387,7 +385,8 @@
       <div class="contact-left reveal">
         <p>Talk directly with a founder. You'll leave the call with a fixed rate and a clear plan — whether or not you work with us.</p>
         <div class="avail reveal" style="margin:0 0 1.6rem"><i aria-hidden="true"></i> Currently booking August — three build slots per month</div>
-        <a class="btn solid" href="mailto:barry@nexraft.com" data-hover>Book a call →</a>
+        <a class="btn solid" href="#f-name" id="startInquiry" data-hover>Start your inquiry →</a>
+        <p class="contact-alt">Or email us directly: <a href="mailto:barry@nexraft.com" data-hover>barry@nexraft.com</a></p>
       </div>
       <form class="reveal" id="contactForm" novalidate>
         <div class="field"><input id="f-name" name="name" type="text" placeholder=" " required autocomplete="name"><label for="f-name">Name</label></div>

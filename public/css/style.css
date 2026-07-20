@@ -19,11 +19,10 @@ body{
   font-size:16px;
   line-height:1.6;
   overflow-x:hidden;
-  cursor:none;
 }
 ::selection{background:var(--signal);color:var(--ink)}
-a{color:inherit;text-decoration:none;cursor:none}
-button{cursor:none}
+a{color:inherit;text-decoration:none;cursor:pointer}
+button{cursor:pointer}
 
 /* ---------- grain ---------- */
 .grain{
@@ -40,21 +39,6 @@ button{cursor:none}
   80%{transform:translate(3%,35%)}90%{transform:translate(-10%,10%)}
 }
 
-/* ---------- cursor ---------- */
-.cursor{
-  position:fixed;top:0;left:0;z-index:300;pointer-events:none;
-  width:10px;height:10px;border-radius:50%;background:var(--signal);
-  transform:translate(-50%,-50%);
-  transition:width .25s,height .25s,background .25s,opacity .25s;
-  mix-blend-mode:difference;
-}
-.cursor.is-hover{width:56px;height:56px;background:var(--bone)}
-.cursor-label{
-  position:fixed;top:0;left:0;z-index:301;pointer-events:none;
-  font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;
-  color:var(--ink);transform:translate(-50%,-50%);opacity:0;transition:opacity .2s;
-}
-@media (hover:none){.cursor,.cursor-label{display:none}body,a,button{cursor:auto}}
 
 /* ---------- preloader ---------- */
 .loader{
@@ -334,9 +318,10 @@ form{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem}
 .field input,.field select,.field textarea{
   width:100%;background:transparent;border:none;border-bottom:1px solid var(--bone-faint);
   color:var(--bone);font-family:var(--sans);font-size:.95rem;padding:1rem 0 .8rem;outline:none;
-  transition:border-color .3s;border-radius:0;appearance:none;cursor:none;
+  transition:border-color .3s;border-radius:0;appearance:none;
 }
 .field textarea{resize:vertical;min-height:90px}
+.field select{cursor:pointer}
 .field select option{background:var(--ink);color:var(--bone)}
 .field label{
   position:absolute;left:0;top:1rem;font-family:var(--mono);font-size:10px;letter-spacing:.14em;
@@ -451,8 +436,6 @@ section.light ::selection{background:var(--ink);color:var(--bone)}
 .proof .pv{font-family:var(--disp);font-weight:700;font-size:clamp(2rem,3.6vw,2.9rem);letter-spacing:-.03em}
 .proof .pl{margin-top:.6rem;font-size:.88rem;line-height:1.5;color:rgba(8,8,11,.62)}
 @media(max-width:860px){.proof-grid{grid-template-columns:1fr}}
-.cursor.on-light{mix-blend-mode:normal;background:var(--ink)}
-.cursor.on-light.is-hover{background:var(--ink)}
 
 /* ---------- status pill ---------- */
 .status-pill{
@@ -463,3 +446,8 @@ section.light ::selection{background:var(--ink);color:var(--bone)}
 }
 .status-pill:hover{color:var(--bone);border-color:var(--bone-dim)}
 .status-pill i{width:6px;height:6px;border-radius:50%;background:#3ddc84;animation:availPulse 2.2s ease-in-out infinite}
+
+/* ---------- contact alt line ---------- */
+.contact-alt{margin-top:1.4rem;font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--bone-dim)}
+.contact-alt a{color:var(--bone);border-bottom:1px solid var(--bone-faint);transition:border-color .3s}
+.contact-alt a:hover{border-color:var(--signal)}

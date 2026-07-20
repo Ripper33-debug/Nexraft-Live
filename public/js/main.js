@@ -289,29 +289,6 @@ if(!reduced){
   gsap.to(track, {xPercent:-50, duration:26, ease:'none', repeat:-1});
 }
 
-/* ================= custom cursor ================= */
-const cursor = document.getElementById('cursor');
-const clabel = document.getElementById('cursorLabel');
-let cx=innerWidth/2, cy=innerHeight/2, tx=cx, ty=cy;
-addEventListener('mousemove', e=>{tx=e.clientX;ty=e.clientY});
-(function cloop(){
-  cx += (tx-cx)*.18; cy += (ty-cy)*.18;
-  cursor.style.transform = `translate(${cx}px,${cy}px) translate(-50%,-50%)`;
-  clabel.style.transform = `translate(${cx}px,${cy}px) translate(-50%,-50%)`;
-  requestAnimationFrame(cloop);
-})();
-document.querySelectorAll('a, button, [data-hover]').forEach(el=>{
-  el.addEventListener('mouseenter', ()=>{
-    cursor.classList.add('is-hover');
-    const label = el.getAttribute('data-cursor');
-    if(label){ clabel.textContent = label; clabel.style.opacity = 1; }
-  });
-  el.addEventListener('mouseleave', ()=>{
-    cursor.classList.remove('is-hover');
-    clabel.style.opacity = 0;
-  });
-});
-
 /* ================= magnetic buttons ================= */
 document.querySelectorAll('.btn').forEach(btn=>{
   btn.addEventListener('mousemove', e=>{
@@ -344,18 +321,44 @@ const cform = document.getElementById('contactForm');
 if(cform){
   const planSel = document.getElementById('f-plan');
   planSel.addEventListener('change', ()=> planSel.classList.add('has'));
-  cform.addEventListener('submit', e=>{
+  cform.addEventListener('submit', async e=>{
     e.preventDefault();
     const note = cform.querySelector('.form-note');
+    const sendBtn = cform.querySelector('.btn');
     if(!cform.reportValidity()) return;
     const d = Object.fromEntries(new FormData(cform).entries());
-    const subject = encodeURIComponent(`Nexraft inquiry — ${d.name}${d.company ? ' ('+d.company+')' : ''}`);
-    const body = encodeURIComponent(
-      `Name: ${d.name}\nEmail: ${d.email}\nWebsite: ${d.website||'—'}\nCompany: ${d.company||'—'}\nPlan interest: ${d.plan||'—'}\n\nBrief:\n${d.brief||'—'}`
-    );
-    location.href = `mailto:${CONTACT_EMAIL}?subject=${subject}&body=${body}`;
-    note.textContent = 'Opening your email client — or write us directly at ' + CONTACT_EMAIL;
-    cform.querySelector('.btn').textContent = 'Sent — talk soon.';
+    sendBtn.textContent = 'Sending…';
+    sendBtn.disabled = true;
+    try{
+      const res = await fetch('/api/contact', {
+        method:'POST',
+        headers:{'Content-Type':'application/json'},
+        body: JSON.stringify(d)
+      });
+      const out = await res.json().catch(()=>({ok:false}));
+      if(res.ok && out.ok){
+        note.textContent = 'Received — we reply within one business day.';
+        sendBtn.textContent = 'Sent — talk soon.';
+        return;
+      }
+      throw new Error(out.error || 'send failed');
+    }catch(err){
+      // fallback: open the visitor's email client with everything pre-filled
+      const subject = encodeURIComponent(`Nexraft inquiry — ${d.name}${d.company ? ' ('+d.company+')' : ''}`);
+      const body = encodeURIComponent(
+        `Name: ${d.name}\nEmail: ${d.email}\nWebsite: ${d.website||'—'}\nCompany: ${d.company||'—'}\nPlan interest: ${d.plan||'—'}\n\nBrief:\n${d.brief||'—'}`
+      );
+      location.href = `mailto:${CONTACT_EMAIL}?subject=${subject}&body=${body}`;
+      note.textContent = 'Could not send automatically — opening your email client, or write us directly at ' + CONTACT_EMAIL;
+      sendBtn.textContent = 'Send inquiry';
+      sendBtn.disabled = false;
+    }
+  });
+}
+const startBtn = document.getElementById('startInquiry');
+if(startBtn){
+  startBtn.addEventListener('click', ()=>{
+    setTimeout(()=>{ const f = document.getElementById('f-name'); if(f) f.focus({preventScroll:true}); }, reduced ? 50 : 650);
   });
 }
 
@@ -377,14 +380,4 @@ document.querySelectorAll('a[href^="#"]').forEach(a=>{
   const onScroll = () => hdr.classList.toggle('scrolled', window.scrollY > 40);
   onScroll();
   window.addEventListener('scroll', onScroll, { passive: true });
-})();
-
-/* ================= cursor: solid ink over light sections ================= */
-(() => {
-  const c = document.getElementById('cursor');
-  if (!c) return;
-  document.querySelectorAll('section.light').forEach(s => {
-    s.addEventListener('mouseenter', () => c.classList.add('on-light'));
-    s.addEventListener('mouseleave', () => c.classList.remove('on-light'));
-  });
 })();
