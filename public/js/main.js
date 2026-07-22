@@ -355,6 +355,16 @@ if(cform){
     }
   });
 }
+document.querySelectorAll('.plan-cta').forEach(cta=>{
+  cta.addEventListener('click', ()=>{
+    const sel = document.getElementById('f-plan');
+    const want = cta.getAttribute('data-plan');
+    if(sel && want){
+      [...sel.options].forEach(o=>{ if(o.text === want) sel.value = o.text; });
+      sel.classList.add('has');
+    }
+  });
+});
 const startBtn = document.getElementById('startInquiry');
 if(startBtn){
   startBtn.addEventListener('click', ()=>{
