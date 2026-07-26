@@ -391,3 +391,18 @@ document.querySelectorAll('a[href^="#"]').forEach(a=>{
   onScroll();
   window.addEventListener('scroll', onScroll, { passive: true });
 })();
+
+/* ================= recede particle field after hero =================
+   Full intensity in the hero, then fades back so content stays readable. */
+(() => {
+  const glCanvas = document.getElementById('gl');
+  if(!glCanvas) return;
+  glCanvas.style.transition = 'opacity .3s linear';
+  const glFade = () => {
+    const vh = innerHeight;
+    const t = Math.min(Math.max((scrollY - vh*0.55)/(vh*0.9), 0), 1);
+    glCanvas.style.opacity = String(1 - t*0.72);
+  };
+  addEventListener('scroll', glFade, {passive:true});
+  glFade();
+})();
