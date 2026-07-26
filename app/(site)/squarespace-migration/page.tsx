@@ -4,12 +4,11 @@ import { BookCallButton } from "@/components/BookCallButton";
 import { ContactEmails } from "@/components/ContactEmails";
 import { SubpageShell } from "@/components/SubpageShell";
 import { BeforeAfterSlider } from "@/components/ui/BeforeAfterSlider";
-import { PRICES, formatUsdRange } from "@/lib/pricing";
 
 export const metadata: Metadata = {
   title: "Squarespace Migration",
   description:
-    "Migrate from Squarespace or Wix to a faster, custom-built site on managed edge infrastructure. Managed plans from $299/mo. Zero-downtime cutover.",
+    "Migrate from Squarespace or Wix to a faster, custom-built site on managed edge infrastructure. Zero-downtime cutover.",
   openGraph: {
     title: "Squarespace migration, done by engineers",
     description:
@@ -80,12 +79,11 @@ export default function SquarespaceMigrationPage() {
         cta={
           <>
             <p className="font-display text-3xl font-semibold tracking-tight text-bone">
-              {formatUsdRange(PRICES.care.min, PRICES.care.max)}/mo
+              Fixed rate — quoted on your discovery call
             </p>
             <p className="mt-3 max-w-lg text-sm leading-relaxed text-mute">
-              Care plan with migration included. Custom rebuilds from{" "}
-              {formatUsdRange(PRICES.web.buildMin, PRICES.web.buildMax)} quoted
-              on a discovery call.
+              Care plan with migration included. Custom rebuilds are quoted
+              fixed on a 30-minute discovery call.
             </p>
             <div className="mt-6">
               <BookCallButton label="Book a call" variant="primary" />

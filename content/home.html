@@ -63,19 +63,14 @@
       "@type": "Service",
       "provider": {"@id": "https://www.nexraft.com/#org"},
       "serviceType": "Web development, managed hosting, SEO growth, 3D and AI",
-      "areaServed": "Worldwide",
-      "offers": [
-        {"@type": "Offer", "name": "Starter", "price": "1500", "priceCurrency": "USD", "description": "$1,500 build + $299/month managed. Up to 5 pages."},
-        {"@type": "Offer", "name": "Business", "price": "2500", "priceCurrency": "USD", "description": "$2,500 build + $399/month managed. Up to 10 pages."},
-        {"@type": "Offer", "name": "Pro", "price": "4000", "priceCurrency": "USD", "description": "$4,000+ build + $599/month managed. Up to 15 pages."}
-      ]
+      "areaServed": "Worldwide"
     },
     {
       "@type": "FAQPage",
       "mainEntity": [
         {"@type": "Question", "name": "Do I own the code?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. You own everything we build for you — code, content and design. If you ever leave, it goes with you."}},
         {"@type": "Question", "name": "What happens if I cancel?", "acceptedAnswer": {"@type": "Answer", "text": "After the 12-month initial term, plans are month-to-month with 30 days notice. We hand over the stack cleanly and help you transition."}},
-        {"@type": "Question", "name": "How fast do you respond?", "acceptedAnswer": {"@type": "Answer", "text": "Small fixes on Starter turn around in 48 hours or less. Business and Pro plans get priority response, backed by our SLA."}},
+        {"@type": "Question", "name": "How fast do you respond?", "acceptedAnswer": {"@type": "Answer", "text": "Small fixes turn around in 48 hours or less on every care plan. Higher tiers get priority response, backed by our SLA."}},
         {"@type": "Question", "name": "Can you migrate my WordPress or Squarespace site?", "acceptedAnswer": {"@type": "Answer", "text": "Yes — migrations are core to what we do. Typical result after migration: 0.8s TTFB and 99.9% uptime."}},
         {"@type": "Question", "name": "Can you build custom AI tools?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. We build copilots and automations scoped to your data — from lead-routing automations to internal assistants."}}
       ]
@@ -107,7 +102,7 @@
     <a href="#services">Services</a>
     <a href="#work">Work</a>
     <a href="#process">Process</a>
-    <a href="#pricing">Pricing</a>
+    <a href="#plans">Plans</a>
     <a href="#contact">Contact</a>
     <a class="btn" href="#contact" data-hover>Book a call</a>
   </nav>
@@ -127,7 +122,7 @@
       <div class="hero-stats">
         <div class="stat reveal"><div class="v"><b>99.9</b>%</div><div class="l">Uptime across the sites we run</div></div>
         <div class="stat reveal"><div class="v"><b>0.8</b>s</div><div class="l">Typical response time after we rebuild</div></div>
-        <div class="stat reveal"><div class="v"><b>48</b>h</div><div class="l">Small-fix turnaround on Starter</div></div>
+        <div class="stat reveal"><div class="v"><b>48</b>h</div><div class="l">Small-fix turnaround on care plans</div></div>
       </div>
       <div class="avail reveal"><i aria-hidden="true"></i> Currently booking August — we take on three new builds a month</div>
       <div class="scroll-hint reveal"><i></i> Scroll — build once, then care or growth every month</div>
@@ -173,7 +168,7 @@
         <span class="idx">/03</span>
         <h3>Growth <small>Add-on</small></h3>
         <p>SEO, Google Business Profile optimization, review workflows, and AI automation aimed at one thing: more qualified leads.</p>
-        <span class="tag">From $750/mo</span>
+        <span class="tag">Monthly retainer</span>
       </div>
       <div class="svc reveal" data-hover>
         <span class="idx">/04</span>
@@ -366,57 +361,51 @@
   </section>
 
   <!-- PRICING -->
-  <section id="pricing" class="wrap">
-    <div class="kicker reveal"><span class="num">06</span> Pricing — transparent, USD</div>
+  <section id="plans" class="wrap">
+    <div class="kicker reveal"><span class="num">06</span> Plans — fixed rate after one call</div>
     <h2 class="reveal">Build once.<br><span class="accent">Care every month.</span></h2>
     <div class="price-grid" style="margin-top:3.5rem">
       <div class="plan reveal" data-hover>
         <div class="name">Starter</div>
-        <div class="amount">$1,500 <small>build</small></div>
-        <div class="per">+ $299 / month managed</div>
+        <div class="per">Build + monthly care — for small sites that need a solid start</div>
         <ul>
           <li>Up to 5 pages</li>
           <li>Forms &amp; lead capture</li>
           <li>1 hour of edits monthly</li>
           <li>48h small-fix turnaround</li>
         </ul>
-        <div class="yr">First year: $5,088</div>
-        <a class="plan-cta" href="#contact" data-plan="Starter — $1,500 + $299/mo" data-hover>Choose Starter →</a>
+                <a class="plan-cta" href="#contact" data-plan="Starter" data-hover>Choose Starter →</a>
       </div>
       <div class="plan popular reveal" data-hover>
         <div class="flag">Most popular</div>
         <div class="name">Business</div>
-        <div class="amount">$2,500 <small>build</small></div>
-        <div class="per">+ $399 / month managed</div>
+        <div class="per">Build + monthly care — for businesses where the site drives revenue</div>
         <ul>
           <li class="base">Everything in Starter</li>
           <li class="up">Up to 10 pages</li>
           <li class="up">2 hours of edits monthly</li>
           <li class="up">Priority response</li>
         </ul>
-        <div class="yr">First year: $7,288</div>
-        <a class="plan-cta" href="#contact" data-plan="Business — $2,500 + $399/mo" data-hover>Choose Business →</a>
+                <a class="plan-cta" href="#contact" data-plan="Business" data-hover>Choose Business →</a>
       </div>
       <div class="plan reveal" data-hover>
         <div class="name">Pro</div>
-        <div class="amount">$4,000+ <small>build</small></div>
-        <div class="per">+ $599 / month managed</div>
+        <div class="per">Build + monthly care — for larger sites and ambitious roadmaps</div>
         <ul>
           <li class="base">Everything in Business</li>
           <li class="up">Up to 15 pages</li>
           <li class="up">4 hours of edits monthly</li>
           <li class="up">Conversion tweaks included</li>
         </ul>
-        <div class="yr">First year: $11,188+</div>
-        <a class="plan-cta" href="#contact" data-plan="Pro — $4,000+ + $599/mo" data-hover>Choose Pro →</a>
+                <a class="plan-cta" href="#contact" data-plan="Pro" data-hover>Choose Pro →</a>
       </div>
     </div>
     <div class="addon reveal" data-hover>
       <div class="t">Growth <b>add-on</b></div>
       <p>SEO, Google Business Profile, review workflows and AI automation for lead generation.</p>
-      <div class="amount" style="font-size:1.5rem">From $750<small style="font-size:.6em">/mo</small></div>
+      <div class="amount" style="font-size:1.05rem">Scoped on your discovery call</div>
     </div>
-    <p class="fine reveal">All prices in USD. 12-month initial term, then month-to-month with 30 days notice.</p>
+    <p class="fine reveal">Every engagement is a fixed rate — you leave your 30-minute discovery call with the number. 12-month initial term, then month-to-month with 30 days notice.</p>
   </section>
 
   <!-- FAQ -->
@@ -426,7 +415,7 @@
     <div style="margin-top:3rem;max-width:52rem">
       <div class="faq-item reveal"><button class="faq-q" data-hover>Do I own the code?<span class="x">+</span></button><div class="faq-a"><p>Yes. You own everything we build for you — code, content and design. If you ever leave, it goes with you.</p></div></div>
       <div class="faq-item reveal"><button class="faq-q" data-hover>What happens if I cancel?<span class="x">+</span></button><div class="faq-a"><p>After the 12-month initial term, plans are month-to-month with 30 days notice. We hand over the stack cleanly and help you transition.</p></div></div>
-      <div class="faq-item reveal"><button class="faq-q" data-hover>How fast do you respond?<span class="x">+</span></button><div class="faq-a"><p>Small fixes on Starter turn around in 48 hours or less. Business and Pro plans get priority response, backed by our SLA.</p></div></div>
+      <div class="faq-item reveal"><button class="faq-q" data-hover>How fast do you respond?<span class="x">+</span></button><div class="faq-a"><p>Small fixes turn around in 48 hours or less on every care plan. Higher tiers get priority response, backed by our SLA.</p></div></div>
       <div class="faq-item reveal"><button class="faq-q" data-hover>Can you migrate my WordPress or Squarespace site?<span class="x">+</span></button><div class="faq-a"><p>Yes — migrations are core to what we do. Typical result after migration to our edge stack: 0.8s TTFB and 99.9% uptime.</p></div></div>
       <div class="faq-item reveal"><button class="faq-q" data-hover>Can you build custom AI tools?<span class="x">+</span></button><div class="faq-a"><p>Yes. We build copilots and automations scoped to your data — from lead-routing automations to internal assistants.</p></div></div>
     </div>
@@ -451,10 +440,10 @@
         <div class="field full">
           <select id="f-plan" name="plan">
             <option value="" selected disabled hidden></option>
-            <option>Starter — $1,500 + $299/mo</option>
-            <option>Business — $2,500 + $399/mo</option>
-            <option>Pro — $4,000+ + $599/mo</option>
-            <option>Growth add-on — from $750/mo</option>
+            <option>Starter</option>
+            <option>Business</option>
+            <option>Pro</option>
+            <option>Growth add-on</option>
             <option>Not sure yet</option>
           </select><label for="f-plan">Plan interest</label>
         </div>
@@ -470,7 +459,7 @@
   <div class="wrap">
     <div class="foot-giant" data-hover>NEXRAFT<span style="color:var(--signal);-webkit-text-stroke-color:var(--signal)">.</span></div>
     <div class="foot-cols">
-      <div class="col"><h4>Studio</h4><a href="#services" data-hover>Services</a><a href="#work" data-hover>Work</a><a href="#process" data-hover>Process</a><a href="#pricing" data-hover>Pricing</a></div>
+      <div class="col"><h4>Studio</h4><a href="#services" data-hover>Services</a><a href="#work" data-hover>Work</a><a href="#process" data-hover>Process</a><a href="#plans" data-hover>Plans</a></div>
       <div class="col"><h4>Resources</h4><a href="/notes" data-hover>Field notes</a><a href="/status" data-hover>System status</a><a href="#contact" data-hover>Book a call</a></div>
       <div class="col"><h4>Legal</h4><a href="/legal/privacy" data-hover>Privacy</a><a href="/legal/terms" data-hover>Terms</a><a href="/legal/subprocessors" data-hover>Subprocessors</a><a href="/legal/sla" data-hover>SLA</a><a href="/legal/accessibility" data-hover>Accessibility</a></div>
       <div class="col"><h4>Contact</h4><a href="mailto:barry@nexraft.com" data-hover>barry@nexraft.com</a><a href="mailto:michael@nexraft.com" data-hover>michael@nexraft.com</a></div>

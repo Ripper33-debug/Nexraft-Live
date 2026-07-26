@@ -4,12 +4,11 @@ import { BookCallButton } from "@/components/BookCallButton";
 import { ContactEmails } from "@/components/ContactEmails";
 import { ShoeConfigurator } from "@/components/ShoeConfigurator";
 import { SubpageShell } from "@/components/SubpageShell";
-import { PRICES, formatUsd } from "@/lib/pricing";
 
 export const metadata: Metadata = {
   title: "3D Product Viewer for Your Website",
   description:
-    "Add an interactive 3D product viewer to your website. Browser-native WebGL, no app download. Optimized GLTF pipeline from CAD or Blender. From $800/mo.",
+    "Add an interactive 3D product viewer to your website. Browser-native WebGL, no app download. Optimized GLTF pipeline from CAD or Blender.",
   openGraph: {
     title: "A 3D product viewer for your website",
     description:
@@ -86,12 +85,11 @@ export default function ThreeDProductViewerPage() {
         cta={
           <>
             <p className="font-display text-3xl font-semibold tracking-tight text-bone">
-              From {formatUsd(PRICES.threeD.asset)}/mo
+              Fixed rate — quoted on your discovery call
             </p>
             <p className="mt-3 max-w-lg text-sm leading-relaxed text-mute">
-              Asset production from {formatUsd(PRICES.threeD.asset)}/mo, full
-              interactive scenes from {formatUsd(PRICES.threeD.scene)}/mo.
-              One-off viewers are quoted fixed on a discovery call.
+              Asset production and full interactive scenes run on a monthly
+              retainer. One-off viewers are quoted fixed on a discovery call.
             </p>
             <div className="mt-6">
               <BookCallButton label="Book a call" variant="primary" />

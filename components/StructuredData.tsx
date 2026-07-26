@@ -59,7 +59,7 @@ const structuredData = {
               "@type": "Service",
               name: "Custom website build",
               description:
-                "Custom Next.js sites with CMS, production deploy, and optional 3D from three to six thousand dollars.",
+                "Custom Next.js sites with CMS, production deploy, and optional 3D. Fixed rate quoted on a discovery call.",
             },
           },
           {
@@ -68,7 +68,7 @@ const structuredData = {
               "@type": "Service",
               name: "Care plan",
               description:
-                "Managed hosting, security, uptime monitoring, and small monthly changes from one hundred fifty to four hundred dollars per month.",
+                "Managed hosting, security, uptime monitoring, and small monthly changes on a monthly retainer.",
             },
           },
           {
@@ -77,7 +77,7 @@ const structuredData = {
               "@type": "Service",
               name: "Growth retainer",
               description:
-                "SEO, Google Business Profile, reviews, and AI automation from seven hundred fifty to fifteen hundred dollars per month.",
+                "SEO, Google Business Profile, reviews, and AI automation on a monthly retainer scoped to the engagement.",
             },
           },
           {

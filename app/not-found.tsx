@@ -24,7 +24,7 @@ export default function NotFound() {
           <PrimaryButton href="/" external={false}>
             Back to home
           </PrimaryButton>
-          <GhostButton href="/#pricing">View pricing</GhostButton>
+          <GhostButton href="/#plans">View plans</GhostButton>
         </div>
       </div>
     </section>

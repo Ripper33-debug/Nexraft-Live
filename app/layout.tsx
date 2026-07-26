@@ -33,7 +33,7 @@ export const metadata: Metadata = {
     template: "%s · Nexraft",
   },
   description:
-    "Custom website builds, WordPress and Squarespace migrations, managed hosting, SEO, and growth retainers. Care from $150/mo, Growth from $750/mo, builds from $3k. 3D and custom AI tools. Founding-client rates available.",
+    "Custom website builds, WordPress and Squarespace migrations, managed hosting, SEO, and growth retainers. 3D and custom AI tools. Fixed rates quoted on a 30-minute discovery call.",
   metadataBase: new URL("https://www.nexraft.com"),
   openGraph: {
     title: "Nexraft · Web, Hosting, 3D & AI Studio",

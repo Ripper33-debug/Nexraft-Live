@@ -65,7 +65,7 @@ export default function TermsPage() {
             {
               title: "Refunds",
               detail:
-                "First-month money-back applies to new retainer subscriptions as stated on our pricing page, at our discretion for good-faith disputes.",
+                "First-month money-back applies to new retainer subscriptions as stated in your proposal, at our discretion for good-faith disputes.",
             },
           ],
         },
